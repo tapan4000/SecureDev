@@ -1,0 +1,15 @@
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\bin\Debug\BluetoothConn.dll
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\bin\Debug\BluetoothConn.pdb
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\bin\Debug\Xamarin.Forms.Core.dll
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\bin\Debug\Xamarin.Forms.Platform.dll
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\bin\Debug\Xamarin.Forms.Xaml.dll
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\bin\Debug\Xamarin.Forms.Core.pdb
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\bin\Debug\Xamarin.Forms.Core.xml
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\bin\Debug\Xamarin.Forms.Platform.pdb
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\bin\Debug\Xamarin.Forms.Xaml.pdb
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\bin\Debug\Xamarin.Forms.Xaml.xml
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\obj\Debug\BluetoothConn.MainPage.xaml.g.cs
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\obj\Debug\BluetoothConn.App.xaml.g.cs
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\obj\Debug\BluetoothConn.dll
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\obj\Debug\BluetoothConn.pdb
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\BluetoothConn\BluetoothConn\obj\Debug\BluetoothConn.csprojResolveAssemblyReference.cache

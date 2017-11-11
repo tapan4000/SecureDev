@@ -1,0 +1,4 @@
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\XamarinCrossPlatApp\XamarinCrossPlatApp\bin\Debug\XamarinCrossPlatApp.dll
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\XamarinCrossPlatApp\XamarinCrossPlatApp\bin\Debug\XamarinCrossPlatApp.pdb
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\XamarinCrossPlatApp\XamarinCrossPlatApp\obj\Debug\XamarinCrossPlatApp.dll
+D:\Misc\Business Idea\SecurityDev\POC\BluetoothConn\XamarinCrossPlatApp\XamarinCrossPlatApp\obj\Debug\XamarinCrossPlatApp.pdb

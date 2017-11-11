@@ -1,0 +1,4 @@
+XamarinCrossPlatApp.Droid.MainActivity, XamarinCrossPlatApp.Android;md5f24d9644982a17c8e8629ee922b3d574.MainActivity
+XamarinCrossPlatApp.Droid.MainActivity, XamarinCrossPlatApp.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5f24d9644982a17c8e8629ee922b3d574.MainActivity
+XamarinCrossPlatApp.Droid.MainActivity;md5f24d9644982a17c8e8629ee922b3d574.MainActivity
+xamarincrossplatapp.droid.MainActivity;md5f24d9644982a17c8e8629ee922b3d574.MainActivity

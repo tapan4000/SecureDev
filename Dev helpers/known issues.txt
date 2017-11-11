@@ -1,0 +1,2 @@
+1) When we place the ethernet module on top of arduino, the image taking software(host app) receives the bytes however the image is not displayed in the window.
+2) When we use the ethernet shield, we need to use the chip select port as 7 instead of 10 (in UNO). Then we get the starting and ending bytes properly.

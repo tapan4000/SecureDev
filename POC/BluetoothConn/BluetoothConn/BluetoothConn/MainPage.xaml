@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BluetoothConn"
+             x:Class="BluetoothConn.MainPage">
+    <StackLayout>
+        <Button HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Text="Clear" x:Name="BtnClearPane" Clicked="BtnClearPane_OnClicked"></Button>
+        <Button HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Text="Send" x:Name="BtnSendData" Clicked="BtnSendData_OnClicked"></Button>
+        <Editor HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" x:Name="EditorTextPanel" Completed="EditorTextPanel_OnCompleted" Keyboard="Numeric"></Editor>
+        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="WordWrap" x:Name="ReceiverTextPanel"></Label>
+        <Button HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Text="Retry Connection" x:Name="RetryConnection" Clicked="RetryConnection_OnClicked"></Button>
+        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="" x:Name="LblErrorMessage"></Label>
+    </StackLayout>
+</ContentPage>

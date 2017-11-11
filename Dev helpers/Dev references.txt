@@ -1,0 +1,3 @@
+Image taking software:
+1) Refer to the host_App in the sketches -> Arduino-master -> ArduCam -> examples
+2) http://www.arducam.com/arducam-bluetooth-module-wireless-image-system/
