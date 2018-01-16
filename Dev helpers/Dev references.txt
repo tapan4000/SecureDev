@@ -1,3 +1,44 @@
-Image taking software:
+--Image taking software:
 1) Refer to the host_App in the sketches -> Arduino-master -> ArduCam -> examples
 2) http://www.arducam.com/arducam-bluetooth-module-wireless-image-system/
+
+--AVI file references
+http://www.jmcgowan.com/avitech.html
+http://www.ezr8.com/avi.html
+https://cdn.hackaday.io/files/274271173436768/avi.pdf
+https://msdn.microsoft.com/en-us/library/windows/desktop/dd318181(v=vs.85).aspx
+
+-- MP4 references
+1) http://www.file-recovery.com/mp4-signature-format.htm
+2) https://developer.apple.com/library/content/documentation/QuickTime/QTFF/QTFFChap1/qtff1.html
+3) https://www.stellarinfo.com/blog/difference-between-mov-and-mp4/
+4) http://download.tsi.telecom-paristech.fr/gpac/mp4box.js/filereader.html (Parsing MP4 files, Also use the tool MP4 explorer)
+5) https://www.itscj.ipsj.or.jp/sc29/open/29view/29n2601t.pdf (ES descriptor reference)
+
+-- Arduino Audio reference
+1) https://www.youtube.com/watch?v=aa3F4ALaEok (video for setting up arduino analog audio input).
+2) http://www.learningaboutelectronics.com/Articles/Arduino-microphone-circuit.php
+3) http://www.arduinoos.com/2010/10/sound-capture/
+4) http://forum.arduino.cc/index.php?topic=180769.60
+5) http://forum.arduino.cc/index.php?topic=158169.0
+6) https://stackoverflow.com/questions/24078563/recording-wav-file-using-arduino - link to digital audio recorder.
+7) http://www.instructables.com/id/Arduino-Mega-Audio-File-logging/
+Good query: arduino microphone sd card
+
+--GPS reference
+1) http://www.toptechboy.com/arduino/lesson-22-build-an-arduino-gps-tracker/
+2) http://www.instructables.com/id/Connecting-GPS-module-to-Arduino/
+
+-- GSM reference
+1) https://www.arduino.cc/en/Guide/ArduinoGSMShield
+3) https://www.youtube.com/watch?v=N69umIUiniI
+
+-- GSM reference
+1) https://www.arduino.cc/en/Tutorial/GSMExamplesWebServer
+
+-- Softwares
+1) MediaInfo: Tells about the details on any video file.
+2) DivFix++: Fixes the video file
+
+-- Arducam reference
+1) Connect arducam with Arduino Mega: https://github.com/ArduCAM/Arduino/issues/175
