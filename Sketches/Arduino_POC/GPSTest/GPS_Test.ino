@@ -53,16 +53,19 @@ int offsets[13];
 char buf[300] = "";
 int gpsRxPin = 2;
 int gpsTxPin = 3;
-SoftwareSerial gpsSerial(gpsRxPin, gpsTxPin);
+//SoftwareSerial gpsSerial(gpsRxPin, gpsTxPin);
 
 // set pin 10 as the slave select for the digital pot:
 const int CS = 7;
 const int SD_CARD_Pin = 4;
+const int gpsIntervalInSeconds = 20;
+unsigned long lastGpsCaptureInMillis = 0;
 bool is_header = false;
 int mode = 0;
 int imgNameCounter = 520;
 uint8_t start_capture = 0;
 String imageCounterFileName = "imgCtr3.txt";
+String message = "";
 #if defined (OV2640_MINI_2MP)
   ArduCAM myCAM( OV2640, CS );
 #else
@@ -78,8 +81,8 @@ void setup() {
   // put your setup code here, to run once:
   uint8_t vid, pid;
   uint8_t temp;
-  Serial3.begin(4800);
-  gpsSerial.begin(4800);
+  Serial3.begin(9600);
+  //gpsSerial.begin(9600);
   #if defined(__SAM3X8E__) 
     //Wire1.begin();
     Serial.begin(115200);
@@ -157,10 +160,6 @@ void reset() {
 }
 
 int getSize(int offset) {
-	if (offset > 11) {
-		return 0;
-	}
-
 	return offsets[offset + 1] - offsets[offset] - 1;
 }
 
@@ -180,45 +179,76 @@ int handle_byte(int byteGPS) {
 		}
 	}
 
+	/*if (counter2 == 1 && getSize(0) == 6) {
+		bool isGPRMC = true;
+		for (int j = 0; j < 6; j++) {
+			if (buf[j] != cmd[j]) {
+				isGPRMC = false;
+			}
+		}
+
+		if (isGPRMC) {
+			Serial.print('-');
+			Serial.print(byteGPS);
+			Serial.print('-');
+		}
+	}*/
+
 	if (byteGPS == '*') {
 		offsets[12] = counter1;
 	}
 
 	// Check if we got <LF> which indicates the end of line.
 	if (byteGPS == 10) {
+		//Serial.println("Reached EOL");
 		// Check that we got 12 pieces and the first piece is 6 characters.
-		if (counter2 != 12 || getSize(0) != 6) {
-			return 0;
+		if (counter2 != 12 || (getSize(0) != 6)) {
+			/*Serial.println("Size not right.");
+			Serial.print(counter2);
+			Serial.println("--");
+			Serial.print(getSize(0));*/
+			return 3;
 		}
 
 		// Check that we received $GPRMC
 		for (int j = 0; j < 6; j++) {
 			if (buf[j] != cmd[j]) {
-				return 0;
+				//Serial.println("Not GPRMC");
+				return 3;
 			}
 		}
 
 		// Check that the time is well formatted.
-		if (getSize(1) != 10) {
-			return 0;
-		}
+		/*if (getSize(1) != 9) {
+			Serial.println("Time not formatted");
+			Serial.print(getSize(1));
+			return 3;
+		}*/
 
 		// Check that the date is well formatted
-		if (getSize(9) != 6) {
-			return 0;
-		}
+		/*if (getSize(9) != 6) {
+			Serial.println("Date not formatted");
+			Serial.print(getSize(9));
+			return 3;
+		}*/
 
 		// TODO: Compute and validate checksum
 
 		// TODO: Handle timezone offset
-
-		return 0;
+		//Serial.println("EOL processing complete.");
+		return 2;
 	}
 
 	return 1;
 }
 
 void loop() {
+	//Serial.println("Start");
+	//Serial.print(lastGpsCaptureInMillis);
+	if (lastGpsCaptureInMillis == 0) {
+		Serial.println("Empty");
+		Serial.println(millis() - lastGpsCaptureInMillis);
+	}
   /* put your main code here, to run repeatedly:
   uint8_t temp = 0xff, temp_last = 0;
   bool is_header = false;
@@ -298,26 +328,222 @@ void loop() {
 
 	mode = 0;
   }*/
-	Serial.println(F("R"));
-	
-	if (gpsSerial.available()) {
-		byteGPS = gpsSerial.read();
-		Serial.println(F("R2"));
-		Serial.println(byteGPS);
-		if (byteGPS == -1) {
-			delay(100);
-		}
-		else {
-			if (!handle_byte(byteGPS)) {
-				reset();
+	if (lastGpsCaptureInMillis == 0 || millis() - lastGpsCaptureInMillis > gpsIntervalInSeconds * 1000) {
+		// Capture the GPS data
+		lastGpsCaptureInMillis = millis();
+		bool isGpsDataCaptureComplete = false;
+		while (!isGpsDataCaptureComplete) {
+			byteGPS = Serial3.read();
+			if (byteGPS == -1) {
+				//Serial.println("Delay");
+				delay(100);
+			}
+			else {
+				int byteHandleRespone = handle_byte(byteGPS);
+				if (byteHandleRespone == 0) {
+					reset();
+				}
+				else if (byteHandleRespone == 2) {
+					// If the GPRMC data is successfully found, then print the data.
+					Serial.println(F("Success"));
+
+					isGpsDataCaptureComplete = true;
+
+					// Print out the GPRMC line
+					for (int i = 0; i < counter1; i++) {
+						Serial.print(buf[i]);
+					}
+
+					Serial.println("");
+					Serial.println("Decoded Data:");
+
+					////
+					//Serial.println("Start");
+					//String numStr = "23.43243";
+					//float num1 = numStr.toFloat();
+					//double num2 = numStr.toDouble();
+					//Serial.println(num1, 5);
+					//Serial.println("--");
+					//Serial.println(num2, 5);
+					//Serial.println("End");
+					////
+
+					// Print time
+					Serial.print("Time: ");
+
+					if (buf[offsets[1]] != ',') {
+						for (int i = offsets[1]; i < offsets[2] - 1; i++) {
+							Serial.print(buf[i]);
+						}
+
+						Serial.print("Formatted: ");
+						Serial.print(buf[offsets[1]]);
+						Serial.print(buf[offsets[1] + 1]);
+						Serial.print(":");
+						Serial.print(buf[offsets[1] + 2]);
+						Serial.print(buf[offsets[1] + 3]);
+						Serial.print(":");
+						Serial.print(buf[offsets[1] + 4]);
+						Serial.print(buf[offsets[1] + 5]);
+						Serial.print(":");
+						Serial.print(buf[offsets[1] + 7]);
+						Serial.print(buf[offsets[1] + 8]);
+						Serial.println(" UTC");
+					}
+					else {
+						Serial.println("Not available");
+					}
+
+					// Print Signal Type
+					Serial.print("Signal Type: ");
+					Serial.println(buf[offsets[2]]);
+
+					//Print latitude
+					Serial.print("Latitude: ");
+					if (buf[offsets[2]] == 'A') {
+						Serial.println(GetPositionInDegrees(offsets[3], offsets[4] - 1, buf[offsets[4]], true), 5);
+						//int decimalPosition = 0;
+						//for (int i = offsets[3]; i < offsets[4] - 1; i++) {
+						//	if (buf[i] == '.') {
+						//		decimalPosition = i;
+						//	}
+						//}
+
+						//// Two degits before decimal represent the minutes and everything after decimal respresent minutes.
+						//// So, the remaining digits prefixing the minutes represents the degrees.
+						//for (int i = offsets[3]; i < decimalPosition - 2; i++) {
+						//	Serial.print(buf[i]);
+						//}
+
+						//Serial.print(" Degrees ");
+						//for (int i = decimalPosition - 2; i < offsets[4] - 1; i++) {
+						//	Serial.print(i);
+						//}
+
+						//Serial.print(" Minutes - ");
+						//Serial.println(buf[offsets[4]]);
+					}
+					else {
+						Serial.println("Not available");
+					}
+
+					//Print longitude
+					Serial.print("Longitude: ");
+					if (buf[offsets[2]] == 'A') {
+						Serial.println(GetPositionInDegrees(offsets[5], offsets[6] - 1, buf[offsets[6]], false), 5);
+					}
+					else {
+						Serial.println("Not available");
+					}
+
+					// Print Speed
+					Serial.print("Speed: ");
+					if (buf[offsets[2]] == 'A') {
+						for (int i = offsets[7]; i < offsets[8] - 1; i++) {
+							Serial.print(buf[i]);
+						}
+					}
+					else {
+						Serial.println("Not available");
+					}
+
+					// Print Date
+					Serial.println("");
+					Serial.print("Date: ");
+
+					if (buf[offsets[9]] != ',') {
+						Serial.print(buf[offsets[9]]);
+						Serial.print(buf[offsets[9] + 1]);
+						Serial.print("-");
+						Serial.print(buf[offsets[9] + 2]);
+						Serial.print(buf[offsets[9] + 3]);
+						Serial.print("-");
+						Serial.print(buf[offsets[9] + 4]);
+						Serial.print(buf[offsets[9] + 5]);
+					}
+					else {
+						Serial.println("Not available");
+					}
+
+					reset();
+				}
+				else if (byteHandleRespone == 3) {
+					//delay(1000);
+					reset();
+				}
 			}
 		}
 	}
 	else {
-		Serial.println(F("NA"));
-		//Serial3.print("B");
-		delay(100);
+		//Serial.println("NA");
+		//Serial.print(lastGpsCaptureInMillis);
 	}
+	
+	//if (Serial3.available()) {
+	//	byteGPS = Serial3.read();
+	//	if (byteGPS == -1) {
+	//		delay(100);
+	//	}
+	//	else {
+	//		int byteHandleRespone = handle_byte(byteGPS);
+	//		if (byteHandleRespone == 0) {
+	//			reset();
+	//		}
+	//		else if(byteHandleRespone == 2) {
+	//			// If the GPRMC data is successfully found, then print the data.
+	//			//Serial.println(F("Success"));
+	//			reset();
+	//		}
+	//		else if (byteHandleRespone == 3) {
+	//			//delay(1000);
+	//			reset();
+	//		}
+	//	}
+	//}
+	//else {
+	//	//Serial.println(F("N/A"));
+	//	//Serial3.print("B");
+	//	delay(100);
+	//}
+}
+
+float GetPositionInDegrees(int startPosition, int endPosition, char direction, bool isLatitude) {
+	int decimalPosition = 0;
+	for (int i = startPosition; i < endPosition; i++) {
+		if (buf[i] == '.') {
+			decimalPosition = i;
+		}
+	}
+
+	// Two degits before decimal represent the minutes and everything after decimal respresent minutes.
+	// So, the remaining digits prefixing the minutes represents the degrees.
+	String numberAsString = "";
+	for (int i = startPosition; i < decimalPosition - 2; i++) {
+		numberAsString += buf[i];
+	}
+
+	float degrees = numberAsString.toFloat();
+	
+	numberAsString = "";
+	for (int i = decimalPosition - 2; i < endPosition; i++) {
+		numberAsString += buf[i];
+	}
+
+	float minutes = numberAsString.toFloat();
+	degrees = degrees + minutes / 60;
+
+	if (isLatitude) {
+		if(direction == 'S'){
+			degrees = degrees * -1;
+		}
+	}
+	else {
+		if (direction == 'W') {
+			degrees = degrees * -1;
+		}
+	}
+
+	return degrees;
 }
 
 String GetFileName(bool isVideoStream){

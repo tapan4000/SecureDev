@@ -23,15 +23,21 @@ https://msdn.microsoft.com/en-us/library/windows/desktop/dd318181(v=vs.85).aspx
 5) http://forum.arduino.cc/index.php?topic=158169.0
 6) https://stackoverflow.com/questions/24078563/recording-wav-file-using-arduino - link to digital audio recorder.
 7) http://www.instructables.com/id/Arduino-Mega-Audio-File-logging/
+8) https://learn.adafruit.com/piccolo/code - Sample for audio visualizer
+9) https://electronics.stackexchange.com/questions/322503/how-to-get-audio-from-a-sensor-for-an-arduino - which sensor to buy
+10) https://www.adafruit.com/product/1063
+11) http://duino4projects.com/arduino-projects-digital-audio-recorder/?utm_content=buffer2cb67&utm_medium=social&utm_source=plus.google.com&utm_campaign=buffer    - Circuit
 Good query: arduino microphone sd card
 
 --GPS reference
 1) http://www.toptechboy.com/arduino/lesson-22-build-an-arduino-gps-tracker/
 2) http://www.instructables.com/id/Connecting-GPS-module-to-Arduino/
-
--- GSM reference
-1) https://www.arduino.cc/en/Guide/ArduinoGSMShield
 3) https://www.youtube.com/watch?v=N69umIUiniI
+
+-- GSM/GPRS reference
+1) https://www.arduino.cc/en/Guide/ArduinoGSMShield
+2) https://www.espruino.com/datasheets/SIM900_AT.pdf - commands list
+3) https://randomnerdtutorials.com/sim900-gsm-gprs-shield-arduino/
 
 -- GSM reference
 1) https://www.arduino.cc/en/Tutorial/GSMExamplesWebServer

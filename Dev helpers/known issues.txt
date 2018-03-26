@@ -3,3 +3,4 @@
 3) If arduino is low on RAM, the file open fails on SD card. Even on RAM size of 261 the failure happens. There are other unexpected issues that also start happening.
 4) Arduino Mega does not start up if we use Serial.begin(921600). Instead we can set the value as 115200 or a value higher than 921600
 5) If we put breakpoints in the Arduino code neae Serial.begin, there are chances that the Arduino serial buffer gets overflown with debug information. In such cases it start showing the error _VMDPE. To fix this, remove the breakpoints and upload the code.
+6) In Arduino SIM module, if we introduce delay in between reading the data, the data is lost.

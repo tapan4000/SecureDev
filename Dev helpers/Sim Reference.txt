@@ -1,0 +1,45 @@
+AT: Indicates whether connection is ok
+Call Ready: We receive this text once the sim connection is setup. Below is the sequence received
+ 	(RDY
+
+	+CFUN: 1
+
+	+CPIN: READY
+
+	+PACSP: 1
+
+	Call Ready)
+AT+CMGF=1 : Set the text mode to 1.
+AT+CMGF? : Gets the current value of CMGF
+AT+CMGF=? : Gets the values that can be set for this variable.
+AT+CMGS="+13133221234": Sets the mode to send SMS to a specific number. Post this command Sim will expect an SMS that should finish with Ctrl-Z character (0x1a).
++CMTI: "SM", 2: This is a notification that comes from SMS whenever a SMS comes in. The last number is the ID
+AT+CPMS="SM" : Sets the preferred message store to "SM".
+AT+CMGL="ALL" : Shows all the SMS messages on the sim card.
+AT+CMGR=2 : Read the second message. Similarly use CMGR, CMGD for reading/deleting the messages.
+		Sample response (+CMGR: "REC UNREAD","+13132135019","","18/02/12,06:02:37-20"
+				Hi there). Here the unit of time zone is quarter of an hour so -20 is -5.
+		Sample outgoing message (+CMGR: "STO UNSENT","+13132135019",""
+					Hi)
+AT+CMGD=2 : Deletes the second message.
+AT+IPR=9600 : Sets the baud rate to 9600.
+AT+CMGW: Writes a message to the memory (Response: +CMGW: 2). It indicates the index for the message written
+AT+CMSS=2,"+13132135019": Writes the message from the memory to network (Response: +CMSS: 114)
+
+-- Sending call
+ATD++13132135019; -- Sends a call to the number
+
+-- Receiving a call
+RING : This message is received whenever there is an incoming call and keeps repeating.
+AT+CLIP=1 : Turns on the caller identification. After turning on identification, the RING is followed by following message (+CLIP: "13132135019",129,"",,"",0)
+ATA: Receives the call.
+
+-- HTTP Commands
+AT+HTTPINIT : Initializes HTTP. It gives ok first time only.
+AT+HTTPPARA="CID",1 : Pass a parameter named CID and sends the value with 1.
+AT+HTTPPARA="URL","http://www.iforce2d.net/test.php": Set the URL
+ATP+SAPBR=3,1,"APN","fast.t-mobile.com" : Set the APN
+AT+SAPBR=1,1
+AT+HTTPACTION=0 : Set the action to get. 1 means post, 2 is head
+AT+HTTPREAD=0,35: Reads the HTTP. Position from where to read and number of bytes to read.
+
