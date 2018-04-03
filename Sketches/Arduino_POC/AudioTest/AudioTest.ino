@@ -19,6 +19,7 @@
 #endif
 
 #define BMPIMAGEOFFSET 66
+#define BUFFERSIZE 512
 #define pic_num 50
 #define rate 0x05
 #define AVIOFFSET 240
@@ -66,8 +67,8 @@ unsigned long recByteSaved = 0L;
 
 unsigned long oldTime = 0L;
 unsigned long newTime = 0L;
-byte buf00[512]; // buffer array 1
-byte buf01[512]; // buffer array 2
+byte buf00[BUFFERSIZE]; // buffer array 1
+byte buf01[BUFFERSIZE]; // buffer array 2
 byte byte1, byte2, byte3, byte4;
 unsigned int bufByteCount;
 byte bufWrite;
@@ -100,7 +101,7 @@ void setup() {
   // put your setup code here, to run once:
   uint8_t vid, pid;
   uint8_t temp;
-  Serial3.begin(9600);
+  //Serial3.begin(9600);
   //gpsSerial.begin(9600);
   #if defined(__SAM3X8E__) 
     //Wire1.begin();
@@ -152,19 +153,19 @@ void setup() {
 	  Serial.println("Wave file open failed");
   }
 
-  // initialize SPI:
-  SPI.begin();
-  while(1){
-    //Check if the ArduCAM SPI bus is OK
-    myCAM.write_reg(ARDUCHIP_TEST1, 0x55);
-    temp = myCAM.read_reg(ARDUCHIP_TEST1);
-    if (temp != 0x55){
-      Serial.println(F("ACK CMD SPI interface Error!"));
-      delay(1000);continue;
-    }else{
-      Serial.println(F("ACK CMD SPI interface OK."));break;
-    }
-  }
+  //// initialize SPI:
+  //SPI.begin();
+  //while(1){
+  //  //Check if the ArduCAM SPI bus is OK
+  //  myCAM.write_reg(ARDUCHIP_TEST1, 0x55);
+  //  temp = myCAM.read_reg(ARDUCHIP_TEST1);
+  //  if (temp != 0x55){
+  //    Serial.println(F("ACK CMD SPI interface Error!"));
+  //    delay(1000);continue;
+  //  }else{
+  //    Serial.println(F("ACK CMD SPI interface OK."));break;
+  //  }
+  //}
   /*
     while(1){
       //Check if the camera module type is OV2640
@@ -231,9 +232,81 @@ void loop() {
 		isRecording = false;
 		delay(100000);
 	}
+	
+	unsigned int signalMax = 0;
+	unsigned int signalMin = 1024;
+	if (isRecording && recByteCount % (BUFFERSIZE*2) == BUFFERSIZE) {
+		int averageValue = buf00[0];
+		for (int i = 1; i < BUFFERSIZE; i++) {
+			averageValue = (averageValue + buf00[i]) / 2;
 
-	if (isRecording && recByteCount % 1024 == 512 && isRecording) { rec.write(buf00, 512); recByteSaved += 512; } // save buf01 to card
-	if (isRecording && recByteCount % 1024 == 0 && isRecording) { rec.write(buf01, 512); recByteSaved += 512; } // save buf02 to card
+			if (buf00[i] > signalMax)
+			{
+				signalMax = buf00[i]; // save just the max levels
+			}
+			else if (buf00[i] < signalMin)
+			{
+				signalMin = buf00[i]; // save just the min levels
+			}
+		}
+		
+		Serial.print("A:");
+		Serial.print(averageValue);
+		Serial.print("Mx:");
+		Serial.print(signalMax);
+		Serial.print("Mn:");
+		Serial.println(signalMin);
+		//Serial.print("Lg:");
+		//Serial.println(analogRead(5));
+		//Serial.println(averageValue);
+
+		rec.write(buf00, BUFFERSIZE); recByteSaved += BUFFERSIZE; // save buf01 to card
+	} 
+	else if (isRecording && recByteCount % (BUFFERSIZE*2) == 0) {
+		int averageValue = buf01[0];
+		for (int i = 1; i < BUFFERSIZE; i++) {
+			averageValue = (averageValue + buf01[i]) / 2;
+
+			if (buf01[i] < 255) // toss out spurious readings
+			{
+				if (buf01[i] > signalMax)
+				{
+					signalMax = buf01[i]; // save just the max levels
+				}
+				else if (buf01[i] < signalMin)
+				{
+					signalMin = buf01[i]; // save just the min levels
+				}
+			}
+		}
+
+		Serial.print("A:");
+		Serial.print(averageValue);
+		Serial.print("Mx:");
+		Serial.print(signalMax);
+		Serial.print("Mn:");
+		Serial.println(signalMin);
+		//Serial.print("Lg:");
+		//Serial.println(analogRead(5));
+		rec.write(buf01, BUFFERSIZE); recByteSaved += BUFFERSIZE; // save buf02 to card
+	} 
+	//else if (isRecording) {
+	//	// Read the analog value
+	//	byte analogHighByte = highByte(analogRead(5));
+	//	recByteCount++; // increment sample counter
+	//	bufByteCount++;
+	//	if (bufByteCount == BUFFERSIZE && bufWrite == 0) {
+	//		bufByteCount = 0;
+	//		bufWrite = 1;
+	//	}
+	//	else if (bufByteCount == BUFFERSIZE & bufWrite == 1) {
+	//		bufByteCount = 0;
+	//		bufWrite = 0;
+	//	}
+
+	//	if (bufWrite == 0) { buf00[bufByteCount] = analogHighByte; }
+	//	if (bufWrite == 1) { buf01[bufByteCount] = analogHighByte; }
+	//}
 }
 
 void StartRec() { // begin recording process
@@ -247,6 +320,7 @@ void StartRec() { // begin recording process
 
 void StopRec() { // stop recording process, update WAV header, close file
 	cbi(TIMSK2, OCIE2A); // disable timer interrupt
+	//rec.close();
 	writeOutHeader();
 }
 
@@ -267,54 +341,69 @@ void writeOutHeader() { // update WAV header with final filesize/datasize
 void writeWavHeader() { // write out original WAV header to file
 	
 	recByteSaved = 0;
-	rec.write(zero_buf, 4);
-	rec.write("RIFF");
-	rec.write(zero_buf, 4);
+	//rec.write(zero_buf, 4);
+	rec.write("RIFF"); // Specifies the chunk Id
+	rec.write(zero_buf, 4); // Specifies the Chunk size
 	/*byte1 = fileSize & 0xff;
 	byte2 = (fileSize >> 8) & 0xff;
 	byte3 = (fileSize >> 16) & 0xff;
 	byte4 = (fileSize >> 24) & 0xff;
 	rec.write(byte1);  rec.write(byte2);  rec.write(byte3);  rec.write(byte4);*/
-	rec.write("WAVE");
-	rec.write("fmt ");
-	byte1 = waveChunk & 0xff;
+	rec.write("WAVE"); // Specifies the format
+	rec.write("fmt "); // Specifies the sub chunk 1 id
+	byte1 = waveChunk & 0xff; 
 	byte2 = (waveChunk >> 8) & 0xff;
 	byte3 = (waveChunk >> 16) & 0xff;
 	byte4 = (waveChunk >> 24) & 0xff;
-	rec.write(byte1);  rec.write(byte2);  rec.write(byte3);  rec.write(byte4);
+	rec.write(byte1);  rec.write(byte2);  rec.write(byte3);  rec.write(byte4); // Specifies the sub chunk 1 size.
 	byte1 = waveType & 0xff;
 	byte2 = (waveType >> 8) & 0xff;
-	rec.write(byte1);  rec.write(byte2);
+	rec.write(byte1);  rec.write(byte2); // Specifies the audio format. Values other than 1 specifies some sort of compression.
 	byte1 = numChannels & 0xff;
 	byte2 = (numChannels >> 8) & 0xff;
-	rec.write(byte1);  rec.write(byte2);
+	rec.write(byte1);  rec.write(byte2); // Specifies the number of channels.
 	byte1 = sampleRate & 0xff;
 	byte2 = (sampleRate >> 8) & 0xff;
 	byte3 = (sampleRate >> 16) & 0xff;
 	byte4 = (sampleRate >> 24) & 0xff;
-	rec.write(byte1);  rec.write(byte2);  rec.write(byte3);  rec.write(byte4);
+	rec.write(byte1);  rec.write(byte2);  rec.write(byte3);  rec.write(byte4); // Specifies the sample rate.
 	byte1 = bytesPerSec & 0xff;
 	byte2 = (bytesPerSec >> 8) & 0xff;
 	byte3 = (bytesPerSec >> 16) & 0xff;
 	byte4 = (bytesPerSec >> 24) & 0xff;
-	rec.write(byte1);  rec.write(byte2);  rec.write(byte3);  rec.write(byte4);
+	rec.write(byte1);  rec.write(byte2);  rec.write(byte3);  rec.write(byte4); // Specifies the byte rate.
 	byte1 = blockAlign & 0xff;
 	byte2 = (blockAlign >> 8) & 0xff;
-	rec.write(byte1);  rec.write(byte2);
+	rec.write(byte1);  rec.write(byte2); // Specifies the number of bytes for one sample including all channels.
 	byte1 = bitsPerSample & 0xff;
 	byte2 = (bitsPerSample >> 8) & 0xff;
-	rec.write(byte1);  rec.write(byte2);
+	rec.write(byte1);  rec.write(byte2); // Specifies the bits per sample.
 	rec.write("data");
 	byte1 = dataSize & 0xff;
 	byte2 = (dataSize >> 8) & 0xff;
 	byte3 = (dataSize >> 16) & 0xff;
 	byte4 = (dataSize >> 24) & 0xff;
 	rec.write(byte1);  rec.write(byte2);  rec.write(byte3);  rec.write(byte4);
+	Serial.println("Write header complete");
 }
 
 void Setup_timer2() {
 	// https://www.arduino.cc/en/Tutorial/SecretsOfArduinoPWM
-	// ATMega328P has three timers as Timer0, timer1 and timer2. Each timer has two output compare registers that control the PWM (Pulse width modulation)
+	// ATMega328P has three timers as Timer0, timer1 and timer2. Each of the timers has a counter that is incremented on each tick of the
+	// timer's clock. CTC timer interrupts are triggered when the counter reaches a specific value, stored in the compare match register.
+	// Once the timer counter reaches this value it will clear (reset to 0) on the next tick of the timer's clock, then it will continue
+	// to count up to the compare match value again. By choosing the compare match value and setting the speed at which the timer increments
+	// the counter, you can control the frequency of the interrupts. The Arduino clock runs at 16MHz, this is the fastest speed at which
+	// the timers can increase their counters. Timer0 and Timer2 are 8 bit timers, meaning they can store a maximum counter value of 255.
+	// Timer1 is a 16 bit counter and can store a maximum counter value of 65535. Once the counter reaches maximum it will tick back to 0,
+	// it is called overflow. This means at 16MHz even if we set the compare match register to the max counter value, interrupts will occur
+	// every 256/16*10^6 seconds (~16us) for the 8 bit counters, and every 65535/16*10^6 seconds (~4ms) for the 16 bit counter. We surely
+	// do not need such speed of increment. We control the speed at which the counter is incremented by using a prescaler. A prescaler
+	// dictates the speed of the timer by using following equation: timer speed(Hz) = Arduino clock speed(16MHz)/prescaler.
+	// The prescaler can be equal to 1, 8, 64, 256 and 1024. The interrupt frequency can be calculated using the following formula
+	// interrupt frequency(Hz) = Arduino clock speed(16MHz)/prescaler*(compare match register + 1).
+	// The +1 is in there becuase compare match register is zero indexed.
+	// Each timer has two output compare registers (TCCR2A and TCCR2B) that control the PWM (Pulse width modulation)
 	// width for the timer's two outputs. When the timer reaches the compare register value, the corresponding output is toggled. These
 	// registers hold several group of bits like Waveform Generation Mode bits (WGM) - they control the overall mode of the timer,
 	// Clock Select bits (CS) - they control clock prescaler, Compare Match Output A Mode bits (COMnA) - they enable/disable/invert 
@@ -329,15 +418,27 @@ void Setup_timer2() {
 	// mode where the counter is cleared to 0, when the counter value matches OCR2A.
 	//TCCR2A - [COM2A1, COM2A0, COM2B1, COM2B0, reserved, reserved, WGM21, WGM20]
 	//TCCR2B - [FOC2A, FOC2B, reserved, reserved, WGM22, CS22, CS21, CS20]
+
 	TCCR2B = _BV(CS21); // Timer2 clock prescaler to: 8. Setting the prescaler to 8 updates the counter every 8 clock cycles. BV sets the bit value as high for specific bit. Here it sets the value to 1 << 1.
-	TCCR2A = _BV(WGM21); // Interrupt frequency =  16Mhz/(8*90 + 1) = 22191 Hz
+	TCCR2A = _BV(WGM21); // Interrupt frequency =  16Mhz/(8*90 + 1) = 22191 Hz; Alternate: 16MHz/(8*45 + 1) = 44321Hz
 	OCR2A = 90; // Output Compare match register A on timer 2 set to 90 (counts from 0 to 90); It is the counter for timer 2. Corresponds to pin 11.
+
+	//cli(); // Stop interrupts
+	//TCCR2A = 0; // Set entire TCCR2A register to 0.
+	//TCCR2B = 0; // Set entire TCCR2B register to 0.
+	//TCNT2 = 0; // Initialize counter value to 0.
+	//OCR2A = 90; // Output Compare match register A on timer 2 set to 90 (counts from 0 to 90); It is the counter for timer 2. Corresponds to pin 11.
+	//TCCR2A = _BV(WGM21); // Turn on CTC mode by setting the WGM21 flag. 
+	//TCCR2B = _BV(CS21); // Set CS21 bit for 8 prescaler. BV sets the bit value as high for specific bit. Here it sets the value to 1 << 1.
+	//TIMSK2 = _BV(OCIE2A); // Enable timer compare interrupt.
+	//sei(); // Allow interrupts.
+	// Final Interrupt frequency = 16Mhz / (8 * 90 + 1) = 22191 Hz
 }
 
 void Setup_ADC() {
 	// ADMUX is an 8-bit that holds the settings for the analog reference voltage and the analog pin to select.
-	// [(Bit 7)REFS1, REFS0, ADLAR, -, MUX3, MUX2, MUX1, MUX0]. Setting RefS1 as 0 and REFS0 as 1 sets the voltage as AVcc (5 V for Arduino) with external
-	// capacitor on AREF pin. This is the default for an arduino.
+	// [(Bit 7)REFS1, REFS0, ADLAR, -, MUX3, MUX2, MUX1, MUX0]. Setting RefS1 as 0 and REFS0 as 1 sets the voltage as AVcc 
+	// (5 V for Arduino) with external capacitor on AREF pin. This is the default for an arduino.
 	// ADLAR determines the presentation of ADC conversion result. If 1, it is left adjusted. If 0, right adjusted. If 1, the ADC
 	// result is stored left adjusted with the 8 most significant bits held in ADCH and the remaining two bits held in ADCL. Now if 
 	// you want 8 bit resolution simply read ADCH. The MUX selects the analog pin. So, 0101 corresponds to pin 5.
@@ -345,12 +446,26 @@ void Setup_ADC() {
 	// The ADCSRA (ADC control and status register A)-[ADEN, ADSC, ADATE, ADIF, ADIE, ADPS2, ADPS1, ADPS0]
 	// Setting ADEN to 1 enables AD conversion, Setting ADSC (ADC Start conversion) to 1 chip begins AD conversion (When AD conversion
 	// is executed this bit is set to 1 and after conversion it becomes 0), ADATE(ADC Auto trigger enable) controls automatic trigger
-	// of AD conversion, ADIF(ADC interrupt flag) and ADIE(ADC interrupt enable) controls the interruption. ADPS are bits used to
-	// determine the division factor between the system clock frequency and the input clock to the AD converter.
+	// of AD conversion, ADIF(ADC interrupt flag) and ADIE(ADC interrupt enable) controls the interruption. ADPS (16, 4, 2)
+	// are bits used to determine the division factor between the system clock frequency and the input clock to the AD converter.
+	// Their value is set by multiplying the set bit values for ADPS.
 	ADMUX = 0x65; // 0110 0101, set ADC to read pin A5, ADLAR to 1 (left adjust)
 	cbi(ADCSRA, ADPS2); // set prescaler to 8 / ADC clock = 2MHz
 	sbi(ADCSRA, ADPS1);
 	sbi(ADCSRA, ADPS0);
+	//sbi(ADCSRA, ADPS2); // set prescaler to 32 / ADC clock = 500KHz
+	//cbi(ADCSRA, ADPS1);
+	//sbi(ADCSRA, ADPS0);
+
+	//ADCSRA = 0;
+	//ADCSRB = 0; // Clear the ADCSRA and ADCSRB registers.
+	//sbi(ADCSRA, ADPS2); // set prescaler to 32 / ADC clock = 500KHz. As reading the analog value takes 13 clock cycles, 
+	//// it would supply the value at the rate 500KHz/13 = 38461 Hz
+	//cbi(ADCSRA, ADPS1);
+	//sbi(ADCSRA, ADPS0);
+	//sbi(ADCSRA, ADATE); // Enable auto-trigger 
+	//sbi(ADCSRA, ADEN); // Enable ADC
+	//sbi(ADCSRA, ADSC); // Start ADC measurement
 }
 
 ISR(TIMER2_COMPA_vect) {
@@ -359,11 +474,11 @@ ISR(TIMER2_COMPA_vect) {
 	while (bit_is_set(ADCSRA, ADSC));  // wait until ADSC bit goes low = new sample ready
 	recByteCount++; // increment sample counter
 	bufByteCount++;
-	if (bufByteCount == 512 && bufWrite == 0) {
+	if (bufByteCount == BUFFERSIZE && bufWrite == 0) {
 		bufByteCount = 0;
 		bufWrite = 1;
 	}
-	else if (bufByteCount == 512 & bufWrite == 1) {
+	else if (bufByteCount == BUFFERSIZE & bufWrite == 1) {
 		bufByteCount = 0;
 		bufWrite = 0;
 	}
@@ -384,6 +499,7 @@ ISR(TIMER2_COMPA_vect) {
 String GetFileName(int fileType){
 	// fileType = 0 represents jpg, 1 represents avi and 2 represents wav.
    // Construct the file name
+  imgNameCounter = 1352;
   imgNameCounter = imgNameCounter+1;
   Serial.println(F("Opening the image counter file"));
   Serial.println(FreeRam());
