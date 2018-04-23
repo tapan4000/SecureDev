@@ -61,14 +61,13 @@ unsigned long fileSize = 0L;
 unsigned long waveChunk = 16;
 unsigned int waveType = 1;
 unsigned int numChannels = 1;
-unsigned long sampleRate = 11103;// 22050 *.73 = 16096. Original: 22191, 11103
-unsigned long bytesPerSec = 11103;
-unsigned int blockAlign = 1;
-unsigned int bitsPerSample = 8;
+unsigned long sampleRate = 22191;// 22050 *.73 = 16096
+unsigned long bytesPerSec = 44382;
+unsigned int blockAlign = 2;
+unsigned int bitsPerSample = 16;
 unsigned long dataSize = 0L;
 unsigned long recByteCount = 0L;
 unsigned long recByteSaved = 0L;
-unsigned long elapsedMicrosForCardWrite = 0;
 
 unsigned long oldTime = 0L;
 unsigned long newTime = 0L;
@@ -76,8 +75,6 @@ byte buf00[BUFFERSIZE]; // buffer array 1
 byte buf01[BUFFERSIZE]; // buffer array 2
 byte byte1, byte2, byte3, byte4;
 unsigned int bufByteCount;
-bool buf0ReadyToRead = false;
-bool buf1ReadyToRead = false;
 unsigned int bufByteCountForAdch;
 byte bufWrite;
 byte bufWriteForAdch;
@@ -254,25 +251,24 @@ void loop() {
 		delay(100000);
 	}
 
-	//Serial.print("-");
 	unsigned int signalMax = 0;
 	unsigned int signalMin = 1024;
-	if (isRecording && buf0ReadyToRead) { // recByteCount % (BUFFERSIZE * 2) == BUFFERSIZE) {
-		buf0ReadyToRead = false;
-		Serial.print("-C-");
-		//Serial.println(recByteCount);
-		//int averageValue = buf00[0];
-		//for (int i = 1; i < BUFFERSIZE; i++) {
-		//	averageValue = (averageValue + buf00[i]) / 2;
-
-		//	if (buf00[i] > signalMax)
-		//	{
-		//		signalMax = buf00[i]; // save just the max levels
-		//	}
-		//	else if (buf00[i] < signalMin)
-		//	{
-		//		signalMin = buf00[i]; // save just the min levels
-		//	}
+	if (isRecording && recByteCount % ((BUFFERSIZE - 2) * 2) == (BUFFERSIZE - 2)) {
+		Serial.println("A");
+		//short averageValue = buf00[2] | buf00[1] << 8;
+		//for (int i = 1; i < BUFFERSIZE - 1; i+=40) {
+		//	short sampleNumber = buf00[i + 1] | buf00[i] << 8;
+		//	Serial.println(sampleNumber);
+		//	//averageValue = (averageValue + sampleNumber) / 2;
+		//	//// High value stored in odd indexes and low value stored in low indexes. So, first form a number with the odd and even index
+		//	//if (sampleNumber > signalMax)
+		//	//{
+		//	//	signalMax = sampleNumber; // save just the max levels
+		//	//}
+		//	//else if (sampleNumber < signalMin)
+		//	//{
+		//	//	signalMin = sampleNumber; // save just the min levels
+		//	//}
 		//}
 
 		/*Serial.print("A:");
@@ -281,36 +277,25 @@ void loop() {
 		Serial.print(signalMax);
 		Serial.print("Mn:");
 		Serial.println(signalMin);*/
-		//Serial.print("Lg:");
-		//Serial.println(analogRead(5));
-		//Serial.println(averageValue);
-		elapsedMicrosForCardWrite = micros();
 
-		// It takes 239252 microseconds first 10 times and 38160 microseconds remaining approx 350 times for 20 second recording to write to the card if writing the buffer size of 512. It takes alternately 38184 microseconds and 260us to write 256 KB of data to the SD card.
 		rec.write(buf00, BUFFERSIZE); recByteSaved += BUFFERSIZE; // save buf01 to card
-		Serial.print("-CO");
-		//Serial.print(micros() - elapsedMicrosForCardWrite);
-		Serial.print("-");
 	}
-	else if (isRecording && buf1ReadyToRead) { // recByteCount % (BUFFERSIZE * 2) == 0) {
-		buf1ReadyToRead = false;
-		Serial.print("-D-");
-		//Serial.println(recByteCount);
-		//int averageValue = buf01[0];
-		//for (int i = 1; i < BUFFERSIZE; i++) {
-		//	averageValue = (averageValue + buf01[i]) / 2;
-
-		//	if (buf01[i] < 255) // toss out spurious readings
-		//	{
-		//		if (buf01[i] > signalMax)
-		//		{
-		//			signalMax = buf01[i]; // save just the max levels
-		//		}
-		//		else if (buf01[i] < signalMin)
-		//		{
-		//			signalMin = buf01[i]; // save just the min levels
-		//		}
-		//	}
+	else if (isRecording && recByteCount % ((BUFFERSIZE - 2) * 2) == 0) {
+		Serial.println("B");
+		//short averageValue = buf01[2] | buf01[1] << 8;
+		//for (int i = 1; i < BUFFERSIZE - 1; i += 40) {
+		//	short sampleNumber = buf01[i + 1] | buf01[i] << 8;
+		//	Serial.println(sampleNumber);
+		//	//averageValue = (averageValue + sampleNumber) / 2;
+		//	//// High value stored in odd indexes and low value stored in low indexes. So, first form a number with the odd and even index
+		//	//if (sampleNumber > signalMax)
+		//	//{
+		//	//	signalMax = sampleNumber; // save just the max levels
+		//	//}
+		//	//else if (sampleNumber < signalMin)
+		//	//{
+		//	//	signalMin = sampleNumber; // save just the min levels
+		//	//}
 		//}
 
 		/*Serial.print("A:");
@@ -319,13 +304,8 @@ void loop() {
 		Serial.print(signalMax);
 		Serial.print("Mn:");
 		Serial.println(signalMin);*/
-		//Serial.print("Lg:");
-		//Serial.println(analogRead(5));
-		elapsedMicrosForCardWrite = micros();
+
 		rec.write(buf01, BUFFERSIZE); recByteSaved += BUFFERSIZE; // save buf02 to card
-		Serial.print("-DO");
-		//Serial.print(micros() - elapsedMicrosForCardWrite);
-		Serial.print("-");
 	}
 	//else if (isRecording) {
 	//	// Read the analog value
@@ -351,7 +331,7 @@ void StartRec() { // begin recording process
 	recByteSaved = 0;
 	writeWavHeader();
 
-	//delay(2000);
+	delay(1000);
 	// TIMSK2 is a 8 bit register [-,-,-,-,-,OCIE2B,OCIE2A,TOIE2]
 	sbi(TIMSK2, OCIE2A); // enable timer interrupt, start grabbing audio
 }
@@ -377,7 +357,7 @@ void writeOutHeader() { // update WAV header with final filesize/datasize
 }
 
 void writeWavHeader() { // write out original WAV header to file
-	// Format Spec: http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/Docs/riffmci.pdf
+						// Format Spec: http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/Docs/riffmci.pdf
 	recByteSaved = 0;
 	//rec.write(zero_buf, 4);
 	rec.write("RIFF"); // Specifies the chunk Id
@@ -464,20 +444,17 @@ void Setup_timer2() {
 	//TCCR2B = _BV(CS20) | _BV(CS21); // Timer2 clock prescaler to: 64. Setting the prescaler to 64 updates the counter every 64 clock cycles. BV sets the bit value as high for specific bit. Here it sets the value to 3.
 	//TCCR2A = _BV(WGM21); // Interrupt frequency =  16Mhz/(64*6 + 1) = 41558 Hz
 	//OCR2A = 6;
-	// The interrupt frequency should be such that the writing to SD card happens before the next interrupt occurs. At 180, the frequency is 11103 Hz, i.e. 11103 times 
-	// per second or every 90 us. So, the write to SD card for 256 bytes of samples should complete within 256*90 = 23040us. For multiplier of 45, the frequency is 44321Hz i.e 44321 times per second or 
-	// every 22.5 us.
 
-				cli(); // Stop interrupts
-				TCCR2A = 0; // Set entire TCCR2A register to 0.
-				TCCR2B = 0; // Set entire TCCR2B register to 0.
-				TCNT2 = 0; // Initialize counter value to 0.
-				OCR2A = 180; // Output Compare match register A on timer 2 set to 90 (counts from 0 to 90); It is the counter for timer 2. Corresponds to pin 11.
-				TCCR2A = _BV(WGM21); // Turn on CTC mode by setting the WGM21 flag. 
-				TCCR2B = _BV(CS21); // Set CS21 bit for 8 prescaler. BV sets the bit value as high for specific bit. Here it sets the value to 1 << 1.
-				TIMSK2 = _BV(OCIE2A); // Enable timer compare interrupt.
-				sei(); // Allow interrupts.
-				// Final Interrupt frequency = 16Mhz / (8 * 90 + 1) = 22191 Hz
+	cli(); // Stop interrupts
+	TCCR2A = 0; // Set entire TCCR2A register to 0.
+	TCCR2B = 0; // Set entire TCCR2B register to 0.
+	TCNT2 = 0; // Initialize counter value to 0.
+	OCR2A = 90; // Output Compare match register A on timer 2 set to 90 (counts from 0 to 90); It is the counter for timer 2. Corresponds to pin 11.
+	TCCR2A = _BV(WGM21); // Turn on CTC mode by setting the WGM21 flag. 
+	TCCR2B = _BV(CS21); // Set CS21 bit for 8 prescaler. BV sets the bit value as high for specific bit. Here it sets the value to 1 << 1.
+	TIMSK2 = _BV(OCIE2A); // Enable timer compare interrupt.
+	sei(); // Allow interrupts.
+		   // Final Interrupt frequency = 16Mhz / (8 * 90 + 1) = 22191 Hz
 }
 
 void Setup_ADC() {
@@ -500,10 +477,10 @@ void Setup_ADC() {
 	// take 13 clock cycles to perform one read of ADC. As, normal audio is ~40KHz, we can divide the 16MHz clock rate by 32 to get approx 38.4KHz. So, every 32th clock
 	// cycle would be used to read the the ADC and it would take 13 such clock cycles to read one value. So, one ADC value would be read in 32*13 = 416 clock cycles of
 	// master clock. So, the rate at which the sample would be taken is 16MHz/416 = ~38.4KHz. So, the sample is ready every 1/38.4KHz seconds = 26us
-	ADMUX = 0x65; // If (65) 0110 0101, set ADC to read pin A5, ADLAR to 1 (left adjust). If (45) 0100 0101, set to read pin A5, ADLAR set to 0 (right adjust)
-	//cbi(ADCSRA, ADPS2); // set prescaler to 8 / ADC clock = 2MHz
-	//sbi(ADCSRA, ADPS1);
-	//sbi(ADCSRA, ADPS0);
+	ADMUX = 0x45; // If (65) 0110 0101, set ADC to read pin A5, ADLAR to 1 (left adjust). If (45) 0100 0101, set to read pin A5, ADLAR set to 0 (right adjust)
+				  //cbi(ADCSRA, ADPS2); // set prescaler to 8 / ADC clock = 2MHz
+				  //sbi(ADCSRA, ADPS1);
+				  //sbi(ADCSRA, ADPS0);
 	sbi(ADCSRA, ADPS2); // set prescaler to 32 / ADC clock = 500KHz
 	cbi(ADCSRA, ADPS1);
 	sbi(ADCSRA, ADPS0);
@@ -522,32 +499,68 @@ void Setup_ADC() {
 ISR(TIMER2_COMPA_vect) {
 	// This interrupt is triggered every time the OCR2A value is reached.
 	sbi(ADCSRA, ADSC); // start ADC sample
-	//while (bit_is_set(ADCSRA, ADSC));  // wait until ADSC bit goes low = new sample ready
+					   //while (bit_is_set(ADCSRA, ADSC));  // wait until ADSC bit goes low = new sample ready
 	recByteCount++; // increment sample counter
 	bufByteCount++;
-
-	byte highValue = ADCH;
-	byte adjustedValue = highValue + 40;
-
-	if (bufByteCount == BUFFERSIZE && bufWrite == 0) {
-		bufByteCount = 0;
-		buf0ReadyToRead = true;
-		buf1ReadyToRead = false;
+	if (bufByteCount == BUFFERSIZE - 1 && bufWrite == 0) {
+		//Serial.println("-A-");
+		bufByteCount = 1;
 		bufWrite = 1;
-		Serial.print("A");
-		Serial.print(highValue);
 	}
-	else if (bufByteCount == BUFFERSIZE & bufWrite == 1) {
-		bufByteCount = 0;
-		buf1ReadyToRead = true;
-		buf0ReadyToRead = false;
+	else if (bufByteCount == BUFFERSIZE - 1 & bufWrite == 1) {
+		//Serial.println("-A-");
+		bufByteCount = 1;
 		bufWrite = 0;
-		Serial.print("B");
-		Serial.print(highValue);
 	}
 
-	if (bufWrite == 0) { buf00[bufByteCount] = adjustedValue; }
-	if (bufWrite == 1) { buf01[bufByteCount] = adjustedValue; }
+	/*byte lowByteOrig = ADCL;
+	byte highByteOrig = ADCH;
+	short dataSample = lowByteOrig | highByteOrig << 8;*/
+
+	/*if (bufByteCount == BUFFERSIZE / 2) {
+	Serial.print(";");
+	Serial.print(dataSample);
+	Serial.print("-");
+	Serial.print(ADCH);
+	Serial.print("-");
+	Serial.print(dataSample);
+	Serial.print("-");
+	Serial.println(ADCL);
+	}*/
+	//dataSample = dataSample - 337;
+	//dataSample = dataSample * 32;
+
+	//dataSample = dataSample;
+	//byte lowByte = dataSample;
+	//byte lowByte = ADCL;
+	//byte highByte = ADCH;
+	
+	short sampleNum = ADCL | ADCH << 8;
+
+	byte nonSignificantPart = sampleNum;
+	byte significantPart = sampleNum >> 8;
+	
+	if (bufWrite == 0) { buf00[bufByteCount] = significantPart; }
+	if (bufWrite == 1) { buf01[bufByteCount] = significantPart; }
+
+	recByteCount++; // increment sample counter
+	bufByteCount++;
+	if (bufByteCount == BUFFERSIZE - 1 && bufWrite == 0) {
+		//Serial.println("-NA-");
+		bufByteCount = 1;
+		bufWrite = 1;
+	}
+	else if (bufByteCount == BUFFERSIZE - 1 & bufWrite == 1) {
+		//Serial.println("-NA-");
+		bufByteCount = 1;
+		bufWrite = 0;
+	}
+
+	
+	//byte adjustedValue = highValue + 40;
+
+	if (bufWrite == 0) { buf00[bufByteCount] = nonSignificantPart; }
+	if (bufWrite == 1) { buf01[bufByteCount] = nonSignificantPart; }
 
 	//byte lowVal = ADCL;
 	////// Write out the ADCL byte.
@@ -638,7 +651,7 @@ ISR(TIMER2_COMPA_vect) {
 String GetFileName(int fileType) {
 	// fileType = 0 represents jpg, 1 represents avi and 2 represents wav.
 	// Construct the file name
-	imgNameCounter = 1359;
+	imgNameCounter = 1355;
 	imgNameCounter = imgNameCounter + 1;
 	Serial.println(F("Opening the image counter file"));
 	Serial.println(FreeRam());
