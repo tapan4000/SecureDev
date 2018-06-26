@@ -1,0 +1,4 @@
+1) Have one document for the best practices around naming of files, variables, classes etc.
+2) Have a document for best practices on logging. What level of logging is required and what should be the logging level.
+3) Have a document that described the features at a high level. Any CR's should update this document.
+4) Prepare Architecture design record documents for any design decision made consisting of Context, Decision, Status, Consequence

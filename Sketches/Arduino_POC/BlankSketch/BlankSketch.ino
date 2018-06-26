@@ -6,9 +6,11 @@ int counter = 0;
 unsigned long maxMicros = 0;
 unsigned long lastMacros = 0;
 unsigned long minMicros = 99999;
+int potPin = 5;
+int val = 0;
 unsigned long sample = 0;
 void setup() {
-	Serial.begin(115200);
+	Serial.begin(9600);
 	Serial.println("Print -450");
 	short sampleData = -450;
 	byte lowByte = sampleData;
@@ -35,7 +37,11 @@ void setup() {
 }
 
 void loop() {
+	
 	if (counter < 10005) {
+		val = analogRead(potPin);
+		Serial.println(val);
+		delay(100);
 		counter++;
 	}
 	

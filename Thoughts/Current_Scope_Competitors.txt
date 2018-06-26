@@ -1,0 +1,46 @@
+1) Glympse
+Pros:
+a) No need to sign up or login through social login.
+b) Works on the mobile number where the location can be shared to the mobile numbers.
+c) Allows to specify the length of the time for which you want the recipient to view your location.
+d) The viewer only needs the link to view the users location. No sign up required.
+e) The feature is available where the customer once orders the item, it can track the delivery boy or service personell/technician using the map. This is being developed as a platform. It has other tools like En route web dashboard, en route mobile and also has developer tools for enterprises.
+f) Glympse also shows the estimated time of arrival, the expected route to take. Say when kids are coming from school, it shows exactly where the kids are.
+g) The interface has been kept easy that makes it easy to use for the daily users like parents (to track kids when kids send their glimpse), person who is reaching a destination(allows the person to send glimpse to person waiting for him), a service personell (customer get to know the real time location and made decision based on that).
+h) They have an online portal for signing in, accessing the FAQ's. Very good online support with good reporting representations.
+i) It gives information to the user about how many people viewed their glimpse.
+
+Cons
+a) Considering this is a simple app for sharing data, it is not much intuitive on how to operate.
+b) The help within the app is not present.
+
+2) Find my friends
+Pros:
+a) Allows each friend to appear as a personal icon.
+b) A group communicator enables quick chat.
+c) Tells the estimated arrival time for friends.
+d) It uses cell phone tower triangulation to find friends.
+e) In first page automatically displays the current mobile number to continue registration. During registration asks for photo, email and pass. Next it asks to join a circle or create a new circle. Pretty intuitive and easy to use.
+f) Shows the available battery on user's mobile.
+g) Shows the history like started from home at 6pm etc. Free version includes history upto 2 days. On upgrade it can show history upto 30 days.
+
+Cons
+a) Some user reported it stopped working. But that was only one instance.
+b) Asks to subscribe to premium after setup.
+
+3) Find my friends(Apple)
+Pros:
+a) Allows the user to specify the period of time for which the data can be shared with others and the sharing can be stopped by them at any time. This is as a security measure for the user.
+b) Geo-fence alerting is available. You can select from which friends you can receive Geo-fence alerts. It tells you when a friend arrives at or leaves a location.
+c) On the map, it displays the list of friends who are able to see your location.
+
+4) Insignia Tracking device
+Pros:
+a) Costs only $25. Devices available as low as $10.
+
+5) Mini A8 Car GPS tracker Global locator with GPRS
+Pros
+a) Can detect sound and automatically make a call to the set number.
+
+Cons
+a) Can be misused for listening to some conversation.

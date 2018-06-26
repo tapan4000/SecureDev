@@ -10,6 +10,10 @@
 #define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
 #define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
 
+// Coupling Capacitor: It filters out the DC current in a AC circuit https://www.elprocus.com/coupling-capacitor-working-and-applications/
+// Decoupling Capacitor: It suppresses high frequency noise in power supply signal. Only high frequency signals can run through the decoupling capacitor to ground.
+// The decoupling capacitor should be located as close to the IC as possible https://learn.sparkfun.com/tutorials/capacitors/application-examples 
+// http://www.capacitorguide.com/coupling-and-decoupling/
 // Set the serial ports for the bluetooth module Receive and Transmit
 //SoftwareSerial moduleSerial(0, 1); //RX, TX
 
@@ -30,6 +34,9 @@ short minDataSample = 1024;
 int countSampleAboveAverage = 0;
 int countSampleBelowAverage = 0;
 const char zero_buf[4] = { 0x00, 0x00, 0x00, 0x00 };
+
+
+
 const int avi_header[AVIOFFSET] PROGMEM = {
 	0x52, 0x49, 0x46, 0x46, 0xD8, 0x01, 0x0E, 0x00, 0x41, 0x56, 0x49, 0x20, 0x4C, 0x49, 0x53, 0x54,
 	0xD0, 0x00, 0x00, 0x00, 0x68, 0x64, 0x72, 0x6C, 0x61, 0x76, 0x69, 0x68, 0x38, 0x00, 0x00, 0x00,

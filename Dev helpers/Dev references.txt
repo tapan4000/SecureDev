@@ -23,10 +23,13 @@ https://msdn.microsoft.com/en-us/library/windows/desktop/dd318181(v=vs.85).aspx
 5) http://forum.arduino.cc/index.php?topic=158169.0
 6) https://stackoverflow.com/questions/24078563/recording-wav-file-using-arduino - link to digital audio recorder.
 7) http://www.instructables.com/id/Arduino-Mega-Audio-File-logging/
+	http://www.instructables.com/id/Arduino-Audio-Input/
 8) https://learn.adafruit.com/piccolo/code - Sample for audio visualizer
 9) https://electronics.stackexchange.com/questions/322503/how-to-get-audio-from-a-sensor-for-an-arduino - which sensor to buy
 10) https://www.adafruit.com/product/1063
-11) http://duino4projects.com/arduino-projects-digital-audio-recorder/?utm_content=buffer2cb67&utm_medium=social&utm_source=plus.google.com&utm_campaign=buffer    - Circuit
+11) http://duino4projects.com/arduino-projects-digital-audio-recorder/?
+12) http://blog.mklec.com/trrs-and-trs-plugs-and-sockets-explained/ - Mike port reference
+utm_content=buffer2cb67&utm_medium=social&utm_source=plus.google.com&utm_campaign=buffer    - Circuit
 Good query: arduino microphone sd card
 
 --GPS reference
@@ -48,3 +51,6 @@ Good query: arduino microphone sd card
 
 -- Arducam reference
 1) Connect arducam with Arduino Mega: https://github.com/ArduCAM/Arduino/issues/175
+
+-- Eagle reference
+1) https://www.schematicpal.com/ -- Schematic libraries

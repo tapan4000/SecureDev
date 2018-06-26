@@ -1,5 +1,5 @@
-C:\Users\tapanj\AppData\Local\Temp\VMBuilds\BlankSketch\mega_atmega2560\Debug\BlankSketch.cpp.o: \
- C:\Users\tapanj\AppData\Local\Temp\VMBuilds\BlankSketch\mega_atmega2560\Debug\BlankSketch.cpp \
+C:\Users\tapanj\AppData\Local\Temp\VMBuilds\BlankSketch\uno\Debug\BlankSketch.cpp.o: \
+ C:\Users\tapanj\AppData\Local\Temp\VMBuilds\BlankSketch\uno\Debug\BlankSketch.cpp \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -10,4 +10,4 @@ C:\Users\tapanj\AppData\Local\Temp\VMBuilds\BlankSketch\mega_atmega2560\Debug\Bl
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\standard/pins_arduino.h

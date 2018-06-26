@@ -1,0 +1,248 @@
+FOURCC: It represents a 4 byte unsigned integer that is formed by concatenaing four ASCII characters.
+DWORD: Double word represents unsigned 4 byte integer.
+WORD: It represents an unsigned 2 byte integer.
+
+The size of any element is always represented in little endian format where the lowest byte comes first.
+RIFF Files
+
+There are 2 types of atoms in AVI:
+ 
+Chunks
+typedef struct {
+DWORD dwFourCC
+DWORD dwSize
+BYTE data[dwSize] // contains headers or video/audio data
+}
+ 
+Lists
+typedef struct {
+DWORD dwList
+DWORD dwSize
+DWORD dwFourCC
+BYTE data[dwSize-4] // contains Lists and Chunks
+}
+
+   RIFF files are built from 
+
+	(1) RIFF Form Header
+
+              'RIFF' (4 byte file size) 'xxxx' (data)
+
+                  where 'xxxx' identifies the specialization (or form)
+                  of RIFF.  'AVI ' for AVI files.
+
+                  where the data is the rest of the file.  The 
+                  data is comprised of chunks and lists.  Chunks
+                  and lists are defined immediately below.
+
+	(2) A Chunk
+
+		(4 byte identifier) (4 byte chunk size) (data)
+
+                The 4 byte identifier is a human readable sequence
+                of four characters such as 'JUNK' or 'idx1'
+
+	(3) A List
+
+		'LIST' (4 byte list size) (4 byte list identifier) (data)
+
+                        where the 4 byte identifier is a human readable
+                        sequence of four characters such as 'rec ' or
+                        'movi'
+			
+			where the data is comprised of LISTS or CHUNKS.
+
+AVI File Format
+
+
+	AVI is a specialization or "form" of RIFF, described below:
+
+
+'RIFF' (4 byte file length) 'AVI '   // file header (a RIFF form)
+
+'LIST' (4 byte list length) 'hdrl'   // list of headers for AVI file
+
+The 'hdrl' list contains:
+
+'avih' (4 byte chunk size)  (data)   // the AVI header  (a chunk)
+
+'strl' lists of stream headers for each stream (audio, video, etc.) in
+the AVI file.  An AVI file can contain zero or one video stream and
+zero, one, or many audio streams.  For an AVI file with one video and
+one audio stream:
+
+'LIST' (4 byte list length) 'strl'   // video stream list (a list)
+
+The video 'strl' list contains:
+
+'strh' (4 byte chunk size)  (data)   // video stream header (a chunk)
+'strf' (4 byte chunk size)  (data)   // video stream format (a chunk)
+
+'LIST' (4 byte list length) 'strl'   // audio stream list (a list)
+
+The audio 'strl' list contains:
+
+'strh' (4 byte chunk size)  (data)   // audio stream header (a chunk)
+'strf' (4 byte chunk size)  (data)   // audio stream format (a chunk)
+
+'JUNK' (4 byte chunk size) (data - usually all zeros) // an OPTIONAL junk chunk to align on 2K byte boundary
+
+'LIST' (4 byte list length) 'movi'   // list of movie data (a list)
+
+The 'movi' list contains the actual audio and video data.   
+ 
+This 'movi' list contains one or more ...
+ 'LIST' (4 byte list length) 'rec '  // list of movie records (a list)
+ '##wb' (4 byte chunk size) (data)   // sound data (a chunk)
+ '##dc' (4 byte chunk size) (data)   // video data (a chunk)
+ '##db' (4 byte chunk size) (data)   // video data (a chunk)
+
+A 'rec ' list (a record) contains the audio and video data for a single frame.
+ '##wb' (4 byte chunk size)  (data)  // sound data (a chunk)
+ '##dc' (4 byte chunk size)  (data)  // video data (a chunk)
+ '##db' (4 byte chunk size)  (data)  // video data (a chunk)
+
+The 'rec ' list may not be used for AVI files with only audio or only
+video data.  I have seen video only uncompressed AVI files that did
+not use the 'rec ' list, only '00db' chunks.  The 'rec ' list is used
+for AVI files with interleaved audio and video streams.  The 'rec '
+list may be used for AVI file with only video.
+
+ ## in '##dc' refers to the stream number.  For example, video data chunks
+belonging to stream 0 would use the identifier '00dc'.  A chunk of
+video data contains a single video frame.
+
+Alexander Grigoriev writes ...
+
+John,
+
+##dc chunk was intended to keep compressed data, whereas ##db chunk
+nad(sic) to be used for uncompressed DIBs (device independent bitmap),
+but actually they both can contain compressed data. For example,
+Microsoft VidCap (more precisely, video capture window class) writes
+MJPEG compressed data in ##db chunks, whereas Adobe Premiere writes
+frames compressed with the same MJPEG codec as ##dc chunks.
+
+----End of Alexander
+
+The ##wb chunks contain the audio data.
+
+The audio and video chunks in an AVI file do not contain 
+time stamps or frame counts.  The data is ordered in time sequentially as
+it appears in the AVI file.  A player application should display the
+video frames at the frame rate indicated in the headers.  The
+application should play the audio at the audio sample rate indicated
+in the headers.  Usually, the streams are all assumed to start at
+time zero since there are no explicit time stamps in the AVI file.
+
+The lack of time stamps is a weakness of the original AVI file
+format.  The OpenDML AVI Extensions add new chunks with time
+stamps.  Microsoft's ASF (Advanced or Active Streaming Format), which
+Microsoft claims will replace AVI, has time stamp "objects".
+
+In principle, a video chunk contains a single frame of video.  By
+design, the video chunk should be interleaved with an audio chunk
+containing the audio associated with that video frame.  The data
+consists of pairs of video and audio chunks.  These pairs may be
+encapsulated in a 'REC ' list.  Not all AVI files obey this simple
+scheme.  There are even AVI files with all the video followed by all
+of the audio; this is not the way an AVI file should be made.
+
+ The 'movi' list may be followed by:
+
+ 'idx1' (4 byte chunk size) (index data) // an optional index into movie (a chunk)
+
+  The optional index contains a table of memory offsets to each
+chunk within the 'movi' list.  The 'idx1' index supports rapid
+seeking to frames within the video file.  
+
+  The 'avih' (AVI Header) chunk contains the following information:
+
+      Total Frames   (for example, 1500 frames in an AVI)
+      Streams   (for example, 2 for audio and video together)
+      InitialFrames
+      MaxBytes
+      BufferSize
+      Microseconds Per Frame
+      Frames Per Second   (for example, 15 fps)
+      Size  (for example 320x240 pixels)
+      Flags
+
+  The 'strh' (Stream Header) chunk contains the following information:
+
+      Stream Type  (for example, 'vids' for video  'auds' for audio)
+      Stream Handler  (for example, 'cvid' for Cinepak)
+      Samples Per Second  (for example 15 frames per second for video)
+      Priority
+      InitialFrames
+      Start
+      Length  (for example, 1500 frames for video)
+      Length (sec)   (for example 100 seconds for video)
+      Flags
+      BufferSize
+      Quality
+      SampleSize
+
+   For video, the 'strf' (Stream Format) chunk contains the following 
+information:
+
+      Size  (for example 320x240 pixels)
+      Bit Depth (for example 24 bit color)
+      Colors Used  (for example 236 for palettized color)
+      Compression  (for example 'cvid' for Cinepak)
+
+   For audio, the 'strf' (Stream Format) chunk contains the following
+information:
+
+      wFormatTag           (for example, WAVE_FORMAT_PCM)
+      Number of Channels   (for example 2 for stereo sound)
+      Samples Per Second   (for example 11025)
+      Average Bytes Per Second   (for example 11025 for 8 bit sound)
+      nBlockAlign
+      Bits Per Sample      (for example 8 or 16 bits)
+
+  Each 'rec ' list contains the sound data and video data for a single
+frame in the sound data chunk and the video data chunk.  
+
+  Other chunks are allowed within the AVI file.  For example, I have
+seen info lists such as
+
+    'LIST' (4 byte list size) 'INFO' (chunks with information on video)
+
+  These chunks that are not part of the AVI standard are simply
+ignored by the AVI parser.  AVI can be and has been extended by adding
+lists and chunks not in the standard.  The 'INFO' list is a registered
+global form type (across all RIFF files) to store information that
+helps identify the contents of a chunk.
+
+  The sound data is typically 8 or 16 bit PCM, stereo or mono,
+sampled at 11, 22, or 44.1 KHz.  Traditionally, the sound has
+typically been uncompressed Windows PCM.  With the advent of
+the WorldWide Web and the severe bandwidth limitations of the
+Internet, there has been increasing use of audio codecs.  The
+wFormatTag field in the audio 'strf' (Stream Format) chunk
+identifies the audio format and codec.
+
+1.2 Basic data structures
+There are 2 types of atoms in AVI les:
+1.2.1 Chunks
+typedef struct {
+DWORD dwFourCC
+DWORD dwSize
+BYTE data[dwSize] // contains headers or video/audio data
+} CHUNK;
+1.2.2 Lists
+typedef struct {
+DWORD dwList
+DWORD dwSize
+DWORD dwFourCC
+BYTE data[dwSize-4] // contains Lists and Chunks
+} LIST;
+A chunk containing video, audio or subtitle data uses a dwFourCC containing 2 hexadecimal
+digits specifying the stream number and 2 letters specifying the data type (dc = video, wb
+= audio, tx = text). The values dwFourCC and dwSize have the same meaning in both of
+the structures:
+dwFourCC describes the type of the chunk (for example 'hdrl' for 'header list'), and dwSize
+contains the size of the chunk or list, including the rst byte after the dwSize value. In the
+case of Lists, this includes the 4 bytes taken by dwFourCC!
+The value of dwList can be 'RIFF' ('RIFF-List') or 'LIST' ('List').
