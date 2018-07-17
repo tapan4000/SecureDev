@@ -1,0 +1,1 @@
+1) High_Accuracy_GPS running every 10 seconds for 8 hours reduced the battery by 40% out of which 24% usage is by the app. The log came till 8:19 am and then at 3:32 pm (Basically it came only till the time I was at home).

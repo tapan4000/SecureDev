@@ -1,0 +1,7 @@
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Logging.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Logging.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\obj\Debug\RestServer.Core.csprojResolveAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\obj\Debug\RestServer.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\obj\Debug\RestServer.Core.pdb

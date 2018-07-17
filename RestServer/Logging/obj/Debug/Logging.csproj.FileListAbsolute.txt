@@ -1,0 +1,4 @@
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\Logging.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\Logging.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\obj\Debug\Logging.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\obj\Debug\Logging.pdb

@@ -1,0 +1,2 @@
+https://android.jlelse.eu/fundamentals-of-dependency-injection-and-popular-libraries-in-android-c17cf48b5253
+https://developer.android.com/training/data-storage/files

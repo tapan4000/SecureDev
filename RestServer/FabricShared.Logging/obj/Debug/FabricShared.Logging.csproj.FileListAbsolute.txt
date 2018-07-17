@@ -1,0 +1,13 @@
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\bin\Debug\FabricShared.Logging.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\bin\Debug\FabricShared.Logging.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\bin\Debug\Microsoft.ServiceFabric.Internal.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\bin\Debug\Microsoft.ServiceFabric.Internal.Strings.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\bin\Debug\Microsoft.ServiceFabric.Preview.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\bin\Debug\System.Fabric.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\bin\Debug\System.Fabric.Management.ServiceModel.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\bin\Debug\System.Fabric.Management.ServiceModel.XmlSerializers.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\bin\Debug\System.Fabric.Strings.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\bin\Debug\Microsoft.ServiceFabric.Preview.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\bin\Debug\System.Fabric.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\obj\Debug\FabricShared.Logging.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.Logging\obj\Debug\FabricShared.Logging.pdb
