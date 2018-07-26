@@ -1,0 +1,2 @@
+1) Check the configuration of winlogbeat is valid or not.
+.\winlogbeat.exe test config -c .\winlogbeat.yml -e

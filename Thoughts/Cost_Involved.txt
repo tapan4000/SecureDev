@@ -1,0 +1,20 @@
+1) Google maps: Google maps gives $200 monthly credit to users. Extra needs to be paid. The costs are based on below
+	a) Dynamic maps web loads: 28,500 times comes with $200 credit.
+	b) Static street view web loads: 25000 times comes with $200 credit.
+	c) Direction calls: 40000 times comes with $200 credit.
+	d) Travel time and distance calls: 40000 times comes with $200 credit.
+	e) Road Calls (Best fit road geometry based on GPS coordinates passed, or speed limits on a road): 40000 Places details calls come with $200 credit.
+	f) Address auto-complete in search: 10000 calls come with $200 credit.
+	g) Get a place from address, names etc: 10000 calls come with $200 credit.
+	h) Dynamic/Static maps mobile loads: Unlimited
+	i) Directions Advamced: 20000 times comes with $200 credit.
+	j) Distance calls advanced: 20000 times comes with $200 credit.
+	Basically two tiers exist in Tier 1(0-100K calls) the price per thousand would be $5 and for 100K+ calls it would be $4.
+
+For address completion in google maps rate is
+10K - $200
+whereas in here maps the rate is
+100K - $49
+So, if google maps appear to be costly, will need to move towards here maps
+
+As we may move to different map providers/address search provider keep the API clients pluggable.
