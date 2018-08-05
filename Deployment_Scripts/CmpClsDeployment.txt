@@ -1,0 +1,48 @@
+Connect-AzureRmAccount
+Set-AzureRmContext -SubscriptionId 78372667-21b1-4bb1-a5d0-86954f68f581
+$resourceGroupLocation="eastus"
+$resourceGroupName="cmpclsstage"
+$vaultName="cmpkvstg"
+$vaultResourceGroupName=""
+$CertSubjectName=""|ConvertTo-SecureString -AsPlainText -Force
+$certPassword=""|ConvertTo-SecureString -AsPlainText -Force
+$vmuser="myadmin"
+$os="WindowsServer2016DatacenterwithContainers"
+$certOutputFolder="c:\certificates"
+
+New-AzureRmServiceFabricCluster -ResourceGroupName $resourceGroupName -Location $resourceGroupLocation -CertificateOutputFolder $certOutputFolder -CertificatePassword $certpassword -CertificateSubjectName $CertSubjectName -OS $os -VmPassword $vmpassword -VmUserName $vmuser
+
+$resourceGroupLocation="westus"
+$resourceGroupName="mycluster"
+$CertSubjectName="mycluster.westus.cloudapp.azure.com"
+$certPassword="Password!1" | ConvertTo-SecureString -AsPlainText -Force 
+$certOutputFolder="c:\certificates"
+
+$parameterFilePath="c:\mytemplates\mytemplateparm.json"
+$templateFilePath="c:\mytemplates\mytemplate.json"
+New-AzureRmServiceFabricCluster -ResourceGroupName $resourceGroupName -CertificateOutputFolder $certOutputFolder -CertificatePassword $certpassword -CertificateSubjectName $CertSubjectName -TemplateFile $templateFilePath -ParameterFile $parameterFilePath
+
+----------------------------------------------------------
+Login-AzureRmAccount
+Set-AzureRmKeyVaultAccessPolicy -VaultName 'cmpkvstg' -EnabledForDeployment
+
+$resourceGroupName="cmprgstage"
+$parameterFilePath="D:\Misc\Business Idea\SecurityDev\Deployment_Scripts\CmpClsArmParameters.json"
+$templateFilePath="D:\Misc\Business Idea\SecurityDev\Deployment_Scripts\CmpClsArmTemplate.json"
+$secretID="https://cmpkvstg.vault.azure.net:443/secrets/clusteraccesscert/3ebe4bcfcde3489c9fa2ec03114f3f76"
+
+New-AzureRmServiceFabricCluster -ResourceGroupName $resourceGroupName -SecretIdentifier $secretId -TemplateFile $templateFilePath -ParameterFile $parameterFilePath
+-----------------------------------------------------------
+Login-AzureRmAccount
+Set-AzureRmKeyVaultAccessPolicy -VaultName 'cmpkvstg' -EnabledForDeployment
+$resourceGroupName="cmprgstage"
+$CertSubjectName="cmpclsstg.eastus.cloudapp.azure.com"
+$certPassword="P@ssword" | ConvertTo-SecureString -AsPlainText -Force 
+$certOutputFolder="D:\Misc\Business Idea\SecurityDev\Deployment_Scripts\Certificates"
+
+$parameterFilePath="D:\Misc\Business Idea\SecurityDev\Deployment_Scripts\CmpClsArmParameters.json"
+$templateFilePath="D:\Misc\Business Idea\SecurityDev\Deployment_Scripts\CmpClsArmTemplate.json"
+
+New-AzureRmServiceFabricCluster -ResourceGroupName $resourceGroupName -CertificateOutputFolder $certOutputFolder -CertificatePassword $certpassword -CertificateSubjectName $CertSubjectName -TemplateFile $templateFilePath -ParameterFile $parameterFilePath
+
+----------------------------------------

@@ -10,3 +10,4 @@
 9) Based on are location fence users can upload different issues faced by them in terms of videos describing the problem or images describing the problem. The images/video can be monitored by the company and then uploaded. This list of problems needs to be looked into by a group local to the community or by MLA's in that area. The MLA's can be contacted for their marketing.
 10) In order to build the reach within the market for security related team building setup a list of detectives who would act as the informants for the security team.
 11) Any person can find a security personell nearby using the iBeacon feature. The iBeacon should be a feature that should show the list of all the available security personell within a region.
+12) People can post the issues against the organizations or establishments and the people working in it. In order to club the establishments, the user posting the issue should correctly select the establishment.

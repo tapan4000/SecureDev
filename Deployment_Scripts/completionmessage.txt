@@ -1,0 +1,75 @@
+VmUserName   : cmpadmin
+Certificates : Primary key vault and certificate detail:
+                KeyVaultId : /subscriptions/78372667-21b1-4bb1-a5d0-86954f68f581/resourceGroups/cmprgstg/providers/Microsoft.KeyVault/vaults/cmpkvstg
+                KeyVaultName : cmpkvstg
+                KeyVaultCertificateId : 
+                SecretIdentifier : https://cmpkvstg.vault.azure.net/secrets/cmpclsaccess/f2b04865ab6f43f996a846f470da7380
+                Certificate: :
+                CertificateThumbprint : 76D4714D6104D7FA88C6140E42770EB05CA40E6A
+                CertificateSavedLocalPath : Not saved
+               
+Deployment   : Name : CmpClsArmTemplate
+               Id : /subscriptions/78372667-21b1-4bb1-a5d0-86954f68f581/resourceGroups/cmpclsstage/providers/Microsoft.Resources/deployments/CmpClsArmTemplate
+               CorrelationId : d6ff6b89-08c1-47e5-8dc5-653334694bc0
+               Mode : Incremental
+               ProvisioningState : Succeeded
+               Timestamp : 31-07-2018 07:28:05 PM
+               
+Cluster      : AvailableClusterVersions :
+                   CodeVersion : 6.3.162.9494
+                   SupportExpiryUtc : 12/31/9999 23:59:59
+                   Environment : Windows
+               ClusterId : 481e7765-7fba-4d2c-966e-81e0f01cb42f
+               ClusterState : Deploying
+               ClusterEndpoint : https://eastus.servicefabric.azure.com/runtime/clusters/481e7765-7fba-4d2c-966e-81e0f01cb42f
+               ClusterCodeVersion : 6.3.162.9494
+               Certificate :
+                   Thumbprint : 76D4714D6104D7FA88C6140E42770EB05CA40E6A
+                   ThumbprintSecondary : 
+                   X509StoreName : My
+               ReliabilityLevel : None
+               UpgradeMode : Automatic
+               ClientCertificateThumbprints :
+               ClientCertificateCommonNames :
+               FabricSettings :
+                   Name : Security
+                   Parameters :
+                       Name : ClusterProtectionLevel
+                       Value : EncryptAndSign
+               ReverseProxyCertificate : 
+               ManagementEndpoint : https://cmpclsstg.eastus.cloudapp.azure.com:19080
+               NodeTypes :
+                   NodeTypeDescription :
+                       Name : cmppri
+                       PlacementProperties : 
+                       Capacities : 
+                       ClientConnectionEndpointPort : 19000
+                       HttpGatewayEndpointPort : 19080
+                       DurabilityLevel : Bronze
+                       ApplicationPorts :
+                           StartPort : 20000
+                           EndPort : 30000
+                       EphemeralPorts :
+                           StartPort : 49152
+                           EndPort : 65534
+                       IsPrimary : True
+                       VmInstanceCount : 1
+                       ReverseProxyEndpointPort : 
+               AzureActiveDirectory : 
+               ProvisioningState : Succeeded
+               VmImage : Windows
+               DiagnosticsStorageAccountConfig :
+                   StorageAccountName : sflogscmpclsstg7745
+                   ProtectedAccountKeyName : StorageAccountKey1
+                   BlobEndpoint : https://sflogscmpclsstg7745.blob.core.windows.net/
+                   QueueEndpoint : https://sflogscmpclsstg7745.queue.core.windows.net/
+                   TableEndpoint : https://sflogscmpclsstg7745.table.core.windows.net/
+               UpgradeDescription : 
+               Id : /subscriptions/78372667-21b1-4bb1-a5d0-86954f68f581/resourcegroups/cmpclsstage/providers/Microsoft.ServiceFabric/clusters/cmpclsstg
+               Name : cmpclsstg
+               Type : Microsoft.ServiceFabric/clusters
+               Location : eastus
+               Tags :
+                   resourceType : Service Fabric
+                   clusterName : cmpclsstg
+               

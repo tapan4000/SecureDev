@@ -1,0 +1,15 @@
+1) Technology should be used to remove the fear among people. There can be
+	a) Fear of theft of car - Geofencing and fast tracking
+	b) Fear of theft of expensive mobile someone has bought	- silent fast tracking
+	c) Fear of being beaten by someone after receiving a threat. - Emergency session
+	d) Fear of losing job after taking up a loan, or for children's education.
+	e) Fear of not having anything to eat this day or the next.
+	f) Fear of police questioning for a rape victim. - Community app
+	g) Fear of police unnecessarily stopping vehicle to get bribe. - Community app
+	h) Fear of family asking for excessive dowry. - Community app
+	i) Fear of ragging in college. - Emergency session
+	j) Fear of bullying a kid in school.
+	k) Fear of kidnapping a kid in school. - Emergency session/geofencing/fast tracking
+	l) Fear of harrasing a kid in school sexually/mentally/physically. - Community app
+	m) Fear of kid travel from home to school/gym/play/camp and vice versa. - Geofecing
+	n) 
