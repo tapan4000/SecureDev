@@ -8,32 +8,46 @@
         void Verbose(
             string traceId,
             string message,
+            string userUniqueId,
             [CallerMemberName] string memberName = null,
-            [CallerFilePath] string fileName = null,
+            [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = 0,
             string logTime = null);
 
         void Info(
             string traceId,
             string message,
+            string userUniqueId,
             [CallerMemberName] string memberName = null,
-            [CallerFilePath] string fileName = null,
+            [CallerFilePath] string filePath = null,
+            [CallerLineNumber] int lineNumber = 0,
+            string logTime = null);
+
+        void Warning(
+            string traceId,
+            string message,
+            string userUniqueId,
+            [CallerMemberName] string memberName = null,
+            [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = 0,
             string logTime = null);
 
         void Error(
             string traceId,
             string errorMessage,
+            string userUniqueId,
             [CallerMemberName] string memberName = null,
-            [CallerFilePath] string fileName = null,
+            [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = 0,
             string logTime = null);
 
-        void Exception(
+        void Critical(
             string traceId,
             Exception ex,
+            string userUniqueId,
+            string message = null,
             [CallerMemberName] string memberName = null,
-            [CallerFilePath] string fileName = null,
+            [CallerFilePath] string filePath = null,
             [CallerLineNumber] int lineNumber = 0,
             string logTime = null);
     }

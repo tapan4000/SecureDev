@@ -1,0 +1,7 @@
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\obj\Release\RestServer.Logging.csprojResolveAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Release\RestServer.Logging.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Release\RestServer.Logging.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Release\RestServer.ServerContext.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Release\RestServer.ServerContext.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\obj\Release\RestServer.Logging.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\obj\Release\RestServer.Logging.pdb

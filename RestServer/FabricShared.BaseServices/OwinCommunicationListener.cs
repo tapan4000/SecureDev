@@ -84,7 +84,7 @@ namespace RestServer.FabricShared.BaseServices
             }
             catch (Exception ex)
             {
-                this.logger.LogException(ex, ServiceFabricLogHelper.GetServiceContextAsString(this.serviceContext) + $"Web server failed to open. Error: ");
+                this.logger.LogException($"Web server failed to open. Context: {ServiceFabricLogHelper.GetServiceContextAsString(this.serviceContext)}", ex);
                 this.StopWebServer();
                 throw;
             }

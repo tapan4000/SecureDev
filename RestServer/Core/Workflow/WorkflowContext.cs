@@ -6,7 +6,7 @@
 
     public class WorkflowContext : IWorkflowContext
     {
-        public Guid WorkflowId { get; set; }
+        public string WorkflowId { get; set; }
 
         public string UserUniqueId { get; set; }
     }

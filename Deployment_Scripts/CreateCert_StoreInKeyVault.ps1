@@ -6,9 +6,9 @@
 #)
 
 $Password = "P@ssword"# | ConvertTo-SecureString -AsPlainText -Force 
-$CertDNSName = "cmpclsstg.eastus.cloudapp.azure.com"
+$CertDNSName = "cmpclsstgclient.eastus.cloudapp.azure.com"
 $KeyVaultName = "cmpkvstg"
-$KeyVaultSecretName = "clusteraccesscert"
+$KeyVaultSecretName = "clusteraccesscertclient"
 $CertOutputFolder = "D:\Misc\Business Idea\SecurityDev\Deployment_Scripts\Certificates"
 
 Login-AzureRmAccount

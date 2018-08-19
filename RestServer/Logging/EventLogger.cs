@@ -1,6 +1,7 @@
 ﻿namespace RestServer.Logging
 {
     using System;
+    using System.Data.SqlClient;
     using System.Runtime.CompilerServices;
     using RestServer.Logging.Interfaces;
     using System.Text;
@@ -16,53 +17,33 @@
 
         public void LogInformation(string message, string filePath = "", int lineNumber = 0, string memberName = "")
         {
-            this.WriteDebugMessage(message);
+            LoggerEventSource.Current.Info(this.workflowContext.WorkflowId, message, this.workflowContext.UserUniqueId, memberName, filePath, lineNumber);
         }
 
         public void LogWarning(string message, string filePath = "", int lineNumber = 0, string memberName = "")
         {
-            this.WriteDebugMessage(message);
+            LoggerEventSource.Current.Warning(this.workflowContext.WorkflowId, message, this.workflowContext.UserUniqueId, memberName, filePath, lineNumber);
         }
 
         public void LogError(string message, string filePath = "", int lineNumber = 0, string memberName = "")
         {
-            this.WriteDebugMessage(message);
+            LoggerEventSource.Current.Error(this.workflowContext.WorkflowId, message, this.workflowContext.UserUniqueId, memberName, filePath, lineNumber);
         }
 
         public void LogVerbose(string message, string filePath = "", int lineNumber = 0, string memberName = "")
         {
-            this.WriteDebugMessage(message);
+            LoggerEventSource.Current.Verbose(this.workflowContext.WorkflowId, message, this.workflowContext.UserUniqueId, memberName, filePath, lineNumber);
         }
 
-        private void WriteDebugMessage(string message)
+
+        public void LogException(string message, Exception ex, [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string memberName = "")
         {
-            LoggerEventSource.Current.Info(this.workflowContext.WorkflowId.ToString(), message);
+            LoggerEventSource.Current.Critical(this.workflowContext.WorkflowId, ex, this.workflowContext.UserUniqueId, message, memberName, filePath, lineNumber);
         }
 
-        public void LogException(Exception ex, string message, [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string memberName = "")
+        public void LogException(Exception ex, [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string memberName = "")
         {
-            this.WriteDebugMessage(this.FlattenException(ex) + message);
-        }
-
-        private string FlattenException(Exception ex)
-        {
-            if (null == ex.InnerException)
-            {
-                return ex.Message;
-            }
-            else
-            {
-                StringBuilder exceptionMessage = new StringBuilder(ex.Message);
-                var innerException = ex.InnerException;
-                while (null != innerException)
-                {
-                    exceptionMessage.Append("---------");
-                    exceptionMessage.Append(innerException.Message);
-                    innerException = innerException.InnerException;
-                }
-
-                return exceptionMessage.ToString();
-            }
+            LoggerEventSource.Current.Critical(this.workflowContext.WorkflowId, ex, this.workflowContext.UserUniqueId, null, memberName, filePath, lineNumber);
         }
     }
 }

@@ -619,6 +619,10 @@
 "clientCertificateCommonNames":[
 ],
 "clientCertificateThumbprints":[
+{
+"CertificateThumbprint": "[parameters('sfExplorerClientCertificateThumbprint')]",
+"IsAdmin": true
+}
 ],
 "clusterState":"Default",
 "diagnosticsStorageAccountConfig":{

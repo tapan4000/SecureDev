@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,9 +46,16 @@
     <Compile Include="Interfaces\IEventLogger.cs" />
     <Compile Include="Interfaces\ILoggerEventSource.cs" />
     <Compile Include="Interfaces\IWorkflowContext.cs" />
+    <Compile Include="LoggerEventSourceBase.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LoggerEventSource.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RestServer.ServerContext\RestServer.ServerContext.csproj">
+      <Project>{f5a4b108-120d-4971-a3e3-0e41635b5109}</Project>
+      <Name>RestServer.ServerContext</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

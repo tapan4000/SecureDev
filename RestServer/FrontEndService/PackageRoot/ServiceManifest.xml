@@ -28,8 +28,8 @@
       <!-- This endpoint is used by the communication listener to obtain the port on which to 
            listen. Please note that if your service is partitioned, this port is shared with 
            replicas of different partitions that are placed in your code. -->
-      <Endpoint Name="ServiceEndpointHttp" Protocol="http" Port="8080" Type="Input" />
-      <Endpoint Name="ServiceEndpointHttps" Protocol="https" Port="8443" Type="Input" />
+      <Endpoint Name="ServiceEndpointHttp" Protocol="http" Port="8085" Type="Input" />
+      <Endpoint Name="ServiceEndpointHttps" Protocol="https" Port="3443" Type="Input" />
     </Endpoints>
   </Resources>
 </ServiceManifest>

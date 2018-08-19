@@ -50,6 +50,9 @@
 "certificateThumbprint":{
 "value":"BABBBF72EA22CF89CC6C76AE6E0BC7A11A01D2A6"
 },
+"sfExplorerClientCertificateThumbprint":{
+"value":"4b49261fb08cbe47a080f61a810ec7d31fd091e8"
+}
 "vmImageSku":{
 "value":"2016-Datacenter-with-Containers"
 },

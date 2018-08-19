@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace RestServer.ServerContext
 {
+    using System.Runtime.CompilerServices;
+
     public static class RestServiceContext
     {
         private static bool initialized = false;
@@ -16,6 +18,8 @@ namespace RestServer.ServerContext
         private static string serviceInstanceName;
         private static string applicationName;
         private static string serviceTypeName;
+        private static string dataCenter;
+        private static int maxAllowedLogLevel;
 
         public static string ServiceStartupTraceId
         {
@@ -65,7 +69,23 @@ namespace RestServer.ServerContext
             }
         }
 
-        public static void InitializeContext(string traceId, RestServiceHostType svcHostType, string serviceIdentifier, string instanceName, string appName, string svcTypeName)
+        public static string DataCenter
+        {
+            get
+            {
+                return ValidateAndGetValue(dataCenter);
+            }
+        }
+
+        public static int MaxAllowedLogLevel
+        {
+            get
+            {
+                return ValidateAndGetValue(maxAllowedLogLevel);
+            }
+        }
+
+        public static void InitializeContext(string traceId, RestServiceHostType svcHostType, string serviceIdentifier, string instanceName, string appName, string svcTypeName, string dc, int maxLogLevel)
         {
             if (initialized)
             {
@@ -83,6 +103,8 @@ namespace RestServer.ServerContext
             serviceInstanceName = instanceName;
             applicationName = appName;
             serviceTypeName = svcTypeName;
+            dataCenter = dc;
+            maxAllowedLogLevel = maxLogLevel;
 
             initialized = true;
         }

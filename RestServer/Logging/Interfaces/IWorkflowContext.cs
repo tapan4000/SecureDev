@@ -4,7 +4,7 @@
 
     public interface IWorkflowContext
     {
-        Guid WorkflowId { get; set; }
+        string WorkflowId { get; set; }
 
         string UserUniqueId { get; set; }
     }

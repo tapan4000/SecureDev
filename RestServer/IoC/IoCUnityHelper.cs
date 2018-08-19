@@ -293,7 +293,7 @@
 
                 var filePath = basePath + string.Format(CultureInfo.InvariantCulture, ConfigurationFileNameFormat, regionName);
                 var fileExists = File.Exists(filePath);
-                LoggerEventSource.Current.Verbose(traceId, string.Concat(filePath, " exists: ", fileExists));
+                LoggerEventSource.Current.Verbose(traceId, $"{filePath} exists: {fileExists}", null);
 
                 if (fileExists)
                 {
@@ -304,7 +304,7 @@
                     }
 
                     var documentExists = configuration.DocumentElement != null;
-                    LoggerEventSource.Current.Verbose(traceId, string.Concat("configuration.DocumentElement exists: ", documentExists));
+                    LoggerEventSource.Current.Verbose(traceId, $"configuration.DocumentElement exists: {documentExists}", null);
                     if (documentExists)
                     {
                         var exclusionsList = new List<string>();
@@ -327,7 +327,7 @@
                                     .ToList());
                         }
 
-                        exclusionsList.ForEach(x => LoggerEventSource.Current.Verbose(traceId, string.Concat("Excluded: ", x)));
+                        exclusionsList.ForEach(x => LoggerEventSource.Current.Verbose(traceId, $"Excluded: {x}", null));
                         return exclusionsList;
                     }
                 }
@@ -350,7 +350,7 @@
                 catch (Exception ex)
                 {
                     // Ignore the error
-                    LoggerEventSource.Current.Exception(traceId, ex);
+                    LoggerEventSource.Current.Critical(traceId, ex, null);
                 }
             }
 
@@ -380,12 +380,12 @@
                     Environment.NewLine);
                 if (count % 100 == 0)
                 {
-                    LoggerEventSource.Current.Verbose(traceId, registrations.ToString());
+                    LoggerEventSource.Current.Verbose(traceId, registrations.ToString(), null);
                     registrations.Clear();
                 }
             }
 
-            LoggerEventSource.Current.Verbose(traceId, registrations.ToString());
+            LoggerEventSource.Current.Verbose(traceId, registrations.ToString(), null);
         }
     }
 }

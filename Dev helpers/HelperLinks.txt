@@ -1,0 +1,5 @@
+1) Get the locality, city, state, country based on the pincode.
+http://postalpincode.in/Api-Details
+
+2) Component.Builder information
+https://proandroiddev.com/dagger-2-component-builder-1f2b91237856

@@ -44,7 +44,7 @@ namespace RestServer.FrontEndService
             }
             catch (ResolutionFailedException ex)
             {
-                LoggerEventSource.Current.Exception(RestServiceContext.ServiceStartupTraceId, ex);
+                LoggerEventSource.Current.Critical(RestServiceContext.ServiceStartupTraceId, ex, null);
                 return null;
             }
         }
@@ -57,7 +57,7 @@ namespace RestServer.FrontEndService
             }
             catch (ResolutionFailedException ex)
             {
-                LoggerEventSource.Current.Exception(RestServiceContext.ServiceStartupTraceId, ex);
+                LoggerEventSource.Current.Critical(RestServiceContext.ServiceStartupTraceId, ex, null);
                 return new List<object>();
             }
         }

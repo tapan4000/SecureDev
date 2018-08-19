@@ -1,0 +1,2 @@
+1) Waking up app automatically on receiving a notification.
+https://stackoverflow.com/questions/24313539/push-notifications-when-app-is-closed

@@ -6,7 +6,7 @@ Login-AzureRmAccount
 
 $ApplicationPackagePath="D:\Misc\Business Idea\SecurityDev\RestServer\RestServer\pkg\Debug"
 $ClusterEndpoint = "cmpclsstg.eastus.cloudapp.azure.com:19000"
-$ClusterAccessCertificateThumbprint = "73FABD7F2ACAD7AD16A2F7CAA92FA2C44DADF852"
+$ClusterAccessCertificateThumbprint = "BABBBF72EA22CF89CC6C76AE6E0BC7A11A01D2A6"
 $ApplicationPackagePathInImageStore = "RestServer_V100"
 $ApplicationTypeName = "RestServerType"
 $ApplicationTypeVersion = "1.0.0"

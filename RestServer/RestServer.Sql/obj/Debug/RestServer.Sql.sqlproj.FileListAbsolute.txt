@@ -1,0 +1,5 @@
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\bin\Debug\RestServer.Sql.dacpac
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\bin\Debug\RestServer.Sql.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\bin\Debug\RestServer.Sql.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\obj\Debug\RestServer.Sql.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\obj\Debug\RestServer.Sql.pdb

@@ -9,13 +9,16 @@ namespace RestServer.FrontEndService.Controllers
     using System.Web.Http;
 
     using RestServer.FrontEndService.ContractModels;
+    using RestServer.Logging.Interfaces;
 
     [RoutePrefix("api/groups")]
     public class GroupController : ApiController
     {
-        public GroupController()
+        private IEventLogger logger;
+
+        public GroupController(IEventLogger logger)
         {
-            
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -29,6 +32,8 @@ namespace RestServer.FrontEndService.Controllers
             groups.Add(this.GetSampleGroup(4));
             groups.Add(this.GetSampleGroup(5));
             groups.Add(this.GetSampleGroup(6));
+            
+            this.logger.LogInformation("Group Fetch complete.");
             return await Task.FromResult(groups);
         }
 

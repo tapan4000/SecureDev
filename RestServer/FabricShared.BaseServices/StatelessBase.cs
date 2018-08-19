@@ -8,6 +8,8 @@ using Microsoft.ServiceFabric.Services.Runtime;
 
 namespace RestServer.FabricShared.BaseServices
 {
+    using System.Diagnostics.Tracing;
+
     using RestServer.IoC;
     using RestServer.Logging.Interfaces;
     using RestServer.ServerContext;
@@ -21,7 +23,6 @@ namespace RestServer.FabricShared.BaseServices
             var unityContainer = IoCUnityHelper.GetConfiguredContainer();
             var dependencyContainer = new UnityDependencyContainer(unityContainer);
             this.Logger = dependencyContainer.Resolve<IEventLogger>();
-            RestServiceContext.InitializeContext(traceId, RestServiceHostType.ServiceFabric, serviceContext.ServiceName.AbsolutePath, serviceContext.NodeContext.NodeName, serviceContext.CodePackageActivationContext.ApplicationName, serviceContext.ServiceTypeName);
         }
     }
 }

@@ -30,8 +30,14 @@
             [CallerMemberName] string memberName = "");
 
         void LogException(
-            Exception ex,
             string message,
+            Exception ex,
+            [CallerFilePath] string filePath = "",
+            [CallerLineNumber] int lineNumber = 0,
+            [CallerMemberName] string memberName = "");
+
+        void LogException(
+            Exception ex,
             [CallerFilePath] string filePath = "",
             [CallerLineNumber] int lineNumber = 0,
             [CallerMemberName] string memberName = "");
