@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestServer.Logging
 {
-    using System.Diagnostics.Tracing;
-
+    using Microsoft.Diagnostics.Tracing;
     using RestServer.Logging.Interfaces;
     using RestServer.ServerContext;
 
@@ -19,20 +18,21 @@ namespace RestServer.Logging
             string message,
             string userUniqueId,
             string memberName = null,
-            string filePath = null,
+            string fileName = null,
             int lineNumber = 0,
             string logTime = null)
         {
             this.VerboseStandardMessage(
                 traceId,
                 RestServiceContext.ServiceName,
+                RestServiceContext.ServiceInstanceName,
                 message,
                 null,
                 userUniqueId,
                 null,
                 RestServiceContext.DataCenter,
                 memberName,
-                filePath,
+                fileName,
                 lineNumber,
                 logTime);
         }
@@ -43,20 +43,21 @@ namespace RestServer.Logging
             string message,
             string userUniqueId,
             string memberName = null,
-            string filePath = null,
+            string fileName = null,
             int lineNumber = 0,
             string logTime = null)
         {
             this.InfoStandardMessage(
                 traceId,
                 RestServiceContext.ServiceName,
+                RestServiceContext.ServiceInstanceName,
                 message,
                 null,
                 userUniqueId,
                 null,
                 RestServiceContext.DataCenter,
                 memberName,
-                filePath,
+                fileName,
                 lineNumber,
                 logTime);
         }
@@ -67,20 +68,21 @@ namespace RestServer.Logging
             string message,
             string userUniqueId,
             string memberName = null,
-            string filePath = null,
+            string fileName = null,
             int lineNumber = 0,
             string logTime = null)
         {
             this.WarningStandardMessage(
                 traceId,
                 RestServiceContext.ServiceName,
+                RestServiceContext.ServiceInstanceName,
                 message,
                 null,
                 userUniqueId,
                 null,
                 RestServiceContext.DataCenter,
                 memberName,
-                filePath,
+                fileName,
                 lineNumber,
                 logTime);
         }
@@ -91,20 +93,21 @@ namespace RestServer.Logging
             string errorMessage,
             string userUniqueId,
             string memberName = null,
-            string filePath = null,
+            string fileName = null,
             int lineNumber = 0,
             string logTime = null)
         {
             this.ErrorStandardMessage(
                 traceId,
                 RestServiceContext.ServiceName,
+                RestServiceContext.ServiceInstanceName,
                 errorMessage,
                 null,
                 userUniqueId,
                 null,
                 RestServiceContext.DataCenter,
                 memberName,
-                filePath,
+                fileName,
                 lineNumber,
                 logTime);
         }
@@ -116,20 +119,21 @@ namespace RestServer.Logging
             string userUniqueId,
             string message = null,
             string memberName = null,
-            string filePath = null,
+            string fileName = null,
             int lineNumber = 0,
             string logTime = null)
         {
             this.CriticalStandardMessage(
                 traceId,
                 RestServiceContext.ServiceName,
+                RestServiceContext.ServiceInstanceName,
                 message,
                 LogHelper.FlattenException(ex),
                 userUniqueId,
                 null,
                 RestServiceContext.DataCenter,
                 memberName,
-                filePath,
+                fileName,
                 lineNumber,
                 logTime);
         }
@@ -137,65 +141,70 @@ namespace RestServer.Logging
         protected abstract void VerboseStandardMessage(
             string traceId,
             string serviceName,
+            string instanceName,
             string message,
             string errorMessage,
             string userUniqueId,
             string logType,
             string dataCenter,
             string memberName,
-            string filePath,
+            string fileName,
             int lineNumber,
             string logTime);
 
         protected abstract void InfoStandardMessage(
             string traceId,
             string serviceName,
+            string instanceName,
             string message,
             string errorMessage,
             string userUniqueId,
             string logType,
             string dataCenter,
             string memberName,
-            string filePath,
+            string fileName,
             int lineNumber,
             string logTime);
 
         protected abstract void WarningStandardMessage(
             string traceId,
             string serviceName,
+            string instanceName,
             string message,
             string errorMessage,
             string userUniqueId,
             string logType,
             string dataCenter,
             string memberName,
-            string filePath,
+            string fileName,
             int lineNumber,
             string logTime);
 
         protected abstract void ErrorStandardMessage(
             string traceId,
             string serviceName,
+            string instanceName,
             string message,
             string errorMessage,
             string userUniqueId,
             string logType,
             string dataCenter,
             string memberName,
-            string filePath,
+            string fileName,
             int lineNumber,
             string logTime);
 
         protected abstract void CriticalStandardMessage(
             string traceId,
             string serviceName,
+            string instanceName,
             string message,
             string errorMessage,
             string userUniqueId,
             string logType,
             string dataCenter,
             string memberName,
-            string filePath,
+            string fileName,
             int lineNumber,
             string logTime);
     }

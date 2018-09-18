@@ -43,12 +43,15 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Workflow\WorkflowContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logging\RestServer.Logging.csproj">
       <Project>{770a8534-d441-4288-aedb-13b84cc2037d}</Project>
       <Name>RestServer.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.Utility\RestServer.Utility.csproj">
+      <Project>{97b5a040-270a-490e-8612-01ec6faa06bf}</Project>
+      <Name>RestServer.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

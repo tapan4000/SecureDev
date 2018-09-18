@@ -1,0 +1,12 @@
+Test Mode - 
+	a) With battery optimization enabled
+	b) Without freeze in background
+	c) Without optimize for anomalies
+1) Try to send the notification when the app is in the foreground and server sends an FCM notification. The notification should be handled by the receiver and no messages shown.
+
+2) Try to send the notification when the app is in the background and server sends an FCM notification. The notification should be handled by the receiver and no messages shown.
+
+3) Try to send the notification when the app is in the background with the screen closed for more than 10 min and server sends an FCM notification. The notification should be handled by the receiver and no messages shown.
+
+3) Try to send the notification when the app is in the background with the screen closed for more than 10 min and the receiver service is destroyed and server sends an FCM notification. The notification should be displayed to the user and clicking on it should start the receiver again and the appropriate action should be triggered.
+

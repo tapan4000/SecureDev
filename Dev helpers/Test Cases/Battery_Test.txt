@@ -1,0 +1,2 @@
+1) The battery usage during location update session should be low. Check the observed percentage.
+2) The battery usage during normal application run, without emergency session should be negligible and app should lie in the list of apps using minimal CPU.

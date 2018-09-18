@@ -10,7 +10,7 @@
             string message,
             string userUniqueId,
             [CallerMemberName] string memberName = null,
-            [CallerFilePath] string filePath = null,
+            [CallerFilePath] string fileName = null,
             [CallerLineNumber] int lineNumber = 0,
             string logTime = null);
 
@@ -19,7 +19,7 @@
             string message,
             string userUniqueId,
             [CallerMemberName] string memberName = null,
-            [CallerFilePath] string filePath = null,
+            [CallerFilePath] string fileName = null,
             [CallerLineNumber] int lineNumber = 0,
             string logTime = null);
 
@@ -28,7 +28,7 @@
             string message,
             string userUniqueId,
             [CallerMemberName] string memberName = null,
-            [CallerFilePath] string filePath = null,
+            [CallerFilePath] string fileName = null,
             [CallerLineNumber] int lineNumber = 0,
             string logTime = null);
 
@@ -37,7 +37,7 @@
             string errorMessage,
             string userUniqueId,
             [CallerMemberName] string memberName = null,
-            [CallerFilePath] string filePath = null,
+            [CallerFilePath] string fileName = null,
             [CallerLineNumber] int lineNumber = 0,
             string logTime = null);
 
@@ -47,7 +47,7 @@
             string userUniqueId,
             string message = null,
             [CallerMemberName] string memberName = null,
-            [CallerFilePath] string filePath = null,
+            [CallerFilePath] string fileName = null,
             [CallerLineNumber] int lineNumber = 0,
             string logTime = null);
     }

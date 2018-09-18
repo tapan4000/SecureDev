@@ -13,12 +13,16 @@ namespace RestServer.FrontEndService
 
     using Unity;
     using Unity.Exceptions;
+    using Logging.Interfaces;
 
     public class UnityDependencyResolver : IDependencyResolver
     {
+        private IEventLogger logger;
+
         public UnityDependencyResolver(IUnityContainer container)
         {
             this.container = container;
+            this.logger = this.container.Resolve<IEventLogger>();
         }
 
         ~UnityDependencyResolver()
@@ -44,7 +48,7 @@ namespace RestServer.FrontEndService
             }
             catch (ResolutionFailedException ex)
             {
-                LoggerEventSource.Current.Critical(RestServiceContext.ServiceStartupTraceId, ex, null);
+                this.logger.LogException(ex);
                 return null;
             }
         }
@@ -57,7 +61,7 @@ namespace RestServer.FrontEndService
             }
             catch (ResolutionFailedException ex)
             {
-                LoggerEventSource.Current.Critical(RestServiceContext.ServiceStartupTraceId, ex, null);
+                this.logger.LogException(ex);
                 return new List<object>();
             }
         }

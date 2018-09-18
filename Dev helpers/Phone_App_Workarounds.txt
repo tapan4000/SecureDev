@@ -1,0 +1,2 @@
+1) OPPO phones:
+	i) When a foreground service is running and user turns off the screen, then the service will be freezed. In order to avoid this issue, go to battery -> <Application> -> Turn off "Freeze when in background".

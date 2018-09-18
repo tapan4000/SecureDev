@@ -14,8 +14,6 @@ namespace RestServer.FabricShared.BaseServices
 
     using Owin;
 
-    using RestServer.Core.Utility;
-    using RestServer.Logging;
     using RestServer.Logging.Interfaces;
 
     public sealed class OwinCommunicationListener : ICommunicationListener, IDisposable

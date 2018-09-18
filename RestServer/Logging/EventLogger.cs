@@ -15,35 +15,35 @@
             this.workflowContext = workflowContext;
         }
 
-        public void LogInformation(string message, string filePath = "", int lineNumber = 0, string memberName = "")
+        public void LogInformation(string message, string fileName = "", int lineNumber = 0, string memberName = "")
         {
-            LoggerEventSource.Current.Info(this.workflowContext.WorkflowId, message, this.workflowContext.UserUniqueId, memberName, filePath, lineNumber);
+            LoggerEventSource.Current.Info(this.workflowContext.WorkflowId, message, this.workflowContext.UserUniqueId, memberName, fileName, lineNumber);
         }
 
-        public void LogWarning(string message, string filePath = "", int lineNumber = 0, string memberName = "")
+        public void LogWarning(string message, string fileName = "", int lineNumber = 0, string memberName = "")
         {
-            LoggerEventSource.Current.Warning(this.workflowContext.WorkflowId, message, this.workflowContext.UserUniqueId, memberName, filePath, lineNumber);
+            LoggerEventSource.Current.Warning(this.workflowContext.WorkflowId, message, this.workflowContext.UserUniqueId, memberName, fileName, lineNumber);
         }
 
-        public void LogError(string message, string filePath = "", int lineNumber = 0, string memberName = "")
+        public void LogError(string message, string fileName = "", int lineNumber = 0, string memberName = "")
         {
-            LoggerEventSource.Current.Error(this.workflowContext.WorkflowId, message, this.workflowContext.UserUniqueId, memberName, filePath, lineNumber);
+            LoggerEventSource.Current.Error(this.workflowContext.WorkflowId, message, this.workflowContext.UserUniqueId, memberName, fileName, lineNumber);
         }
 
-        public void LogVerbose(string message, string filePath = "", int lineNumber = 0, string memberName = "")
+        public void LogVerbose(string message, string fileName = "", int lineNumber = 0, string memberName = "")
         {
-            LoggerEventSource.Current.Verbose(this.workflowContext.WorkflowId, message, this.workflowContext.UserUniqueId, memberName, filePath, lineNumber);
+            LoggerEventSource.Current.Verbose(this.workflowContext.WorkflowId, message, this.workflowContext.UserUniqueId, memberName, fileName, lineNumber);
         }
 
 
-        public void LogException(string message, Exception ex, [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string memberName = "")
+        public void LogException(string message, Exception ex, string fileName = "", int lineNumber = 0, string memberName = "")
         {
-            LoggerEventSource.Current.Critical(this.workflowContext.WorkflowId, ex, this.workflowContext.UserUniqueId, message, memberName, filePath, lineNumber);
+            LoggerEventSource.Current.Critical(this.workflowContext.WorkflowId, ex, this.workflowContext.UserUniqueId, message, memberName, fileName, lineNumber);
         }
 
-        public void LogException(Exception ex, [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string memberName = "")
+        public void LogException(Exception ex, string fileName = "", int lineNumber = 0, string memberName = "")
         {
-            LoggerEventSource.Current.Critical(this.workflowContext.WorkflowId, ex, this.workflowContext.UserUniqueId, null, memberName, filePath, lineNumber);
+            LoggerEventSource.Current.Critical(this.workflowContext.WorkflowId, ex, this.workflowContext.UserUniqueId, null, memberName, fileName, lineNumber);
         }
     }
 }

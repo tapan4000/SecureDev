@@ -1,0 +1,2 @@
+1) While publishing things that cannot change.
+https://android-developers.googleblog.com/2011/06/things-that-cannot-change.html

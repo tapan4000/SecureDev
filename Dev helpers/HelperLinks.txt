@@ -3,3 +3,17 @@ http://postalpincode.in/Api-Details
 
 2) Component.Builder information
 https://proandroiddev.com/dagger-2-component-builder-1f2b91237856
+
+3) Usage of Android injection
+https://google.github.io/dagger/android.html
+
+4) EventSource registration
+wevtutil.exe im "D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\RestServer.Logging.RestServer-EventLog.etwManifest.man" /rf:"D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\RestServer.Logging.RestServer-EventLog.etwManifest.dll" /mf:"D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\RestServer.Logging.RestServer-EventLog.etwManifest.dll"
+
+5) EventSource unregistration
+wevtutil.exe um "C:\Users\tapanj\Desktop\ETWManifest\RestServer.Logging.RestServer-EventLog.etwManifest.man"
+
+6) Chinese ROM workaround for repetetive tasks
+https://medium.com/mindorks/enable-background-services-in-chinese-roms-32e73dfba1a6
+https://stackoverflow.com/questions/41804070/how-to-protect-background-service-alarms-to-be-kill-in-newly-launched-devices-in
+https://stackoverflow.com/questions/44383983/how-to-programmatically-enable-auto-start-and-floating-window-permissions-how-t/47307864#47307864

@@ -1,0 +1,6 @@
+Test Mode - 
+	a) With battery optimization enabled
+	b) Without freeze in background
+	c) Without optimize for anomalies
+1) Test the frequency of location update is happening at least once in 5 min when user is moving by foot, car or plane.
+2) Test if the periodic handler of a service is running at as low as 30 sec.

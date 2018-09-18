@@ -23,3 +23,8 @@ D:\Misc\Business Idea\SecurityDev\RestServer\IoC\obj\Debug\RestServer.IoC.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\obj\Debug\RestServer.IoC.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.ServerContext.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.ServerContext.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.IoC.etwManifests.lst
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Utility.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Utility.pdb

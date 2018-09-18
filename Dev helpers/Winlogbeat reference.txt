@@ -1,2 +1,18 @@
 1) Check the configuration of winlogbeat is valid or not.
 .\winlogbeat.exe test config -c .\winlogbeat.yml -e
+
+2) Winlogbeat configuration
+https://www.elastic.co/guide/en/beats/winlogbeat/current/winlogbeat-configuration.html
+
+3) Install winlogbeat
+PowerShell.exe -ExecutionPolicy UnRestricted -File .\install-service-winlogbeat.ps1.
+Unblock-File
+.\install-service-winlogbeat.ps1
+
+4) Add the keys to winlogbeat keystore
+type token.txt | winlogbeat keystore add LOGSERVER_PWD --stdin --force
+
+winlogbeat keystore list
+winlogbeat keystore remove ES_PWD
+
+5) Delete the token.txt file after adding the key to winlogbeat.

@@ -62,3 +62,7 @@ D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug
 D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\System.Web.Http.Owin.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Microsoft.Owin.Host.HttpListener.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Microsoft.Owin.Host.HttpListener.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\RestServer.Utility.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\RestServer.Utility.pdb

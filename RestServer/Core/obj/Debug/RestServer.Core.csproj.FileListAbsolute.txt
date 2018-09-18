@@ -7,3 +7,7 @@ D:\Misc\Business Idea\SecurityDev\RestServer\Core\obj\Debug\RestServer.Core.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\obj\Debug\RestServer.Core.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.ServerContext.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.ServerContext.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Utility.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Utility.pdb

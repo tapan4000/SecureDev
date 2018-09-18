@@ -3,14 +3,15 @@
     using System;
     using System.Data.SqlClient;
     using System.Diagnostics;
-    using System.Diagnostics.Tracing;
     using System.Security;
 
     using RestServer.Logging.Interfaces;
     using RestServer.ServerContext;
+    using RestServer.Utility;
+    using Microsoft.Diagnostics.Tracing;
 
-    [EventSource(Name="Event-Log")]
-    public class LoggerEventSource : LoggerEventSourceBase
+    [EventSource(Name="RestServer-EventLog")]
+    public sealed class LoggerEventSource : LoggerEventSourceBase
     {
         private const int InformationEventId = 1;
         private const int VerboseEventId = 2;
@@ -25,17 +26,18 @@
 
         public static LoggerEventSource Current => Instance.Value;
 
-        [Event(VerboseEventId, Level = EventLevel.Verbose, Message = "{2}")]
+        [Event(VerboseEventId, Level = EventLevel.Verbose, Message = "{3}", Channel = EventChannel.Operational)]
         protected override void VerboseStandardMessage(
             string traceId,
             string serviceName,
+            string instanceName,
             string message,
             string errorMessage,
             string userUniqueId,
             string logType,
             string dataCenter,
             string memberName,
-            string filePath,
+            string fileName,
             int lineNumber,
             string logTime)
         {
@@ -45,29 +47,31 @@
                 VerboseEventId,
                 traceId,
                 serviceName,
+                instanceName,
                 message,
                 errorMessage,
                 userUniqueId,
                 logType,
                 dataCenter,
                 memberName,
-                filePath,
+                fileName,
                 lineNumber,
                 logTime);
             }
         }
 
-        [Event(InformationEventId, Level = EventLevel.Informational, Message = "{2}")]
+        [Event(InformationEventId, Level = EventLevel.Informational, Message = "{3}", Channel = EventChannel.Operational)]
         protected override void InfoStandardMessage(
             string traceId,
             string serviceName,
+            string instanceName,
             string message,
             string errorMessage,
             string userUniqueId,
             string logType,
             string dataCenter,
             string memberName,
-            string filePath,
+            string fileName,
             int lineNumber,
             string logTime)
         {
@@ -77,29 +81,31 @@
                 InformationEventId,
                 traceId,
                 serviceName,
+                instanceName,
                 message,
                 errorMessage,
                 userUniqueId,
                 logType,
                 dataCenter,
                 memberName,
-                filePath,
+                fileName,
                 lineNumber,
                 logTime);
             }
         }
 
-        [Event(WarningEventId, Level = EventLevel.Warning, Message = "{2}")]
+        [Event(WarningEventId, Level = EventLevel.Warning, Message = "{3}", Channel = EventChannel.Operational)]
         protected override void WarningStandardMessage(
             string traceId,
             string serviceName,
+            string instanceName,
             string message,
             string errorMessage,
             string userUniqueId,
             string logType,
             string dataCenter,
             string memberName,
-            string filePath,
+            string fileName,
             int lineNumber,
             string logTime)
         {
@@ -109,29 +115,31 @@
                 WarningEventId,
                 traceId,
                 serviceName,
+                instanceName,
                 message,
                 errorMessage,
                 userUniqueId,
                 logType,
                 dataCenter,
                 memberName,
-                filePath,
+                fileName,
                 lineNumber,
                 logTime);
             }
         }
 
-        [Event(ErrorEventId, Level = EventLevel.Error, Message = "{2}")]
+        [Event(ErrorEventId, Level = EventLevel.Error, Message = "{3}", Channel = EventChannel.Operational)]
         protected override void ErrorStandardMessage(
             string traceId,
             string serviceName,
+            string instanceName,
             string message,
             string errorMessage,
             string userUniqueId,
             string logType,
             string dataCenter,
             string memberName,
-            string filePath,
+            string fileName,
             int lineNumber,
             string logTime)
         {
@@ -141,29 +149,31 @@
                 ErrorEventId,
                 traceId,
                 serviceName,
+                instanceName,
                 message,
                 errorMessage,
                 userUniqueId,
                 logType,
                 dataCenter,
                 memberName,
-                filePath,
+                fileName,
                 lineNumber,
                 logTime);
             }
         }
 
-        [Event(CriticalEventId, Level = EventLevel.Critical, Message = "{3}")]
+        [Event(CriticalEventId, Level = EventLevel.Critical, Message = "{3}", Channel = EventChannel.Operational)]
         protected override void CriticalStandardMessage(
             string traceId,
             string serviceName,
+            string instanceName,
             string message,
             string errorMessage,
             string userUniqueId,
             string logType,
             string dataCenter,
             string memberName,
-            string filePath,
+            string fileName,
             int lineNumber,
             string logTime)
         {
@@ -173,13 +183,14 @@
                 CriticalEventId,
                 traceId,
                 serviceName,
+                instanceName,
                 message,
                 errorMessage,
                 userUniqueId,
                 logType,
                 dataCenter,
                 memberName,
-                filePath,
+                fileName,
                 lineNumber,
                 logTime);
             }
@@ -206,10 +217,10 @@
             }
         }
 
-        private unsafe void WriteStandardEventMessage(int eventId, string traceId, string serviceName, string message, string errorMessage, string userUniqueId, 
-            string logType, string dataCenter, string memberName, string filePath, int lineNumber, string logTime)
+        private unsafe void WriteStandardEventMessage(int eventId, string traceId, string serviceName, string serviceInstanceName, string message, string errorMessage, string userUniqueId, 
+            string logType, string dataCenter, string memberName, string fileName, int lineNumber, string logTime)
         {
-            const int ArgumentCount = 11;
+            const int ArgumentCount = 12;
 
             if (string.IsNullOrWhiteSpace(logTime))
             {
@@ -256,36 +267,48 @@
                 memberName = NullString;
             }
 
-            if (filePath == null)
+            if(serviceInstanceName == null)
             {
-                filePath = NullString;
+                serviceInstanceName = NullString;
             }
+
+            if (fileName == null)
+            {
+                fileName = NullString;
+            }
+            else
+            {
+                fileName = Utility.GetClassName(fileName);
+            }
+            
 
             fixed(
                 char* dataTraceId = traceId,
                 dataServiceName = serviceName,
+                dataServiceInstanceName = serviceInstanceName,
                 dataMessage = message,
                 dataErrorMessage = errorMessage,
                 dataUserUniqueId = userUniqueId,
                 dataLogType = logType,
                 dataDatacenter = dataCenter,
                 dataMemberName = memberName,
-                dataFilePath = filePath,
+                dataFileName = fileName,
                 logtime = logTime)
             {
                 EventData* eventData = stackalloc EventData[ArgumentCount];
 
                 eventData[0] = new EventData { DataPointer = (IntPtr)dataTraceId, Size = this.SizeInBytes(traceId) };
                 eventData[1] = new EventData { DataPointer = (IntPtr)dataServiceName, Size = this.SizeInBytes(serviceName) };
-                eventData[2] = new EventData { DataPointer = (IntPtr)dataMessage, Size = this.SizeInBytes(message) };
-                eventData[3] = new EventData { DataPointer = (IntPtr)dataErrorMessage, Size = this.SizeInBytes(errorMessage) };
-                eventData[4] = new EventData { DataPointer = (IntPtr)dataUserUniqueId, Size = this.SizeInBytes(userUniqueId) };
-                eventData[5] = new EventData { DataPointer = (IntPtr)dataLogType, Size = this.SizeInBytes(logType) };
-                eventData[6] = new EventData { DataPointer = (IntPtr)dataDatacenter, Size = this.SizeInBytes(dataCenter) };
-                eventData[7] = new EventData { DataPointer = (IntPtr)dataMemberName, Size = this.SizeInBytes(memberName) };
-                eventData[8] = new EventData { DataPointer = (IntPtr)dataFilePath, Size = this.SizeInBytes(filePath) };
-                eventData[9] = new EventData { DataPointer = (IntPtr)(&lineNumber), Size = sizeof(int) };
-                eventData[10] = new EventData { DataPointer = (IntPtr)logtime, Size = this.SizeInBytes(logTime) };
+                eventData[2] = new EventData { DataPointer = (IntPtr)dataServiceInstanceName, Size = this.SizeInBytes(serviceInstanceName) };
+                eventData[3] = new EventData { DataPointer = (IntPtr)dataMessage, Size = this.SizeInBytes(message) };
+                eventData[4] = new EventData { DataPointer = (IntPtr)dataErrorMessage, Size = this.SizeInBytes(errorMessage) };
+                eventData[5] = new EventData { DataPointer = (IntPtr)dataUserUniqueId, Size = this.SizeInBytes(userUniqueId) };
+                eventData[6] = new EventData { DataPointer = (IntPtr)dataLogType, Size = this.SizeInBytes(logType) };
+                eventData[7] = new EventData { DataPointer = (IntPtr)dataDatacenter, Size = this.SizeInBytes(dataCenter) };
+                eventData[8] = new EventData { DataPointer = (IntPtr)dataMemberName, Size = this.SizeInBytes(memberName) };
+                eventData[9] = new EventData { DataPointer = (IntPtr)dataFileName, Size = this.SizeInBytes(fileName) };
+                eventData[10] = new EventData { DataPointer = (IntPtr)(&lineNumber), Size = sizeof(int) };
+                eventData[11] = new EventData { DataPointer = (IntPtr)logtime, Size = this.SizeInBytes(logTime) };
 
                 this.WriteEventCore(eventId, ArgumentCount, eventData);
             }

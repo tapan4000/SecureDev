@@ -1,0 +1,16 @@
+1) Foreground service calling the handler method every 30 seconds
+	a) The notification sent using the foreground service remains for 5-10 minutes and then goes away.
+	b) When the phone is charging the foreground the service handler keeps running properly.
+	c) If the phone is unlocked and app is in background the service handler keeps running properly.
+	d) If the phone is not on charging and locked, the service is paused either immidiately or within 1-2 min. This happens because the phone goes into sleep mode during this time.
+	e) When the phone is turned on or put on charging the service starts running again. When the service is paused it's ondestroy is not called.
+Ideally foreground service should not allow the CPU to go to sleep mode, however, in OPPO, VIVI, MI etc. with custom ROM devices.
+Using FCM at times we do not see the method being triggered when sending a notification using fiddler. Need to reconfirm by making a server call whenever an FCM message is sent.
+-Using FCM, if the app is in the background with the phone not charging and screen closed, if we send a FCM data only notification, it is processed by the app. However, after some time the FCMMessagereceiver stops working and then only a notification would appear on the screen. Note: The FCM receiver is running in app process during this test. Also optimize battery is turned off.
+-When app is forcefully closed on oppo, then even the FCM notification does not come up in the system tray. So, at this time the user has to open up the application. Note: The FCM receiver is running in app process during this test. Also optimize battery is turned off.
+
+2) AlarmManager is deferred during doze mode in API level 23 and above. Setexactalarmandallowwhileidle in API 26 can run in doze mode and wake up the device, however, the minimum period of usage of this method is 15 min. If app tries to use this method more frequently than 15 minutes, then it will not be allowed. In doze mode the entire device goes in a mode where network access is not working, alarms, schedules etc don't work. However, in case of a app standby mode, the app which has not been used for long time is not allowed to use network access, whereas alarm manager etc would be respected. App standby comes when user has not launched app in long time, there is no foreground service. App standby ends when user launches the app, or starts charging, or app alarm goes off and it shows notification. Every app in standby mode is gauranteed maintenance window at least once a day. You can use GCM to wake up your device.
+
+3) JobScheduler and sync may happen couple of hours late in the doze mode or app standby mode.
+
+During normal android sleep mode, the CPU stops. This usually happens shortly after closing the screen without charging on. During sleep mode, even the WiFi and GPS stops.

@@ -74,3 +74,9 @@ D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\obj\x64\Debug\RestS
 D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\obj\x64\Debug\RestServer.FrontEndService.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\Microsoft.Owin.Host.HttpListener.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\Microsoft.Owin.Host.HttpListener.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\RestServer.FrontEndService.etwManifests.lst
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\RestServer.Utility.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\RestServer.Utility.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\PackageRoot\Code\RestServerSetup.ps1

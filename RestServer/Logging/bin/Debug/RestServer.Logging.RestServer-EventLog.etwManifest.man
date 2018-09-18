@@ -1,0 +1,155 @@
+<instrumentationManifest xmlns="http://schemas.microsoft.com/win/2004/08/events">
+ <instrumentation xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events">
+  <events xmlns="http://schemas.microsoft.com/win/2004/08/events">
+<provider name="RestServer-EventLog" guid="{d4743be1-4336-5a9f-2fb0-e774db2841c9}" resourceFileName="D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\RestServer.Logging.RestServer-EventLog.etwManifest.dll" messageFileName="D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\RestServer.Logging.RestServer-EventLog.etwManifest.dll" symbol="RestServerEventLog">
+ <channels>
+  <channel chid="Operational" name="RestServer-EventLog/Operational" value="17" type="Operational" enabled="true"/>
+ </channels>
+ <tasks>
+  <task name="WriteStandardEventMessage" message="$(string.task_WriteStandardEventMessage)" value="65527"/>
+  <task name="WriteMessageToSql" message="$(string.task_WriteMessageToSql)" value="65528"/>
+  <task name="CriticalStandardMessage" message="$(string.task_CriticalStandardMessage)" value="65529"/>
+  <task name="WarningStandardMessage" message="$(string.task_WarningStandardMessage)" value="65530"/>
+  <task name="ErrorStandardMessage" message="$(string.task_ErrorStandardMessage)" value="65531"/>
+  <task name="VerboseStandardMessage" message="$(string.task_VerboseStandardMessage)" value="65532"/>
+  <task name="InfoStandardMessage" message="$(string.task_InfoStandardMessage)" value="65533"/>
+  <task name="EventSourceMessage" message="$(string.task_EventSourceMessage)" value="65534"/>
+ </tasks>
+ <opcodes>
+ </opcodes>
+ <keywords>
+  <keyword name="Session3" message="$(string.keyword_Session3)" mask="0x100000000000"/>
+  <keyword name="Session2" message="$(string.keyword_Session2)" mask="0x200000000000"/>
+  <keyword name="Session1" message="$(string.keyword_Session1)" mask="0x400000000000"/>
+  <keyword name="Session0" message="$(string.keyword_Session0)" mask="0x800000000000"/>
+ </keywords>
+ <events>
+  <event value="0" version="0" level="win:LogAlways" symbol="EventSourceMessage" task="EventSourceMessage" template="EventSourceMessageArgs"/>
+  <event value="2" version="0" level="win:Verbose" symbol="VerboseStandardMessage" message="$(string.event_VerboseStandardMessage)" task="VerboseStandardMessage" channel="Operational" template="VerboseStandardMessageArgs"/>
+  <event value="1" version="0" level="win:Informational" symbol="InfoStandardMessage" message="$(string.event_InfoStandardMessage)" task="InfoStandardMessage" channel="Operational" template="InfoStandardMessageArgs"/>
+  <event value="4" version="0" level="win:Warning" symbol="WarningStandardMessage" message="$(string.event_WarningStandardMessage)" task="WarningStandardMessage" channel="Operational" template="WarningStandardMessageArgs"/>
+  <event value="3" version="0" level="win:Error" symbol="ErrorStandardMessage" message="$(string.event_ErrorStandardMessage)" task="ErrorStandardMessage" channel="Operational" template="ErrorStandardMessageArgs"/>
+  <event value="5" version="0" level="win:Critical" symbol="CriticalStandardMessage" message="$(string.event_CriticalStandardMessage)" task="CriticalStandardMessage" channel="Operational" template="CriticalStandardMessageArgs"/>
+  <event value="6" version="0" level="win:Informational" symbol="WriteMessageToSql" task="WriteMessageToSql" template="WriteMessageToSqlArgs"/>
+  <event value="7" version="0" level="win:Informational" symbol="WriteStandardEventMessage" task="WriteStandardEventMessage" template="WriteStandardEventMessageArgs"/>
+ </events>
+ <templates>
+  <template tid="EventSourceMessageArgs">
+   <data name="message" inType="win:UnicodeString"/>
+  </template>
+  <template tid="VerboseStandardMessageArgs">
+   <data name="traceId" inType="win:UnicodeString"/>
+   <data name="serviceName" inType="win:UnicodeString"/>
+   <data name="instanceName" inType="win:UnicodeString"/>
+   <data name="message" inType="win:UnicodeString"/>
+   <data name="errorMessage" inType="win:UnicodeString"/>
+   <data name="userUniqueId" inType="win:UnicodeString"/>
+   <data name="logType" inType="win:UnicodeString"/>
+   <data name="dataCenter" inType="win:UnicodeString"/>
+   <data name="memberName" inType="win:UnicodeString"/>
+   <data name="fileName" inType="win:UnicodeString"/>
+   <data name="lineNumber" inType="win:Int32"/>
+   <data name="logTime" inType="win:UnicodeString"/>
+  </template>
+  <template tid="InfoStandardMessageArgs">
+   <data name="traceId" inType="win:UnicodeString"/>
+   <data name="serviceName" inType="win:UnicodeString"/>
+   <data name="instanceName" inType="win:UnicodeString"/>
+   <data name="message" inType="win:UnicodeString"/>
+   <data name="errorMessage" inType="win:UnicodeString"/>
+   <data name="userUniqueId" inType="win:UnicodeString"/>
+   <data name="logType" inType="win:UnicodeString"/>
+   <data name="dataCenter" inType="win:UnicodeString"/>
+   <data name="memberName" inType="win:UnicodeString"/>
+   <data name="fileName" inType="win:UnicodeString"/>
+   <data name="lineNumber" inType="win:Int32"/>
+   <data name="logTime" inType="win:UnicodeString"/>
+  </template>
+  <template tid="WarningStandardMessageArgs">
+   <data name="traceId" inType="win:UnicodeString"/>
+   <data name="serviceName" inType="win:UnicodeString"/>
+   <data name="instanceName" inType="win:UnicodeString"/>
+   <data name="message" inType="win:UnicodeString"/>
+   <data name="errorMessage" inType="win:UnicodeString"/>
+   <data name="userUniqueId" inType="win:UnicodeString"/>
+   <data name="logType" inType="win:UnicodeString"/>
+   <data name="dataCenter" inType="win:UnicodeString"/>
+   <data name="memberName" inType="win:UnicodeString"/>
+   <data name="fileName" inType="win:UnicodeString"/>
+   <data name="lineNumber" inType="win:Int32"/>
+   <data name="logTime" inType="win:UnicodeString"/>
+  </template>
+  <template tid="ErrorStandardMessageArgs">
+   <data name="traceId" inType="win:UnicodeString"/>
+   <data name="serviceName" inType="win:UnicodeString"/>
+   <data name="instanceName" inType="win:UnicodeString"/>
+   <data name="message" inType="win:UnicodeString"/>
+   <data name="errorMessage" inType="win:UnicodeString"/>
+   <data name="userUniqueId" inType="win:UnicodeString"/>
+   <data name="logType" inType="win:UnicodeString"/>
+   <data name="dataCenter" inType="win:UnicodeString"/>
+   <data name="memberName" inType="win:UnicodeString"/>
+   <data name="fileName" inType="win:UnicodeString"/>
+   <data name="lineNumber" inType="win:Int32"/>
+   <data name="logTime" inType="win:UnicodeString"/>
+  </template>
+  <template tid="CriticalStandardMessageArgs">
+   <data name="traceId" inType="win:UnicodeString"/>
+   <data name="serviceName" inType="win:UnicodeString"/>
+   <data name="instanceName" inType="win:UnicodeString"/>
+   <data name="message" inType="win:UnicodeString"/>
+   <data name="errorMessage" inType="win:UnicodeString"/>
+   <data name="userUniqueId" inType="win:UnicodeString"/>
+   <data name="logType" inType="win:UnicodeString"/>
+   <data name="dataCenter" inType="win:UnicodeString"/>
+   <data name="memberName" inType="win:UnicodeString"/>
+   <data name="fileName" inType="win:UnicodeString"/>
+   <data name="lineNumber" inType="win:Int32"/>
+   <data name="logTime" inType="win:UnicodeString"/>
+  </template>
+  <template tid="WriteMessageToSqlArgs">
+   <data name="message" inType="win:UnicodeString"/>
+  </template>
+  <template tid="WriteStandardEventMessageArgs">
+   <data name="eventId" inType="win:Int32"/>
+   <data name="traceId" inType="win:UnicodeString"/>
+   <data name="serviceName" inType="win:UnicodeString"/>
+   <data name="serviceInstanceName" inType="win:UnicodeString"/>
+   <data name="message" inType="win:UnicodeString"/>
+   <data name="errorMessage" inType="win:UnicodeString"/>
+   <data name="userUniqueId" inType="win:UnicodeString"/>
+   <data name="logType" inType="win:UnicodeString"/>
+   <data name="dataCenter" inType="win:UnicodeString"/>
+   <data name="memberName" inType="win:UnicodeString"/>
+   <data name="fileName" inType="win:UnicodeString"/>
+   <data name="lineNumber" inType="win:Int32"/>
+   <data name="logTime" inType="win:UnicodeString"/>
+  </template>
+ </templates>
+</provider>
+</events>
+</instrumentation>
+<localization>
+ <resources culture="en-US">
+  <stringTable>
+   <string id="event_CriticalStandardMessage" value="%4"/>
+   <string id="event_ErrorStandardMessage" value="%4"/>
+   <string id="event_InfoStandardMessage" value="%4"/>
+   <string id="event_VerboseStandardMessage" value="%4"/>
+   <string id="event_WarningStandardMessage" value="%4"/>
+   <string id="keyword_Session0" value="Session0"/>
+   <string id="keyword_Session1" value="Session1"/>
+   <string id="keyword_Session2" value="Session2"/>
+   <string id="keyword_Session3" value="Session3"/>
+   <string id="task_CriticalStandardMessage" value="CriticalStandardMessage"/>
+   <string id="task_ErrorStandardMessage" value="ErrorStandardMessage"/>
+   <string id="task_EventSourceMessage" value="EventSourceMessage"/>
+   <string id="task_InfoStandardMessage" value="InfoStandardMessage"/>
+   <string id="task_VerboseStandardMessage" value="VerboseStandardMessage"/>
+   <string id="task_WarningStandardMessage" value="WarningStandardMessage"/>
+   <string id="task_WriteMessageToSql" value="WriteMessageToSql"/>
+   <string id="task_WriteStandardEventMessage" value="WriteStandardEventMessage"/>
+  </stringTable>
+ </resources>
+</localization>
+</instrumentationManifest>

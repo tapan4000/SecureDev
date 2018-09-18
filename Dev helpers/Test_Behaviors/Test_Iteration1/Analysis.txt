@@ -1,0 +1,41 @@
+Day 1
+7:03 -> 8:27 (every 30 sec)
+For above interval---
+7:33, 7:46, 7:52, 7:59, 8:11, 8:24 (change of position occuring at these times, so the change happens variably at 13min, 6min, 7min, 2min etc)
+------
+9:09 onwards -> (time period, 30sec, 1min, 2min, 4min, 5min, 7min) 9:30 -> 10:10 (ran every 30 seconds), 10:33-> 11:31 (every 30 sec), 1:30 -> 2:45 (every 30 sec)
+
+For above, Change of position happened at below times:
+9:14, 9:22, 9:28, 9:31, 9:36, 9:39, 9:43, 9:47, 9:52, 9:57, ----11:11, 11:16, 11:26, 11:31---11:46, 11:49, 11:59, 12:11, 12:17, 12:23, ---- 4:04, 4:08, 4:11(consecutive 30sec has same location), 4:23
+So, change of position happening in 8min, 10min, 5min, 4min, 3min, 2min
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Day 2:
+
+Itinerary:
+8:07 - Move charging away
+8:38-9: Commute to office
+9:10 - Check phone
+10:10, 2pm - check phone
+4:07 - starting from office
+
+-----
+7:25 -> 8:34 (every 30 sec update with location also updating every 30 sec as the vehicle was moving and correct trajectory being shown)
+10:10 -> 10:19 (every 30 sec update)
+10:30 -> 11:27 (every 30 sec update, with variable 3, 5, 10 min interval update of location)
+16:07 -> 16:24 (update happen every 30 sec, however, the location update happened in 30sec, 2min, 4min, so even while moving no guarantee of getting update every 30 sec)
+
+Day 3 (Optimize battery both options)
+6:32 - Start
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Day3:
+On Day 2 testing the freeze application battery optimization was removed.
+On Day 3 testing both free application and optimize when abnormal was removed. However, still the observation is similar to the observations on Day2. No change of behavior.
+On Day 1, Day 2, and Day 3 we used get current location every 30 seconds using the handler with post delayed.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Day4:
+On Day 4 testing, the freeze application battery optimization was removed.
+Additionally, locationupdate callback is used with interval of 30 sec and fastestinterval of 30 sec.
+It is seen that the location trigger is happening every 30 sec , 1 min, or 1:30 min. Most of the time the location is updated every 1 min. This is more trustable source than using handlers in terms of period of trigger. The actual location update also happens every 30sec or 1 min interval. On very few instances the location update is happening at 2min, 10 min etc.

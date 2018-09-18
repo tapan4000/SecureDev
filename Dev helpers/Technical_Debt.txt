@@ -1,0 +1,1 @@
+1) Current for workmanager worker classes we are injecting using custom implementation of dagger injection as currently dagger does not support injection of workers. Once the implementation is available in dagger, the same needs to be replaced.
