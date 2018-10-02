@@ -80,3 +80,5 @@ D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\Micro
 D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\RestServer.Utility.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\RestServer.Utility.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\PackageRoot\Code\RestServerSetup.ps1
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\PackageRoot\Code\RestServer.cmd
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\PackageRoot\Code\RestServerSetup.bat

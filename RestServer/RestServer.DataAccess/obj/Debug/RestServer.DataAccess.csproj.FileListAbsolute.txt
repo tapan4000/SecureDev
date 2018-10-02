@@ -1,0 +1,4 @@
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess\bin\Debug\RestServer.DataAccess.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess\bin\Debug\RestServer.DataAccess.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess\obj\Debug\RestServer.DataAccess.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess\obj\Debug\RestServer.DataAccess.pdb

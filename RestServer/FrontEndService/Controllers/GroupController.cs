@@ -11,8 +11,8 @@ namespace RestServer.FrontEndService.Controllers
     using RestServer.FrontEndService.ContractModels;
     using RestServer.Logging.Interfaces;
 
-    [RoutePrefix("api/groups")]
-    public class GroupController : ApiController
+    [RoutePrefix("api/group")]
+    public class GroupController : ApiControllerBase
     {
         private IEventLogger logger;
 

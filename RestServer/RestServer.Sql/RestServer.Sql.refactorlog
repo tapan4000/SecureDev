@@ -119,4 +119,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="IsAdministratorAllowedToTriggerEmergencySession" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="db5d6ad3-fac7-4191-b732-2b6e0021a313" ChangeDateTime="09/28/2018 19:54:35">
+    <Property Name="ElementName" Value="[dbo].[UserState].[UserStateName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserState]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserState" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="954c9144-193b-4158-b84d-e3e315b6475f" ChangeDateTime="09/28/2018 19:55:00">
+    <Property Name="ElementName" Value="[dbo].[UserState].[UserState]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserState]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserStateName" />
+  </Operation>
 </Operations>

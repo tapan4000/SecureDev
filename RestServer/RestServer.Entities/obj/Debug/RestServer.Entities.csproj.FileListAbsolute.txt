@@ -1,0 +1,4 @@
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\bin\Debug\RestServer.Entities.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\bin\Debug\RestServer.Entities.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\obj\Debug\RestServer.Entities.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\obj\Debug\RestServer.Entities.pdb

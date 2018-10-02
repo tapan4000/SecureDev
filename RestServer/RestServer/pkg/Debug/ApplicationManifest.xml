@@ -7,6 +7,9 @@
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="FrontEndServicePkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides />
+    <Policies>
+      <RunAsPolicy CodePackageRef="Code" UserRef="SetupLocalSystem" EntryPointType="Setup" />
+    </Policies>
   </ServiceManifestImport>
   <DefaultServices>
     <!-- The section below creates instances of service types, when an instance of this 
@@ -20,4 +23,9 @@
       </StatelessService>
     </Service>
   </DefaultServices>
+  <Principals>
+    <Users>
+      <User Name="SetupLocalSystem" AccountType="LocalSystem" />
+    </Users>
+  </Principals>
 </ApplicationManifest>
