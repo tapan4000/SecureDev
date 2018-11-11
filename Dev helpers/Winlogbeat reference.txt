@@ -16,3 +16,6 @@ winlogbeat keystore list
 winlogbeat keystore remove ES_PWD
 
 5) Delete the token.txt file after adding the key to winlogbeat.
+
+6) Uninstall winlogbeat
+PowerShell.exe -ExecutionPolicy UnRestricted -File .\uninstall-service-winlogbeat.ps1

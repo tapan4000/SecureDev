@@ -11,6 +11,7 @@
       <ExeHost>
         <Program>RestServerSetup.bat</Program>
         <WorkingFolder>CodePackage</WorkingFolder>
+        <ConsoleRedirection FileRetentionCount="10" />
       </ExeHost>
     </SetupEntryPoint>
     <EntryPoint>

@@ -6,6 +6,8 @@
 
     using Unity;
     using Unity.Lifetime;
+    using Unity.Resolution;
+    using System.Collections.Generic;
 
     public class UnityDependencyContainer : IDependencyContainer
     {
@@ -34,6 +36,18 @@
         public T Resolve<T>(string name)
         {
             return this.unityContainer.Resolve<T>(name);
+        }
+
+        public T Resolve<T>(params DependencyParameterOverride[] parameterOverrides)
+        {
+            var parameters = new List<ResolverOverride>();
+
+            foreach(var parameterOverride in parameterOverrides)
+            {
+                parameters.Add(new ParameterOverride(parameterOverride.ParameterName, parameterOverride.ParameterValue));
+            }
+
+            return this.unityContainer.Resolve<T>(parameters.ToArray());
         }
 
         public void RegisterType<T>(Type target, string name)

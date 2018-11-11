@@ -40,12 +40,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\AddUserActivity.cs" />
+    <Compile Include="Models\Request\AddUserRequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Activities\" />
     <Folder Include="Managers\" />
+    <Folder Include="Models\Response\" />
     <Folder Include="Processors\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\RestServer.Core.csproj">
+      <Project>{69C00889-769C-4C2C-9A54-29B6B53E1D9C}</Project>
+      <Name>RestServer.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logging\RestServer.Logging.csproj">
+      <Project>{770A8534-D441-4288-AEDB-13B84CC2037D}</Project>
+      <Name>RestServer.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.Business.Core\RestServer.Business.Core.csproj">
+      <Project>{846C7206-2ED2-4A36-8140-D7AE657DE61E}</Project>
+      <Name>RestServer.Business.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.DataAccess.Core\RestServer.DataAccess.Core.csproj">
+      <Project>{EE983C02-182C-4B13-8568-9D40CEF9191C}</Project>
+      <Name>RestServer.DataAccess.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.Entities\RestServer.Entities.csproj">
+      <Project>{93988F7C-B7B2-4308-BBB0-A27C1E8A03DD}</Project>
+      <Name>RestServer.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

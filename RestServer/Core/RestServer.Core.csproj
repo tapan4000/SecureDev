@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Workflow\WorkflowContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

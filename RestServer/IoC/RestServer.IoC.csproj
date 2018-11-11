@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConventionConstants.cs" />
+    <Compile Include="DependencyParameterOverride.cs" />
     <Compile Include="IoCLifetime.cs" />
     <Compile Include="IoCRegistrationAttribute.cs" />
     <Compile Include="IoCUnityHelper.cs" />

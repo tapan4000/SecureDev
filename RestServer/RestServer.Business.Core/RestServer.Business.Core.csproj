@@ -43,6 +43,10 @@
     <Compile Include="Activities\ActivityBase.cs" />
     <Compile Include="Activities\ActivityFactory.cs" />
     <Compile Include="Activities\CompensatableActivityBase.cs" />
+    <Compile Include="BaseModels\BusinessError.cs" />
+    <Compile Include="BaseModels\BusinessErrorCode.cs" />
+    <Compile Include="BaseModels\BusinessRequestData.cs" />
+    <Compile Include="BaseModels\BusinessResult.cs" />
     <Compile Include="Interfaces\Activities\IActivity.cs" />
     <Compile Include="Interfaces\Activities\IActivityFactory.cs" />
     <Compile Include="Interfaces\Activities\ICompensatableActivity.cs" />
@@ -64,6 +68,10 @@
     <ProjectReference Include="..\IoC\RestServer.IoC.csproj">
       <Project>{1003bb7b-2e1d-48ac-a9d0-e2c4b82e62a1}</Project>
       <Name>RestServer.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logging\RestServer.Logging.csproj">
+      <Project>{770A8534-D441-4288-AEDB-13B84CC2037D}</Project>
+      <Name>RestServer.Logging</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

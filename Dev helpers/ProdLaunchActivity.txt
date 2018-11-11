@@ -1,0 +1,1 @@
+1) Remove the Service fabric ConsoleRedirection from the ServiceManifest.

@@ -30,7 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,17 +49,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContextBase.cs" />
+    <Compile Include="Interfaces\IDataContext.cs" />
+    <Compile Include="Interfaces\IRestServerUnitOfWork.cs" />
+    <Compile Include="Interfaces\IUnitOfWorkFactory.cs" />
+    <Compile Include="Interfaces\IUserContext.cs" />
     <Compile Include="Interfaces\Repositories\IRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
     <Compile Include="Interfaces\Strategies\IDataStoreStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="RestServerDataContext.cs" />
+    <Compile Include="RestServerUnitOfWork.cs" />
     <Compile Include="Strategies\DataStoreStrategyBase.cs" />
+    <Compile Include="UnitOfWorkFactory.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\RestServer.Core.csproj">
+      <Project>{69C00889-769C-4C2C-9A54-29B6B53E1D9C}</Project>
+      <Name>RestServer.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IoC\RestServer.IoC.csproj">
       <Project>{1003bb7b-2e1d-48ac-a9d0-e2c4b82e62a1}</Project>
       <Name>RestServer.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logging\RestServer.Logging.csproj">
+      <Project>{770A8534-D441-4288-AEDB-13B84CC2037D}</Project>
+      <Name>RestServer.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.Cache\RestServer.Cache.csproj">
+      <Project>{16251b74-e916-4e91-90fb-99110a05bbe7}</Project>
+      <Name>RestServer.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.Configuration\RestServer.Configuration.csproj">
+      <Project>{F0FB5C81-5F07-4BEB-9899-40554F061148}</Project>
+      <Name>RestServer.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.DataAccess.Configuration\RestServer.DataAccess.Configuration.csproj">
+      <Project>{3f78827c-9657-4d21-99a3-97ecc60bf88c}</Project>
+      <Name>RestServer.DataAccess.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.Entities\RestServer.Entities.csproj">
+      <Project>{93988F7C-B7B2-4308-BBB0-A27C1E8A03DD}</Project>
+      <Name>RestServer.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

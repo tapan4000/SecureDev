@@ -25,5 +25,15 @@ namespace RestServer.Core.Extensions
 
             return secureString;
         }
+
+        public static bool IsEmpty(this string strData)
+        {
+            if (string.IsNullOrWhiteSpace(strData))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

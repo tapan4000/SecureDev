@@ -1,5 +1,7 @@
-﻿using RestServer.Business.Core.Interfaces.Activities;
+﻿using RestServer.Business.Core.BaseModels;
+using RestServer.Business.Core.Interfaces.Activities;
 using RestServer.Business.Core.Interfaces.Processors;
+using RestServer.Logging.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace RestServer.Business.Core.Processors
 {
-    public abstract class ProcessorBase<RequestData, ResponseData> : Trackable<RequestData, ResponseData>
+    public abstract class ProcessorBase<RequestData, ResponseData> : Trackable<RequestData, ResponseData> where ResponseData : BusinessResult, new()
     {
         private readonly IActivityFactory<RequestData, ResponseData> activityFactory;
 
         private readonly Stack<IActivity<RequestData, ResponseData>> compensatableActivities;
 
-        protected ProcessorBase(IActivityFactory<RequestData, ResponseData> activityFactory)
+        protected ProcessorBase(IActivityFactory<RequestData, ResponseData> activityFactory, IEventLogger logger) : base(logger)
         {
             this.compensatableActivities = new Stack<IActivity<RequestData, ResponseData>>();
             this.activityFactory = activityFactory;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestServer.IoC
 {
+    [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class IoCRegistrationAttribute : Attribute
     {
         public IoCRegistrationAttribute(string lifetime):this(null, true, lifetime)

@@ -30,8 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +51,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\CityBasedPublicGroup.cs" />
+    <Compile Include="DataAccess\Core\IEntityBase.cs" />
+    <Compile Include="DataAccess\Core\ObjectState.cs" />
+    <Compile Include="DataAccess\CountryBasedPublicGroup.cs" />
+    <Compile Include="DataAccess\EmergencyLocation.cs" />
+    <Compile Include="DataAccess\EmergencySession.cs" />
+    <Compile Include="DataAccess\EmergencySessionExtension.cs" />
+    <Compile Include="DataAccess\EmergencySessionPublicGroupAccess.cs" />
+    <Compile Include="DataAccess\EmergencySessionViewer.cs" />
+    <Compile Include="DataAccess\Group.cs" />
+    <Compile Include="DataAccess\GroupCategory.cs" />
+    <Compile Include="DataAccess\GroupDevice.cs" />
+    <Compile Include="DataAccess\GroupMember.cs" />
+    <Compile Include="DataAccess\IEntity.cs" />
+    <Compile Include="DataAccess\LocalityBasedPublicGroup.cs" />
+    <Compile Include="DataAccess\PublicGroup.cs" />
+    <Compile Include="DataAccess\RestServerContext.cs" />
+    <Compile Include="DataAccess\StateBasedPublicGroup.cs" />
+    <Compile Include="DataAccess\Device.cs" />
+    <Compile Include="DataAccess\User.cs" />
+    <Compile Include="DataAccess\UserActivation.cs" />
+    <Compile Include="DataAccess\UserDevice.cs" />
+    <Compile Include="DataAccess\UserSession.cs" />
+    <Compile Include="DataAccess\UserState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RestServer.Cache\RestServer.Cache.csproj">
+      <Project>{16251B74-E916-4E91-90FB-99110A05BBE7}</Project>
+      <Name>RestServer.Cache</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

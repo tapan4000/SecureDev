@@ -1,4 +1,4 @@
-﻿SET IDENTITY_INSERT [dbo].[UnitOfMeasure] ON
+﻿SET IDENTITY_INSERT [dbo].[UserState] ON
 
 IF NOT EXISTS (SELECT * FROM [dbo].[UserState] WHERE [UserStateId] = 1)
 INSERT [dbo].[UserState] ([UserStateId], [UserStateName], [CreatedBy], [CreationDateTime]) 
@@ -12,6 +12,6 @@ IF NOT EXISTS (SELECT * FROM [dbo].[UserState] WHERE [UserStateId] = 3)
 INSERT [dbo].[UserState] ([UserStateId], [UserStateName], [CreatedBy], [CreationDateTime]) 
 	VALUES (3, 'MobileAndEmailVerified', SUSER_SNAME(), GETUTCDATE())
 
-SET IDENTITY_INSERT [dbo].[UnitOfMeasure] OFF
+SET IDENTITY_INSERT [dbo].[UserState] OFF
 
 GO

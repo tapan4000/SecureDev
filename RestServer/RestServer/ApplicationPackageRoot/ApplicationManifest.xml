@@ -8,7 +8,7 @@
     <ServiceManifestRef ServiceManifestName="FrontEndServicePkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides />
     <Policies>
-      <RunAsPolicy CodePackageRef="Code" UserRef="SetupLocalSystem" EntryPointType="Setup" />
+      <RunAsPolicy CodePackageRef="Code" UserRef="SetupAdminUser" EntryPointType="Setup" />
     </Policies>
   </ServiceManifestImport>
   <DefaultServices>
@@ -26,6 +26,11 @@
   <Principals>
     <Users>
       <User Name="SetupLocalSystem" AccountType="LocalSystem" />
+      <User Name="SetupAdminUser">
+        <MemberOf>
+          <SystemGroup Name="Administrators" />
+        </MemberOf>
+      </User>
     </Users>
   </Principals>
 </ApplicationManifest>

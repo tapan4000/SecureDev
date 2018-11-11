@@ -8,7 +8,11 @@
 
         void RegisterInstance<T>(T instance);
 
+        T Resolve<T>();
+
         T Resolve<T>(string name);
+
+        T Resolve<T>(params DependencyParameterOverride[] parameterOverrides);
 
         void RegisterType<T>(Type target, string name);
     }
