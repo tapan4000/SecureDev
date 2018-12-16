@@ -16,6 +16,8 @@ namespace RestServer.Entities.DataAccess
 
         public string UserUniqueId { get; set; }
 
+        public string IsdCode { get; set; }
+
         public string MobileNumber { get; set; }
 
         public string Email { get; set; }
@@ -24,9 +26,9 @@ namespace RestServer.Entities.DataAccess
 
         public string LastName { get; set; }
 
-        public string EncryptedPassword { get; set; }
+        public string PasswordHash { get; set; }
 
-        public int UserStateId { get; set; }
+        public UserState UserStateId { get; set; }
 
         public string CreatedBy { get; set; }
 
@@ -37,5 +39,13 @@ namespace RestServer.Entities.DataAccess
         public DateTime? LastModificationDateTime { get; set; }
 
         public ObjectState ObjectState { get; set; }
+
+        public string CompleteMobileNumber
+        {
+            get
+            {
+                return this.IsdCode + this.MobileNumber;
+            }
+        }
     }
 }

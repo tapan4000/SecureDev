@@ -18,6 +18,7 @@
         private const int ErrorEventId = 3;
         private const int WarningEventId = 4;
         private const int CriticalEventId = 5;
+        private const int ExecutionTimeEventId = 6;
 
         private const string NullString = "";
 
@@ -33,7 +34,7 @@
             string instanceName,
             string message,
             string errorMessage,
-            string userUniqueId,
+            int userId,
             string logType,
             string dataCenter,
             string memberName,
@@ -50,7 +51,7 @@
                 instanceName,
                 message,
                 errorMessage,
-                userUniqueId,
+                userId,
                 logType,
                 dataCenter,
                 memberName,
@@ -67,7 +68,7 @@
             string instanceName,
             string message,
             string errorMessage,
-            string userUniqueId,
+            int userId,
             string logType,
             string dataCenter,
             string memberName,
@@ -84,7 +85,7 @@
                 instanceName,
                 message,
                 errorMessage,
-                userUniqueId,
+                userId,
                 logType,
                 dataCenter,
                 memberName,
@@ -101,7 +102,7 @@
             string instanceName,
             string message,
             string errorMessage,
-            string userUniqueId,
+            int userId,
             string logType,
             string dataCenter,
             string memberName,
@@ -118,7 +119,7 @@
                 instanceName,
                 message,
                 errorMessage,
-                userUniqueId,
+                userId,
                 logType,
                 dataCenter,
                 memberName,
@@ -135,7 +136,7 @@
             string instanceName,
             string message,
             string errorMessage,
-            string userUniqueId,
+            int userId,
             string logType,
             string dataCenter,
             string memberName,
@@ -152,7 +153,7 @@
                 instanceName,
                 message,
                 errorMessage,
-                userUniqueId,
+                userId,
                 logType,
                 dataCenter,
                 memberName,
@@ -169,7 +170,7 @@
             string instanceName,
             string message,
             string errorMessage,
-            string userUniqueId,
+            int userId,
             string logType,
             string dataCenter,
             string memberName,
@@ -186,7 +187,7 @@
                 instanceName,
                 message,
                 errorMessage,
-                userUniqueId,
+                userId,
                 logType,
                 dataCenter,
                 memberName,
@@ -217,7 +218,7 @@
             }
         }
 
-        private unsafe void WriteStandardEventMessage(int eventId, string traceId, string serviceName, string serviceInstanceName, string message, string errorMessage, string userUniqueId, 
+        private unsafe void WriteStandardEventMessage(int eventId, string traceId, string serviceName, string serviceInstanceName, string message, string errorMessage, int userId, 
             string logType, string dataCenter, string memberName, string fileName, int lineNumber, string logTime)
         {
             const int ArgumentCount = 12;
@@ -245,11 +246,6 @@
             if (errorMessage == null)
             {
                 errorMessage = NullString;
-            }
-
-            if (userUniqueId == null)
-            {
-                userUniqueId = NullString;
             }
 
             if (logType == null)
@@ -288,7 +284,6 @@
                 dataServiceInstanceName = serviceInstanceName,
                 dataMessage = message,
                 dataErrorMessage = errorMessage,
-                dataUserUniqueId = userUniqueId,
                 dataLogType = logType,
                 dataDatacenter = dataCenter,
                 dataMemberName = memberName,
@@ -302,7 +297,7 @@
                 eventData[2] = new EventData { DataPointer = (IntPtr)dataServiceInstanceName, Size = this.SizeInBytes(serviceInstanceName) };
                 eventData[3] = new EventData { DataPointer = (IntPtr)dataMessage, Size = this.SizeInBytes(message) };
                 eventData[4] = new EventData { DataPointer = (IntPtr)dataErrorMessage, Size = this.SizeInBytes(errorMessage) };
-                eventData[5] = new EventData { DataPointer = (IntPtr)dataUserUniqueId, Size = this.SizeInBytes(userUniqueId) };
+                eventData[5] = new EventData { DataPointer = (IntPtr)(&userId), Size = sizeof(int) };
                 eventData[6] = new EventData { DataPointer = (IntPtr)dataLogType, Size = this.SizeInBytes(logType) };
                 eventData[7] = new EventData { DataPointer = (IntPtr)dataDatacenter, Size = this.SizeInBytes(dataCenter) };
                 eventData[8] = new EventData { DataPointer = (IntPtr)dataMemberName, Size = this.SizeInBytes(memberName) };

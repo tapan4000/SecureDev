@@ -30,6 +30,11 @@ namespace RestServer.DataAccess.Configuration
                 .IsRequired()
                 .HasMaxLength(50);
 
+            this.Property(t => t.GroupDescription)
+                .HasColumnName("GroupDescription")
+                .IsRequired()
+                .HasMaxLength(500);
+
             this.Property(t => t.IsPublic)
                 .HasColumnName("IsPublic")
                 .IsRequired();

@@ -40,14 +40,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\AddUserActivity.cs" />
+    <Compile Include="Activities\AddGroupActivity.cs" />
+    <Compile Include="Activities\AddGroupMemberActivity.cs" />
+    <Compile Include="Activities\AddUserToDataStoreActivity.cs" />
+    <Compile Include="Activities\GenerateUserAuthTokenActivity.cs" />
+    <Compile Include="Activities\GenerateUserLoginRefreshTokenActivity.cs" />
+    <Compile Include="Activities\ValidateUserCredentialsActivity.cs" />
+    <Compile Include="Activities\SendUserRegistrationOtpActivity.cs" />
+    <Compile Include="Activities\ValidateUserLoginRefreshTokenActivity.cs" />
+    <Compile Include="Activities\ValidateUserRegistrationOtpActivity.cs" />
+    <Compile Include="Interfaces\Managers\IUserManager.cs" />
+    <Compile Include="Managers\UserManager.cs" />
+    <Compile Include="Models\Request\AddGroupRequestData.cs" />
     <Compile Include="Models\Request\AddUserRequestData.cs" />
+    <Compile Include="Models\Request\GenerateUserAuthTokenRequestData.cs" />
+    <Compile Include="Models\Request\ValidateUserCredentialsActivityData.cs" />
+    <Compile Include="Models\Request\ContextUserIdActivityData.cs" />
+    <Compile Include="Models\Request\LoginProcessorRequestData.cs" />
+    <Compile Include="Models\Request\ValidateUserLoginRefreshTokenActivityData.cs" />
+    <Compile Include="Models\Request\ValidateUserRegistrationRequestData.cs" />
+    <Compile Include="Models\Response\AddUserRequestBusinessResult.cs" />
+    <Compile Include="Models\Response\GenerateUserAuthTokenResult.cs" />
+    <Compile Include="Models\Response\GenerateUserLoginRefreshTokenResult.cs" />
+    <Compile Include="Models\Response\LoginUserBusinessResult.cs" />
+    <Compile Include="Models\Response\PopulatedGroupBusinessResult.cs" />
+    <Compile Include="Models\Response\PopulatedUserBusinessResult.cs" />
+    <Compile Include="Processors\AddUserRequestProcessor.cs" />
+    <Compile Include="Processors\LoginUserProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Managers\" />
-    <Folder Include="Models\Response\" />
-    <Folder Include="Processors\" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\RestServer.Core.csproj">
@@ -62,6 +85,10 @@
       <Project>{846C7206-2ED2-4A36-8140-D7AE657DE61E}</Project>
       <Name>RestServer.Business.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RestServer.Configuration\RestServer.Configuration.csproj">
+      <Project>{F0FB5C81-5F07-4BEB-9899-40554F061148}</Project>
+      <Name>RestServer.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RestServer.DataAccess.Core\RestServer.DataAccess.Core.csproj">
       <Project>{EE983C02-182C-4B13-8568-9D40CEF9191C}</Project>
       <Name>RestServer.DataAccess.Core</Name>
@@ -69,6 +96,14 @@
     <ProjectReference Include="..\RestServer.Entities\RestServer.Entities.csproj">
       <Project>{93988F7C-B7B2-4308-BBB0-A27C1E8A03DD}</Project>
       <Name>RestServer.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.Notification\RestServer.Notification.csproj">
+      <Project>{26FE921C-B7D6-4863-97F8-DA98C9C69B6E}</Project>
+      <Name>RestServer.Notification</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.RestSecurity\RestServer.RestSecurity.csproj">
+      <Project>{428B6B6B-B55E-4E4F-AB18-2701AC9BB3D4}</Project>
+      <Name>RestServer.RestSecurity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

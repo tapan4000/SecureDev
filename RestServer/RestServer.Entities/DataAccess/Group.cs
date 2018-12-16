@@ -18,6 +18,8 @@ namespace RestServer.Entities.DataAccess
 
         public string GroupName { get; set; }
 
+        public string GroupDescription { get; set; }
+
         public bool IsPublic { get; set; }
 
         public string CreatedBy { get; set; }

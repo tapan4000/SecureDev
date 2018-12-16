@@ -10,6 +10,6 @@ namespace RestServer.DataAccess.Interfaces.Strategies
 {
     public interface IUserDataStoreStrategy : IDataStoreStrategy<User>
     {
-        Task<User> GetUserByMobileNumber(string mobileNumber);
+        Task<User> GetUserByMobileNumber(string isdCode, string mobileNumber);
     }
 }

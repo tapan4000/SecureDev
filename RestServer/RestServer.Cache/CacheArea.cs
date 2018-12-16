@@ -11,6 +11,7 @@ namespace RestServer.Cache
         Default = 0,
         User = 1,
         Group = 2,
-        EmergencySession = 3
+        EmergencySession = 3,
+        Application = 4
     }
 }

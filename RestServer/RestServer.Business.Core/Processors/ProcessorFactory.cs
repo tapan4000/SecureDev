@@ -1,4 +1,5 @@
-﻿using RestServer.Business.Core.Interfaces.Processors;
+﻿using RestServer.Business.Core.Interfaces;
+using RestServer.Business.Core.Interfaces.Processors;
 using RestServer.IoC.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RestServer.Business.Core.Processors
 {
-    public class ProcessorFactory<RequestData, ResponseData> : IProcessorFactory<RequestData, ResponseData>
+    public class ProcessorFactory : IProcessorFactory
     {
         private readonly IDependencyContainer dependencyContainer;
 
@@ -17,12 +18,20 @@ namespace RestServer.Business.Core.Processors
             this.dependencyContainer = dependencyContainer;
         }
 
-        public IProcessor<RequestData, ResponseData> CreateGenericProcessor()
+        public ITrackable<RequestData, ResponseData> CreateGenericProcessor<TActivity, RequestData, ResponseData>() where TActivity : ITrackable<RequestData, ResponseData>
         {
-            throw new NotImplementedException();
+            var activityName = typeof(TActivity).Name;
+            var activity = this.dependencyContainer.Resolve<TActivity>(activityName);
+
+            if(null == activity)
+            {
+                throw new ArgumentException($"Failed to create named activity: {activityName}.");
+            }
+
+            return activity;
         }
 
-        public IProcessor<RequestData, ResponseData> CreateProcessor<TProcessor>() where TProcessor:IProcessor<RequestData, ResponseData>
+        public ITrackable<RequestData, ResponseData> CreateProcessor<TProcessor, RequestData, ResponseData>() where TProcessor : ITrackable<RequestData, ResponseData>
         {
             var processorName = typeof(TProcessor).Name;
             var processor = this.dependencyContainer.Resolve<TProcessor>(processorName);

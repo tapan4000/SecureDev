@@ -74,8 +74,8 @@
       <HintPath>..\packages\Microsoft.ServiceFabric.Services.2.8.219\lib\net45\Microsoft.ServiceFabric.Services.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
@@ -175,6 +175,10 @@
     <ProjectReference Include="..\Logging\RestServer.Logging.csproj">
       <Project>{770a8534-d441-4288-aedb-13b84cc2037d}</Project>
       <Name>RestServer.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.FabricShared.Configuration\RestServer.FabricShared.Configuration.csproj">
+      <Project>{C3C43C3C-AABF-4437-A74A-FA532480D296}</Project>
+      <Name>RestServer.FabricShared.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\RestServer.ServerContext\RestServer.ServerContext.csproj">
       <Project>{f5a4b108-120d-4971-a3e3-0e41635b5109}</Project>

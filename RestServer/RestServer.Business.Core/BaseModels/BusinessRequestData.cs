@@ -8,6 +8,5 @@ namespace RestServer.Business.Core.BaseModels
 {
     public abstract class BusinessRequestData
     {
-        protected abstract bool IsValid();
     }
 }

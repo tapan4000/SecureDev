@@ -1,5 +1,4 @@
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Utility\bin\Debug\RestServer.Utility.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Utility\bin\Debug\RestServer.Utility.pdb
-D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Utility\obj\Debug\RestServer.Utility.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Utility\obj\Debug\RestServer.Utility.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Utility\obj\Debug\RestServer.Utility.pdb

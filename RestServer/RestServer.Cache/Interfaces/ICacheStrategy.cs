@@ -8,16 +8,16 @@ namespace RestServer.Cache.Interfaces
 {
     public interface ICacheStrategy
     {
-        Task<bool> DeleteAsync(string key, string keyGroupName = null);
+        Task<bool> DeleteAsync(string key);
     }
 
     public interface ICacheStrategy<T> : ICacheStrategy
     {
-        Task<bool> DoesKeyExistAsync(string key, string keyGroupName = null);
+        Task<bool> DoesKeyExistAsync(string key);
 
-        Task<T> GetAsync(string key, string keyGroupName = null);
+        Task<T> GetAsync(string key);
 
-        Task<bool> InsertOrUpdateAsync(string key, T entity, string keyGroupName = null, TimeSpan? expiry = null);
+        Task<bool> InsertOrUpdateAsync(string key, T entity, TimeSpan? expiry = null);
 
         Task<bool> ClearCacheAsync();
     }

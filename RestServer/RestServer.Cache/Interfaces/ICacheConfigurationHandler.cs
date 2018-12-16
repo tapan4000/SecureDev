@@ -10,6 +10,8 @@ namespace RestServer.Cache.Interfaces
     {
         Task<string> GetCacheConnectionStringAsync();
 
-        Task<CacheConfigurationSettings> GetCacheConfigurationSettingsAsync();
+        Task<bool> IsRedisCacheEnabled();
+
+        Task<int> GetRedisCacheTtlInSeconds();
     }
 }

@@ -10,6 +10,7 @@ using System.Collections.Concurrent;
 using System.Collections;
 using System.Threading;
 using System.IO;
+using System.Globalization;
 
 namespace RestServer.Cache
 {
@@ -29,7 +30,7 @@ namespace RestServer.Cache
 
         private int subscriptionEventMonitorFrequency;
 
-        private StringWriter redisConnectLog;
+        private StringWriter redisConnectLog = new StringWriter(CultureInfo.InvariantCulture);
 
         private IEventLogger logger;
 
@@ -46,7 +47,7 @@ namespace RestServer.Cache
 
         public int MultiplexerPoolSize { get { return this.multiplexerPoolSize; } }
 
-        public bool Initialize(string[] connectionStrings, int minOnDemandIoThreadCount, IEventLogger logger, int multiplexerPoolSize, bool isSubscribedToExternalChannel, int subscriptionEventMonitorFrequency)
+        public bool Initialize(string[] connectionStrings, int minOnDemandIoThreadCount, IEventLogger logger, int multiplexerPoolSize, bool isSubscribedToExternalChannel = true, int subscriptionEventMonitorFrequency = 30)
         {
             this.logger = logger;
             this.multiplexerPoolSize = multiplexerPoolSize;
@@ -232,9 +233,12 @@ namespace RestServer.Cache
                     }
 
                     connectionMultiplexerPool.Add(connectionMultiplexer);
+
+                    this.logger.LogVerbose(this.redisConnectLog.ToString());
                 }
                 catch(Exception ex)
                 {
+                    this.logger.LogInformation(this.redisConnectLog.ToString());
                     this.logger.LogException($"Failed to connect to {masterServerAddress} for connectionid {connectionid}", ex);
                 }
             }

@@ -50,17 +50,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContextBase.cs" />
+    <Compile Include="GenericRepository.cs" />
     <Compile Include="Interfaces\IDataContext.cs" />
     <Compile Include="Interfaces\IRestServerUnitOfWork.cs" />
     <Compile Include="Interfaces\IUnitOfWorkFactory.cs" />
     <Compile Include="Interfaces\IUserContext.cs" />
+    <Compile Include="Interfaces\Repositories\IApplicationRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IGenericRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IGroupRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUserActivationRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
     <Compile Include="Interfaces\Strategies\IDataStoreStrategy.cs" />
+    <Compile Include="Interfaces\Strategies\IGenericDataStoreStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="RestServerDataContext.cs" />
     <Compile Include="RestServerUnitOfWork.cs" />
+    <Compile Include="Strategies\GenericDataStoreStrategy.cs" />
     <Compile Include="Strategies\DataStoreStrategyBase.cs" />
     <Compile Include="UnitOfWorkFactory.cs" />
   </ItemGroup>

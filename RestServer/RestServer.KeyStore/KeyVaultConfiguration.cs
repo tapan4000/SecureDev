@@ -20,6 +20,8 @@ namespace RestServer.KeyStore
 
         public string ClientAuthSecret { get; set; }
 
+        public string ClientCertificateThumbrpint { get; set; }
+
         public int CacheExpirationDurationInSeconds { get; set; }
 
         public object Clone()

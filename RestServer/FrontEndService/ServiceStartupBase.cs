@@ -16,10 +16,17 @@
 
     using RestServer.FrontEndService.Converter;
     using RestServer.Logging.Interfaces;
+    using Configuration.Interfaces;
+    using Core.Helpers;
+    using Configuration;
+    using Cache;
+    using Configuration.Models;
 
     public abstract class ServiceStartupBase
     {
         private readonly IDictionary<Type, object> explicitRegistrations;
+
+        private IConfigurationHandler configurationHandler;
 
         private IEventLogger logger;
 
@@ -38,6 +45,7 @@
             var unityDependencyResolver = new UnityDependencyResolver(unityContainer);
             var dependencyContainer = new UnityDependencyContainer(unityContainer);
             config.DependencyResolver = unityDependencyResolver;
+            this.configurationHandler = (IConfigurationHandler)unityDependencyResolver.GetService(typeof(IConfigurationHandler));
 
             // Configure Error Page
             this.ConfigureGlobalFilters(config);
@@ -46,6 +54,8 @@
             this.ConfigureMessageHandlers(config);
 
             this.logger = dependencyContainer.Resolve<IEventLogger>();
+
+            AsyncHelper.RunSync(this.InitializeRedis);
 
             // Enable CORS
             this.AllowCors(appBuilder);
@@ -89,6 +99,7 @@
             //this.ConfigureMessageHandlers(config);
 
             //this.logger = dependencyContainer.Resolve<IEventLogger>();
+            //AsyncHelper.RunSync(this.InitializeRedis);
 
             //// Enable CORS
             //this.AllowCors(appBuilder);
@@ -145,6 +156,14 @@
         protected virtual void ConfigureTypeConverters(HttpConfiguration config)
         {
             config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new JsonSecureStringRequestModelConverter());
+        }
+
+        private async Task InitializeRedis()
+        {
+            var cacheConnectionString = await this.configurationHandler.GetConfiguration(ConfigurationConstants.RedisCacheConnectionString);
+            var multiplexerPoolSize = await this.configurationHandler.GetConfiguration<int>(ConfigurationConstants.RedisCacheConnectionMultiplexerPoolSize);
+            var globalSetting = await this.configurationHandler.GetConfiguration<GlobalSetting>(ConfigurationConstants.GlobalSetting);
+            RedisConnectionMultiplexer.Instance.Initialize(new[] { cacheConnectionString }, globalSetting.MinIocpThreadCountForMaxRedisThroughput, this.logger, multiplexerPoolSize);
         }
 
         private void AllowCors(IAppBuilder appBuilder)

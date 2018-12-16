@@ -1,6 +1,7 @@
 ﻿using RestServer.Cache;
 using RestServer.Cache.Interfaces;
 using RestServer.Configuration.Interfaces;
+using RestServer.Configuration.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,15 +30,21 @@ namespace RestServer.Configuration
             return cacheConnectionString;
         }
 
-        public async Task<CacheConfigurationSettings> GetCacheConfigurationSettingsAsync()
+        public async Task<int> GetRedisCacheTtlInSeconds()
         {
-            var cacheConfigurationSettings = await this.configurationHandler.GetConfiguration<CacheConfigurationSettings>(ConfigurationConstants.CacheConfigurationSettings);
-            if (null == cacheConfigurationSettings)
+            var redisCacheTtlInSeconds = await this.configurationHandler.GetConfiguration<int>(ConfigurationConstants.RedisCacheTtlInSeconds);
+            if(redisCacheTtlInSeconds <= 0)
             {
-                throw new NullReferenceException("Unable to fetch cache configuration settings.");
+                return -1;
             }
 
-            return cacheConfigurationSettings;
+            return redisCacheTtlInSeconds;
+        }
+
+        public async Task<bool> IsRedisCacheEnabled()
+        {
+            var isRedisCacheEnabled = await this.configurationHandler.GetConfiguration<bool>(ConfigurationConstants.IsRedisCacheEnabled);
+            return isRedisCacheEnabled;
         }
     }
 }

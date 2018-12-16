@@ -1,6 +1,8 @@
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.IoC.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.IoC.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.IoC.etwManifests.lst
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\CommonServiceLocator.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Logging.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.Abstractions.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.Configuration.dll
@@ -9,8 +11,11 @@ D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.Interception.Co
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.Interception.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.RegistrationByConvention.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.ServiceLocation.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.ServerContext.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Utility.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Logging.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\CommonServiceLocator.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.Abstractions.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.Configuration.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.Container.pdb
@@ -18,13 +23,8 @@ D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.Interception.pd
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.Interception.Configuration.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.RegistrationByConvention.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.ServiceLocation.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.ServerContext.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Utility.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\obj\Debug\RestServer.IoC.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\obj\Debug\RestServer.IoC.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\obj\Debug\RestServer.IoC.pdb
-D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.ServerContext.dll
-D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.ServerContext.pdb
-D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.IoC.etwManifests.lst
-D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
-D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
-D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Utility.dll
-D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Utility.pdb

@@ -32,7 +32,9 @@ namespace RestServer.FabricShared.Configuration
 
         private const string KeyVaultCacheExpirationDurationInSeconds = "KeyVaultCacheExpirationDurationInSeconds";
 
-        public ServiceConfigurationHandler(Guid serviceStartupTraceId, Uri serviceUri, ICodePackageActivationContext context, IEventLogger logger)
+        public event EventHandler ConfigurationChangedEvent;
+
+        public ServiceConfigurationHandler(string serviceStartupTraceId, Uri serviceUri, ICodePackageActivationContext context, IEventLogger logger)
         {
             if (null == serviceStartupTraceId)
             {
@@ -133,11 +135,11 @@ namespace RestServer.FabricShared.Configuration
         private void LoadConfiguration(KeyedCollection<string, ConfigurationSection> sections)
         {
             this.isConfigInitialized = false;
-            if (sections.Contains(this.serviceUri.AbsoluteUri))
+            if (sections.Contains(ConfigurationConstants.ServiceConfigurationSectionName))
             {
                 this.logger.LogInformation($"Configuration found for service {this.serviceUri.AbsoluteUri}");
 
-                var section = sections[this.serviceUri.AbsoluteUri];
+                var section = sections[ConfigurationConstants.ServiceConfigurationSectionName];
 
                 foreach(var param in section.Parameters)
                 {

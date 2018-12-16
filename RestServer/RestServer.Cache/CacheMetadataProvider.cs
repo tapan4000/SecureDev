@@ -41,7 +41,7 @@ namespace RestServer.Cache
             {
                 CacheHint = storageAttribute.CacheHint,
                 CacheArea = storageAttribute.CacheArea,
-                TimeToLiveInMinutes = storageAttribute.TimeToLiveInMinutes
+                TimeToLiveInSeconds = storageAttribute.TimeToLiveInSeconds
             };
         }
     }

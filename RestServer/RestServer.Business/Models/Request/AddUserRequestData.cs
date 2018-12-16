@@ -13,14 +13,6 @@ namespace RestServer.Business.Models.Request
     {
         public User User { get; set; }
 
-        protected override bool IsValid()
-        {
-            if(null == this.User || this.User.MobileNumber.IsEmpty() || this.User.Email.IsEmpty() || this.User.EncryptedPassword.IsEmpty() || this.User.FirstName.IsEmpty() || this.User.LastName.IsEmpty())
-            {
-                return false;
-            }
-
-            return true;
-        }
+        public string ApplicationUniqueId { get; set; }
     }
 }

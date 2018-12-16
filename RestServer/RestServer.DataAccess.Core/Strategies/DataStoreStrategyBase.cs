@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace RestServer.DataAccess.Core.Strategies
 {
-    public abstract class DataStoreStrategyBase<TEntity> : IDataStoreStrategy<TEntity> where TEntity : class
+    public class DataStoreStrategyBase<TEntity> : IDataStoreStrategy<TEntity> where TEntity : class
     {
         protected DataContextBase DataContext;
 
         private IDbSet<TEntity> dataSet;
 
-        public DataStoreStrategyBase(IDataContext dataContext)
+        protected DataStoreStrategyBase(IDataContext dataContext)
         {
             this.DataContext = dataContext as DataContextBase;
             if(null != this.DataContext)
@@ -29,6 +29,21 @@ namespace RestServer.DataAccess.Core.Strategies
         {
             // TODO: Every delete operation against an id should run a delete stored procedure instead of fetching the record and then deleting it.
             throw new NotImplementedException();
+        }
+
+        public bool DeleteAsync(TEntity entityToDelete)
+        {
+            if(null != entityToDelete)
+            {
+                if(this.DataContext.Entry(entityToDelete).State == EntityState.Detached)
+                {
+                    this.dataSet.Attach(entityToDelete);
+                }
+
+                this.dataSet.Remove(entityToDelete);
+            }
+
+            return true;
         }
 
         public async Task<TEntity> GetById(object id)
@@ -45,10 +60,10 @@ namespace RestServer.DataAccess.Core.Strategies
             }
         }
 
-        public async Task<bool> InsertAsync(TEntity entity)
+        public async Task<TEntity> InsertAsync(TEntity entity)
         {
             var entityData = await Task.Run(() => this.dataSet.Add(entity)).ConfigureAwait(false);
-            return entityData != null;
+            return entityData;
         }
 
         public Task<bool> UpdateAsync(TEntity entity)
@@ -72,6 +87,12 @@ namespace RestServer.DataAccess.Core.Strategies
             this.dataSet.Attach(entity);
             this.DataContext.Entry(entity).State = EntityState.Modified;
             return true;
+        }
+
+        protected async Task<int> GetCountByFilter(Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = this.DataContext.GetQuery<TEntity>();
+            return await Task.Run(() => query.Count(filter)).ConfigureAwait(false);
         }
     }
 }

@@ -18,11 +18,11 @@ namespace RestServer.Entities.DataAccess
 
         public int UserId { get; set; }
 
-        public bool IsAdministratorAllowedToTriggerEmergencySession { get; set; }
+        public bool CanAdminTriggerEmergencySessionForSelf { get; set; }
 
-        public bool IsAdministratorAllowedToExtendEmergencySession { get; set; }
+        public bool CanAdminExtendEmergencySessionForSelf { get; set; }
 
-        public int EmergencyNotificationModePreference { get; set; }
+        public int GroupPeerEmergencyNotificationModePreferenceId { get; set; }
 
         public bool IsAdmin { get; set; }
 

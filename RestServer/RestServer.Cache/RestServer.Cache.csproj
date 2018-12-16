@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
@@ -51,8 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CacheArea.cs" />
-    <Compile Include="CacheConfigurationSettings.cs" />
     <Compile Include="CacheException.cs" />
+    <Compile Include="CacheHelper.cs" />
     <Compile Include="CacheHint.cs" />
     <Compile Include="CacheMetadataProvider.cs" />
     <Compile Include="CacheNotificationEventArgs.cs" />
@@ -72,6 +72,10 @@
     <Compile Include="StorageTypeAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\RestServer.Core.csproj">
+      <Project>{69C00889-769C-4C2C-9A54-29B6B53E1D9C}</Project>
+      <Name>RestServer.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IoC\RestServer.IoC.csproj">
       <Project>{1003BB7B-2E1D-48AC-A9D0-E2C4B82E62A1}</Project>
       <Name>RestServer.IoC</Name>
@@ -83,6 +87,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

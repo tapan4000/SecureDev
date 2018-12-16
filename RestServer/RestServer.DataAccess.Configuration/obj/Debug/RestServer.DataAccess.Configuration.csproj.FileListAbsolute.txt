@@ -34,3 +34,5 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\obj\Debug\RestServer.DataAccess.Configuration.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\obj\Debug\RestServer.DataAccess.Configuration.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\obj\Debug\RestServer.DataAccess.Configuration.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\bin\Debug\RestServer.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\bin\Debug\RestServer.Core.pdb

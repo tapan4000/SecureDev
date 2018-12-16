@@ -8,22 +8,11 @@ namespace RestServer.Entities.DataAccess
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Serializable]
-    [StorageType(CacheHint.LocalCache, CacheArea.User)]
-    public partial class UserState : IEntityBase
+    public enum UserState
     {
-        public int UserStateId { get; set; }
-
-        public string UserStateName { get; set; }
-
-        public string CreatedBy { get; set; }
-
-        public DateTime CreationDateTime { get; set; }
-
-        public string LastModifiedBy { get; set; }
-
-        public DateTime? LastModificationDateTime { get; set; }
-
-        public ObjectState ObjectState { get; set; }
+        None = 0,
+        VerificationPending = 1,
+        MobileVerified = 2,
+        MobileAndEmailVerified = 3
     }
 }

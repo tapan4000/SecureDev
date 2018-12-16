@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationConfiguration.cs" />
     <Compile Include="CityBasedPublicGroupConfiguration.cs" />
     <Compile Include="CountryBasedPublicGroupConfiguration.cs" />
     <Compile Include="DeviceConfiguration.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="LocalityBasedPublicGroupConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicGroupConfiguration.cs" />
+    <Compile Include="RestServerSettingConfiguration.cs" />
     <Compile Include="StateBasedPublicGroupConfiguration.cs" />
     <Compile Include="UserActivationConfiguration.cs" />
     <Compile Include="UserConfiguration.cs" />

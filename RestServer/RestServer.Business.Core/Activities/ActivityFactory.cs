@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RestServer.Business.Core.Activities
 {
-    public class ActivityFactory<RequestData, ResponseData> : IActivityFactory<RequestData, ResponseData>
+    public class ActivityFactory : IActivityFactory
     {
         private readonly IDependencyContainer dependencyContainer;
         public ActivityFactory(IDependencyContainer dependencyContainer)
@@ -16,7 +16,7 @@ namespace RestServer.Business.Core.Activities
             this.dependencyContainer = dependencyContainer;
         }
 
-        public IActivity<RequestData, ResponseData> CreateActivity<TActivity>() where TActivity : IActivity<RequestData, ResponseData>
+        public IActivity<TActivityRequest, TActivityResponse> CreateActivity<TActivity, TActivityRequest, TActivityResponse>() where TActivity : IActivity<TActivityRequest, TActivityResponse>
         {
             var activityName = typeof(TActivity).Name;
             var activity = this.dependencyContainer.Resolve<TActivity>(activityName);
@@ -29,7 +29,7 @@ namespace RestServer.Business.Core.Activities
             return activity;
         }
 
-        public IActivity<RequestData, ResponseData> CreateGenericActivity()
+        public IActivity<TActivityRequest, TActivityResponse> CreateGenericActivity<TActivityRequest, TActivityResponse>()
         {
             throw new NotImplementedException();
         }

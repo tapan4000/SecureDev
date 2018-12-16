@@ -9,6 +9,6 @@ namespace RestServer.DataAccess.Core.Interfaces.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task<User> GetUserByMobileNumber(string mobileNumber);
+        Task<User> GetUserByMobileNumber(string isdCode, string mobileNumber);
     }
 }

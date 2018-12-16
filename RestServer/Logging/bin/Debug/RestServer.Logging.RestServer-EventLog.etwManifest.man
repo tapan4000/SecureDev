@@ -43,7 +43,7 @@
    <data name="instanceName" inType="win:UnicodeString"/>
    <data name="message" inType="win:UnicodeString"/>
    <data name="errorMessage" inType="win:UnicodeString"/>
-   <data name="userUniqueId" inType="win:UnicodeString"/>
+   <data name="userId" inType="win:Int32"/>
    <data name="logType" inType="win:UnicodeString"/>
    <data name="dataCenter" inType="win:UnicodeString"/>
    <data name="memberName" inType="win:UnicodeString"/>
@@ -57,7 +57,7 @@
    <data name="instanceName" inType="win:UnicodeString"/>
    <data name="message" inType="win:UnicodeString"/>
    <data name="errorMessage" inType="win:UnicodeString"/>
-   <data name="userUniqueId" inType="win:UnicodeString"/>
+   <data name="userId" inType="win:Int32"/>
    <data name="logType" inType="win:UnicodeString"/>
    <data name="dataCenter" inType="win:UnicodeString"/>
    <data name="memberName" inType="win:UnicodeString"/>
@@ -71,7 +71,7 @@
    <data name="instanceName" inType="win:UnicodeString"/>
    <data name="message" inType="win:UnicodeString"/>
    <data name="errorMessage" inType="win:UnicodeString"/>
-   <data name="userUniqueId" inType="win:UnicodeString"/>
+   <data name="userId" inType="win:Int32"/>
    <data name="logType" inType="win:UnicodeString"/>
    <data name="dataCenter" inType="win:UnicodeString"/>
    <data name="memberName" inType="win:UnicodeString"/>
@@ -85,7 +85,7 @@
    <data name="instanceName" inType="win:UnicodeString"/>
    <data name="message" inType="win:UnicodeString"/>
    <data name="errorMessage" inType="win:UnicodeString"/>
-   <data name="userUniqueId" inType="win:UnicodeString"/>
+   <data name="userId" inType="win:Int32"/>
    <data name="logType" inType="win:UnicodeString"/>
    <data name="dataCenter" inType="win:UnicodeString"/>
    <data name="memberName" inType="win:UnicodeString"/>
@@ -99,7 +99,7 @@
    <data name="instanceName" inType="win:UnicodeString"/>
    <data name="message" inType="win:UnicodeString"/>
    <data name="errorMessage" inType="win:UnicodeString"/>
-   <data name="userUniqueId" inType="win:UnicodeString"/>
+   <data name="userId" inType="win:Int32"/>
    <data name="logType" inType="win:UnicodeString"/>
    <data name="dataCenter" inType="win:UnicodeString"/>
    <data name="memberName" inType="win:UnicodeString"/>
@@ -117,7 +117,7 @@
    <data name="serviceInstanceName" inType="win:UnicodeString"/>
    <data name="message" inType="win:UnicodeString"/>
    <data name="errorMessage" inType="win:UnicodeString"/>
-   <data name="userUniqueId" inType="win:UnicodeString"/>
+   <data name="userId" inType="win:Int32"/>
    <data name="logType" inType="win:UnicodeString"/>
    <data name="dataCenter" inType="win:UnicodeString"/>
    <data name="memberName" inType="win:UnicodeString"/>

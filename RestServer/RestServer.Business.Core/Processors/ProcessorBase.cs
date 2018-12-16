@@ -10,27 +10,45 @@ using System.Threading.Tasks;
 
 namespace RestServer.Business.Core.Processors
 {
-    public abstract class ProcessorBase<RequestData, ResponseData> : Trackable<RequestData, ResponseData> where ResponseData : BusinessResult, new()
+    public abstract class ProcessorBase<TRequest, TResponse> : Trackable<TRequest, TResponse> where TResponse : RestrictedBusinessResultBase, new()
     {
-        private readonly IActivityFactory<RequestData, ResponseData> activityFactory;
+        private readonly IActivityFactory activityFactory;
 
-        private readonly Stack<IActivity<RequestData, ResponseData>> compensatableActivities;
+        private readonly Stack<ICompensatableActivity<TRequest, TResponse>> compensatableActivities;
 
-        protected ProcessorBase(IActivityFactory<RequestData, ResponseData> activityFactory, IEventLogger logger) : base(logger)
+        protected ProcessorBase(IActivityFactory activityFactory, IEventLogger logger) : base(logger)
         {
-            this.compensatableActivities = new Stack<IActivity<RequestData, ResponseData>>();
+            this.compensatableActivities = new Stack<ICompensatableActivity<TRequest, TResponse>>();
             this.activityFactory = activityFactory;
         }
 
-        protected Task<ResponseData> ExecuteActivityAsync<TActivity>(RequestData activityData) where TActivity : IActivity<RequestData, ResponseData>
+        protected async Task<BusinessResult> CompensateProcessor()
         {
-            var activity = this.activityFactory.CreateActivity<TActivity>();
-            if (activity.IsCompensatable)
+            var compensationResult = new RestrictedBusinessResultBase();
+            compensationResult.SetSuccessStatus(true);
+            foreach (var compensatableActivity in this.compensatableActivities)
             {
-                this.compensatableActivities.Push((ICompensatableActivity<RequestData, ResponseData>)activity);
+                var activityResult = await compensatableActivity.ExecuteCompensateAsync();
+                compensationResult.SetSuccessStatus(compensationResult.IsSuccessful && activityResult.IsSuccessful);
             }
 
-            return activity.TrackAndExecuteAsync(activityData);
+            return compensationResult;
+        }
+
+        protected async Task<TActivityResponse> CreateAndExecuteActivity<TActivity, TActivityRequest, TActivityResponse>(TActivityRequest requestData) where TActivity : IActivity<TActivityRequest, TActivityResponse> where TActivityResponse : RestrictedBusinessResultBase, new()
+        {
+            var activity = this.activityFactory.CreateActivity<TActivity, TActivityRequest, TActivityResponse>();
+            var activityResult = await activity.TrackAndExecuteAsync(requestData);
+
+            // For a successful activity no need to modify the business processor result IsSuccessful flag as it would be true originally. Only in case of a failure scenario modify the
+            // flag and append the errors.
+            if (!activityResult.IsSuccessful)
+            {
+                this.Result.IsSuccessful = false;
+                this.Result.AppendBusinessErrors(activityResult.BusinessErrors);
+            }
+
+            return activityResult;
         }
     }
 }

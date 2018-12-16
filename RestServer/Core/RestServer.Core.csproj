@@ -46,6 +46,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IoC\RestServer.IoC.csproj">
+      <Project>{1003BB7B-2E1D-48AC-A9D0-E2C4B82E62A1}</Project>
+      <Name>RestServer.IoC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logging\RestServer.Logging.csproj">
       <Project>{770a8534-d441-4288-aedb-13b84cc2037d}</Project>
       <Name>RestServer.Logging</Name>

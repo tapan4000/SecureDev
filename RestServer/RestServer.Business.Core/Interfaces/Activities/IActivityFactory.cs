@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace RestServer.Business.Core.Interfaces.Activities
 {
-    public interface IActivityFactory<RequestData, ResponseData>
+    public interface IActivityFactory
     {
-        IActivity<RequestData, ResponseData> CreateActivity<TActivity>() where TActivity : IActivity<RequestData, ResponseData>;
+        IActivity<TActivityRequest, TActivityResponse> CreateActivity<TActivity, TActivityRequest, TActivityResponse>() where TActivity : IActivity<TActivityRequest, TActivityResponse>;
 
-        IActivity<RequestData, ResponseData> CreateGenericActivity();
+        IActivity<TActivityRequest, TActivityResponse> CreateGenericActivity<TActivityRequest, TActivityResponse>();
     }
 }

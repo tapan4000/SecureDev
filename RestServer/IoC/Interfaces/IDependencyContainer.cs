@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface IDependencyContainer
+    public interface IDependencyContainer : IDisposable
     {
         bool IsRegistered<T>(string name);
 
@@ -15,5 +15,7 @@
         T Resolve<T>(params DependencyParameterOverride[] parameterOverrides);
 
         void RegisterType<T>(Type target, string name);
+
+        IDependencyContainer CreateChildContainer();
     }
 }

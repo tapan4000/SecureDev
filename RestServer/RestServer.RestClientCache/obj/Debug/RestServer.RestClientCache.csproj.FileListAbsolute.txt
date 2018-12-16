@@ -1,0 +1,13 @@
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\RestServer.RestClientCache.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\RestServer.RestClientCache.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\RestServer.Logging.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\RestServer.ServerContext.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\RestServer.Utility.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\RestServer.Logging.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\RestServer.ServerContext.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\RestServer.Utility.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\obj\Debug\RestServer.RestClientCache.csprojResolveAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\obj\Debug\RestServer.RestClientCache.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\obj\Debug\RestServer.RestClientCache.pdb

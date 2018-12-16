@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace RestServer.Business.Core.Interfaces.Processors
 {
-    public interface IProcessorFactory<RequestData, ResponseData>
+    public interface IProcessorFactory
     {
-        IProcessor<RequestData, ResponseData> CreateProcessor<TProcessor>() where TProcessor : IProcessor<RequestData, ResponseData>;
+        ITrackable<RequestData, ResponseData> CreateProcessor<TProcessor, RequestData, ResponseData>() where TProcessor : ITrackable<RequestData, ResponseData>;
 
-        IProcessor<RequestData, ResponseData> CreateGenericProcessor();
+        ITrackable<RequestData, ResponseData> CreateGenericProcessor<TActivity, RequestData, ResponseData>() where TActivity : ITrackable<RequestData, ResponseData>;
     }
 }

@@ -42,6 +42,18 @@
             return Container.Value;
         }
 
+        public static string GetRegistrationMapping()
+        {
+            StringBuilder sb = new StringBuilder();
+            var container = Container.Value;
+            foreach(var registration in container.Registrations)
+            {
+                sb.AppendLine($"'{registration.Name}' >> {registration.RegisteredType}:{registration.MappedToType}");
+            }
+
+            return sb.ToString();
+        }
+
         public static IDependencyContainer OverrideDependencies(IUnityContainer container, IDictionary<Type, Type> explicitTypes = null, IDictionary<Type, object> explicitInstances = null)
         {
             if (null == container)
@@ -293,7 +305,7 @@
 
                 var filePath = basePath + string.Format(CultureInfo.InvariantCulture, ConfigurationFileNameFormat, regionName);
                 var fileExists = File.Exists(filePath);
-                LoggerEventSource.Current.Verbose(traceId, $"{filePath} exists: {fileExists}", null);
+                LoggerEventSource.Current.Verbose(traceId, $"{filePath} exists: {fileExists}", 0);
 
                 if (fileExists)
                 {
@@ -304,7 +316,7 @@
                     }
 
                     var documentExists = configuration.DocumentElement != null;
-                    LoggerEventSource.Current.Verbose(traceId, $"configuration.DocumentElement exists: {documentExists}", null);
+                    LoggerEventSource.Current.Verbose(traceId, $"configuration.DocumentElement exists: {documentExists}", 0);
                     if (documentExists)
                     {
                         var exclusionsList = new List<string>();
@@ -327,7 +339,7 @@
                                     .ToList());
                         }
 
-                        exclusionsList.ForEach(x => LoggerEventSource.Current.Verbose(traceId, $"Excluded: {x}", null));
+                        exclusionsList.ForEach(x => LoggerEventSource.Current.Verbose(traceId, $"Excluded: {x}", 0));
                         return exclusionsList;
                     }
                 }
@@ -345,12 +357,15 @@
             {
                 try
                 {
-                    basePathAssemblies.Add(Assembly.LoadFile(dll));
+                    if (dll.Contains("RestServer."))
+                    {
+                        basePathAssemblies.Add(Assembly.LoadFile(dll));
+                    }
                 }
                 catch (Exception ex)
                 {
                     // Ignore the error
-                    LoggerEventSource.Current.Critical(traceId, ex, null);
+                    LoggerEventSource.Current.Critical(traceId, ex, 0);
                 }
             }
 
@@ -380,12 +395,12 @@
                     Environment.NewLine);
                 if (count % 100 == 0)
                 {
-                    LoggerEventSource.Current.Verbose(traceId, registrations.ToString(), null);
+                    LoggerEventSource.Current.Verbose(traceId, registrations.ToString(), 0);
                     registrations.Clear();
                 }
             }
 
-            LoggerEventSource.Current.Verbose(traceId, registrations.ToString(), null);
+            LoggerEventSource.Current.Verbose(traceId, registrations.ToString(), 0);
         }
     }
 }

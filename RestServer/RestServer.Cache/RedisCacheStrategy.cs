@@ -29,9 +29,9 @@ namespace RestServer.Cache
 
         private readonly IConnectionMultiplexer connectionMultiplexer;
 
-        public RedisCacheStrategy(string redisConnectionString, int database, IEventLogger logger)
+        public RedisCacheStrategy(string cacheConnectionString, int database, IEventLogger logger)
         {
-            this.redisConnectionString = redisConnectionString;
+            this.redisConnectionString = cacheConnectionString;
             this.database = database;
             this.logger = logger;
             this.connectionMultiplexer = this.GetConnectionMultiplexer();
@@ -52,50 +52,46 @@ namespace RestServer.Cache
             return true;
         }
 
-        public override async Task<bool> DeleteAsync(string key, string keyGroupName = null)
+        public override async Task<bool> DeleteAsync(string key)
         {
-            var cacheKey = this.GetCacheKey(key, keyGroupName);
             var cacheDb = this.GetDatabase(this.database);
             if (null != cacheDb && !string.IsNullOrWhiteSpace(key))
             {
-                return await cacheDb.KeyDeleteAsync(cacheKey).ConfigureAwait(false);
+                return await cacheDb.KeyDeleteAsync(key).ConfigureAwait(false);
             }
 
             return true;
         }
 
-        public override async Task<bool> DoesKeyExistAsync(string key, string keyGroupName = null)
+        public override async Task<bool> DoesKeyExistAsync(string key)
         {
-            var cacheKey = this.GetCacheKey(key, keyGroupName);
             var cacheDb = this.GetDatabase(this.database);
             if(null != cacheDb && !string.IsNullOrWhiteSpace(key))
             {
-                return await cacheDb.KeyExistsAsync(cacheKey).ConfigureAwait(false);
+                return await cacheDb.KeyExistsAsync(key).ConfigureAwait(false);
             }
 
             return false;
         }
 
-        public override async Task<T> GetAsync(string key, string keyGroupName = null)
+        public override async Task<T> GetAsync(string key)
         {
-            var cacheKey = this.GetCacheKey(key, keyGroupName);
             var cacheDb = this.GetDatabase(this.database);
             if (null != cacheDb && !string.IsNullOrWhiteSpace(key))
             {
-                var value = await cacheDb.StringGetAsync(cacheKey).ConfigureAwait(false);
+                var value = await cacheDb.StringGetAsync(key).ConfigureAwait(false);
                 return value.IsNull ? default(T) : Deserialize<T>(value);
             }
 
             return default(T);
         }
 
-        public override async Task<bool> InsertOrUpdateAsync(string key, T entity, string keyGroupName = null, TimeSpan? expiry = null)
+        public override async Task<bool> InsertOrUpdateAsync(string key, T entity, TimeSpan? expiry = null)
         {
-            var cacheKey = this.GetCacheKey(key, keyGroupName);
             var cacheDb = this.GetDatabase(this.database);
             if (null != cacheDb && !string.IsNullOrWhiteSpace(key))
             {
-                return await cacheDb.StringSetAsync(cacheKey, Serialize(entity), expiry).ConfigureAwait(false);
+                return await cacheDb.StringSetAsync(key, Serialize(entity), expiry).ConfigureAwait(false);
             }
 
             return false;

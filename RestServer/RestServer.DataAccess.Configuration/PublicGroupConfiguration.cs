@@ -14,16 +14,13 @@ namespace RestServer.DataAccess.Configuration
         public PublicGroupConfiguration()
         {
             // Primary Key
-            this.HasKey(t => t.PublicGroupId);
+            this.HasKey(t => t.GroupId);
 
             // Properties
             this.ToTable("PublicGroup");
-            this.Property(t => t.PublicGroupId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             this.Property(t => t.GroupId)
-                .HasColumnName("GroupId")
-                .IsRequired();
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.IsVerified)
                 .HasColumnName("IsVerified")

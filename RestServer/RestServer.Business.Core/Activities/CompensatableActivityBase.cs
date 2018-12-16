@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RestServer.Business.Core.Activities
 {
-    public abstract class CompensatableActivityBase<RequestData, ResponseData> : Trackable<RequestData, ResponseData>, ICompensatableActivity<RequestData, ResponseData> where ResponseData : BusinessResult, new()
+    public abstract class CompensatableActivityBase<TRequest, TResponse> : Trackable<TRequest, TResponse>, ICompensatableActivity<TRequest, TResponse> where TResponse : RestrictedBusinessResultBase, new()
     {
         public CompensatableActivityBase(IEventLogger logger) : base(logger)
         {
@@ -23,6 +23,25 @@ namespace RestServer.Business.Core.Activities
             }
         }
 
-        public abstract Task<bool> CompensateAsync(RequestData requestData);
+        public async Task<TResponse> ExecuteCompensateAsync()
+        {
+            var businessResult = new TResponse();
+            businessResult.SetSuccessStatus(true);
+            
+            // TODO: Add code to track the execution time based on the set flags.
+            try
+            {
+                await this.CompensateAsync().ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogException(ex);
+                businessResult.SetSuccessStatus(false);
+            }
+
+            return businessResult;
+        }
+
+        protected abstract Task CompensateAsync();
     }
 }

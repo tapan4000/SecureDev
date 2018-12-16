@@ -26,6 +26,11 @@ namespace RestServer.DataAccess.Configuration
                 .IsRequired()
                 .HasMaxLength(50);
 
+            this.Property(t => t.IsdCode)
+                .HasColumnName("IsdCode")
+                .IsRequired()
+                .HasMaxLength(10);
+
             this.Property(t => t.MobileNumber)
                 .HasColumnName("MobileNumber")
                 .IsRequired()
@@ -46,9 +51,9 @@ namespace RestServer.DataAccess.Configuration
                 .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.EncryptedPassword)
+            this.Property(t => t.PasswordHash)
                 .IsRequired()
-                .HasColumnName("EncryptedPassword")
+                .HasColumnName("PasswordHash")
                 .HasMaxLength(50);
 
             this.Property(t => t.UserStateId)
@@ -61,6 +66,7 @@ namespace RestServer.DataAccess.Configuration
             this.Property(t => t.LastModificationDateTime).HasColumnName("LastModificationDateTime");
 
             // Properties not part of database model
+            this.Ignore(t => t.CompleteMobileNumber);
             this.Ignore(t => t.ObjectState);
         }
     }

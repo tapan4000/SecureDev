@@ -9,16 +9,39 @@ namespace RestServer.Business.Core.BaseModels
 {
     public class BusinessResult
     {
-        public bool IsSuccessful { get; set; }
+        private List<BusinessError> businessErrors;
+        public BusinessResult()
+        {
+            this.businessErrors = new List<BusinessError>();
+        }
 
-        public List<BusinessError> BusinessErrors { get; private set; }
+        public virtual bool IsSuccessful { get; set; }
+
+        public List<BusinessError> BusinessErrors
+        {
+            get
+            {
+                return this.businessErrors;
+            }
+        }
 
         public void AddBusinessError(BusinessErrorCode errorCode)
         {
-            this.BusinessErrors.Add(new BusinessError
+            if(!this.businessErrors.Any(businessError => businessError.ErrorCode == errorCode))
             {
-                ErrorCode = errorCode
-            });
+                this.businessErrors.Add(new BusinessError
+                {
+                    ErrorCode = errorCode
+                });
+            }
+        }
+
+        public void AppendBusinessErrors(List<BusinessError> businessErrors)
+        {
+            foreach(var businessError in businessErrors)
+            {
+                this.AddBusinessError(businessError.ErrorCode);
+            }
         }
     }
 }

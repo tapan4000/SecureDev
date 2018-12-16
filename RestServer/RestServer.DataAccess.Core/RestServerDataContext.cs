@@ -9,6 +9,7 @@ using RestServer.Core.Helpers;
 using RestServer.Configuration;
 using RestServer.IoC;
 using RestServer.DataAccess.Configuration;
+using RestServer.Entities.DataAccess;
 
 namespace RestServer.DataAccess.Core
 {
@@ -45,6 +46,7 @@ namespace RestServer.DataAccess.Core
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            this.AppenCommonConfiguration(modelBuilder);
             this.AppendUserRelatedConfiguration(modelBuilder);
             this.AppendGroupRelatedConfiguration(modelBuilder);
             this.AppendEmergencySessionRelatedConfiguration(modelBuilder);
@@ -84,6 +86,12 @@ namespace RestServer.DataAccess.Core
         private void AppendDeviceRelatedConfiguration(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new DeviceConfiguration());
+        }
+
+        private void AppenCommonConfiguration(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new RestServerSettingConfiguration());
+            modelBuilder.Configurations.Add(new ApplicationConfiguration());
         }
     }
 }

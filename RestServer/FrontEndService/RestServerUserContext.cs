@@ -23,7 +23,7 @@ namespace RestServer.FrontEndService
         {
             get
             {
-                return string.IsNullOrWhiteSpace(this.workflowContext.UserUniqueId) ? RestServerName : this.workflowContext.UserUniqueId;
+                return this.workflowContext.UserId <= 0 ? RestServerName : this.workflowContext.UserId.ToString();
             }
         }
     }

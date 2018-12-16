@@ -28,7 +28,7 @@ namespace RestServer.Configuration
 
         public Task<string> GetConfiguration(string key)
         {
-            throw new NotImplementedException();
+            return this.GetConfiguration<string>(key);
         }
 
         public async Task<T> GetConfiguration<T>(string key)
@@ -56,6 +56,8 @@ namespace RestServer.Configuration
 
                 var configStore = this.configurationStoreFactory.GetConfigurationStoreByKey(key);
                 configuration = await configStore.GetAsync<T>(key).ConfigureAwait(false);
+
+                InMemoryCacheManager.Add<T>(key, configuration);
 
                 // Store the type assosicated with key data to cast it to a type during an update operation.
                 CacheKeyTypeMap[key] = typeof(T);

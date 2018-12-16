@@ -1,4 +1,5 @@
-﻿using RestServer.Cache;
+﻿using Microsoft.Azure.KeyVault;
+using RestServer.Cache;
 using RestServer.Configuration.Interfaces;
 using RestServer.IoC.Interfaces;
 using RestServer.KeyStore;
@@ -18,14 +19,16 @@ namespace RestServer.Configuration
 
         private IDependencyContainer dependencyContainer;
 
-        private IEventLogger logger;
+        private KeyVaultClient keyVaultClient;
 
-        public SecretConfigurationStore(IKeyVaultContext keyVaultContext, IDependencyContainer dependencyContainer, IEventLogger logger, IConfigurationStoreFactory configurationStoreFactory)
+        private IKeyVaultClientFactory keyVaultClientFactory;
+
+        public SecretConfigurationStore(IKeyVaultContext keyVaultContext, IKeyVaultClientFactory keyVaultClientFactory, IDependencyContainer dependencyContainer, IEventLogger logger, IConfigurationStoreFactory configurationStoreFactory)
             :base(ConfigurationConstants.SecretConfigurationPrefix, logger, configurationStoreFactory)
         {
             this.keyVaultContext = keyVaultContext;
+            this.keyVaultClientFactory = keyVaultClientFactory;
             this.dependencyContainer = dependencyContainer;
-            this.logger = logger;
         }
 
         public override ConfigurationStoreType StoreType
@@ -36,21 +39,33 @@ namespace RestServer.Configuration
             }
         }
 
-        protected override Task<string> DoGetFromStoreAsync(string keyWithoutIdentifier)
+        protected async override Task<string> DoGetFromStoreAsync(string keyWithoutIdentifier)
         {
-            throw new NotImplementedException();
+            await this.SetKeyVaultContextAsync().ConfigureAwait(false);
+
+            if (null == this.keyVaultClient)
+            {
+                this.keyVaultClient = this.keyVaultClientFactory.GetKeyVaultClient();
+            }
+            var keyVaultUrl = this.keyVaultContext.Settings.VaultAddress;
+            if (keyVaultUrl == null)
+            {
+                throw new Exception("Key Vault URL not found in cloud configuration!");
+            }
+
+            keyWithoutIdentifier = keyWithoutIdentifier.ToLower();
+            var keyUri = string.Format(ConfigurationConstants.KeyVaultSecretUriFormat, keyVaultUrl, keyWithoutIdentifier);
+            var secret = await this.keyVaultClient.GetSecretAsync(keyUri).ConfigureAwait(false);
+            return null != secret ? secret.Value : string.Empty;
         }
 
         private async Task SetKeyVaultContextAsync()
         {
-            var keyVaultConfig = InMemoryCacheManager.Get<KeyVaultConfiguration>(ConfigurationConstants.KeyVaultConfig);
-
-            if(null == keyVaultConfig)
+            if (!this.keyVaultContext.Initialized)
             {
-                keyVaultConfig = await BuildKeyVaultConfigurationAsync();
+                var keyVaultConfig = await BuildKeyVaultConfigurationAsync();
+                this.keyVaultContext.InitializeSettings(keyVaultConfig);
             }
-
-            this.keyVaultContext.InitializeSettings(keyVaultConfig);
         }
 
         private async Task<KeyVaultConfiguration> BuildKeyVaultConfigurationAsync()
@@ -58,32 +73,32 @@ namespace RestServer.Configuration
             var keyVaultUrl = await this.GetConfigurationFromTargetStoreByKeyAync<string>(ConfigurationConstants.KeyVaultUrl).ConfigureAwait(false);
             if (string.IsNullOrWhiteSpace(keyVaultUrl))
             {
-                this.logger.LogError("Key Vault URL cannot be empty.");
+                this.Logger.LogError("Key Vault URL cannot be empty.");
             }
 
             var keyVaultClientAuthId = await this.GetConfigurationFromTargetStoreByKeyAync<string>(ConfigurationConstants.KeyVaultClientAuthId).ConfigureAwait(false);
             if (string.IsNullOrWhiteSpace(keyVaultClientAuthId))
             {
-                this.logger.LogError("Key Vault Client Auth Id cannot be empty.");
+                this.Logger.LogError("Key Vault Client Auth Id cannot be empty.");
             }
 
             var keyVaultClientCertificateThumbprint = await this.GetConfigurationFromTargetStoreByKeyAync<string>(ConfigurationConstants.KeyVaultClientCertificateThumbprint).ConfigureAwait(false);
             if (string.IsNullOrWhiteSpace(keyVaultClientCertificateThumbprint))
             {
-                this.logger.LogError("Key Vault Client Certificate thumbprint cannot be empty.");
+                this.Logger.LogError("Key Vault Client Certificate thumbprint cannot be empty.");
             }
 
             var keyVaultCacheExpirationDurationInSeconds = await this.GetConfigurationFromTargetStoreByKeyAync<int>(ConfigurationConstants.KeyVaultCacheExpirationDurationInSeconds).ConfigureAwait(false);
             if (keyVaultCacheExpirationDurationInSeconds <= 0)
             {
-                this.logger.LogError("Key Vault cache expiration duration cannot be less than or equal to 0.");
+                this.Logger.LogError("Key Vault cache expiration duration cannot be less than or equal to 0.");
             }
 
             var keyVaultConfiguration = new KeyVaultConfiguration
             {
                 VaultAddress = keyVaultUrl,
                 ClientAuthId = keyVaultClientAuthId,
-                ClientAuthSecret = keyVaultClientCertificateThumbprint,
+                ClientCertificateThumbrpint = keyVaultClientCertificateThumbprint,
                 CacheExpirationDurationInSeconds = keyVaultCacheExpirationDurationInSeconds
             };
 

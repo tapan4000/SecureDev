@@ -20,6 +20,7 @@ namespace RestServer.ServerContext
         private static string serviceTypeName;
         private static string dataCenter;
         private static int maxAllowedLogLevel;
+        private static bool isExecutionTimeLoggingEnabled;
 
         public static string ServiceStartupTraceId
         {
@@ -85,7 +86,15 @@ namespace RestServer.ServerContext
             }
         }
 
-        public static void InitializeContext(string traceId, RestServiceHostType svcHostType, string serviceIdentifier, string instanceName, string appName, string svcTypeName, string dc, int maxLogLevel)
+        public static bool IsExecutionTimeLoggingEnabled
+        {
+            get
+            {
+                return ValidateAndGetValue(isExecutionTimeLoggingEnabled);
+            }
+        }
+
+        public static void InitializeContext(string traceId, RestServiceHostType svcHostType, string serviceIdentifier, string instanceName, string appName, string svcTypeName, string dc, int maxLogLevel, bool executionTimeLoggingEnabled)
         {
             if (initialized)
             {
@@ -105,6 +114,7 @@ namespace RestServer.ServerContext
             serviceTypeName = svcTypeName;
             dataCenter = dc;
             maxAllowedLogLevel = maxLogLevel;
+            isExecutionTimeLoggingEnabled = executionTimeLoggingEnabled;
 
             initialized = true;
         }

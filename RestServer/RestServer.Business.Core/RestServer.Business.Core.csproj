@@ -47,6 +47,7 @@
     <Compile Include="BaseModels\BusinessErrorCode.cs" />
     <Compile Include="BaseModels\BusinessRequestData.cs" />
     <Compile Include="BaseModels\BusinessResult.cs" />
+    <Compile Include="BaseModels\RestrictedBusinessResultBase.cs" />
     <Compile Include="Interfaces\Activities\IActivity.cs" />
     <Compile Include="Interfaces\Activities\IActivityFactory.cs" />
     <Compile Include="Interfaces\Activities\ICompensatableActivity.cs" />
@@ -72,6 +73,10 @@
     <ProjectReference Include="..\Logging\RestServer.Logging.csproj">
       <Project>{770A8534-D441-4288-AEDB-13B84CC2037D}</Project>
       <Name>RestServer.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.ServerContext\RestServer.ServerContext.csproj">
+      <Project>{F5A4B108-120D-4971-A3E3-0E41635B5109}</Project>
+      <Name>RestServer.ServerContext</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

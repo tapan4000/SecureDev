@@ -16,8 +16,6 @@ namespace RestServer.Configuration
 
         public const string RedisCacheConnectionString = SecretConfigurationPrefix + "RedisCacheConnectionString";
 
-        public const string CacheConfigurationSettings = ExternalStorageConfigurationPrefix + "CacheConfigurationSettings";
-
         public const string ServiceConfigurationSettings = ServiceConfigurationPrefix + "ServiceConfigurationSettings";
 
         // A configuration constant that does not have a prefix is not stored in any configuration store, rather it is built dynamically in memory.
@@ -34,5 +32,29 @@ namespace RestServer.Configuration
         public const string LogLevel = ServiceConfigurationPrefix + "LogLevel";
 
         public const string SqlConnectionString = SecretConfigurationPrefix + "SqlConnectionString";
+
+        public const string ServiceConfigurationSectionName = "ServiceConfig";
+
+        public const string KeyVaultSecretUriFormat = "{0}/secrets/{1}";
+
+        public const string TextLocalSmsApiKey = SecretConfigurationPrefix + "TextLocalSmsApiKey";
+
+        public const string UserActivationSetting = ExternalStorageConfigurationPrefix + "UserActivationSetting";
+
+        public const string SendGridApiKey = SecretConfigurationPrefix + "SendGridApiKey";
+
+        public const string UserAuthTokenSigningKey = SecretConfigurationPrefix + "UserAuthTokenSigningKey";
+
+        public const string UserAuthSetting = ExternalStorageConfigurationPrefix + "UserAuthSetting";
+
+        public const string RedisCacheConnectionMultiplexerPoolSize = ServiceConfigurationPrefix + "RedisCacheConnectionMultiplexerPoolSize";
+
+        public const string GlobalSetting = ExternalStorageConfigurationPrefix + "GlobalSetting";
+
+        public const string IsRedisCacheEnabled = ServiceConfigurationPrefix + "IsRedisCacheEnabled";
+
+        public const string RedisCacheTtlInSeconds = ServiceConfigurationPrefix + "RedisCacheTtlInSeconds";
+
+        public const string GroupGeneralSetting = ExternalStorageConfigurationPrefix + "GroupGeneralSetting";
     }
 }

@@ -25,7 +25,7 @@
 
         public void RegisterInstance<T>(T instance)
         {
-            throw new NotImplementedException();
+            this.unityContainer.RegisterInstance(instance);
         }
 
         public T Resolve<T>()
@@ -35,6 +35,7 @@
 
         public T Resolve<T>(string name)
         {
+            name = name.ToLower();
             return this.unityContainer.Resolve<T>(name);
         }
 
@@ -53,6 +54,29 @@
         public void RegisterType<T>(Type target, string name)
         {
             this.unityContainer.RegisterType(typeof(T), target, "ss", new SingletonLifetimeManager(), null);
+        }
+
+        public IDependencyContainer CreateChildContainer()
+        {
+            var childContainer = this.unityContainer.CreateChildContainer();
+            return new UnityDependencyContainer(childContainer);
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                if(null != this.unityContainer)
+                {
+                    this.unityContainer.Dispose();
+                }
+            }
         }
     }
 }

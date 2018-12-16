@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RestServer.Business.Core.Activities
 {
-    public abstract class ActivityBase<RequestData, ResponseData> : Trackable<RequestData, ResponseData>, IActivity<RequestData, ResponseData> where ResponseData : BusinessResult, new()
+    public abstract class ActivityBase<RequestData, ResponseData> : Trackable<RequestData, ResponseData>, IActivity<RequestData, ResponseData> where ResponseData : RestrictedBusinessResultBase, new()
     {
         public ActivityBase(IEventLogger logger) : base(logger)
         {

@@ -31,7 +31,6 @@ namespace RestServer.Entities.DataAccess
         public virtual DbSet<UserActivation> UserActivations { get; set; }
         public virtual DbSet<UserDevice> UserDevices { get; set; }
         public virtual DbSet<UserSession> UserSessions { get; set; }
-        public virtual DbSet<UserState> UserStates { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -216,7 +215,7 @@ namespace RestServer.Entities.DataAccess
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
-                .Property(e => e.EncryptedPassword)
+                .Property(e => e.PasswordHash)
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
@@ -252,18 +251,6 @@ namespace RestServer.Entities.DataAccess
                 .IsUnicode(false);
 
             modelBuilder.Entity<UserSession>()
-                .Property(e => e.LastModifiedBy)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<UserState>()
-                .Property(e => e.UserStateName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<UserState>()
-                .Property(e => e.CreatedBy)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<UserState>()
                 .Property(e => e.LastModifiedBy)
                 .IsUnicode(false);
         }

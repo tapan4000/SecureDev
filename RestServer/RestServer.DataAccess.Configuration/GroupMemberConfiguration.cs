@@ -29,16 +29,16 @@ namespace RestServer.DataAccess.Configuration
                 .HasColumnName("UserId")
                 .IsRequired();
 
-            this.Property(t => t.IsAdministratorAllowedToTriggerEmergencySession)
-                .HasColumnName("IsAdministratorAllowedToTriggerEmergencySession")
+            this.Property(t => t.CanAdminTriggerEmergencySessionForSelf)
+                .HasColumnName("CanAdminTriggerEmergencySessionForSelf")
                 .IsRequired();
 
-            this.Property(t => t.IsAdministratorAllowedToExtendEmergencySession)
-                .HasColumnName("IsAdministratorAllowedToExtendEmergencySession")
+            this.Property(t => t.CanAdminExtendEmergencySessionForSelf)
+                .HasColumnName("CanAdminExtendEmergencySessionForSelf")
                 .IsRequired();
 
-            this.Property(t => t.EmergencyNotificationModePreference)
-                .HasColumnName("EmergencyNotificationModePreference")
+            this.Property(t => t.GroupPeerEmergencyNotificationModePreferenceId)
+                .HasColumnName("GroupPeerEmergencyNotificationModePreferenceId")
                 .IsRequired();
 
             this.Property(t => t.IsAdmin)

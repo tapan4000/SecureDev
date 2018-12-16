@@ -12,7 +12,7 @@ namespace RestServer.DataAccess.Core.Interfaces.Strategies
 
         Task<bool> DeleteAsync(object id);
 
-        Task<bool> InsertAsync(TEntity entity);
+        Task<TEntity> InsertAsync(TEntity entity);
 
         Task<bool> UpdateAsync(TEntity entity);
     }

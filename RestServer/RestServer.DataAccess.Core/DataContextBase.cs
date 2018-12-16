@@ -17,11 +17,6 @@ namespace RestServer.DataAccess.Core
         {
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<IEntityBase> GetModifiedEntities()
         {
             return this.ChangeTracker.Entries<IEntityBase>()

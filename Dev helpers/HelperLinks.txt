@@ -17,3 +17,10 @@ wevtutil.exe um "C:\Users\tapanj\Desktop\ETWManifest\RestServer.Logging.RestServ
 https://medium.com/mindorks/enable-background-services-in-chinese-roms-32e73dfba1a6
 https://stackoverflow.com/questions/41804070/how-to-protect-background-service-alarms-to-be-kill-in-newly-launched-devices-in
 https://stackoverflow.com/questions/44383983/how-to-programmatically-enable-auto-start-and-floating-window-permissions-how-t/47307864#47307864
+
+7) Creating a certificate and accessing key vault:
+https://www.youtube.com/watch?v=JbshGF4ZwGE
+Open developer command prompt for visual studio
+Use command: makecert -sv mykey.pvk -n "cn=RestSeverKeyVault" RestServerKeyVault.cer -b 11/15/2018 -e 11/15/2019 -r
+Create Private key pass: restkeyvault
+cer  to pfx command: pvk2pfx -pvk mykey.pvk -spc RestServerKeyVault.cer -pfx RestServerKeyVault.pfx -pi restkeyvault

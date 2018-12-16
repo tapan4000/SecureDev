@@ -12,12 +12,13 @@ namespace RestServer.Cache
 
         private readonly CacheArea cacheArea;
 
-        private readonly int timeToLiveInMinutes;
-        public StorageTypeAttribute(CacheHint cacheHint, CacheArea cacheArea = CacheArea.Default, int timeToLiveInMinutes = 0)
+        private readonly int timeToLiveInSeconds;
+
+        public StorageTypeAttribute(CacheHint cacheHint, CacheArea cacheArea = CacheArea.Default, int timeToLiveInSeconds = 0)
         {
             this.cacheHint = cacheHint;
             this.cacheArea = cacheArea;
-            this.timeToLiveInMinutes = timeToLiveInMinutes;
+            this.timeToLiveInSeconds = timeToLiveInSeconds;
         }
 
         public CacheHint CacheHint
@@ -30,9 +31,9 @@ namespace RestServer.Cache
             get { return this.cacheArea; }
         }
 
-        public int TimeToLiveInMinutes
+        public int TimeToLiveInSeconds
         {
-            get { return this.timeToLiveInMinutes; }
+            get { return this.timeToLiveInSeconds; }
         }
     }
 }

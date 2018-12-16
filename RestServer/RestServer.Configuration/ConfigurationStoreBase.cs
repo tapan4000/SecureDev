@@ -13,27 +13,27 @@ namespace RestServer.Configuration
     {
         private readonly string keyIdentifier;
 
-        private IEventLogger logger;
+        protected IEventLogger Logger;
 
         private IConfigurationStoreFactory configurationStoreFactory;
 
         public ConfigurationStoreBase(string keyIdentifier, IEventLogger logger, IConfigurationStoreFactory configurationStoreFactory)
         {
             this.keyIdentifier = keyIdentifier;
-            this.logger = logger;
+            this.Logger = logger;
             this.configurationStoreFactory = configurationStoreFactory;
         }
 
         public abstract ConfigurationStoreType StoreType { get; }
 
-        public Task<string> GetAsync(string key)
+        public async Task<string> GetAsync(string key)
         {
-            throw new NotImplementedException();
+            return await this.GetAsync<string>(key, true).ConfigureAwait(false);
         }
         
-        public Task<T> GetAsync<T>(string key)
+        public async Task<T> GetAsync<T>(string key)
         {
-            throw new NotImplementedException();
+            return await this.GetAsync<T>(key, true).ConfigureAwait(false);
         }
 
         public async Task<T> GetAsync<T>(string key, bool shouldCache)
@@ -52,7 +52,7 @@ namespace RestServer.Configuration
 
             if (string.IsNullOrWhiteSpace(configData))
             {
-                this.logger.LogError($"The requested key {key} is not found in the key store.");
+                this.Logger.LogError($"The requested key {key} is not found in the key store.");
                 return default(T);
             }
 
@@ -61,7 +61,7 @@ namespace RestServer.Configuration
 
             if(null != parseResult.Item2)
             {
-                this.logger.LogException($"Error occurred while parsing item of type {typeof(T)} during key fetch for {key}.", parseResult.Item2);
+                this.Logger.LogException($"Error occurred while parsing item of type {typeof(T)} during key fetch for {key}.", parseResult.Item2);
                 return typedValue;
             }
 

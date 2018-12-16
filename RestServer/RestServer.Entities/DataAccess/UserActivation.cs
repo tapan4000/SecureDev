@@ -16,11 +16,11 @@ namespace RestServer.Entities.DataAccess
 
         public int ActivationCode { get; set; }
 
-        public int TotalActivationAttemptCount { get; set; }
+        public int TotalOtpGenerationAttemptCount { get; set; }
 
-        public int CurrentWindowActivationAttemptCount { get; set; }
+        public int CurrentWindowOtpGenerationAttemptCount { get; set; }
 
-        public DateTime NextActivationWindowStartDateTime { get; set; }
+        public DateTime NextOtpGenerationWindowStartDateTime { get; set; }
 
         public DateTime UserActivationExpiryDateTime { get; set; }
 

@@ -8,6 +8,6 @@ namespace RestServer.Business.Core.Interfaces.Activities
 {
     public interface ICompensatableActivity<RequestData, ResponseData> : IActivity<RequestData, ResponseData>
     {
-        Task<bool> CompensateAsync(RequestData data);
+        Task<ResponseData> ExecuteCompensateAsync();
     }
 }

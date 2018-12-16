@@ -30,8 +30,9 @@
                     serviceContext =>
                         {
                             string dataCenter = "eus"; // TODO: Fetch this data from key vault.
-                            int maxLogLevel = (int)EventLevel.Verbose;
-                            RestServiceContext.InitializeContext(traceId, RestServiceHostType.ServiceFabric, serviceContext.ServiceName.AbsolutePath, serviceContext.NodeContext.NodeName, serviceContext.CodePackageActivationContext.ApplicationName, serviceContext.ServiceTypeName, dataCenter, maxLogLevel);
+                            int maxLogLevel = (int)EventLevel.Verbose; // Fetch service level setting and flow specific setting. Stored in data store.
+                            bool isExecutionTimeLoggingEnabled = true; // Fetch global setting and flow specific setting. Stored in data store
+                            RestServiceContext.InitializeContext(traceId, RestServiceHostType.ServiceFabric, serviceContext.ServiceName.AbsolutePath, serviceContext.NodeContext.NodeName, serviceContext.CodePackageActivationContext.ApplicationName, serviceContext.ServiceTypeName, dataCenter, maxLogLevel, isExecutionTimeLoggingEnabled);
                             return new FrontEndService(traceId, serviceContext);
                         }).GetAwaiter().GetResult();
 
@@ -42,7 +43,7 @@
             }
             catch (Exception e)
             {
-                LoggerEventSource.Current.Critical(traceId, e, null);
+                LoggerEventSource.Current.Critical(traceId, e, 0);
                 throw;
             }
         }

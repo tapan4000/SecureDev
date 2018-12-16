@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheConstants.cs" />
+    <Compile Include="CacheTypeToKeyPropertyMap.cs" />
+    <Compile Include="DataAccess\Application.cs" />
     <Compile Include="DataAccess\CityBasedPublicGroup.cs" />
     <Compile Include="DataAccess\Core\IEntityBase.cs" />
     <Compile Include="DataAccess\Core\ObjectState.cs" />
@@ -68,6 +71,7 @@
     <Compile Include="DataAccess\LocalityBasedPublicGroup.cs" />
     <Compile Include="DataAccess\PublicGroup.cs" />
     <Compile Include="DataAccess\RestServerContext.cs" />
+    <Compile Include="DataAccess\RestServerSetting.cs" />
     <Compile Include="DataAccess\StateBasedPublicGroup.cs" />
     <Compile Include="DataAccess\Device.cs" />
     <Compile Include="DataAccess\User.cs" />
@@ -75,6 +79,8 @@
     <Compile Include="DataAccess\UserDevice.cs" />
     <Compile Include="DataAccess\UserSession.cs" />
     <Compile Include="DataAccess\UserState.cs" />
+    <Compile Include="Enums\GroupCategoryEnum.cs" />
+    <Compile Include="Enums\NotificationModeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,3 @@
-D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\obj\Debug\RestServer.FabricShared.Configuration.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.FabricShared.Configuration.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.FabricShared.Configuration.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Microsoft.ServiceFabric.Internal.dll
@@ -38,5 +37,19 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configurati
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Unity.Container.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Unity.Interception.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Unity.RegistrationByConvention.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\obj\Debug\RestServer.FabricShared.Configuration.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\obj\Debug\RestServer.FabricShared.Configuration.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\obj\Debug\RestServer.FabricShared.Configuration.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Microsoft.Azure.KeyVault.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Hyak.Common.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Microsoft.Azure.Common.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Microsoft.Threading.Tasks.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Microsoft.Azure.KeyVault.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Hyak.Common.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Microsoft.Azure.Common.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Microsoft.Threading.Tasks.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.FabricShared.Configuration.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.Core.pdb

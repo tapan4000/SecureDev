@@ -12,6 +12,6 @@ namespace RestServer.Cache
 
         public CacheArea CacheArea { get; set; }
 
-        public int? TimeToLiveInMinutes { get; set; }
+        public int? TimeToLiveInSeconds { get; set; }
     }
 }

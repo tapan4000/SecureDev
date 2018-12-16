@@ -3,3 +3,7 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\bin\Debug\RestServer
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\bin\Debug\RestServer.Sql.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\obj\Debug\RestServer.Sql.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\obj\Debug\RestServer.Sql.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\obj\Debug\Model.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\obj\Debug\refactor.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\obj\Debug\postdeploy.sql
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Sql\obj\Debug\predeploy.sql

@@ -15,25 +15,26 @@ namespace RestServer.Cache
             return Task.FromResult(true);
         }
 
-        public override Task<bool> DeleteAsync(string key, string keyGroupName = null)
+        public override Task<bool> DeleteAsync(string key)
         {
             InMemoryCacheManager.Remove(key);
             return Task.FromResult(true);
         }
 
-        public override Task<bool> DoesKeyExistAsync(string key, string keyGroupName = null)
+        public override Task<bool> DoesKeyExistAsync(string key)
         {
             return Task.FromResult(InMemoryCacheManager.ContainsKey(key));
         }
 
-        public override Task<T> GetAsync(string key, string keyGroupName = null)
+        public override Task<T> GetAsync(string key)
         {
             return Task.FromResult(InMemoryCacheManager.Get<T>(key));
         }
 
-        public override Task<bool> InsertOrUpdateAsync(string key, T entity, string keyGroupName = null, TimeSpan? expiry = null)
+        public override Task<bool> InsertOrUpdateAsync(string key, T entity, TimeSpan? expiry = null)
         {
-            InMemoryCacheManager.Add<T>(key, entity);
+            var expiryInSeconds = null == expiry ? -1 : Convert.ToInt32(expiry.Value.TotalSeconds);
+            InMemoryCacheManager.Add<T>(key, entity, expiryInSeconds);
             return Task.FromResult(true);
         }
     }

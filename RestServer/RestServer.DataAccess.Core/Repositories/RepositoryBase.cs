@@ -1,6 +1,9 @@
-﻿using RestServer.DataAccess.Core.Interfaces.Repositories;
+﻿using RestServer.Cache.Interfaces;
+using RestServer.DataAccess.Core.Interfaces.Repositories;
 using RestServer.DataAccess.Core.Interfaces.Strategies;
+using RestServer.Entities;
 using RestServer.IoC.Interfaces;
+using RestServer.Logging.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,36 +12,86 @@ using System.Threading.Tasks;
 
 namespace RestServer.DataAccess.Core.Repositories
 {
-    public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
+    public class RepositoryBase<TEntity> : IRepository<TEntity>
     {
         private readonly IDependencyContainer dependencyContainer;
 
-        private readonly IDataStoreStrategy<TEntity> dataStoreStrategy;
+        protected readonly IDataStoreStrategy<TEntity> dataStoreStrategy;
 
-        public RepositoryBase(IDependencyContainer dependencyContainer, IDataStoreStrategy<TEntity> dataStoreStrategy)
+        private readonly ICacheStrategyHandler<TEntity> cacheStrategyHandler;
+
+        private IEventLogger logger;
+
+        public RepositoryBase(IDependencyContainer dependencyContainer, IDataStoreStrategy<TEntity> dataStoreStrategy, ICacheStrategyHandler<TEntity> cacheStrategyHandler, IEventLogger logger)
         {
             this.dependencyContainer = dependencyContainer;
             this.dataStoreStrategy = dataStoreStrategy;
+            this.cacheStrategyHandler = cacheStrategyHandler;
+            this.logger = logger;
         }
 
-        public Task<bool> DeleteAsync(object id)
+        public async Task<bool> DeleteAsync(object id)
         {
-            throw new NotImplementedException();
+            if(null == id)
+            {
+                return true;
+            }
+
+            var result = await this.cacheStrategyHandler.DeleteFromStoreAsync(id.ToString()).ConfigureAwait(false);
+
+            if (result)
+            {
+                result = await this.dataStoreStrategy.DeleteAsync(id).ConfigureAwait(false);
+            }
+            else
+            {
+                this.logger.LogError($"Failed to delete from cache: {id}");
+            }
+
+            return result;
         }
 
-        public Task<TEntity> GetById(object id)
+        public async Task<TEntity> GetById(object id)
         {
-            throw new NotImplementedException();
+            if(null == id)
+            {
+                return default(TEntity);
+            }
+
+            var cachedEntity = await this.cacheStrategyHandler.GetFromStoreAsync(id.ToString()).ConfigureAwait(false);
+            if(null != cachedEntity)
+            {
+                return cachedEntity;
+            }
+
+            var entityValue = await this.dataStoreStrategy.GetById(id).ConfigureAwait(false);
+            if(null != entityValue)
+            {
+                await this.cacheStrategyHandler.InsertOrUpdateInStoreAsync(id.ToString(), entityValue).ConfigureAwait(false);
+            }
+
+            return entityValue;
         }
 
-        public Task<bool> InsertAsync(TEntity entity)
+        public Task<TEntity> InsertAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            return this.dataStoreStrategy.InsertAsync(entity);
         }
 
-        public Task<bool> UpdateAsync(TEntity entity)
+        public async Task<bool> UpdateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            var result = await this.cacheStrategyHandler.DeleteFromStoreAsync(CacheTypeToKeyPropertyMap.GetKeyForType(entity)).ConfigureAwait(false);
+
+            if (result)
+            {
+                result = await this.dataStoreStrategy.UpdateAsync(entity).ConfigureAwait(false);
+            }
+            else
+            {
+                this.logger.LogError($"Failed to update the cache for entity: {typeof(TEntity).FullName}");
+            }
+
+            return result;
         }
     }
 }

@@ -12,11 +12,11 @@ namespace RestServer.Entities.DataAccess
     [StorageType(CacheHint.DistributedCache, CacheArea.Group)]
     public partial class PublicGroup : IEntityBase
     {
-        public int PublicGroupId { get; set; }
-
         public int GroupId { get; set; }
 
         public bool IsVerified { get; set; }
+
+        public int VerifiedGroupCategoryId { get; set; }
 
         public string VerifiedTitle { get; set; }
 

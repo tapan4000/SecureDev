@@ -25,16 +25,16 @@ namespace RestServer.DataAccess.Configuration
                 .HasColumnName("ActivationCode")
                 .IsRequired();
 
-            this.Property(t => t.TotalActivationAttemptCount)
-                .HasColumnName("TotalActivationAttemptCount")
+            this.Property(t => t.TotalOtpGenerationAttemptCount)
+                .HasColumnName("TotalOtpGenerationAttemptCount")
                 .IsRequired();
 
-            this.Property(t => t.CurrentWindowActivationAttemptCount)
-                .HasColumnName("CurrentWindowActivationAttemptCount")
+            this.Property(t => t.CurrentWindowOtpGenerationAttemptCount)
+                .HasColumnName("CurrentWindowOtpGenerationAttemptCount")
                 .IsRequired();
 
-            this.Property(t => t.NextActivationWindowStartDateTime)
-                .HasColumnName("NextActivationWindowStartDateTime")
+            this.Property(t => t.NextOtpGenerationWindowStartDateTime)
+                .HasColumnName("NextOtpGenerationWindowStartDateTime")
                 .IsRequired();
 
             this.Property(t => t.UserActivationExpiryDateTime)

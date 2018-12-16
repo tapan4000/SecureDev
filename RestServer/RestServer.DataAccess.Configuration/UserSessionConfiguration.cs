@@ -14,16 +14,13 @@ namespace RestServer.DataAccess.Configuration
         public UserSessionConfiguration()
         {
             // Primary Key
-            this.HasKey(t => t.UserSessionId);
+            this.HasKey(t => t.UserId);
 
             // Properties
             this.ToTable("UserSession");
-            this.Property(t => t.UserSessionId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             this.Property(t => t.UserId)
-                .HasColumnName("UserId")
-                .IsRequired();
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.RefreshToken)
                 .HasColumnName("RefreshToken")

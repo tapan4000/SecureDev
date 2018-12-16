@@ -133,4 +133,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="UserStateName" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="223bcbc3-3137-4a23-99c7-bd1089519e0c" ChangeDateTime="11/27/2018 08:56:33">
+    <Property Name="ElementName" Value="[dbo].[ApplicationSettings].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ApplicationSettings]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ApplicationSetting" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="794bb262-c0b5-4449-be7d-a1285dd8c09b" ChangeDateTime="11/27/2018 08:56:48">
+    <Property Name="ElementName" Value="[dbo].[ApplicationSetting].[ApplicationSetting]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ApplicationSetting]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ApplicationSettingId" />
+  </Operation>
 </Operations>

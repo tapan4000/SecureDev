@@ -16,9 +16,12 @@ namespace RestServer.DataAccess.Strategies
         {
         }
 
-        public async Task<User> GetUserByMobileNumber(string mobileNumber)
+        public async Task<User> GetUserByMobileNumber(string isdCode, string mobileNumber)
         {
-            var user = (await this.GetData(userObj => userObj.MobileNumber.Equals(mobileNumber, StringComparison.OrdinalIgnoreCase)).ConfigureAwait(false)).FirstOrDefault();
+            var user = (await this.GetData(userObj => userObj.MobileNumber.Equals(mobileNumber, StringComparison.OrdinalIgnoreCase)
+                            && userObj.IsdCode.Equals(isdCode, StringComparison.OrdinalIgnoreCase))
+                            .ConfigureAwait(false))
+                            .FirstOrDefault();
             return user;
         }
     }

@@ -14,7 +14,7 @@ namespace RestServer.Cache.Interfaces
 
         IConnectionMultiplexer GetConnectionMultiplexer(string redisConnectionString);
 
-        bool Initialize(string[] connectionStrings, int minOnDemandIoThreadCount, IEventLogger logger, int multiplexerPoolSize, bool isSubscribedToExternalChannel, int subscriptionEventMonitorFrequency);
+        bool Initialize(string[] connectionStrings, int minOnDemandIoThreadCount, IEventLogger logger, int multiplexerPoolSize, bool isSubscribedToExternalChannel = true, int subscriptionEventMonitorFrequency = 30);
 
         bool Reset(string[] connectionStrings, int multiplexerPoolSize, bool isSubscribedToExternalChannel, int subscriptionEventMonitorFrequency);
     }

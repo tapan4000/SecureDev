@@ -139,7 +139,7 @@ namespace RestServer.FabricShared.BaseServices
         private string BuildAddress(string hostName)
         {
             var serviceEndpoint = this.serviceContext.CodePackageActivationContext.GetEndpoint(this.endpointName);
-            var protocol = serviceEndpoint.Protocol;
+            var protocol = serviceEndpoint.Protocol.ToString().ToLower();
             int port = serviceEndpoint.Port;
             var serviceUrlSuffix = this.urlSuffix;
 

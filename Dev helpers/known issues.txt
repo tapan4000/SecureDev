@@ -5,3 +5,7 @@
 5) If we put breakpoints in the Arduino code neae Serial.begin, there are chances that the Arduino serial buffer gets overflown with debug information. In such cases it start showing the error _VMDPE. To fix this, remove the breakpoints and upload the code.
 6) In Arduino SIM module, if we introduce delay in between reading the data, the data is lost.
 7) The audio recording with MAX4466 has background noise if the input voltage used is 5V. Acceptable range of voltage is 2.4-5V. Lower the voltage used, lesser would be the noise.
+8) While publishing the database using visual studio, we get an error, Unable to connect to master or target server 'cmp'. You must have a user with the same password in master or target server 'tmp'. It happens due to the new compatibility level 140 for newly created SQL azure databases. To fix this you can change the compatibility level of database to 130 as below:
+ALTER DATABASE database_name   
+SET COMPATIBILITY_LEVEL =  130;
+9) While publishing the database from visual studio, we get an error, A project which specifies SQL server 2014 as the target platform cannot be published to Microsoft Azure SQL database v12. To fix this, go to SQL project properties and select the target platform as SQL server v12.

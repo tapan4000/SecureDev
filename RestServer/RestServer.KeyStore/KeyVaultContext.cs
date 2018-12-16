@@ -1,4 +1,5 @@
-﻿using RestServer.KeyStore.Interfaces;
+﻿using RestServer.IoC;
+using RestServer.KeyStore.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace RestServer.KeyStore
 {
+    [IoCRegistration(IoCLifetime.Hierarchical)]
     public class KeyVaultContext : IKeyVaultContext
     {
         public KeyVaultContext()
