@@ -16,17 +16,17 @@ namespace RestServer.DataAccess.Repositories
 {
     public class ApplicationRepository : RepositoryBase<Application>, IApplicationRepository
     {
-        private IApplicationDataStoreStrategy dataStoreStrategy;
+        private IApplicationDataStoreStrategy appDataStoreStrategy;
 
         public ApplicationRepository(IDependencyContainer dependencyContainer, IApplicationDataStoreStrategy dataStoreStrategy, ICacheStrategyHandler<Application> cacheStrategyHandler, IEventLogger logger) 
             : base(dependencyContainer, dataStoreStrategy, cacheStrategyHandler, logger)
         {
-            this.dataStoreStrategy = dataStoreStrategy;
+            this.appDataStoreStrategy = dataStoreStrategy;
         }
 
         public Task<Application> GetApplicationByUniqueId(string appUniqueId)
         {
-            return this.dataStoreStrategy.GetApplicationByUniqueId(appUniqueId);
+            return this.appDataStoreStrategy.GetApplicationByUniqueId(appUniqueId);
         }
     }
 }

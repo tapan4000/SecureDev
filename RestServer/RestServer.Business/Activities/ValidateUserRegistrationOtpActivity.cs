@@ -14,7 +14,7 @@ using RestServer.Business.Models.Response;
 
 namespace RestServer.Business.Activities
 {
-    public class ValidateUserRegistrationOtpActivity : ActivityBase<ValidateUserRegistrationRequestData, PopulatedUserBusinessResult>
+    public class ValidateUserRegistrationOtpActivity : ActivityBase<ValidateUserRegistrationOtpRequestData, PopulatedUserBusinessResult>
     {
         private IUnitOfWorkFactory unitOfWorkFactory;
 
@@ -23,44 +23,32 @@ namespace RestServer.Business.Activities
             this.unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        protected async override Task<PopulatedUserBusinessResult> ExecuteAsync(ValidateUserRegistrationRequestData requestData)
+        protected async override Task<PopulatedUserBusinessResult> ExecuteAsync(ValidateUserRegistrationOtpRequestData requestData)
         {
             var response = new PopulatedUserBusinessResult();
 
             using (var unitOfWork = this.unitOfWorkFactory.RestServerUnitOfWork)
             {
-                var existingUser = await unitOfWork.UserRepository.GetById(requestData.UserId).ConfigureAwait(false);
-                if (null == existingUser)
+                if(requestData.User.UserStateId == UserState.None)
                 {
-                    this.logger.LogError($"The user with id {requestData.UserId} not found.");
-                    this.Result.AddBusinessError(BusinessErrorCode.UserWithIdNotFound);
+                    this.logger.LogError($"The user with id {requestData.User.UserId} is in an invalid state. User state: {requestData.User.UserStateId}");
                     this.Result.IsSuccessful = false;
+
+                    // Return failure result with no error code leading to a 402 response.
                     return response;
                 }
-                else
+                else if(requestData.User.UserStateId != UserState.VerificationPending)
                 {
-                    response.User = existingUser;
-                    if(existingUser.UserStateId == UserState.None)
-                    {
-                        this.logger.LogError($"The user with id {requestData.UserId} is in an invalid state. User state: {existingUser.UserStateId}");
-                        this.Result.IsSuccessful = false;
+                    this.logger.LogWarning($"The user with id {requestData.User.UserId} is already verified. User state: {requestData.User.UserStateId}");
 
-                        // Return failure result with no error code leading to a 402 response.
-                        return response;
-                    }
-                    else if(existingUser.UserStateId != UserState.VerificationPending)
-                    {
-                        this.logger.LogWarning($"The user with id {requestData.UserId} is already verified. User state: {existingUser.UserStateId}");
-
-                        // Return with successful result as no action is needed.
-                        return response;
-                    }
+                    // Return with successful result as no action is needed.
+                    return response;
                 }
 
-                var existingUserActivationRecord = await unitOfWork.UserActivationRepository.GetById(requestData.UserId).ConfigureAwait(false);
+                var existingUserActivationRecord = await unitOfWork.UserActivationRepository.GetById(requestData.User.UserId).ConfigureAwait(false);
                 if (null == existingUserActivationRecord)
                 {
-                    this.logger.LogError($"User activation record for user id {requestData.UserId} not found.");
+                    this.logger.LogError($"User activation record for user id {requestData.User.UserId} not found.");
                     this.Result.AddBusinessError(BusinessErrorCode.UserActivationRecordNotFound);
                     this.Result.IsSuccessful = false;
                     return response;
@@ -75,20 +63,21 @@ namespace RestServer.Business.Activities
                     return response;
                 }
 
-                existingUser.UserStateId = UserState.MobileVerified;
-                await unitOfWork.UserRepository.UpdateAsync(existingUser);
+                requestData.User.UserStateId = UserState.MobileVerified;
+                await unitOfWork.UserRepository.UpdateAsync(requestData.User);
                 await unitOfWork.SaveAsync();
             }
 
+            response.User = requestData.User;
             return response;
         }
 
-        protected override bool ValidateRequestData(ValidateUserRegistrationRequestData requestData)
+        protected override bool ValidateRequestData(ValidateUserRegistrationOtpRequestData requestData)
         {
-            if (requestData.UserId <= 0)
+            if (null == requestData.User)
             {
                 this.logger.LogError("User id is not provided.");
-                this.Result.AddBusinessError(BusinessErrorCode.UserIdNotProvided);
+                this.Result.AddBusinessError(BusinessErrorCode.UserParameterNotProvided);
                 return false;
             }
 

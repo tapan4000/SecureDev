@@ -29,6 +29,10 @@ namespace RestServer.DataAccess.Configuration
                 .HasColumnName("UserId")
                 .IsRequired();
 
+            this.Property(t => t.GroupMemberStateId)
+                .HasColumnName("GroupMemberStateId")
+                .IsRequired();
+
             this.Property(t => t.CanAdminTriggerEmergencySessionForSelf)
                 .HasColumnName("CanAdminTriggerEmergencySessionForSelf")
                 .IsRequired();

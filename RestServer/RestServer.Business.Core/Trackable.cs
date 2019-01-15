@@ -16,6 +16,9 @@ namespace RestServer.Business.Core
     {
         protected BusinessResult Result;
 
+        // If this field is set then any failure of the trackable can be ignored.
+        protected bool CanIgnoreTrackableFailure = false;
+
         public Trackable(IEventLogger logger)
         {
             this.logger = logger;
@@ -47,7 +50,7 @@ namespace RestServer.Business.Core
                 businessFlowResult = new TResponse();
             }
 
-            businessFlowResult.SetSuccessStatus(this.Result.IsSuccessful);
+            businessFlowResult.SetSuccessStatus(this.CanIgnoreTrackableFailure ? true : this.Result.IsSuccessful);
             businessFlowResult.AppendBusinessErrors(this.Result.BusinessErrors);
             return businessFlowResult;
         }

@@ -43,3 +43,9 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business.Core\bin\Debug\
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business.Core\bin\Debug\RestServer.Utility.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business.Core\obj\Debug\RestServer.Business.Core.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business.Core\obj\Debug\RestServer.Business.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business.Core\bin\Debug\RestServer.Entities.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business.Core\bin\Debug\RestServer.Cache.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business.Core\bin\Debug\EntityFramework.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business.Core\bin\Debug\RestServer.Entities.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business.Core\bin\Debug\RestServer.Cache.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business.Core\bin\Debug\EntityFramework.xml

@@ -18,30 +18,30 @@ namespace RestServer.DataAccess.Repositories
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
-        private readonly IUserDataStoreStrategy dataStoreStrategy;
+        private readonly IUserDataStoreStrategy userDataStoreStrategy;
 
         private readonly ICacheStrategyHandler<User> cacheStrategyHandler;
 
         public UserRepository(IDependencyContainer dependencyContainer, IUserDataStoreStrategy dataStoreStrategy, ICacheStrategyHandler<User> cacheStrategyHandler, IEventLogger logger) 
             : base(dependencyContainer, dataStoreStrategy, cacheStrategyHandler, logger)
         {
-            this.dataStoreStrategy = dataStoreStrategy;
+            this.userDataStoreStrategy = dataStoreStrategy;
             this.cacheStrategyHandler = cacheStrategyHandler;
         }
 
         public async Task<User> GetUserByMobileNumber(string isdCode, string mobileNumber)
         {
-            var cacheKey = CacheHelper.GetCacheKey(CacheConstants.UserByMobileNumber, isdCode + mobileNumber);
-            var cachedUser = await this.cacheStrategyHandler.GetFromStoreAsync(cacheKey);
+            var cacheKeyCategoryAndIdentifier = CacheHelper.GetCacheCategoryWithIdentifier(CacheConstants.UserByMobileNumber, isdCode + mobileNumber);
+            var cachedUser = await this.cacheStrategyHandler.GetFromStoreAsync(cacheKeyCategoryAndIdentifier);
             if(null != cachedUser)
             {
                 return cachedUser;
             }
 
-            var user = await this.dataStoreStrategy.GetUserByMobileNumber(isdCode, mobileNumber).ConfigureAwait(false);
+            var user = await this.userDataStoreStrategy.GetUserByMobileNumber(isdCode, mobileNumber).ConfigureAwait(false);
             if(null != user)
             {
-                await this.cacheStrategyHandler.InsertOrUpdateInStoreAsync(cacheKey, user);
+                await this.cacheStrategyHandler.InsertOrUpdateInStoreAsync(cacheKeyCategoryAndIdentifier, user);
             }
 
             return user;

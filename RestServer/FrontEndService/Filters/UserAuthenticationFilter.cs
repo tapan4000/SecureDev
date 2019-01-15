@@ -58,10 +58,9 @@ namespace RestServer.FrontEndService.Filters
                         context.ErrorResult = new RestServerHttpActionResult(HttpStatusCode.Unauthorized);
                         return;
                     }
-                }
 
-                workflowContext.UserId = decodedAuthToken.UserId;
-                workflowContext.UserUniqueId = decodedAuthToken.UserUniqueId;
+                    workflowContext.User = expectedUserByUserId;
+                }
             }
             catch (ArgumentNullException ex)
             {

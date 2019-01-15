@@ -1,6 +1,8 @@
 namespace RestServer.Entities.DataAccess
 {
     using Cache;
+    using Cache.Core.Attributes;
+    using Cache.Core.Enums;
     using Core;
     using System;
     using System.Collections.Generic;
@@ -9,7 +11,7 @@ namespace RestServer.Entities.DataAccess
     using System.Data.Entity.Spatial;
 
     [Serializable]
-    [StorageType(CacheHint.None, CacheArea.EmergencySession)]
+    [StorageType(CacheHint.None, CacheArea.LocationSession)]
     public partial class EmergencyLocation : IEntityBase
     {
         public int EmergencyLocationId { get; set; }

@@ -21,3 +21,13 @@ D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Unity.Abstractions.p
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Unity.Container.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Unity.Interception.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Unity.RegistrationByConvention.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Entities.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Cache.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\EntityFramework.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Entities.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Cache.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\EntityFramework.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Polly.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Polly.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Polly.xml

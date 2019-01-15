@@ -53,3 +53,12 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configurati
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.FabricShared.Configuration.dll.config
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.Core.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.Cache.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.Entities.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\EntityFramework.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.Cache.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.Entities.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\EntityFramework.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Polly.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Polly.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Polly.xml

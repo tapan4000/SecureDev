@@ -38,6 +38,18 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -50,25 +62,42 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContextBase.cs" />
+    <Compile Include="EntityFrameworkDatabaseLogFormatter.cs" />
+    <Compile Include="EntityFrameworkDbConfiguration.cs" />
     <Compile Include="GenericRepository.cs" />
+    <Compile Include="Helpers\DocumentDbHelper.cs" />
     <Compile Include="Interfaces\IDataContext.cs" />
+    <Compile Include="Interfaces\IDocumentDbEntity.cs" />
+    <Compile Include="Interfaces\IDocumentDbUnitOfWork.cs" />
     <Compile Include="Interfaces\IRestServerUnitOfWork.cs" />
     <Compile Include="Interfaces\IUnitOfWorkFactory.cs" />
-    <Compile Include="Interfaces\IUserContext.cs" />
+    <Compile Include="Interfaces\Repositories\IAnonymousGroupMemberRepository.cs" />
     <Compile Include="Interfaces\Repositories\IApplicationRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IDocumentDbRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGenericRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IGroupMemberRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGroupRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ILocationCaptureSessionRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserActivationRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUserBlockListRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUserLocationRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
     <Compile Include="Interfaces\Strategies\IDataStoreStrategy.cs" />
     <Compile Include="Interfaces\Strategies\IGenericDataStoreStrategy.cs" />
+    <Compile Include="Models\DocumentDbEntityBase.cs" />
+    <Compile Include="Models\DocumentDbRecord.cs" />
+    <Compile Include="Models\DocumentTypeEnum.cs" />
+    <Compile Include="Models\LocationDetail.cs" />
+    <Compile Include="Models\UserBlockList.cs" />
+    <Compile Include="Models\UserLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="RestServerDataContext.cs" />
     <Compile Include="RestServerUnitOfWork.cs" />
     <Compile Include="Strategies\GenericDataStoreStrategy.cs" />
     <Compile Include="Strategies\DataStoreStrategyBase.cs" />
+    <Compile Include="Strategies\SqlStoredProcedoreAccessStrategyBase.cs" />
     <Compile Include="UnitOfWorkFactory.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +134,7 @@
       <Name>RestServer.Entities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

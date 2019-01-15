@@ -56,5 +56,7 @@ namespace RestServer.Configuration
         public const string RedisCacheTtlInSeconds = ServiceConfigurationPrefix + "RedisCacheTtlInSeconds";
 
         public const string GroupGeneralSetting = ExternalStorageConfigurationPrefix + "GroupGeneralSetting";
+
+        public const string CacheRetrySetting = ExternalStorageConfigurationPrefix + "CacheRetrySetting";
     }
 }

@@ -55,3 +55,12 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\obj\Debug\RestServer.Configuration.csproj.App.config
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\RestServer.Core.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\RestServer.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\RestServer.Cache.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\RestServer.Entities.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\EntityFramework.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\RestServer.Cache.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\RestServer.Entities.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\EntityFramework.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\Polly.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\Polly.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\Polly.xml

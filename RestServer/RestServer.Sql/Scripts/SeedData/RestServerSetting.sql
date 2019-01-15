@@ -18,11 +18,25 @@ INSERT [dbo].[RestServerSetting] ([Key], [Value], [CreatedBy], [CreationDateTime
 IF NOT EXISTS (SELECT * FROM [dbo].[RestServerSetting] WHERE [Key] = 'GlobalSetting')
 INSERT [dbo].[RestServerSetting] ([Key], [Value], [CreatedBy], [CreationDateTime]) 
 	VALUES ('GlobalSetting', '{
-	"MinIocpThreadCountForMaxRedisThroughput": 200
+	"MinIocpThreadCountForMaxRedisThroughput": 200,
+	"SqlRetryCount": 3,
+	"SqlRetryIntervalInSeconds": 2,
+	"SqlCommandTimeoutInSeconds": 30
 }', SUSER_SNAME(), GETUTCDATE())
 
 IF NOT EXISTS (SELECT * FROM [dbo].[RestServerSetting] WHERE [Key] = 'GroupGeneralSetting')
 INSERT [dbo].[RestServerSetting] ([Key], [Value], [CreatedBy], [CreationDateTime]) 
 	VALUES ('GroupGeneralSetting', '{
-	"MaxGroupCountPerUser": 20
+	"MaxGroupCountPerUser": 20,
+	"MaxUserCountPerGroup": 20,
+	"AnonymousGroupMembershipExpiryPeriodInDays": 5
+}', SUSER_SNAME(), GETUTCDATE())
+
+IF NOT EXISTS (SELECT * FROM [dbo].[RestServerSetting] WHERE [Key] = 'CacheRetrySetting')
+INSERT [dbo].[RestServerSetting] ([Key], [Value], [CreatedBy], [CreationDateTime]) 
+	VALUES ('CacheRetrySetting', '{
+	"RetryStrategy": 1,
+	"RetryCount": 3,
+	"RetryIntervalInSeconds": 2,
+	"TransientExceptionList": [""RestServer.Cache.CacheException""]
 }', SUSER_SNAME(), GETUTCDATE())

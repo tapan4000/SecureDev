@@ -61,6 +61,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestServer.RestClientCache"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestServer.RestSecurity", "RestServer.RestSecurity\RestServer.RestSecurity.csproj", "{428B6B6B-B55E-4E4F-AB18-2701AC9BB3D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestServer.DataAccess.DocumentDb", "RestServer.DataAccess.DocumentDb\RestServer.DataAccess.DocumentDb.csproj", "{1AAF0A79-B5D0-4786-A2A2-80E14CF7CEB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestServer.Cache.Core", "RestServer.Cache.Core\RestServer.Cache.Core.csproj", "{5EC84123-D50C-4A61-8986-EF4E7AF2F420}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -262,6 +266,22 @@ Global
 		{428B6B6B-B55E-4E4F-AB18-2701AC9BB3D4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{428B6B6B-B55E-4E4F-AB18-2701AC9BB3D4}.Release|x64.ActiveCfg = Release|Any CPU
 		{428B6B6B-B55E-4E4F-AB18-2701AC9BB3D4}.Release|x64.Build.0 = Release|Any CPU
+		{1AAF0A79-B5D0-4786-A2A2-80E14CF7CEB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AAF0A79-B5D0-4786-A2A2-80E14CF7CEB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AAF0A79-B5D0-4786-A2A2-80E14CF7CEB1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1AAF0A79-B5D0-4786-A2A2-80E14CF7CEB1}.Debug|x64.Build.0 = Debug|Any CPU
+		{1AAF0A79-B5D0-4786-A2A2-80E14CF7CEB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AAF0A79-B5D0-4786-A2A2-80E14CF7CEB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AAF0A79-B5D0-4786-A2A2-80E14CF7CEB1}.Release|x64.ActiveCfg = Release|Any CPU
+		{1AAF0A79-B5D0-4786-A2A2-80E14CF7CEB1}.Release|x64.Build.0 = Release|Any CPU
+		{5EC84123-D50C-4A61-8986-EF4E7AF2F420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EC84123-D50C-4A61-8986-EF4E7AF2F420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EC84123-D50C-4A61-8986-EF4E7AF2F420}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5EC84123-D50C-4A61-8986-EF4E7AF2F420}.Debug|x64.Build.0 = Debug|Any CPU
+		{5EC84123-D50C-4A61-8986-EF4E7AF2F420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EC84123-D50C-4A61-8986-EF4E7AF2F420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EC84123-D50C-4A61-8986-EF4E7AF2F420}.Release|x64.ActiveCfg = Release|Any CPU
+		{5EC84123-D50C-4A61-8986-EF4E7AF2F420}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -291,5 +311,10 @@ Global
 		{26FE921C-B7D6-4863-97F8-DA98C9C69B6E} = {6C5BF55E-B863-4AF4-B7F9-53BD7393CCD3}
 		{B001E2A5-3F40-4B30-ADC5-BBA6EEB3CEEC} = {6C5BF55E-B863-4AF4-B7F9-53BD7393CCD3}
 		{428B6B6B-B55E-4E4F-AB18-2701AC9BB3D4} = {6C5BF55E-B863-4AF4-B7F9-53BD7393CCD3}
+		{1AAF0A79-B5D0-4786-A2A2-80E14CF7CEB1} = {6C5BF55E-B863-4AF4-B7F9-53BD7393CCD3}
+		{5EC84123-D50C-4A61-8986-EF4E7AF2F420} = {6C5BF55E-B863-4AF4-B7F9-53BD7393CCD3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45
 	EndGlobalSection
 EndGlobal

@@ -22,6 +22,16 @@ namespace RestServer.DataAccess.Core.Interfaces
 
         IGroupRepository GroupRepository { get; }
 
+        IGroupMemberRepository GroupMemberRepository { get; }
+
+        IGenericRepository<PublicGroup> PublicGroupRepository { get; }
+
+        IAnonymousGroupMemberRepository AnonymousGroupMemberRepository { get; }
+
+        IGenericRepository<MembershipTier> MembershipTierRepository { get; }
+
+        ILocationCaptureSessionRepository LocationCaptureSessionRepository { get; }
+
         Task<int> SaveAsync();
     }
 }

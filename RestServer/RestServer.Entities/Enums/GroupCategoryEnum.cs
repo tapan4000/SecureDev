@@ -9,7 +9,8 @@ namespace RestServer.Entities.Enums
     public enum GroupCategoryEnum
     {
         None = 0,
-        Personal = 1,
-        Security = 2
+        Default = 1,
+        Personal = 2,
+        Security = 3
     }
 }

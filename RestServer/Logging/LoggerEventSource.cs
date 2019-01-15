@@ -34,7 +34,7 @@
             string instanceName,
             string message,
             string errorMessage,
-            int userId,
+            string userId,
             string logType,
             string dataCenter,
             string memberName,
@@ -68,7 +68,7 @@
             string instanceName,
             string message,
             string errorMessage,
-            int userId,
+            string userId,
             string logType,
             string dataCenter,
             string memberName,
@@ -102,7 +102,7 @@
             string instanceName,
             string message,
             string errorMessage,
-            int userId,
+            string userId,
             string logType,
             string dataCenter,
             string memberName,
@@ -136,7 +136,7 @@
             string instanceName,
             string message,
             string errorMessage,
-            int userId,
+            string userId,
             string logType,
             string dataCenter,
             string memberName,
@@ -170,7 +170,7 @@
             string instanceName,
             string message,
             string errorMessage,
-            int userId,
+            string userId,
             string logType,
             string dataCenter,
             string memberName,
@@ -218,7 +218,7 @@
             }
         }
 
-        private unsafe void WriteStandardEventMessage(int eventId, string traceId, string serviceName, string serviceInstanceName, string message, string errorMessage, int userId, 
+        private unsafe void WriteStandardEventMessage(int eventId, string traceId, string serviceName, string serviceInstanceName, string message, string errorMessage, string userId, 
             string logType, string dataCenter, string memberName, string fileName, int lineNumber, string logTime)
         {
             const int ArgumentCount = 12;
@@ -246,6 +246,11 @@
             if (errorMessage == null)
             {
                 errorMessage = NullString;
+            }
+
+            if (userId == null)
+            {
+                userId = NullString;
             }
 
             if (logType == null)
@@ -276,7 +281,6 @@
             {
                 fileName = Utility.GetClassName(fileName);
             }
-            
 
             fixed(
                 char* dataTraceId = traceId,
@@ -284,6 +288,7 @@
                 dataServiceInstanceName = serviceInstanceName,
                 dataMessage = message,
                 dataErrorMessage = errorMessage,
+                dataUserId = userId,
                 dataLogType = logType,
                 dataDatacenter = dataCenter,
                 dataMemberName = memberName,
@@ -297,7 +302,7 @@
                 eventData[2] = new EventData { DataPointer = (IntPtr)dataServiceInstanceName, Size = this.SizeInBytes(serviceInstanceName) };
                 eventData[3] = new EventData { DataPointer = (IntPtr)dataMessage, Size = this.SizeInBytes(message) };
                 eventData[4] = new EventData { DataPointer = (IntPtr)dataErrorMessage, Size = this.SizeInBytes(errorMessage) };
-                eventData[5] = new EventData { DataPointer = (IntPtr)(&userId), Size = sizeof(int) };
+                eventData[5] = new EventData { DataPointer = (IntPtr)dataUserId, Size = this.SizeInBytes(userId) };
                 eventData[6] = new EventData { DataPointer = (IntPtr)dataLogType, Size = this.SizeInBytes(logType) };
                 eventData[7] = new EventData { DataPointer = (IntPtr)dataDatacenter, Size = this.SizeInBytes(dataCenter) };
                 eventData[8] = new EventData { DataPointer = (IntPtr)dataMemberName, Size = this.SizeInBytes(memberName) };

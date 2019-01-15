@@ -194,8 +194,10 @@
     <Compile Include="ContractModels\GroupMemberModel.cs" />
     <Compile Include="ContractModels\GroupModel.cs" />
     <Compile Include="ContractModels\LocationModel.cs" />
+    <Compile Include="ContractModels\Reponse\InitiateAddGroupMemberResponseModel.cs" />
     <Compile Include="ContractModels\Reponse\LoginUserResponseModel.cs" />
     <Compile Include="ContractModels\Request\CompleteUserRegistrationRequestModel.cs" />
+    <Compile Include="ContractModels\Request\InitiateAddGroupMemberRequestModel.cs" />
     <Compile Include="ContractModels\Request\LoginUserRequestModel.cs" />
     <Compile Include="ContractModels\Request\LoginUserWithTokenRequestModel.cs" />
     <Compile Include="ContractModels\Request\RegisterUserRequestModel.cs" />
@@ -204,6 +206,7 @@
     <Compile Include="Controllers\AnonymousUserController.cs" />
     <Compile Include="Controllers\ApiControllerBase.cs" />
     <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Converter\JsonSecureStringRequestModelConverter.cs" />
     <Compile Include="Filters\ApplicationValidationFilter.cs" />

@@ -94,5 +94,11 @@ namespace RestServer.DataAccess.Core.Strategies
             IQueryable<TEntity> query = this.DataContext.GetQuery<TEntity>();
             return await Task.Run(() => query.Count(filter)).ConfigureAwait(false);
         }
+
+        protected async Task<bool> IsRecordPresentByFilter(Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = this.DataContext.GetQuery<TEntity>();
+            return await Task.Run(() => query.Any(filter)).ConfigureAwait(false);
+        }
     }
 }

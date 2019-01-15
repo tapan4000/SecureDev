@@ -9,6 +9,6 @@ namespace RestServer.DataAccess.Core.Interfaces.Repositories
 {
     public interface IGroupRepository : IRepository<Group>
     {
-        Task<int> GetGroupCountByUserId(int userId);
+        Task SyncAnonymousGroupMemberRequests(int userId, string userIsdCode, string mobileNumber, int maxUserCountPerGroup, int maxGroupCountPerUser);
     }
 }

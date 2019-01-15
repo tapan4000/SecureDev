@@ -1,8 +1,6 @@
 ﻿using RestServer.Business.Core.Processors;
 using RestServer.Business.Models.Request;
 using RestServer.Business.Models.Response;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +10,7 @@ using RestServer.Business.Models;
 using RestServer.Core.Extensions;
 using RestServer.Business.Activities;
 using RestServer.Entities.DataAccess;
+using RestServer.Business.Core.BaseModels;
 
 namespace RestServer.Business.Processors
 {
@@ -105,6 +104,15 @@ namespace RestServer.Business.Processors
             var generateUserLoginTokenResult = await this.CreateAndExecuteActivity<GenerateUserLoginRefreshTokenActivity, ContextUserIdActivityData, GenerateUserLoginRefreshTokenResult>(sendUserRegistrationOtpRequest);
             loginResponse.UserLoginRefreshToken = generateUserLoginTokenResult.RefreshToken;
             loginResponse.RefreshTokenCreationDateTime = generateUserLoginTokenResult.RefreshTokenCreationDateTime;
+
+            // Synchronize the anonymous group requests that might be pending while the user has not registered.
+            var userActivityDataRequest = new UserActivityData
+            {
+                User = contextUser
+            };
+
+            var synchronizeAnonymousGroupRequests = await this.CreateAndExecuteActivity<SyncAnonymousGroupMemberRequestsActivity, UserActivityData, RestrictedBusinessResultBase>(userActivityDataRequest);
+            // As the SyncAnonymousGroupMemberRequestsActivity ignores errors, result should always be true. Hence not checking the result.
 
             return loginResponse;
         }

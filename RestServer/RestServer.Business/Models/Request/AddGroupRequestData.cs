@@ -18,6 +18,8 @@ namespace RestServer.Business.Models.Request
 
         public bool IsPublic { get; set; }
 
+        public bool IsPrimary { get; set; }
+
         public int UserId { get; set; }
     }
 }

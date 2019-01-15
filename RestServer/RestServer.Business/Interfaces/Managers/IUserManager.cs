@@ -1,5 +1,7 @@
 ﻿using RestServer.Business.Core.BaseModels;
 using RestServer.Business.Models.Response;
+using RestServer.Entities.DataAccess;
+using RestServer.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,9 @@ namespace RestServer.Business.Interfaces.Managers
 {
     public interface IUserManager
     {
-        Task<AddUserRequestBusinessResult> AddUser(string isdCode, string mobileNumber, string email, string firstName, string lastName, string passwordHash, string applicationUniqueId);
+        Task<AddUserRequestBusinessResult> AddUser(string isdCode, string mobileNumber, string email, string firstName, string lastName, MembershipTierEnum membershipTier, string passwordHash, string applicationUniqueId);
 
-        Task<BusinessResult> CompleteUserRegistration(int userId, int activationCode);
+        Task<BusinessResult> CompleteUserRegistration(User user, int activationCode);
 
         Task<BusinessResult> ResendUserRegistrationOtp(int userId);
 

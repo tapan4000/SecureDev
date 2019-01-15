@@ -52,3 +52,12 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debu
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Microsoft.Azure.Common.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Microsoft.Threading.Tasks.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\RestServer.Cache.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\RestServer.Cache.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Polly.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Polly.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Polly.xml

@@ -19,6 +19,7 @@
         private static void Main()
         {
             string traceId = Guid.NewGuid().ToString();
+            string ServiceType = "FrontEndServiceType";
             try
             {
                 // The ServiceManifest.XML file defines one or more service type names.
@@ -26,7 +27,7 @@
                 // When Service Fabric creates an instance of this service type,
                 // an instance of the class is created in this host process.
                 
-                ServiceRuntime.RegisterServiceAsync("FrontEndServiceType",
+                ServiceRuntime.RegisterServiceAsync(ServiceType,
                     serviceContext =>
                         {
                             string dataCenter = "eus"; // TODO: Fetch this data from key vault.
@@ -43,7 +44,7 @@
             }
             catch (Exception e)
             {
-                LoggerEventSource.Current.Critical(traceId, e, 0);
+                LoggerEventSource.Current.Critical(traceId, e, ServiceType);
                 throw;
             }
         }

@@ -1,4 +1,6 @@
 ﻿using RestServer.Cache;
+using RestServer.Cache.Core.Attributes;
+using RestServer.Cache.Core.Enums;
 using RestServer.Entities.DataAccess.Core;
 using System;
 using System.Collections.Generic;

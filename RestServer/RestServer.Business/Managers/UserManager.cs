@@ -10,6 +10,8 @@ using RestServer.Business.Processors;
 using RestServer.Business.Models.Request;
 using RestServer.Business.Models.Response;
 using RestServer.Business.Activities;
+using RestServer.Entities.DataAccess;
+using RestServer.Entities.Enums;
 
 namespace RestServer.Business.Managers
 {
@@ -22,7 +24,7 @@ namespace RestServer.Business.Managers
             this.businessProcessorFactory = businessProcessorFactory;
         }
 
-        public async Task<AddUserRequestBusinessResult> AddUser(string isdCode, string mobileNumber, string email, string firstName, string lastName, string passwordHash, string applicationUniqueId)
+        public async Task<AddUserRequestBusinessResult> AddUser(string isdCode, string mobileNumber, string email, string firstName, string lastName, MembershipTierEnum membershipTier, string passwordHash, string applicationUniqueId)
         {
             var addUserRequestProcessor = this.businessProcessorFactory.CreateProcessor<AddUserRequestProcessor, AddUserRequestData, AddUserRequestBusinessResult>();
             var addUserRequestData = new AddUserRequestData
@@ -34,7 +36,8 @@ namespace RestServer.Business.Managers
                     Email = email,
                     FirstName = firstName,
                     LastName = lastName,
-                    PasswordHash = passwordHash
+                    PasswordHash = passwordHash,
+                    MembershipTierId = membershipTier
                 },
                 ApplicationUniqueId = applicationUniqueId
             };
@@ -42,12 +45,12 @@ namespace RestServer.Business.Managers
             return await addUserRequestProcessor.TrackAndExecuteAsync(addUserRequestData);
         }
 
-        public async Task<BusinessResult> CompleteUserRegistration(int userId, int activationCode)
+        public async Task<BusinessResult> CompleteUserRegistration(User user, int activationCode)
         {
-            var validateUserActivationCodeProcessor = this.businessProcessorFactory.CreateGenericProcessor<ValidateUserRegistrationOtpActivity, ValidateUserRegistrationRequestData, PopulatedUserBusinessResult>();
-            var validateUserActivitionRequestData = new ValidateUserRegistrationRequestData
+            var validateUserActivationCodeProcessor = this.businessProcessorFactory.CreateProcessor<CompleteUserRegistrationProcessor, ValidateUserRegistrationOtpRequestData, RestrictedBusinessResultBase>();
+            var validateUserActivitionRequestData = new ValidateUserRegistrationOtpRequestData
             {
-                UserId = userId,
+                User = user,
                 ActivationCode = activationCode
             };
 

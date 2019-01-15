@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestServer.Entities.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,7 @@ namespace RestServer.Cache.Interfaces
         Task<bool> IsRedisCacheEnabled();
 
         Task<int> GetRedisCacheTtlInSeconds();
+
+        Task<RetrySetting> GetCacheRetrySetting();
     }
 }

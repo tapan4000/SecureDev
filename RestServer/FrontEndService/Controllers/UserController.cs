@@ -1,5 +1,6 @@
 ﻿using RestServer.Business.Interfaces.Managers;
 using RestServer.Business.Models;
+using RestServer.Entities.Interfaces;
 using RestServer.FrontEndService.ContractModels;
 using RestServer.FrontEndService.ContractModels.Reponse;
 using RestServer.FrontEndService.ContractModels.Request;
@@ -19,14 +20,10 @@ namespace RestServer.FrontEndService.Controllers
     public class UserController : ApiControllerBase
     {
         private IUserManager userManager;
-        private IEventLogger logger;
-        private IWorkflowContext workflowContext;
 
-        public UserController(IUserManager userManager, IEventLogger logger, IWorkflowContext workflowContext)
+        public UserController(IUserManager userManager, IEventLogger logger, IUserContext userContext) : base(logger, userContext)
         {
             this.userManager = userManager;
-            this.logger = logger;
-            this.workflowContext = workflowContext;
         }
 
         [HttpPut]
@@ -38,8 +35,8 @@ namespace RestServer.FrontEndService.Controllers
             // 2) Else if the response is user activation record not found (606), then display a message to user to contact the administrator.
             // 3) Else if the response is user activation code mismatch (607), then display a message to user incorrect activation code provided. Thereafter user can attempt to send the SMS again.
             // 4) Else if the response is user with id not found, then clear the auth token from the mobile, and take the user to the registration page and display the message - user registration was not successfull. Please re-attempt registration.
-            // 5) Else if the response is bad request (402). Display bad request to the user.
-            // 6) Else indicate some error occurred. Please try again.
+            // 6) Else if the response is bad request (402). Display bad request to the user.
+            // 7) Else indicate some error occurred. Please try again.
             var response = new ServiceResponseModel
             {
                 Status = (int)PublicStatusCodes.Success
@@ -55,7 +52,7 @@ namespace RestServer.FrontEndService.Controllers
 
             try
             {
-                var result = await this.userManager.CompleteUserRegistration(this.workflowContext.UserId, request.Otp);
+                var result = await this.userManager.CompleteUserRegistration(this.userContext.User, request.Otp);
                 if (!result.IsSuccessful)
                 {
                     if (result.BusinessErrors.Any(error => error.ErrorCode == BusinessErrorCode.UserActivationRecordNotFound))
@@ -67,11 +64,7 @@ namespace RestServer.FrontEndService.Controllers
                     {
                         response.Status = (int)PublicStatusCodes.UserActivationCodeMismatch;
                     }
-                    else if (result.BusinessErrors.Any(error => error.ErrorCode == BusinessErrorCode.UserWithIdNotFound))
-                    {
-                        response.Status = (int)PublicStatusCodes.UserWithIdNotFound;
-                    }
-                    else if (result.BusinessErrors.Any(error => error.ErrorCode == BusinessErrorCode.UserIdNotProvided)
+                    else if (result.BusinessErrors.Any(error => error.ErrorCode == BusinessErrorCode.UserParameterNotProvided)
                         || result.BusinessErrors.Any(error => error.ErrorCode == BusinessErrorCode.UserActivationCodeNotProvided))
                     {
                         response.Status = (int)PublicStatusCodes.BadRequest;
@@ -119,7 +112,7 @@ namespace RestServer.FrontEndService.Controllers
 
             try
             {
-                var result = await this.userManager.ResendUserRegistrationOtp(this.workflowContext.UserId);
+                var result = await this.userManager.ResendUserRegistrationOtp(this.userContext.UserId);
                 if (!result.IsSuccessful)
                 {
                     if (result.BusinessErrors.Any(error => error.ErrorCode == BusinessErrorCode.UserIdNotProvided))
@@ -202,8 +195,8 @@ namespace RestServer.FrontEndService.Controllers
 
             try
             {
-                var result = await this.userManager.LoginUserWithToken(this.workflowContext.UserId,
-                    this.workflowContext.ApplicationUniqueId,
+                var result = await this.userManager.LoginUserWithToken(this.userContext.UserId,
+                    this.userContext.ApplicationUniqueId,
                     loginWithTokenRequest.RefreshToken,
                     loginWithTokenRequest.RefreshTokenCreationDateTime);
 

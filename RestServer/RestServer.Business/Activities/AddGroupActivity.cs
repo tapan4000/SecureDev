@@ -14,13 +14,12 @@ using RestServer.Configuration.Models;
 using RestServer.Configuration;
 using RestServer.Business.Models;
 using RestServer.Core.Extensions;
+using RestServer.Entities.Enums;
 
 namespace RestServer.Business.Activities
 {
-    public class AddGroupActivity : CompensatableActivityBase<AddGroupRequestData, PopulatedGroupBusinessResult>
+    public class AddGroupActivity : ActivityBase<AddGroupRequestData, PopulatedGroupBusinessResult>
     {
-        private Group insertedGroup;
-
         private IUnitOfWorkFactory unitOfWorkFactory;
 
         private IConfigurationHandler configurationHandler;
@@ -29,24 +28,6 @@ namespace RestServer.Business.Activities
         {
             this.unitOfWorkFactory = unitOfWorkFactory;
             this.configurationHandler = configurationHandler;
-        }
-
-        protected async override Task CompensateAsync()
-        {
-            using (var unitOfWork = this.unitOfWorkFactory.RestServerUnitOfWork)
-            {
-                var existingGroup = await unitOfWork.GroupRepository.GetById(this.insertedGroup.GroupId).ConfigureAwait(false);
-                if (null != existingGroup)
-                {
-                    this.logger.LogInformation($"The group with name {this.insertedGroup.GroupName} and id {this.insertedGroup.GroupId} is being removed as part of compensation.");
-                    await unitOfWork.GroupRepository.DeleteAsync(this.insertedGroup.GroupId).ConfigureAwait(false);
-                    await unitOfWork.SaveAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    this.logger.LogInformation($"The group with name {this.insertedGroup.GroupName} and id {this.insertedGroup.GroupId} not found as part of compensation.");
-                }
-            }
         }
 
         protected async override Task<PopulatedGroupBusinessResult> ExecuteAsync(AddGroupRequestData requestData)
@@ -58,12 +39,25 @@ namespace RestServer.Business.Activities
                 var groupGeneralSetting = await this.configurationHandler.GetConfiguration<GroupGeneralSetting>(ConfigurationConstants.GroupGeneralSetting);
 
                 // Fetch the number of groups to which the user is associated.
-                var groupCount = await unitOfWork.GroupRepository.GetGroupCountByUserId(requestData.UserId);
+                var groupCount = await unitOfWork.GroupMemberRepository.GetActiveGroupCountByUserId(requestData.UserId);
                 if(groupCount >= groupGeneralSetting.MaxGroupCountPerUser)
                 {
                     this.Result.AddBusinessError(BusinessErrorCode.MaxGroupCountPerUserReached);
                     this.Result.IsSuccessful = false;
                     return addGroupResult;
+                }
+
+                // Check if the default group is being created, then the default group should not be present already. This can happen if the completeUserRegistration flow is called multiple
+                // times.
+                if(requestData.GroupCategoryId == GroupCategoryEnum.Default)
+                {
+                    var isDefaultGroupAlreadyCreated = await unitOfWork.GroupMemberRepository.IsUserAlreadyHavingPrimaryGroup(requestData.UserId).ConfigureAwait(false);
+                    if (isDefaultGroupAlreadyCreated)
+                    {
+                        // No need to create the default group.
+                        this.logger.LogInformation("As the primary group for user is already created, skipping creation of group.");
+                        return addGroupResult;
+                    }
                 }
 
                 // Even if a user already is part of a group with the same name let the user create the group as we cannot stop a group with same name being created
@@ -76,9 +70,41 @@ namespace RestServer.Business.Activities
                     IsPublic = requestData.IsPublic
                 };
 
-                this.insertedGroup = await unitOfWork.GroupRepository.InsertAsync(group).ConfigureAwait(false);
+                addGroupResult.Group = await unitOfWork.GroupRepository.InsertAsync(group).ConfigureAwait(false);
                 await unitOfWork.SaveAsync().ConfigureAwait(false);
-                addGroupResult.Group = this.insertedGroup;
+
+                if (requestData.IsPublic)
+                {
+                    // If the group has been created as a public group, make an entry into the Public Group table as well with IsVerified as false.
+                    // The verification should be done as a backgroup process post which the details can be updated by the admin.
+                    var publicGroup = new PublicGroup
+                    {
+                        GroupId = addGroupResult.Group.GroupId,
+                        IsVerified = false,
+                        VerifiedDescription = null,
+                        VerifiedGroupCategoryId = (int)GroupCategoryEnum.None,
+                        VerifiedTitle = null
+                    };
+
+                    await unitOfWork.PublicGroupRepository.InsertAsync(publicGroup).ConfigureAwait(false);
+                    await unitOfWork.SaveAsync().ConfigureAwait(false);
+                }
+
+                // Add the member requesting the group to be added as the default admin of the group.
+                var groupMember = new GroupMember
+                {
+                    GroupId = addGroupResult.Group.GroupId,
+                    UserId = requestData.UserId,
+                    GroupMemberStateId = (int)GroupMemberStateEnum.Accepted,
+                    CanAdminTriggerEmergencySessionForSelf = true,
+                    CanAdminExtendEmergencySessionForSelf = true,
+                    GroupPeerEmergencyNotificationModePreferenceId = (int)NotificationModeEnum.Sms,
+                    IsAdmin = true,
+                    IsPrimary = requestData.IsPrimary
+                };
+
+                var insertedGroupMember = await unitOfWork.GroupMemberRepository.InsertAsync(groupMember).ConfigureAwait(false);
+                await unitOfWork.SaveAsync().ConfigureAwait(false);
             }
 
             return addGroupResult;

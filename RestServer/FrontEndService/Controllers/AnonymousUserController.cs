@@ -1,5 +1,7 @@
 ﻿using RestServer.Business.Interfaces.Managers;
 using RestServer.Business.Models;
+using RestServer.Entities.Enums;
+using RestServer.Entities.Interfaces;
 using RestServer.FrontEndService.ContractModels;
 using RestServer.FrontEndService.ContractModels.Reponse;
 using RestServer.FrontEndService.ContractModels.Request;
@@ -19,14 +21,10 @@ namespace RestServer.FrontEndService.Controllers
     public class AnonymousUserController : ApiControllerBase
     {
         private IUserManager userManager;
-        private IEventLogger logger;
-        private IWorkflowContext workflowContext;
 
-        public AnonymousUserController(IUserManager userManager, IEventLogger logger, IWorkflowContext workflowContext)
+        public AnonymousUserController(IUserManager userManager, IEventLogger logger, IUserContext userContext) : base(logger, userContext)
         {
             this.userManager = userManager;
-            this.logger = logger;
-            this.workflowContext = workflowContext;
         }
 
         [HttpPost]
@@ -71,8 +69,9 @@ namespace RestServer.FrontEndService.Controllers
                     registerRequest.Email,
                     registerRequest.FirstName,
                     registerRequest.LastName,
+                    MembershipTierEnum.Free,
                     registerRequest.UserPasswordHash,
-                    this.workflowContext.ApplicationUniqueId);
+                    this.userContext.ApplicationUniqueId);
 
                 // Assign the user auth token and first name that can be used by client to see till what checkpoint the business flow succeeded.
                 response.UserAuthToken = result.UserAuthToken;
@@ -169,7 +168,7 @@ namespace RestServer.FrontEndService.Controllers
                 var result = await this.userManager.LoginUser(loginRequest.IsdCode,
                     loginRequest.MobileNumber,
                     loginRequest.UserPasswordHash,
-                    this.workflowContext.ApplicationUniqueId);
+                    this.userContext.ApplicationUniqueId);
 
                 // Assign the user auth token and first name that can be used by client to see till what checkpoint the business flow succeeded.
                 response.UserAuthToken = result.EncodedSignedToken;

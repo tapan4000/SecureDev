@@ -1,6 +1,8 @@
 namespace RestServer.Entities.DataAccess
 {
     using Cache;
+    using Cache.Core.Attributes;
+    using Cache.Core.Enums;
     using Core;
     using System;
     using System.Collections.Generic;

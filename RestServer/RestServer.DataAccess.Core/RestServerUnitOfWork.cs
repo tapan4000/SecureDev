@@ -9,6 +9,8 @@ using RestServer.IoC.Interfaces;
 using RestServer.Logging.Interfaces;
 using RestServer.Entities.DataAccess.Core;
 using RestServer.Entities.DataAccess;
+using RestServer.Entities.Interfaces;
+using RestServer.Cache.Interfaces;
 
 namespace RestServer.DataAccess.Core
 {
@@ -31,12 +33,27 @@ namespace RestServer.DataAccess.Core
 
         private IGroupRepository groupRepository;
 
-        public RestServerUnitOfWork(IDependencyContainer dependencyContainer, IEventLogger logger, IUserContext userContext)
+        private IGroupMemberRepository groupMemberRepository;
+
+        private IGenericRepository<PublicGroup> publicGroupRepository;
+
+        private IAnonymousGroupMemberRepository anonymousGroupMemberRepository;
+
+        private ILocationCaptureSessionRepository locationCaptureSessionRepository;
+
+        private IGenericRepository<MembershipTier> membershipTierRepository;
+
+        private IConsolidatedCacheInvalidator cacheInvalidator;
+
+        public RestServerUnitOfWork(IDependencyContainer dependencyContainer, IEventLogger logger, IUserContext userContext, IConsolidatedCacheInvalidator cacheInvalidator)
         {
             this.dependencyContainer = dependencyContainer.CreateChildContainer();
             this.logger = logger;
             this.userContext = userContext;
+
+            // Necessary to resolve data context using child container, else the data context will be disposed after first usage and then will remain in disposed state.
             this.dataContext = this.dependencyContainer.Resolve<IDataContext>();
+            this.cacheInvalidator = cacheInvalidator;
         }
 
         public IUserRepository UserRepository
@@ -117,6 +134,71 @@ namespace RestServer.DataAccess.Core
             }
         }
 
+        public IGroupMemberRepository GroupMemberRepository
+        {
+            get
+            {
+                if(null == this.groupMemberRepository)
+                {
+                    this.groupMemberRepository = this.dependencyContainer.Resolve<IGroupMemberRepository>();
+                }
+
+                return this.groupMemberRepository;
+            }
+        }
+
+        public IGenericRepository<PublicGroup> PublicGroupRepository
+        {
+            get
+            {
+                if(null == this.publicGroupRepository)
+                {
+                    this.publicGroupRepository = this.dependencyContainer.Resolve<IGenericRepository<PublicGroup>>();
+                }
+
+                return this.publicGroupRepository;
+            }
+        }
+
+        public IAnonymousGroupMemberRepository AnonymousGroupMemberRepository
+        {
+            get
+            {
+                if(null == this.anonymousGroupMemberRepository)
+                {
+                    this.anonymousGroupMemberRepository = this.dependencyContainer.Resolve<IAnonymousGroupMemberRepository>();
+                }
+
+                return this.anonymousGroupMemberRepository;
+            }
+        }
+
+        public ILocationCaptureSessionRepository LocationCaptureSessionRepository
+        {
+            get
+            {
+                if (null == this.locationCaptureSessionRepository)
+                {
+                    this.locationCaptureSessionRepository = this.dependencyContainer.Resolve<ILocationCaptureSessionRepository>();
+                }
+
+                return this.locationCaptureSessionRepository;
+            }
+        }
+
+        public IGenericRepository<MembershipTier> MembershipTierRepository
+        {
+            get
+            {
+                if(null == this.membershipTierRepository)
+                {
+                    this.membershipTierRepository = this.dependencyContainer.Resolve<IGenericRepository<MembershipTier>>();
+                }
+
+                return this.membershipTierRepository;
+            }
+        }
+
         public void Dispose()  
         {
             this.Dispose(true);
@@ -148,16 +230,18 @@ namespace RestServer.DataAccess.Core
                 if(modifiedEntity.ObjectState == ObjectState.Added)
                 {
                     modifiedEntity.CreationDateTime = currentUtcDateTime;
-                    modifiedEntity.CreatedBy = this.userContext.UserName;
+                    modifiedEntity.CreatedBy = this.userContext.UserOrServiceIdentifier;
                 }
                 else
                 {
                     modifiedEntity.LastModificationDateTime = currentUtcDateTime;
-                    modifiedEntity.LastModifiedBy = this.userContext.UserName;
+                    modifiedEntity.LastModifiedBy = this.userContext.UserOrServiceIdentifier;
                 }
             }
 
-            return await this.dataContext.SaveAsync().ConfigureAwait(false);
+            var result = await this.dataContext.SaveAsync().ConfigureAwait(false);
+            await this.cacheInvalidator.invalidateAsync().ConfigureAwait(false);
+            return result;
         }
     }
 }

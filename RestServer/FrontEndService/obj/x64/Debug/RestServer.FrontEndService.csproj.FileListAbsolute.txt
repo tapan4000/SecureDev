@@ -127,3 +127,12 @@ D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\SendG
 D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\SendGrid.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\RestServer.RestSecurity.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\RestServer.RestSecurity.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\RestServer.Cache.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\RestServer.Cache.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\Polly.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\Polly.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\FrontEndService\bin\x64\Debug\Polly.xml

@@ -9,11 +9,13 @@
 	[LastName]											VARCHAR(50) NOT NULL, 
     [PasswordHash]										VARCHAR(50) NOT NULL,
 	[UserStateId]										INT			NOT NULL,
+	[IsGroupMemberRequestSynchronized]					BIT			NOT NULL,
+	[MembershipTierId]									INT			NOT NULL,
 	[CreatedBy]											VARCHAR(50) NOT NULL, 
-    [CreationDateTime]									DATETIME2 NOT NULL, 
+    [CreationDateTime]									DATETIME2   NOT NULL, 
     [LastModifiedBy]									VARCHAR(50) NULL, 
-    [LastModificationDateTime]							DATETIME2 NULL, 
+    [LastModificationDateTime]							DATETIME2   NULL, 
     CONSTRAINT [PK_dbo.User]							PRIMARY KEY CLUSTERED ([UserId] ASC),
-	CONSTRAINT [UK_UserMobile]							UNIQUE (MobileNumber),
+	CONSTRAINT [UK_UserMobile]							UNIQUE (IsdCode, MobileNumber),
 	CONSTRAINT [UK_UserUniqueId]						UNIQUE (UserUniqueId)
 )

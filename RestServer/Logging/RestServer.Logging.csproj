@@ -58,6 +58,10 @@
     <Compile Include="LoggerEventSource.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RestServer.Entities\RestServer.Entities.csproj">
+      <Project>{93988F7C-B7B2-4308-BBB0-A27C1E8A03DD}</Project>
+      <Name>RestServer.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RestServer.ServerContext\RestServer.ServerContext.csproj">
       <Project>{f5a4b108-120d-4971-a3e3-0e41635b5109}</Project>
       <Name>RestServer.ServerContext</Name>

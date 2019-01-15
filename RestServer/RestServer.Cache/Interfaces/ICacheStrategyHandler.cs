@@ -16,6 +16,10 @@ namespace RestServer.Cache.Interfaces
 
         Task<bool> DeleteFromStoreAsync(string key, string entityName = null);
 
+        Task<bool> DeleteFromStoreAsync(IList<string> keys);
+
+        Task<bool> DeleteFromStoreAsync(IList<KeyValuePair<string, string>> keyAndEntityNamePairs);
+
         Task<bool> ClearStoreCacheAsync();
     }
 }

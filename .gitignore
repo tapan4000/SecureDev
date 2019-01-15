@@ -2,3 +2,4 @@
 *.dbmdl
 RestServer/RestServer.Sql/RestServer.Sql.jfm
 *.jfm
+*.jfm

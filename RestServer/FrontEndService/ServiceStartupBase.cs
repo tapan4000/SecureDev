@@ -21,6 +21,8 @@
     using Configuration;
     using Cache;
     using Configuration.Models;
+    using System.Data.Entity;
+    using DataAccess.Core;
 
     public abstract class ServiceStartupBase
     {
@@ -29,6 +31,8 @@
         private IConfigurationHandler configurationHandler;
 
         private IEventLogger logger;
+
+        private GlobalSetting globalSetting;
 
         public void ConfigureHttp(IAppBuilder appBuilder)
         {
@@ -47,6 +51,8 @@
             config.DependencyResolver = unityDependencyResolver;
             this.configurationHandler = (IConfigurationHandler)unityDependencyResolver.GetService(typeof(IConfigurationHandler));
 
+            this.globalSetting = AsyncHelper.RunSync(() => this.configurationHandler.GetConfiguration<GlobalSetting>(ConfigurationConstants.GlobalSetting));
+
             // Configure Error Page
             this.ConfigureGlobalFilters(config);
 
@@ -56,6 +62,8 @@
             this.logger = dependencyContainer.Resolve<IEventLogger>();
 
             AsyncHelper.RunSync(this.InitializeRedis);
+
+            DbConfiguration.SetConfiguration(new EntityFrameworkDbConfiguration(this.globalSetting.SqlRetryCount, this.globalSetting.SqlRetryIntervalInSeconds, this.logger));
 
             // Enable CORS
             this.AllowCors(appBuilder);
@@ -162,8 +170,7 @@
         {
             var cacheConnectionString = await this.configurationHandler.GetConfiguration(ConfigurationConstants.RedisCacheConnectionString);
             var multiplexerPoolSize = await this.configurationHandler.GetConfiguration<int>(ConfigurationConstants.RedisCacheConnectionMultiplexerPoolSize);
-            var globalSetting = await this.configurationHandler.GetConfiguration<GlobalSetting>(ConfigurationConstants.GlobalSetting);
-            RedisConnectionMultiplexer.Instance.Initialize(new[] { cacheConnectionString }, globalSetting.MinIocpThreadCountForMaxRedisThroughput, this.logger, multiplexerPoolSize);
+            RedisConnectionMultiplexer.Instance.Initialize(new[] { cacheConnectionString }, this.globalSetting.MinIocpThreadCountForMaxRedisThroughput, this.logger, multiplexerPoolSize);
         }
 
         private void AllowCors(IAppBuilder appBuilder)

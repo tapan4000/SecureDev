@@ -3,6 +3,7 @@
 	[GroupMemberId]											INT NOT NULL IDENTITY (1, 1), 
     [GroupId]												INT NOT NULL, 
     [UserId]												INT NOT NULL, 
+	[GroupMemberStateId]									INT NOT NULL,
     [CanAdminTriggerEmergencySessionForSelf]				BIT NOT NULL, 
     [CanAdminExtendEmergencySessionForSelf]					BIT NOT NULL, 
     [GroupPeerEmergencyNotificationModePreferenceId]		INT NOT NULL, 

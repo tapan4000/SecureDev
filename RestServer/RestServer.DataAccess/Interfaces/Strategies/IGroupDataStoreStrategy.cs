@@ -10,6 +10,5 @@ namespace RestServer.DataAccess.Interfaces.Strategies
 {
     public interface IGroupDataStoreStrategy : IDataStoreStrategy<Group>
     {
-        Task<int> GetGroupCountByUserId(int userId);
     }
 }

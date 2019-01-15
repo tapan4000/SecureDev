@@ -16,6 +16,7 @@ namespace RestServer.Business.Models
 
         // 10001 - 20000: User management related error codes
         UserWithMobileAlreadyRegistered = 10001,
+
         UserMobileNumberNotProvided = 10002,
 
         UserEmailNotProvided = 10003,
@@ -64,6 +65,17 @@ namespace RestServer.Business.Models
 
         UserLoginRefreshTokenCreationDateTimeNotProvided = 10025,
 
+        NotificationModeNotProvided = 10026,
+
+        NotificationMessageNotProvided = 10027,
+
+        NotificationRecipientNotProvided = 10028,
+
+        NotificationTitleNotProvided = 10029,
+
+        UserParameterNotProvided = 10030,
+
+        UserIdForGroupMemberAddRequestNotProvided = 10031,
 
         // Group management related error codes: 20001 - 30000
         MaxGroupCountPerUserReached = 20001,
@@ -72,6 +84,31 @@ namespace RestServer.Business.Models
 
         GroupNameNotProvided = 20003,
 
+        MaxUserCountPerGroupReached = 20004,
 
+        UserAlreadyAddedToTargetGroup = 20005,
+
+        GroupIdNotProvided = 20006,
+
+        GroupPeerEmergencyNotificationModePreferenceNotProvided = 20007,
+
+        UserAlreadyPendingAcceptanceToGroupMembership = 20008,
+
+        AddGroupMemberDeniedRequestingUserBlocked = 20009,
+
+        AddGroupMemberDeniedRequestedGroupBlocked = 20010,
+
+        GroupMemberToBeAddedUserIdNotProvided = 20011,
+
+        GroupWithIdNotFound = 20012,
+
+        // 30001 - 40000: Location management related error codes
+        LocationCaptureSessionExceededAllowedDuration = 30001,
+
+        UserRequestingLocationNotAssociatedToTargetGroup = 30002,
+
+        LocationProviderUserNotAssociatedToTargetGroup = 30003,
+
+        UserRequestingLocationNotAnAdmin = 30004,
     }
 }

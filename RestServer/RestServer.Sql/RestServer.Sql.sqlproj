@@ -67,7 +67,7 @@
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\Device.sql" />
     <Build Include="dbo\Tables\UserDevice.sql" />
-    <Build Include="dbo\Tables\EmergencySession.sql" />
+    <Build Include="dbo\Tables\LocationCaptureSession.sql" />
     <Build Include="dbo\Tables\EmergencySessionExtension.sql" />
     <Build Include="dbo\Tables\EmergencySessionViewer.sql" />
     <Build Include="dbo\Tables\EmergencyLocation.sql" />
@@ -87,6 +87,12 @@
     <Build Include="dbo\Tables\RestServerSetting.sql" />
     <Build Include="dbo\Tables\Application.sql" />
     <Build Include="dbo\Tables\NotificationMode.sql" />
+    <Build Include="dbo\Tables\GroupMemberState.sql" />
+    <Build Include="dbo\Tables\AnonymousGroupMember.sql" />
+    <Build Include="dbo\StoredProcedure\usp_SyncAnonymousGroupMemberRequests.sql" />
+    <Build Include="dbo\Tables\LocationCaptureSessionState.sql" />
+    <Build Include="dbo\Tables\LocationCaptureType.sql" />
+    <Build Include="dbo\Tables\MembershipTier.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="RestServer.Sql.refactorlog" />
@@ -97,6 +103,10 @@
     <None Include="Scripts\SeedData\Application.sql" />
     <None Include="Scripts\SeedData\GroupCategory.sql" />
     <None Include="Scripts\SeedData\NotificationMode.sql" />
+    <None Include="Scripts\SeedData\GroupMemberState.sql" />
+    <None Include="Scripts\SeedData\LocationCaptureSessionState.sql" />
+    <None Include="Scripts\SeedData\LocationCaptureType.sql" />
+    <None Include="Scripts\SeedData\MembershipTier.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

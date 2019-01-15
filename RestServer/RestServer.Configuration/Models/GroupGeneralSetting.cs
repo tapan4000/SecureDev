@@ -9,5 +9,9 @@ namespace RestServer.Configuration.Models
     public class GroupGeneralSetting
     {
         public int MaxGroupCountPerUser { get; set; }
+
+        public int MaxUserCountPerGroup { get; set; }
+
+        public int AnonymousGroupMembershipExpiryPeriodInDays { get; set; }
     }
 }

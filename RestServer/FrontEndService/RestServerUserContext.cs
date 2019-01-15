@@ -1,4 +1,7 @@
-﻿using RestServer.DataAccess.Core.Interfaces;
+﻿using RestServer.Core.Extensions;
+using RestServer.DataAccess.Core.Interfaces;
+using RestServer.Entities.DataAccess;
+using RestServer.Entities.Interfaces;
 using RestServer.Logging.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,11 +22,59 @@ namespace RestServer.FrontEndService
             this.workflowContext = workflowContext;
         }
 
-        public string UserName
+        public string UserOrServiceIdentifier
         {
             get
             {
-                return this.workflowContext.UserId <= 0 ? RestServerName : this.workflowContext.UserId.ToString();
+                return null == this.workflowContext.User ? RestServerName : this.workflowContext.User.UserId.ToString();
+            }
+        }
+
+        public string WorkflowId
+        {
+            get
+            {
+                if (this.workflowContext.WorkflowId.IsEmpty())
+                {
+                    var workflowId = Guid.NewGuid().ToString();
+                    this.workflowContext.WorkflowId = workflowId;
+                }
+
+                return this.workflowContext.WorkflowId;
+            }
+        }
+
+        public int UserId
+        {
+            get
+            {
+                if(null != this.workflowContext.User)
+                {
+                    return this.workflowContext.User.UserId;
+                }
+
+                return 0;
+            }
+        }
+
+        public string ApplicationUniqueId
+        {
+            get
+            {
+                if (!this.workflowContext.ApplicationUniqueId.IsEmpty())
+                {
+                    return this.workflowContext.ApplicationUniqueId;
+                }
+
+                return null;
+            }
+        }
+
+        public User User
+        {
+            get
+            {
+                return this.workflowContext.User;
             }
         }
     }

@@ -1,4 +1,4 @@
-1) Technology should be used to remove the fear among people. There can be
+1) Technology should be used to remove the fear among people. Also, remove the day-to-day frustration among people. There can be
 	a) Fear of theft of car - Geofencing and fast tracking
 	b) Fear of theft of expensive mobile someone has bought	- silent fast tracking
 	c) Fear of being beaten by someone after receiving a threat. - Emergency session
@@ -12,4 +12,5 @@
 	k) Fear of kidnapping a kid in school. - Emergency session/geofencing/fast tracking
 	l) Fear of harrasing a kid in school sexually/mentally/physically. - Community app
 	m) Fear of kid travel from home to school/gym/play/camp and vice versa. - Geofecing
-	n) 
+	n) Frustration of cars moving in wrong lane, cars blocking the free pass right lane, cars moving in the sideways, cars moving very fast.
+	o) Frustration of public servants taking unnecessary time to perform their duty and giving services to those who bribe. Like police officers not giving clearance because the person was not present on address etc.

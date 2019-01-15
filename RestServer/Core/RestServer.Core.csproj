@@ -30,8 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Polly, Version=6.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Polly.6.1.2\lib\netstandard1.1\Polly.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,8 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoreConstants.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\AsyncHelper.cs" />
+    <Compile Include="Helpers\Utility.cs" />
+    <Compile Include="Interfaces\ITransientErrorRetryPolicy.cs" />
+    <Compile Include="Interfaces\ITransientFaultHandlerFactory.cs" />
+    <Compile Include="RestTransientErrorRetryPolicy.cs" />
+    <Compile Include="TransientErrorRetryPolicyBase.cs" />
+    <Compile Include="TransientFaultHandlerFactory.cs" />
     <Compile Include="Workflow\WorkflowContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -54,10 +72,17 @@
       <Project>{770a8534-d441-4288-aedb-13b84cc2037d}</Project>
       <Name>RestServer.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RestServer.Entities\RestServer.Entities.csproj">
+      <Project>{93988F7C-B7B2-4308-BBB0-A27C1E8A03DD}</Project>
+      <Name>RestServer.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RestServer.Utility\RestServer.Utility.csproj">
       <Project>{97b5a040-270a-490e-8612-01ec6faa06bf}</Project>
       <Name>RestServer.Utility</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

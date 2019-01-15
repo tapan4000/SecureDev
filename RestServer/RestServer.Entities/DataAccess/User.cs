@@ -1,7 +1,10 @@
 namespace RestServer.Entities.DataAccess
 {
     using Cache;
+    using Cache.Core.Attributes;
+    using Cache.Core.Enums;
     using Core;
+    using Enums;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -29,6 +32,10 @@ namespace RestServer.Entities.DataAccess
         public string PasswordHash { get; set; }
 
         public UserState UserStateId { get; set; }
+
+        public bool IsGroupMemberRequestSynchronized { get; set; }
+
+        public MembershipTierEnum MembershipTierId { get; set; }
 
         public string CreatedBy { get; set; }
 

@@ -26,6 +26,8 @@
 
         private const string ServerNamespace = "RestServer";
 
+        private const string UnityInitializationIdentifier = "UnityInit";
+
         private static string traceId;
 
         private static Lazy<IUnityContainer> Container = new Lazy<IUnityContainer>(
@@ -305,7 +307,7 @@
 
                 var filePath = basePath + string.Format(CultureInfo.InvariantCulture, ConfigurationFileNameFormat, regionName);
                 var fileExists = File.Exists(filePath);
-                LoggerEventSource.Current.Verbose(traceId, $"{filePath} exists: {fileExists}", 0);
+                LoggerEventSource.Current.Verbose(traceId, $"{filePath} exists: {fileExists}", UnityInitializationIdentifier);
 
                 if (fileExists)
                 {
@@ -316,7 +318,7 @@
                     }
 
                     var documentExists = configuration.DocumentElement != null;
-                    LoggerEventSource.Current.Verbose(traceId, $"configuration.DocumentElement exists: {documentExists}", 0);
+                    LoggerEventSource.Current.Verbose(traceId, $"configuration.DocumentElement exists: {documentExists}", UnityInitializationIdentifier);
                     if (documentExists)
                     {
                         var exclusionsList = new List<string>();
@@ -339,7 +341,7 @@
                                     .ToList());
                         }
 
-                        exclusionsList.ForEach(x => LoggerEventSource.Current.Verbose(traceId, $"Excluded: {x}", 0));
+                        exclusionsList.ForEach(x => LoggerEventSource.Current.Verbose(traceId, $"Excluded: {x}", ""));
                         return exclusionsList;
                     }
                 }
@@ -365,7 +367,7 @@
                 catch (Exception ex)
                 {
                     // Ignore the error
-                    LoggerEventSource.Current.Critical(traceId, ex, 0);
+                    LoggerEventSource.Current.Critical(traceId, ex, UnityInitializationIdentifier);
                 }
             }
 
@@ -395,12 +397,12 @@
                     Environment.NewLine);
                 if (count % 100 == 0)
                 {
-                    LoggerEventSource.Current.Verbose(traceId, registrations.ToString(), 0);
+                    LoggerEventSource.Current.Verbose(traceId, registrations.ToString(), UnityInitializationIdentifier);
                     registrations.Clear();
                 }
             }
 
-            LoggerEventSource.Current.Verbose(traceId, registrations.ToString(), 0);
+            LoggerEventSource.Current.Verbose(traceId, registrations.ToString(), UnityInitializationIdentifier);
         }
     }
 }

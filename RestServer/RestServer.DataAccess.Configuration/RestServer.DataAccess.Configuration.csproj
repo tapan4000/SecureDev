@@ -49,12 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnonymousGroupMemberConfiguration.cs" />
     <Compile Include="ApplicationConfiguration.cs" />
     <Compile Include="CityBasedPublicGroupConfiguration.cs" />
     <Compile Include="CountryBasedPublicGroupConfiguration.cs" />
     <Compile Include="DeviceConfiguration.cs" />
     <Compile Include="EmergencyLocationConfiguration.cs" />
-    <Compile Include="EmergencySessionConfiguration.cs" />
+    <Compile Include="LocationCaptureSessionConfiguration.cs" />
     <Compile Include="EmergencySessionExtensionConfiguration.cs" />
     <Compile Include="EmergencySessionPublicGroupAccessConfiguration.cs" />
     <Compile Include="EmergencySessionViewerConfiguration.cs" />

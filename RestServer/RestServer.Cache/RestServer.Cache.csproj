@@ -50,26 +50,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CacheArea.cs" />
+    <Compile Include="CacheConstants.cs" />
     <Compile Include="CacheException.cs" />
     <Compile Include="CacheHelper.cs" />
-    <Compile Include="CacheHint.cs" />
     <Compile Include="CacheMetadataProvider.cs" />
     <Compile Include="CacheNotificationEventArgs.cs" />
+    <Compile Include="CacheTransientErrorRetryPolicy.cs" />
     <Compile Include="CacheStrategyBase.cs" />
     <Compile Include="CacheStrategyHandler.cs" />
     <Compile Include="CacheMetadata.cs" />
+    <Compile Include="CacheTypeToKeyPropertyMap.cs" />
+    <Compile Include="ConsolidatedCacheInvalidator.cs" />
     <Compile Include="Interfaces\ICacheConfigurationHandler.cs" />
     <Compile Include="Interfaces\ICacheMetadataProvider.cs" />
     <Compile Include="Interfaces\ICacheStrategyHandler.cs" />
     <Compile Include="InMemoryCacheManager.cs" />
     <Compile Include="InMemoryCacheStrategy.cs" />
     <Compile Include="Interfaces\ICacheStrategy.cs" />
+    <Compile Include="Interfaces\IConsolidatedCacheInvalidator.cs" />
     <Compile Include="Interfaces\IRedisConnectionMultiplexer.cs" />
+    <Compile Include="Models\CacheInvalidationData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedisCacheStrategy.cs" />
     <Compile Include="RedisConnectionMultiplexer.cs" />
-    <Compile Include="StorageTypeAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\RestServer.Core.csproj">
@@ -84,13 +87,19 @@
       <Project>{770a8534-d441-4288-aedb-13b84cc2037d}</Project>
       <Name>RestServer.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RestServer.Cache.Core\RestServer.Cache.Core.csproj">
+      <Project>{5ec84123-d50c-4a61-8986-ef4e7af2f420}</Project>
+      <Name>RestServer.Cache.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.Entities\RestServer.Entities.csproj">
+      <Project>{93988F7C-B7B2-4308-BBB0-A27C1E8A03DD}</Project>
+      <Name>RestServer.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

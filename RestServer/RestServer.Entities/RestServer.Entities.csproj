@@ -51,15 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CacheConstants.cs" />
-    <Compile Include="CacheTypeToKeyPropertyMap.cs" />
+    <Compile Include="Core\RetrySetting.cs" />
+    <Compile Include="DataAccess\AnonymousGroupMember.cs" />
     <Compile Include="DataAccess\Application.cs" />
     <Compile Include="DataAccess\CityBasedPublicGroup.cs" />
     <Compile Include="DataAccess\Core\IEntityBase.cs" />
     <Compile Include="DataAccess\Core\ObjectState.cs" />
     <Compile Include="DataAccess\CountryBasedPublicGroup.cs" />
     <Compile Include="DataAccess\EmergencyLocation.cs" />
-    <Compile Include="DataAccess\EmergencySession.cs" />
+    <Compile Include="DataAccess\LocationCaptureSession.cs" />
     <Compile Include="DataAccess\EmergencySessionExtension.cs" />
     <Compile Include="DataAccess\EmergencySessionPublicGroupAccess.cs" />
     <Compile Include="DataAccess\EmergencySessionViewer.cs" />
@@ -69,6 +69,7 @@
     <Compile Include="DataAccess\GroupMember.cs" />
     <Compile Include="DataAccess\IEntity.cs" />
     <Compile Include="DataAccess\LocalityBasedPublicGroup.cs" />
+    <Compile Include="DataAccess\MembershipTier.cs" />
     <Compile Include="DataAccess\PublicGroup.cs" />
     <Compile Include="DataAccess\RestServerContext.cs" />
     <Compile Include="DataAccess\RestServerSetting.cs" />
@@ -80,7 +81,15 @@
     <Compile Include="DataAccess\UserSession.cs" />
     <Compile Include="DataAccess\UserState.cs" />
     <Compile Include="Enums\GroupCategoryEnum.cs" />
+    <Compile Include="Enums\GroupMemberStateEnum.cs" />
+    <Compile Include="Enums\LocationCaptureSessionStateEnum.cs" />
+    <Compile Include="Enums\LocationCaptureTypeEnum.cs" />
+    <Compile Include="Enums\MembershipTierEnum.cs" />
     <Compile Include="Enums\NotificationModeEnum.cs" />
+    <Compile Include="Enums\RetryStrategyEnum.cs" />
+    <Compile Include="Enums\RetryTypeEnum.cs" />
+    <Compile Include="Enums\TargetSystemEnum.cs" />
+    <Compile Include="Interfaces\IUserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -88,9 +97,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RestServer.Cache\RestServer.Cache.csproj">
-      <Project>{16251B74-E916-4E91-90FB-99110A05BBE7}</Project>
-      <Name>RestServer.Cache</Name>
+    <ProjectReference Include="..\RestServer.Cache.Core\RestServer.Cache.Core.csproj">
+      <Project>{5ec84123-d50c-4a61-8986-ef4e7af2f420}</Project>
+      <Name>RestServer.Cache.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

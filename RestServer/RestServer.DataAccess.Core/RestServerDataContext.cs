@@ -51,6 +51,7 @@ namespace RestServer.DataAccess.Core
             this.AppendGroupRelatedConfiguration(modelBuilder);
             this.AppendEmergencySessionRelatedConfiguration(modelBuilder);
             this.AppendDeviceRelatedConfiguration(modelBuilder);
+            this.AppendLocationConfiguration(modelBuilder);
         }
 
         private void AppendUserRelatedConfiguration(DbModelBuilder modelBuilder)
@@ -72,12 +73,13 @@ namespace RestServer.DataAccess.Core
             modelBuilder.Configurations.Add(new LocalityBasedPublicGroupConfiguration());
             modelBuilder.Configurations.Add(new PublicGroupConfiguration());
             modelBuilder.Configurations.Add(new StateBasedPublicGroupConfiguration());
+            modelBuilder.Configurations.Add(new AnonymousGroupMemberConfiguration());
         }
 
         private void AppendEmergencySessionRelatedConfiguration(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new EmergencyLocationConfiguration());
-            modelBuilder.Configurations.Add(new EmergencySessionConfiguration());
+            modelBuilder.Configurations.Add(new LocationCaptureSessionConfiguration());
             modelBuilder.Configurations.Add(new EmergencySessionExtensionConfiguration());
             modelBuilder.Configurations.Add(new EmergencySessionPublicGroupAccessConfiguration());
             modelBuilder.Configurations.Add(new EmergencySessionViewerConfiguration());
@@ -92,6 +94,11 @@ namespace RestServer.DataAccess.Core
         {
             modelBuilder.Configurations.Add(new RestServerSettingConfiguration());
             modelBuilder.Configurations.Add(new ApplicationConfiguration());
+        }
+
+        private void AppendLocationConfiguration(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new LocationCaptureSessionConfiguration());
         }
     }
 }

@@ -4,6 +4,7 @@
 
     using RestServer.Logging.Interfaces;
     using IoC;
+    using Entities.DataAccess;
 
     [IoCRegistration(IoCLifetime.Hierarchical)]
     public class WorkflowContext : IWorkflowContext
@@ -12,8 +13,6 @@
 
         public string ApplicationUniqueId { get; set; }
 
-        public int UserId { get; set; }
-
-        public string UserUniqueId { get; set; }
+        public User User { get; set; }
     }
 }

@@ -41,5 +41,16 @@ namespace RestServer.FrontEndService
         UserPasswordNotMatching = 611,
 
         UserPendingMobileVerification = 612,
+
+        // Group related status codes: 700 range
+        MaxGroupCountPerUserReached = 701,
+
+        MaxUserCountPerGroupReached = 702,
+
+        AddGroupMemberDenied = 703,
+
+        UserAlreadyAddedToTargetGroup = 704,
+
+        UserAlreadyPendingAcceptanceToGroupMembership = 705,
     }
 }

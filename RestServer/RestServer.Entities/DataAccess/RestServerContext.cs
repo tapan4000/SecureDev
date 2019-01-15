@@ -15,7 +15,7 @@ namespace RestServer.Entities.DataAccess
         public virtual DbSet<CityBasedPublicGroup> CityBasedPublicGroups { get; set; }
         public virtual DbSet<CountryBasedPublicGroup> CountryBasedPublicGroups { get; set; }
         public virtual DbSet<EmergencyLocation> EmergencyLocations { get; set; }
-        public virtual DbSet<EmergencySession> EmergencySessions { get; set; }
+        public virtual DbSet<LocationCaptureSession> EmergencySessions { get; set; }
         public virtual DbSet<EmergencySessionExtension> EmergencySessionExtensions { get; set; }
         public virtual DbSet<EmergencySessionPublicGroupAccess> EmergencySessionPublicGroupAccesses { get; set; }
         public virtual DbSet<EmergencySessionPublicGroupAccess> EmergencySessionViewers { get; set; }
@@ -70,19 +70,19 @@ namespace RestServer.Entities.DataAccess
                 .Property(e => e.LastModifiedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<EmergencySession>()
+            modelBuilder.Entity<LocationCaptureSession>()
                 .Property(e => e.Title)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<EmergencySession>()
+            modelBuilder.Entity<LocationCaptureSession>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<EmergencySession>()
+            modelBuilder.Entity<LocationCaptureSession>()
                 .Property(e => e.StoppedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<EmergencySession>()
+            modelBuilder.Entity<LocationCaptureSession>()
                 .Property(e => e.LastModifiedBy)
                 .IsUnicode(false);
 

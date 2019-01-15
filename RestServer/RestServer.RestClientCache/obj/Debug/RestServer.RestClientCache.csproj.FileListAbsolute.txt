@@ -11,3 +11,9 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debu
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\obj\Debug\RestServer.RestClientCache.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\obj\Debug\RestServer.RestClientCache.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\obj\Debug\RestServer.RestClientCache.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\RestServer.Entities.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\RestServer.Cache.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\EntityFramework.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\RestServer.Entities.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\RestServer.Cache.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestClientCache\bin\Debug\EntityFramework.xml

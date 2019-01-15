@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <!-- Add your custom configuration sections and parameters here -->
-  <!--
-  <Section Name="MyConfigSection">
-    <Parameter Name="MyParameter" Value="Value1" />
+  
+  <Section Name="ServiceConfig">
+    <Parameter Name="KeyVaultUrl" Value="https://cmpkvstg.vault.azure.net/" />
+    <Parameter Name="KeyVaultClientAuthId" Value="20ee1e4a-ddba-4561-8e68-da2705b0d4ec" />
+    <Parameter Name="KeyVaultClientCertificateThumbprint" Value="7d6496bfe961b2ab444f5b267fb86da413cd4803" />
+    <Parameter Name="KeyVaultCacheExpirationDurationInSeconds" Value="86400" />
+    <Parameter Name="RedisCacheConnectionMultiplexerPoolSize" Value="5" />
+    <Parameter Name="LogLevel" Value="Verbose" />
+    <Parameter Name="IsRedisCacheEnabled" Value="true" />
+    <Parameter Name="RedisCacheTtlInSeconds" Value="14400" />
   </Section>
-  -->
+  
 </Settings>

@@ -2,6 +2,7 @@
 using RestServer.Cache.Interfaces;
 using RestServer.Configuration.Interfaces;
 using RestServer.Configuration.Models;
+using RestServer.Entities.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace RestServer.Configuration
 
         public async Task<string> GetCacheConnectionStringAsync()
         {
-            var cacheConnectionString = await this.configurationHandler.GetConfiguration(ConfigurationConstants.RedisCacheConnectionString);
+            var cacheConnectionString = await this.configurationHandler.GetConfiguration(ConfigurationConstants.RedisCacheConnectionString).ConfigureAwait(false);
             if (string.IsNullOrWhiteSpace(cacheConnectionString))
             {
                 throw new NullReferenceException("Unable to fetch cache connection string.");
@@ -32,7 +33,7 @@ namespace RestServer.Configuration
 
         public async Task<int> GetRedisCacheTtlInSeconds()
         {
-            var redisCacheTtlInSeconds = await this.configurationHandler.GetConfiguration<int>(ConfigurationConstants.RedisCacheTtlInSeconds);
+            var redisCacheTtlInSeconds = await this.configurationHandler.GetConfiguration<int>(ConfigurationConstants.RedisCacheTtlInSeconds).ConfigureAwait(false);
             if(redisCacheTtlInSeconds <= 0)
             {
                 return -1;
@@ -43,8 +44,14 @@ namespace RestServer.Configuration
 
         public async Task<bool> IsRedisCacheEnabled()
         {
-            var isRedisCacheEnabled = await this.configurationHandler.GetConfiguration<bool>(ConfigurationConstants.IsRedisCacheEnabled);
+            var isRedisCacheEnabled = await this.configurationHandler.GetConfiguration<bool>(ConfigurationConstants.IsRedisCacheEnabled).ConfigureAwait(false);
             return isRedisCacheEnabled;
+        }
+
+        public async Task<RetrySetting> GetCacheRetrySetting()
+        {
+            var cacheRetrySetting = await this.configurationHandler.GetConfiguration<RetrySetting>(ConfigurationConstants.CacheRetrySetting).ConfigureAwait(false);
+            return cacheRetrySetting;
         }
     }
 }

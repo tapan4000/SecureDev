@@ -27,3 +27,12 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\obj\Debug\RestServ
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\obj\Debug\RestServer.Cache.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\bin\Debug\RestServer.Core.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\bin\Debug\RestServer.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\bin\Debug\RestServer.Cache.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\bin\Debug\RestServer.Entities.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\bin\Debug\EntityFramework.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\bin\Debug\RestServer.Cache.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\bin\Debug\RestServer.Entities.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\bin\Debug\EntityFramework.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\bin\Debug\Polly.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\bin\Debug\Polly.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Cache\bin\Debug\Polly.xml

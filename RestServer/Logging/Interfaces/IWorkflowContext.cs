@@ -1,5 +1,6 @@
 ﻿namespace RestServer.Logging.Interfaces
 {
+    using Entities.DataAccess;
     using System;
 
     public interface IWorkflowContext
@@ -8,8 +9,6 @@
 
         string ApplicationUniqueId { get; set; }
 
-        int UserId { get; set; }
-
-        string UserUniqueId { get; set; }
+        User User { get; set; }
     }
 }

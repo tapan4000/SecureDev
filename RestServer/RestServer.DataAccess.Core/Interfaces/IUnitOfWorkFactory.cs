@@ -9,5 +9,7 @@ namespace RestServer.DataAccess.Core.Interfaces
     public interface IUnitOfWorkFactory
     {
         IRestServerUnitOfWork RestServerUnitOfWork { get; }
+
+        IDocumentDbUnitOfWork DocumentDbUnitOfWork { get; }
     }
 }

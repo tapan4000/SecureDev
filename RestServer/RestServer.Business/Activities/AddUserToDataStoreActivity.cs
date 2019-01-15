@@ -42,6 +42,7 @@ namespace RestServer.Business.Activities
                 // If the new user needs to be registered, assign the required properties.
                 requestData.User.UserStateId = UserState.VerificationPending;
                 requestData.User.UserUniqueId = Guid.NewGuid().ToString();
+                requestData.User.IsGroupMemberRequestSynchronized = false;
 
                 var insertedUser = await unitOfWork.UserRepository.InsertAsync(requestData.User).ConfigureAwait(false);
                 await unitOfWork.SaveAsync().ConfigureAwait(false);

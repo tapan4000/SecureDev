@@ -1,6 +1,8 @@
 namespace RestServer.Entities.DataAccess
 {
     using Cache;
+    using Cache.Core.Attributes;
+    using Cache.Core.Enums;
     using Core;
     using System;
     using System.Collections.Generic;
@@ -17,6 +19,8 @@ namespace RestServer.Entities.DataAccess
         public int GroupId { get; set; }
 
         public int UserId { get; set; }
+
+        public int GroupMemberStateId { get; set; }
 
         public bool CanAdminTriggerEmergencySessionForSelf { get; set; }
 

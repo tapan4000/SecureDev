@@ -24,5 +24,13 @@ namespace RestServer.DataAccess.Core
                 return this.dependencyContainer.Resolve<IRestServerUnitOfWork>();
             }
         }
+
+        public IDocumentDbUnitOfWork DocumentDbUnitOfWork
+        {
+            get
+            {
+                return this.dependencyContainer.Resolve<IDocumentDbUnitOfWork>();
+            }
+        }
     }
 }

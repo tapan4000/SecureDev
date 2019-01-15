@@ -1,4 +1,5 @@
-﻿using RestServer.Cache.Interfaces;
+﻿using RestServer.Cache.Core.Enums;
+using RestServer.Cache.Interfaces;
 using RestServer.Core.Extensions;
 using RestServer.Core.Helpers;
 using RestServer.IoC;
@@ -24,17 +25,24 @@ namespace RestServer.Cache
 
         private ICacheConfigurationHandler cacheConfigurationHandler;
 
+        private IConsolidatedCacheInvalidator consolidatedCacheInvalidator;
+
         private ICacheStrategy<T> cacheStrategy;
 
         private CacheMetadata cacheMetadata;
 
-        public CacheStrategyHandler(IDependencyContainer dependencyContainer, IEventLogger logger, ICacheMetadataProvider cacheMetadataProvider, ICacheConfigurationHandler cacheConfigurationHandler)
+        public CacheStrategyHandler(IDependencyContainer dependencyContainer, 
+            IEventLogger logger, 
+            ICacheMetadataProvider cacheMetadataProvider, 
+            ICacheConfigurationHandler cacheConfigurationHandler,
+            IConsolidatedCacheInvalidator consolidatedCacheInvalidator)
         {
             this.cacheMetadata = cacheMetadataProvider.GetCacheMetadata(typeof(T));
             this.dependencyContainer = dependencyContainer;
             this.logger = logger;
             this.cacheConfigurationHandler = cacheConfigurationHandler;
             this.cacheStrategy = this.GetCacheStrategyAsync(this.cacheMetadata);
+            this.consolidatedCacheInvalidator = consolidatedCacheInvalidator;
         }
 
         public async Task<bool> ClearStoreCacheAsync()
@@ -54,13 +62,13 @@ namespace RestServer.Cache
             return true;
         }
 
-        public async Task<bool> DoesKeyExistInStoreAsync(string key, string entityName = null)
+        public async Task<bool> DoesKeyExistInStoreAsync(string keyCategoryAndIdentifier, string entityName = null)
         {
-            if(null != this.cacheStrategy && !key.IsEmpty())
+            if(null != this.cacheStrategy && !keyCategoryAndIdentifier.IsEmpty())
             {
                 try
                 {
-                    var mergedKey = this.GetCacheKey(key, entityName);
+                    var mergedKey = CacheHelper.GetCacheKey<T>(keyCategoryAndIdentifier, entityName);
                     return await this.cacheStrategy.DoesKeyExistAsync(mergedKey);
                 }
                 catch (Exception ex)
@@ -72,13 +80,13 @@ namespace RestServer.Cache
             return false;
         }
 
-        public async Task<T> GetFromStoreAsync(string key, string entityName = null)
+        public async Task<T> GetFromStoreAsync(string keyCategoryAndIdentifier, string entityName = null)
         {
-            if (null != this.cacheStrategy && !key.IsEmpty())
+            if (null != this.cacheStrategy && !keyCategoryAndIdentifier.IsEmpty())
             {
                 try
                 {
-                    var mergedKey = this.GetCacheKey(key, entityName);
+                    var mergedKey = CacheHelper.GetCacheKey<T>(keyCategoryAndIdentifier, entityName);
                     return await this.cacheStrategy.GetAsync(mergedKey);
                 }
                 catch (Exception ex)
@@ -90,14 +98,14 @@ namespace RestServer.Cache
             return default(T);
         }
 
-        public async Task<bool> DeleteFromStoreAsync(string key, string entityName = null)
+        public Task<bool> DeleteFromStoreAsync(string keyCategoryWithIdentifier, string entityName = null)
         {
-            if (null != this.cacheStrategy && !key.IsEmpty())
+            if (null != this.cacheStrategy && !keyCategoryWithIdentifier.IsEmpty())
             {
                 try
                 {
-                    var mergedKey = this.GetCacheKey(key, entityName);
-                    return await this.cacheStrategy.DeleteAsync(mergedKey).ConfigureAwait(false);
+                    var mergedKey = CacheHelper.GetCacheKey<T>(keyCategoryWithIdentifier, entityName);
+                    this.consolidatedCacheInvalidator.Register(this.cacheStrategy, mergedKey);
                 }
                 catch (Exception ex)
                 {
@@ -106,12 +114,41 @@ namespace RestServer.Cache
             }
 
             // Returning true as deletion if key would fail if the cachestrategy is null or key is null (which can happen if the key is not already populated in the cache).
-            return true;
+            return Task.FromResult(true);
         }
 
-        public async Task<bool> InsertOrUpdateInStoreAsync(string key, T entity, TimeSpan? expiry = null, string entityName = null)
+        public async Task<bool> DeleteFromStoreAsync(IList<KeyValuePair<string, string>> keyCategoryIdentifierAndEntityNamePairs)
         {
-            if(null != this.cacheStrategy && !key.IsEmpty())
+            var result = true;
+            foreach(var keyCategoryIdentifierAndEntityPair in keyCategoryIdentifierAndEntityNamePairs)
+            {
+                result = result && (await this.DeleteFromStoreAsync(keyCategoryIdentifierAndEntityPair.Key, keyCategoryIdentifierAndEntityPair.Value).ConfigureAwait(false));
+            }
+
+            return result;
+        }
+
+        public Task<bool> DeleteFromStoreAsync(IList<string> finalKeys)
+        {
+            if (null != this.cacheStrategy)
+            {
+                try
+                {
+                    this.consolidatedCacheInvalidator.Register(this.cacheStrategy, finalKeys);
+                }
+                catch (Exception ex)
+                {
+                    this.logger.LogException(ex);
+                }
+            }
+
+            // Returning true as deletion if key would fail if the cachestrategy is null or key is null (which can happen if the key is not already populated in the cache).
+            return Task.FromResult(true);
+        }
+
+        public async Task<bool> InsertOrUpdateInStoreAsync(string keyCategoryAndIdentifier, T entity, TimeSpan? expiry = null, string entityName = null)
+        {
+            if(null != this.cacheStrategy && !keyCategoryAndIdentifier.IsEmpty())
             {
                 try
                 {
@@ -141,7 +178,7 @@ namespace RestServer.Cache
                         }
                     }
 
-                    var mergedKey = this.GetCacheKey(key, entityName);
+                    var mergedKey = CacheHelper.GetCacheKey<T>(keyCategoryAndIdentifier, entityName);
                     return await this.cacheStrategy.InsertOrUpdateAsync(mergedKey, entity, expiry);
                 }
                 catch(Exception ex)
@@ -174,25 +211,7 @@ namespace RestServer.Cache
 
         private int GetCacheDb(CacheArea cacheArea)
         {
-            switch (cacheArea)
-            {
-                case CacheArea.Default:
-                    return 0;
-                case CacheArea.User:
-                    return 1;
-            }
-
-            return 0;
-        }
-
-        private string GetCacheKey(string key, string entityName)
-        {
-            if (string.IsNullOrWhiteSpace(entityName))
-            {
-                return $"{typeof(T).FullName}|{key}";
-            }
-
-            return $"{entityName}|{key}";
+            return (int)cacheArea;
         }
     }
 }

@@ -112,6 +112,7 @@
     <Compile Include="Interfaces\IKeyVaultClientFactory.cs" />
     <Compile Include="KeyVaultClientFactory.cs" />
     <Compile Include="KeyVaultDelegatingHandler.cs" />
+    <Compile Include="Models\DocumentDbSetting.cs" />
     <Compile Include="Models\GlobalSetting.cs" />
     <Compile Include="Models\GroupGeneralSetting.cs" />
     <Compile Include="Models\UserActivationSetting.cs" />
@@ -132,12 +133,18 @@
       <Project>{16251b74-e916-4e91-90fb-99110a05bbe7}</Project>
       <Name>RestServer.Cache</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RestServer.Entities\RestServer.Entities.csproj">
+      <Project>{93988F7C-B7B2-4308-BBB0-A27C1E8A03DD}</Project>
+      <Name>RestServer.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RestServer.KeyStore\RestServer.KeyStore.csproj">
       <Project>{DE7B552E-733D-4318-961B-8647408BA6FE}</Project>
       <Name>RestServer.KeyStore</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

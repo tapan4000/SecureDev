@@ -86,3 +86,12 @@ D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug
 D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\StackExchange.Redis.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Microsoft.Azure.Common.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Microsoft.Threading.Tasks.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\RestServer.Cache.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\RestServer.Entities.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\EntityFramework.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\RestServer.Cache.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\RestServer.Entities.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\EntityFramework.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Polly.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Polly.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Polly.xml

@@ -60,6 +60,14 @@ namespace RestServer.DataAccess.Configuration
                 .IsRequired()
                 .HasColumnName("UserStateId");
 
+            this.Property(t => t.IsGroupMemberRequestSynchronized)
+                .IsRequired()
+                .HasColumnName("IsGroupMemberRequestSynchronized");
+
+            this.Property(t => t.MembershipTierId)
+                .IsRequired()
+                .HasColumnName("MembershipTierId");
+
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy").HasMaxLength(50);
             this.Property(t => t.CreationDateTime).HasColumnName("CreationDateTime");
             this.Property(t => t.LastModifiedBy).HasColumnName("LastModifiedBy").HasMaxLength(50);

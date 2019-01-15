@@ -1,4 +1,5 @@
-﻿using RestServer.Cache.Interfaces;
+﻿using RestServer.Cache;
+using RestServer.Cache.Interfaces;
 using RestServer.DataAccess.Core.Interfaces.Repositories;
 using RestServer.DataAccess.Core.Interfaces.Strategies;
 using RestServer.Entities;
@@ -18,7 +19,7 @@ namespace RestServer.DataAccess.Core.Repositories
 
         protected readonly IDataStoreStrategy<TEntity> dataStoreStrategy;
 
-        private readonly ICacheStrategyHandler<TEntity> cacheStrategyHandler;
+        protected readonly ICacheStrategyHandler<TEntity> cacheStrategyHandler;
 
         private IEventLogger logger;
 
@@ -80,7 +81,7 @@ namespace RestServer.DataAccess.Core.Repositories
 
         public async Task<bool> UpdateAsync(TEntity entity)
         {
-            var result = await this.cacheStrategyHandler.DeleteFromStoreAsync(CacheTypeToKeyPropertyMap.GetKeyForType(entity)).ConfigureAwait(false);
+            var result = await this.cacheStrategyHandler.DeleteFromStoreAsync(CacheTypeToKeyPropertyMap.GetFinalKeyListForType(entity)).ConfigureAwait(false);
 
             if (result)
             {

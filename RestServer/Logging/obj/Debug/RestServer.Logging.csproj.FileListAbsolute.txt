@@ -12,3 +12,9 @@ D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\Microsoft.Diagnos
 D:\Misc\Business Idea\SecurityDev\RestServer\Logging\obj\Debug\RestServer.Logging.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\Logging\obj\Debug\RestServer.Logging.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\Logging\obj\Debug\RestServer.Logging.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\RestServer.Entities.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\RestServer.Cache.Core.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\EntityFramework.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\RestServer.Entities.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\RestServer.Cache.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\Logging\bin\Debug\EntityFramework.xml

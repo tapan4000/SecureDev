@@ -7,3 +7,5 @@
 1) The AsyncHelper library has been taken from below GIT hub repository: https://gist.github.com/ChrisMcKee/6664438
 2) The AsyncLock implementation has been taken from scott hanselmans blog:
 https://www.hanselman.com/blog/ComparingTwoTechniquesInNETAsynchronousCoordinationPrimitives.aspx
+
+2) The Document Db is consistency level has been kept as session initially considering the document db is deployed in one region only initially. Later we can move to bounded staleness.
