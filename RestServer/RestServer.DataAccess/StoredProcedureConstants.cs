@@ -8,16 +8,26 @@ namespace RestServer.DataAccess
 {
     public class StoredProcedureConstants
     {
+        // Procedure Name constants
         public const string SyncAnonymousGroupMemberRequestsStoredProcedure = "usp_SyncAnonymousGroupMemberRequests";
 
-        public const string UserIdParameterName = "UserId";
+        public const string FetchNotificationDetailsForAdminsByGroupStoredProcedure = "usp_FetchNotificationDetailsForAdminsByGroup";
 
-        public const string UserMobileIsdCodeParameterName = "UserMobileIsdCode";
+        // Stored procedure parameter or result set constants.
+        public const string UserId = "UserId";
 
-        public const string UserMobileNumberParameterName = "UserMobileNumber";
+        public const string UserMobileIsdCode = "UserMobileIsdCode";
 
-        public const string MaxUserCountPerGroupParameterName = "MaxUserCountPerGroup";
+        public const string UserMobileNumber = "UserMobileNumber";
 
-        public const string MaxGroupCountPerUserParameterName = "MaxGroupCountPerUser";
+        public const string MaxUserCountPerGroup = "MaxUserCountPerGroup";
+
+        public const string MaxGroupCountPerUser = "MaxGroupCountPerUser";
+
+        public const string GroupId = "GroupId";
+
+        public const string CompleteMobileNumber = "CompleteMobileNumber";
+
+        public const string EmailId = "EmailId";
     }
 }

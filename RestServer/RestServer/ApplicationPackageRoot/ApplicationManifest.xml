@@ -25,7 +25,6 @@
   </DefaultServices>
   <Principals>
     <Users>
-      <User Name="SetupLocalSystem" AccountType="LocalSystem" />
       <User Name="SetupAdminUser">
         <MemberOf>
           <SystemGroup Name="Administrators" />

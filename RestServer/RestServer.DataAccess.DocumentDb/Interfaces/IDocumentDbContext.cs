@@ -13,12 +13,12 @@ namespace RestServer.DataAccess.DocumentDb.Interfaces
     {
         bool IsInitialized { get; set; }
 
-        Task InitializeAsync(DocumentDbSetting docDbSetting);
+        Task InitializeAsync(DocumentDbSetting docDbSetting, string docDbConnectionString);
 
         IDocumentClient GetDocumentClient();
 
         string GetDatabase();
 
-        string GetCollection(string entityName);
+        string GetCollection(DocumentDbCollectionType collectionType);
     }
 }

@@ -15,6 +15,7 @@ namespace RestServer.DataAccess.DocumentDb.Repositories
 
         public UserLocationRepository(IUserLocationDataStoreStrategy documentDbDataStoreStrategy) : base(documentDbDataStoreStrategy)
         {
+            this.userLocationDataStoreStrategy = documentDbDataStoreStrategy;
         }
 
         public Task<UserLocation> GetUserLocation(int userId)

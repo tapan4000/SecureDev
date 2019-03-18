@@ -1,0 +1,12 @@
+"currentKeyVaultCertificateThumbprint": {
+      "value": "14be9e94dbf5096895ae1c0d2adc988ec28145b0"
+    },
+    "currentKeyVaultCertificateSecretUrl": {
+      "value": "https://cmpkvstg.vault.azure.net/secrets/CurrentKeyVaultEncodedCert/201026a7d15542fca6a7d7da0eaaccf8"
+    },
+    "pairedKeyVaultCertificateThumbprint": {
+      "value": "efda074278fbea9f1e94897a894cf418993e1723"
+    },
+    "pairedKeyVaultCertificateSecretUrl": {
+      "value": "https://cmpkvstg.vault.azure.net/secrets/PairedKeyVaultEncodedCert/f6eaa06265e3448c83cffc6e927ffffd"
+    },

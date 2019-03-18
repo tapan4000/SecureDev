@@ -29,6 +29,8 @@ namespace RestServer.Configuration
 
         public const string KeyVaultCacheExpirationDurationInSeconds = ServiceConfigurationPrefix + "KeyVaultCacheExpirationDurationInSeconds";
 
+        public const string IsManagedIdentityUsedForKeyVaultAccess = ServiceConfigurationPrefix + "IsManagedIdentityUsedForKeyVaultAccess";
+
         public const string LogLevel = ServiceConfigurationPrefix + "LogLevel";
 
         public const string SqlConnectionString = SecretConfigurationPrefix + "SqlConnectionString";
@@ -58,5 +60,11 @@ namespace RestServer.Configuration
         public const string GroupGeneralSetting = ExternalStorageConfigurationPrefix + "GroupGeneralSetting";
 
         public const string CacheRetrySetting = ExternalStorageConfigurationPrefix + "CacheRetrySetting";
+
+        public const string LocationSetting = ExternalStorageConfigurationPrefix + "LocationSetting";
+
+        public const string DocDbSetting = ExternalStorageConfigurationPrefix + "DocDbSetting";
+
+        public const string DocDbConnectionString = SecretConfigurationPrefix + "DocDbConnectionString";
     }
 }

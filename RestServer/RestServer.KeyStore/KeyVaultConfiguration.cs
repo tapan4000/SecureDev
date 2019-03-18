@@ -24,6 +24,8 @@ namespace RestServer.KeyStore
 
         public int CacheExpirationDurationInSeconds { get; set; }
 
+        public bool IsManagedIdentityUsedForKeyVaultAccess { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();

@@ -13,6 +13,7 @@ using System.Net.Http;
 using RestServer.KeyStore;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Azure.Services.AppAuthentication;
 
 namespace RestServer.Configuration
 {
@@ -42,7 +43,17 @@ namespace RestServer.Configuration
                 var retryPolicy = new RetryPolicy(new RestTransientErrorDetectionStrategy(), retryStrategy);
                 var httpRetryHandler = new RetryHandler(retryPolicy, new KeyVaultDelegatingHandler());
                 httpRetryHandler.Retrying += HttpRetryHandler_Retrying;
-                keyVaultClient = new KeyVaultClient(this.GetAccessToken, new HttpClient(httpRetryHandler));
+
+                // If the key vault 
+                if (this.keyVaultContext.Settings.IsManagedIdentityUsedForKeyVaultAccess)
+                {
+                    AzureServiceTokenProvider tokenProvider = new AzureServiceTokenProvider();
+                    keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(tokenProvider.KeyVaultTokenCallback));
+                }
+                else
+                {
+                    keyVaultClient = new KeyVaultClient(this.GetAccessToken, new HttpClient(httpRetryHandler));
+                }
 
                 this.logger.LogInformation($"Key vault client for {this.keyVaultContext.Settings.VaultAddress} created successfully.");
             }

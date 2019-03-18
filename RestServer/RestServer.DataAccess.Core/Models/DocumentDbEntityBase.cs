@@ -18,7 +18,7 @@ namespace RestServer.DataAccess.Core.Models
         }
 
         [JsonProperty("docType")]
-        public string DocumentType { get; set; }
+        public string DocumentType { get; private set; }
 
         [JsonProperty("id")]
         public string Id { get; set; }

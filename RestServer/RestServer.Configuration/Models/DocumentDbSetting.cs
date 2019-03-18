@@ -12,10 +12,14 @@ namespace RestServer.Configuration.Models
 
         public int RequestTimeoutInSeconds { get; set; }
 
-        public string ConnectionString { get; set; }
+        public int MediaRequestTimeOutInSeconds { get; set; }
 
-        public int RetryCount { get; set; }
+        public int RetryCountOnThrottling { get; set; }
 
         public int RetryIntervalInSeconds { get; set; }
+
+        public string DatabaseName { get; set; }
+
+        public string UserCollectionName { get; set; }
     }
 }

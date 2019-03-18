@@ -9,7 +9,7 @@
   <CodePackage Name="Code" Version="1.0.0">
     <SetupEntryPoint>
       <ExeHost>
-        <Program>RestServerSetup.bat</Program>
+        <Program>PackageRoot\Code\RestServerSetup.bat</Program>
         <WorkingFolder>CodePackage</WorkingFolder>
         <ConsoleRedirection FileRetentionCount="10" />
       </ExeHost>

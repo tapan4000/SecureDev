@@ -195,9 +195,11 @@
     <Compile Include="ContractModels\GroupModel.cs" />
     <Compile Include="ContractModels\LocationModel.cs" />
     <Compile Include="ContractModels\Reponse\InitiateAddGroupMemberResponseModel.cs" />
+    <Compile Include="ContractModels\Reponse\InitiateLocationCaptureResponseModel.cs" />
     <Compile Include="ContractModels\Reponse\LoginUserResponseModel.cs" />
     <Compile Include="ContractModels\Request\CompleteUserRegistrationRequestModel.cs" />
     <Compile Include="ContractModels\Request\InitiateAddGroupMemberRequestModel.cs" />
+    <Compile Include="ContractModels\Request\InitiateEmergencySessionForSelfRequestModel.cs" />
     <Compile Include="ContractModels\Request\LoginUserRequestModel.cs" />
     <Compile Include="ContractModels\Request\LoginUserWithTokenRequestModel.cs" />
     <Compile Include="ContractModels\Request\RegisterUserRequestModel.cs" />
@@ -223,9 +225,11 @@
     <Compile Include="UnityDependencyResolver.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PackageRoot\Code\install-service-winlogbeat.ps1" />
-    <None Include="PackageRoot\Code\RestServer.cmd">
+    <None Include="PackageRoot\Code\install-service-winlogbeat.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="PackageRoot\Code\RestServer.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="PackageRoot\Code\RestServerSetup.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -237,7 +241,9 @@
     <None Include="PackageRoot\Config\Settings.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="PackageRoot\ServiceManifest.xml" />
+    <None Include="PackageRoot\ServiceManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="_EventRegisterUsersGuide.docx" />
@@ -283,6 +289,10 @@
     <ProjectReference Include="..\RestServer.DataAccess.Core\RestServer.DataAccess.Core.csproj">
       <Project>{EE983C02-182C-4B13-8568-9D40CEF9191C}</Project>
       <Name>RestServer.DataAccess.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestServer.DataAccess.DocumentDb\RestServer.DataAccess.DocumentDb.csproj">
+      <Project>{1aaf0a79-b5d0-4786-a2a2-80e14cf7ceb1}</Project>
+      <Name>RestServer.DataAccess.DocumentDb</Name>
     </ProjectReference>
     <ProjectReference Include="..\RestServer.DataAccess\RestServer.DataAccess.csproj">
       <Project>{19819f4d-4156-4b56-973a-c88ebc93c8e8}</Project>

@@ -3,3 +3,4 @@
 RestServer/RestServer.Sql/RestServer.Sql.jfm
 *.jfm
 *.jfm
+/RestServer/.vs/RestServer/v15/Server/sqlite3

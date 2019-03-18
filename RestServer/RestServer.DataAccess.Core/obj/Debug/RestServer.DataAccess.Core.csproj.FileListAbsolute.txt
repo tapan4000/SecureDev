@@ -1,4 +1,3 @@
-D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\obj\Debug\RestServer.DataAccess.Core.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\RestServer.DataAccess.Core.dll.config
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\RestServer.DataAccess.Core.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\RestServer.DataAccess.Core.pdb
@@ -61,3 +60,11 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debu
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Polly.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Polly.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Polly.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Microsoft.Azure.Services.AppAuthentication.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\Microsoft.Azure.Services.AppAuthentication.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\RestServer.Configuration.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\RestServer.DataAccess.Configuration.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\bin\Debug\RestServer.Entities.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\obj\Debug\RestServer.DataAccess.Core.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\obj\Debug\RestServer.DataAccess.Core.csproj.CoreCompileInputs.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Core\obj\Debug\RestServer.DataAccess.Core.csproj.CopyComplete

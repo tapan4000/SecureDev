@@ -64,6 +64,8 @@
     <Compile Include="GroupDeviceConfiguration.cs" />
     <Compile Include="GroupMemberConfiguration.cs" />
     <Compile Include="LocalityBasedPublicGroupConfiguration.cs" />
+    <Compile Include="MembershipTierConfiguration.cs" />
+    <Compile Include="NotificationMessageTemplateConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicGroupConfiguration.cs" />
     <Compile Include="RestServerSettingConfiguration.cs" />

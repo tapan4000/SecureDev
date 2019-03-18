@@ -40,7 +40,6 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\U
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\Unity.RegistrationByConvention.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\Microsoft.Azure.Common.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\Microsoft.Threading.Tasks.xml
-D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\obj\Debug\RestServer.RestSecurity.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\obj\Debug\RestServer.RestSecurity.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\obj\Debug\RestServer.RestSecurity.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\RestServer.Cache.Core.dll
@@ -53,3 +52,10 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\R
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\Polly.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\Polly.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\Polly.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\Microsoft.Azure.Services.AppAuthentication.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\Microsoft.Azure.Services.AppAuthentication.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\RestServer.Configuration.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\bin\Debug\RestServer.Entities.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\obj\Debug\RestServer.RestSecurity.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\obj\Debug\RestServer.RestSecurity.csproj.CoreCompileInputs.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.RestSecurity\obj\Debug\RestServer.RestSecurity.csproj.CopyComplete

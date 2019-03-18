@@ -52,12 +52,10 @@ namespace RestServer.DataAccess.Configuration
 
             this.Property(t => t.StoppedBy)
                 .HasColumnName("StoppedBy")
-                .IsRequired()
                 .HasMaxLength(50);
 
             this.Property(t => t.StopDateTime)
-                .HasColumnName("StopDateTime")
-                .IsRequired();
+                .HasColumnName("StopDateTime");
 
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy").HasMaxLength(50);
             this.Property(t => t.CreationDateTime).HasColumnName("CreationDateTime");

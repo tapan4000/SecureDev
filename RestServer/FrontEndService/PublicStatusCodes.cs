@@ -52,5 +52,20 @@ namespace RestServer.FrontEndService
         UserAlreadyAddedToTargetGroup = 704,
 
         UserAlreadyPendingAcceptanceToGroupMembership = 705,
+
+        GroupHasNoAdminOtherThanRequestingUser = 706,
+
+        // Location related status codes: 800 range
+        LocationProviderUserIdNotFound = 801,
+
+        UserRequestingLocationNotAssociatedToTargetGroup = 802,
+
+        LocationProviderUserNotAssociatedToTargetGroup = 803,
+
+        UserRequestingLocationNotAnAdmin = 804,
+
+        LocationCaptureSessionExceededAllowedDuration = 805,
+
+        NoActiveOrRecentlyInactivatedSessionsAvailable = 806,
     }
 }

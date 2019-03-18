@@ -10,7 +10,6 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\R
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\RestServer.ServerContext.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\RestServer.Utility.pdb
-D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\obj\Debug\RestServer.Notification.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\obj\Debug\RestServer.Notification.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\obj\Debug\RestServer.Notification.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\RestServer.Configuration.dll
@@ -58,3 +57,10 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\E
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\Polly.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\Polly.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\Polly.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\Microsoft.Azure.Services.AppAuthentication.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\Microsoft.Azure.Services.AppAuthentication.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\RestServer.Configuration.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\bin\Debug\RestServer.Entities.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\obj\Debug\RestServer.Notification.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\obj\Debug\RestServer.Notification.csproj.CoreCompileInputs.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Notification\obj\Debug\RestServer.Notification.csproj.CopyComplete

@@ -13,6 +13,9 @@ using RestServer.Configuration.Interfaces;
 using RestServer.Configuration.Models;
 using RestServer.Configuration;
 using RestServer.Business.Models.Response;
+using System.Collections.Generic;
+using RestServer.Business.Core.Interfaces.Activities;
+using RestServer.Entities.Enums;
 
 namespace RestServer.Business.Activities
 {
@@ -24,7 +27,7 @@ namespace RestServer.Business.Activities
 
         private IConfigurationHandler configurationHandler;
 
-        public SendUserRegistrationOtpActivity(IEventLogger logger, IUnitOfWorkFactory unitOfWorkFactory, INotificationHandler notificationHandler, IConfigurationHandler configurationHandler) : base(logger)
+        public SendUserRegistrationOtpActivity(IActivityFactory activityFactory, IEventLogger logger, IUnitOfWorkFactory unitOfWorkFactory, INotificationHandler notificationHandler, IConfigurationHandler configurationHandler) : base(activityFactory, logger)
         {
             this.unitOfWorkFactory = unitOfWorkFactory;
             this.notificationHandler = notificationHandler;
@@ -149,18 +152,52 @@ namespace RestServer.Business.Activities
             }
 
             // Send an SMS to the user with the token
-            var sendSmsResult = await this.notificationHandler.SendSms(string.Format(NotificationTemplateConstants.SmsConstants.UserRegistrationOtp, activationCode), existingUser.CompleteMobileNumber);
-            if (!sendSmsResult)
+            var sendSmsNotificationRequest = new SendNotificationActivityData
+            {
+                Recipients = new List<NotificationRecipient>
+                    {
+                        new NotificationRecipient
+                        {
+                            CompleteMobileNumber = existingUser.CompleteMobileNumber,
+                            NotificationPreference = NotificationModeEnum.Sms
+                        }
+                    },
+                BodyMergeFields = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>(NotificationTemplateMergeFieldConstants.OtpValue, activationCode.ToString())
+                    },
+                NotificationMessageType = NotificationMessageTypeEnum.UserRegistrationOtp,
+                CanNotificationFailureCauseFlowFailure = false
+            };
+
+            var sendSmsResult = await this.CreateAndExecuteActivity<SendNotificationActivity, SendNotificationActivityData, SendNotificationActivityResult>(sendSmsNotificationRequest).ConfigureAwait(false);
+            if (!sendSmsResult.IsNotificationSuccessful)
             {
                 this.logger.LogError("Failed to send the OTP SMS. User must retry sending the SMS using the UI.");
 
                 // Attempt to send the code using email.
                 // TODO: Remove the send email functionality as it requires making additional call to database to fetch the user as this is a temporary flow.
-                var emailSendResult = await this.notificationHandler.SendEmail(NotificationTemplateConstants.EmailConstants.UserRegistrationOtpEmailSubject
-                    , string.Format(NotificationTemplateConstants.EmailConstants.UserRegistrationOtpEmailBody, activationCode)
-                    , existingUser.Email);
+                var sendEmailNotificationRequest = new SendNotificationActivityData
+                {
+                    Recipients = new List<NotificationRecipient>
+                    {
+                        new NotificationRecipient
+                        {
+                            EmailId = existingUser.Email,
+                            NotificationPreference = NotificationModeEnum.Email
+                        }
+                    },
+                    BodyMergeFields = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>(NotificationTemplateMergeFieldConstants.OtpValue, activationCode.ToString())
+                    },
+                    NotificationMessageType = NotificationMessageTypeEnum.UserRegistrationOtp,
+                    CanNotificationFailureCauseFlowFailure = false
+                };
 
-                if (!emailSendResult)
+                var sendEmailResult = await this.CreateAndExecuteActivity<SendNotificationActivity, SendNotificationActivityData, SendNotificationActivityResult>(sendEmailNotificationRequest).ConfigureAwait(false);
+
+                if (!sendEmailResult.IsNotificationSuccessful)
                 {
                     this.Result.IsSuccessful = false;
                     this.Result.AddBusinessError(BusinessErrorCode.UserRegistrationOtpSendFailed);

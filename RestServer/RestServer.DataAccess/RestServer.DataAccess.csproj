@@ -64,6 +64,7 @@
     <Compile Include="Interfaces\Strategies\IGroupDataStoreStrategy.cs" />
     <Compile Include="Interfaces\Strategies\IGroupMemberDataStoreStrategy.cs" />
     <Compile Include="Interfaces\Strategies\ILocationCaptureSessionStrategy.cs" />
+    <Compile Include="Interfaces\Strategies\INotificationMessageTemplateDataStoreStrategy.cs" />
     <Compile Include="Interfaces\Strategies\IUserDataStoreStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AnonymousGroupMemberRepository.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Repositories\GroupMemberRepository.cs" />
     <Compile Include="Repositories\GroupRepository.cs" />
     <Compile Include="Repositories\LocationCaptureSessionRepository.cs" />
+    <Compile Include="Repositories\NotificationMessageTemplateRepository.cs" />
     <Compile Include="Repositories\UserActivationRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="StoredProcedureAccessStrategies\GroupStoredProcedureAccessSqlStrategy.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Strategies\GroupSqlDataStoreStrategy.cs" />
     <Compile Include="Strategies\GroupMemberSqlDataStoreStrategy.cs" />
     <Compile Include="Strategies\LocationCaptureSessionStrategy.cs" />
+    <Compile Include="Strategies\NotificationMessageTemplateSqlDataStoreStrategy.cs" />
     <Compile Include="Strategies\UserSqlDataStoreStrategy.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -55,7 +55,6 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bi
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\StackExchange.Redis.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\Microsoft.Azure.Common.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\Microsoft.Threading.Tasks.xml
-D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\obj\Debug\RestServer.DataAccess.DocumentDb.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\RestServer.Cache.Core.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\RestServer.Cache.Core.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\EntityFramework.SqlServer.dll
@@ -67,3 +66,12 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bi
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\Polly.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\Polly.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\Polly.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\Microsoft.Azure.Services.AppAuthentication.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\Microsoft.Azure.Services.AppAuthentication.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\RestServer.Configuration.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\RestServer.DataAccess.Core.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\RestServer.Entities.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\bin\Debug\RestServer.DataAccess.Configuration.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\obj\Debug\RestServer.DataAccess.DocumentDb.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\obj\Debug\RestServer.DataAccess.DocumentDb.csproj.CoreCompileInputs.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.DocumentDb\obj\Debug\RestServer.DataAccess.DocumentDb.csproj.CopyComplete

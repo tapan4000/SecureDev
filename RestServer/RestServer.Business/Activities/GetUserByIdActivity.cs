@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using RestServer.Logging.Interfaces;
 using RestServer.DataAccess.Core.Interfaces;
 using RestServer.Business.Models;
+using RestServer.Business.Core.Interfaces.Activities;
 
 namespace RestServer.Business.Activities
 {
@@ -16,8 +17,9 @@ namespace RestServer.Business.Activities
     {
         private IUnitOfWorkFactory unitOfWorkFactory;
 
-        public GetUserByIdActivity(IUnitOfWorkFactory unitOfWorkFactory, IEventLogger logger) : base(logger)
+        public GetUserByIdActivity(IActivityFactory activityFactory, IUnitOfWorkFactory unitOfWorkFactory, IEventLogger logger) : base(activityFactory, logger)
         {
+            this.unitOfWorkFactory = unitOfWorkFactory;
         }
 
         protected async override Task<PopulatedUserBusinessResult> ExecuteAsync(UserIdActivityData requestData)

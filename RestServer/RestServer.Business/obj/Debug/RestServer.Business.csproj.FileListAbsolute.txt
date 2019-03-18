@@ -1,4 +1,3 @@
-D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\obj\Debug\RestServer.Business.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\RestServer.Business.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\RestServer.Business.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\RestServer.Business.Core.dll
@@ -74,3 +73,21 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\Micro
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\Polly.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\Polly.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\Polly.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\Microsoft.Azure.Documents.ServiceInterop.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\DocumentDB.Spatial.Sql.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\RestServer.DataAccess.DocumentDb.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\Microsoft.Azure.Documents.Client.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\RestServer.DataAccess.DocumentDb.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\Microsoft.Azure.Documents.Client.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\Microsoft.Azure.Services.AppAuthentication.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\Microsoft.Azure.Services.AppAuthentication.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\RestServer.Configuration.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\RestServer.DataAccess.Core.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\RestServer.DataAccess.DocumentDb.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\RestServer.Entities.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\RestServer.Notification.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\RestServer.RestSecurity.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\bin\Debug\RestServer.DataAccess.Configuration.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\obj\Debug\RestServer.Business.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\obj\Debug\RestServer.Business.csproj.CoreCompileInputs.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Business\obj\Debug\RestServer.Business.csproj.CopyComplete

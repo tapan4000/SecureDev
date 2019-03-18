@@ -1,0 +1,1145 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    /* Begin Parameters: Core */
+    "clusterName": {
+      "type": "string",
+      "defaultValue": "cmpclsstg",
+      "metadata": {
+        "description": "Name of your cluster - Between 3 and 23 characters. Letters and numbers only"
+      }
+    },
+    "environment": {
+      "type": "string",
+      "metadata": {
+        "description": "Specifies the environment: Stage/Prod"
+      }
+    },
+    "configKeyVault": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource Id of the key vault should be in the format of /subscriptions/<Sub ID>/resourceGroups/<Resource group name>/providers/Microsoft.KeyVault/vaults/<vault name>"
+      }
+    },
+    "clusterConnectionEndPointPort": {
+      "type": "int",
+      "defaultValue": 9025,
+      "metadata": {
+        "description": "Port for Cluster Connection End Point"
+      }
+    },
+    "serviceFabricLeaseDriverEndPointPort": {
+      "type": "int",
+      "defaultValue": 9026,
+      "metadata": {
+        "description": "Port for Cluster Connection End Point"
+      }
+    },
+    "serviceFabricClusterRuntimeVersion": {
+      "type": "string",
+      "metadata": {
+        "description": "Service fabric runtime version for the cluster"
+      }
+    },
+    "serviceFabricClusterProtectionLevel": {
+      "type": "string",
+      "allowedValues": [
+        "None",
+        "Sign",
+        "EncryptAndSign"
+      ],
+      "defaultValue": "EncryptAndSign",
+      "metadata": {
+        "description": "Protection level.Three values are allowed - EncryptAndSign, Sign, None. It is best to keep the default of EncryptAndSign."
+      }
+    },
+    "serviceFabricClusterReliabilityLevel": {
+      "type": "string",
+      "allowedValues": [
+        "Bronze",
+        "Silver",
+        "Gold",
+        "Platinum"
+      ],
+      "defaultValue": "Bronze",
+      "metadata": {
+        "description": "Reliability level for all Service Fabric node types"
+      }
+    },
+    /* End Parameters: Core */
+
+    /* Begin Parameters: Azure AD setting */
+    "tenantId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The tenant id of the Azure Active Directory application"
+      }
+    },
+    "clusterApplicationId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The cluster application id of the Azure Active Directory application"
+      }
+    },
+    "clientApplicationId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The client application id of the Azure Active Directory application"
+      }
+    },
+    /* End Parameters: Azure AD Setting */
+
+    /* Begin Parameters: Port */
+    "sfTcpManagementPort": {
+      "type": "int",
+      "defaultValue": 19000,
+      "metadata": {
+        "description": "TCP Client Connection end point to perform management operations on this cluster"
+      }
+    },
+    "sfHttpManagementPort": {
+      "type": "int",
+      "defaultValue": 19080,
+      "metadata": {
+        "description": "Http Client Connection end point to perform management operations on this cluster"
+      }
+    },
+    "ntFrontEndGeneralHttpPort": {
+      "type": "int",
+      "defaultValue": 443
+    },
+    "ntFrontEndGeneralHttpPortBackend": {
+      "type": "int",
+      "defaultValue": 80
+    },
+    /* End Parameters: Port */
+
+    /* Begin Parameters: VM Setting */
+    "ntFrontEndInstanceSize": {
+      "type": "string",
+      "defaultValue": "Standard_D2",
+      "metadata": {
+        "description": "Size/Sku used for the Front End node type instances"
+      }
+    },
+    "ntFrontEndInstanceCnt": {
+      "type": "int",
+      "defaultValue": 5,
+      "metadata": {
+        "description": "Number of Front End node type instances"
+      }
+    },
+    "vmssUpgradeBatchSize": {
+      "type": "int",
+      "defaultValue": 20,
+      "metadata": {
+        "description": "The maximum percentage of total VM instances that will be upgraded simultaneously by a rolling upgrade in one batch."
+      }
+    },
+    "vmssUpgradeMaxUnhealthyInstancePercent": {
+      "type": "int",
+      "defaultValue": 20,
+      "metadata": {
+        "description": "The maximum percentage of VM instances that can be unhealthy (either because of the upgrade or other reasons) before the rolling upgade aborts."
+      }
+    },
+    "vmssUpgradeMaxUpgradedUnhealthyInstancePercent": {
+      "type": "int",
+      "defaultValue": 20,
+      "metadata": {
+        "description": "The maximum percentage of upgraded VM instances that can be in unhealthy state before the rolling update aborts."
+      }
+    },
+    "vmAdminUserName": {
+      "type": "string",
+      "metadata": {
+        "description": "Remote desktop user Id"
+      }
+    },
+    "vmAdminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Remote desktop user password. Must be a strong password"
+      }
+    },
+    "vmTimeZone": {
+      "type": "string",
+      "defaultValue": "Pacific Standard Time",
+      "metadata": {
+        "description": "Remote desktop user password. Must be a strong password"
+      }
+    },
+    "vmssDurabilityLevel": {
+      "type": "string",
+      "allowedValues": [
+        "Bronze",
+        "Silver",
+        "Gold",
+        "Platinum"
+      ],
+      "defaultValue": "Bronze",
+      "metadata": {
+        "description": "Durability level of the VM Scale Sets for all nodes"
+      }
+    },
+    /* End Parameters: VM Setting */
+
+    /* Begin Parameters: Certificate */
+    "certificateStore": {
+      "type": "string",
+      "allowedValues": [
+        "My"
+      ],
+      "defaultValue": "My",
+      "metadata": {
+        "description": "The store name where the cert will be deployed in the virtual machine"
+      }
+    },
+    "currentKeyVaultCertificateThumbprint": {
+      "type": "string",
+      "metadata": {
+        "description": "Current Key vault certificate thumbprint"
+      }
+    },
+
+    "currentKeyVaultCertificateSecretUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "Refers to the secret's URL in the key vault where the certificate was uploaded. It is should be in the format of https://<name of the vault>.vault.azure.net:443/secrets/<exact location>"
+      }
+    },
+    "pairedKeyVaultCertificateThumbprint": {
+      "type": "string",
+      "metadata": {
+        "description": "Paired Key vault certificate thumbprint"
+      }
+    },
+    "pairedKeyVaultCertificateSecretUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "Refers to the secret's URL in the key vault where the certificate for paired key vault was uploaded. It is should be in the format of https://<name of the vault>.vault.azure.net:443/secrets/<exact location>"
+      }
+    },
+    /* End Parameters: Certificate */
+
+    /* Begin Parameters: Storage account setting */
+    "supportLogStorageAccountType": {
+      "type": "string",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_GRS"
+      ],
+      "defaultValue": "Standard_LRS",
+      "metadata": {
+        "description": "Replication option for the support log storage account"
+      }
+    },
+    /* End Parameters: Storage account setting */
+
+    /* Begin Parameters: App Gateway */
+    "appGatewaySize": {
+      "type": "string",
+      "allowedValues": [
+        "Standard_Small",
+        "Standard_Medium",
+        "Standard_Large",
+        "WAF_Medium",
+        "WAF_Large",
+        "Standard_v2",
+        "WAF_v2"
+      ],
+      "defaultValue": "Standard_Small",
+      "metadata": {
+        "description": "Application gateway size"
+      }
+    },
+    "appGatewayTier": {
+      "type": "string",
+      "allowedValues": [
+        "Standard",
+        "Standard_v2",
+        "WAF",
+        "WAF_v2"
+      ],
+      "defaultValue": "Standard",
+      "metadata": {
+        "description": "Application gateway size"
+      }
+    },
+    "appGatewayInstanceCount": {
+      "type": "int",
+      "allowedValues": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "defaultValue": 2,
+      "metadata": {
+        "description": "Application gateway instance count"
+      }
+    },
+    "appGatewayCookieBasedAffinity": {
+      "type": "string",
+      "allowedValues": [
+        "Enabled",
+        "Disabled"
+      ],
+      "defaultValue": "Disabled",
+      "metadata": {
+        "description": "Application gateway cookie based affinity."
+      }
+    }
+    /* End Parameters: App Gateway */
+  },
+  "variables": {
+    /* Begin Variable: Versions */
+    "vmssApiVersion": "2018-06-01",
+    "vNetApiVersion": "2018-10-01",
+    "storageApiVersion": "2018-07-01",
+    "publicIPApiVersion": "2015-06-15",
+    "appGatewayApiVersion": "2018-10-01",
+    "sfClusterApiVersion": "2018-02-01",
+    "nicApiVersion": "2018-08-01",
+    "vmApiVersion": "2018-10-01",
+    /* End Variable: Versions */
+
+    /* Begin Variable: Core */
+    "resourceTypeTag": "Service Fabric",
+    /* End Variable: Core */
+
+    /* Begin Variable: VM Setting */
+    "ntFrontEnd": {
+      "TypeName": "FrondEnd",
+      "TypeSize": "[parameters('ntFrontEndInstanceSize')]",
+      "Capacity": "[parameters('ntFrontEndInstanceCnt')]",
+      "nicName": "nicFrontEnd"
+    },
+    "overProvision": "false",
+    "ntFrontEndInstanceImageReference": {
+      "publisher": "MicrosoftWindowsServer",
+      "offer": "WindowsServer",
+      "sku": "2016-Datacenter",
+      "version": "latest"
+    },
+    /* End Variable: VM Setting */
+
+    /* Begin Variable: Network Setting */
+    "virtualNetworkName": "[concat(parameters('clusterName'), 'Vnet')]",
+    "virtualNetworkResourceId": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
+    "virtualNetworkAddressPrefix": "10.0.0.0/16",
+    "subnetNTFrontEnd": {
+      "Name": "subNetFrontEnd",
+      "CIDR": "10.0.0.0/24",
+      "Ref": "[concat(variables('virtualNetworkResourceId'),'/subnets/subNetFrontEnd')]"
+    },
+    "virtualNetworkAppGatewayName": "[concat(parameters('clusterName'), 'VnetAppGw')]",
+    "virtualNetworkAppGatewayResourceId": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkAppGatewayName'))]",
+    "subnetAppGateway": {
+      "Name": "subNetAppGateway",
+      "CIDR": "10.0.1.0/24",
+      "Ref": "[concat(variables('virtualNetworkAppGatewayResourceId'),'/subnets/subNetAppGateway')]"
+    },
+    /* End Variable: Network Setting */
+
+    /* Begin Variable: Storage Account*/
+    "supportLogStorageAccountName": "[toLower(concat('sflog', uniqueString(resourceGroup().id)))]",
+    /* End Variable: Storage Account*/
+
+    /* Begin Variable: Public IP and App Gateway setting */
+    "publicIPNodeTypeFrontEnd": {
+      "Name": "[concat(parameters('clusterName'), '_ntFrontEndIP')]",
+      "AddressType": "Dynamic",
+      "DNS": "[toLower(concat(parameters('clusterName'), 'ntFrontEnd'))]"
+    },
+    "appGatewayidNTFrontEndName": "[concat('AppGW','-', parameters('clusterName'), '-', variables('ntFrontEnd')['TypeName'])]",
+    "appGatewayidNTFrontEnd": "[resourceId('Microsoft.Network/applicationGateways', variables('appGatewayidNTFrontEndName'))]",
+    "appGatewayNTFrontEnd": {
+      "IPConfig": "[concat(variables('appGatewayidNTFrontEnd'),'/frontendIPConfigurations/appGatewayFrontendIP')]",
+      "Ports": "[concat(variables('appGatewayidNTFrontEnd'),'/frontendPorts/appGatewayFrontendPort')]",
+      "BackendAddressPool": "[concat(variables('appGatewayidNTFrontEnd'),'/backendAddressPools/appGatewayBackendPool')]",
+      "HttpListener": "[concat(variables('appGatewayidNTFrontEnd'),'/httpListeners/appGatewayHttpListener')]",
+      "BackendHttpSetting": "[concat(variables('appGatewayidNTFrontEnd'),'/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]",
+      "ProbeID": "[concat(variables('appGatewayidNTFrontEnd'),'/probes/FabricGatewayProbe')]",
+      "HttpProbeID": "[concat(variables('appGatewayidNTFrontEnd'),'/probes/FabricHttpGatewayProbe')]"
+    },
+    /* End Variable: Public IP and App Gateway setting */
+
+    /* Begin Variable: Service Fabric cluster setting */
+    "svcFabCluster": {
+      "tcpGatewayPort": "[parameters('sfTcpManagementPort')]",
+      "httpGatewayPort": "[parameters('sfHttpManagementPort')]",
+      "clusterPorts": "1025-1027",
+      "applicationStartPort": "20000",
+      "applicationEndPort": "30000",
+      "ephemeralStartPort": "49152",
+      "ephemeralEndPort": "65534"
+    },
+    /* End Variable: Service Fabric cluster setting */
+
+    /* Begin Variable: RDP setting */
+    "rdpMachine": {
+      "Name": "[concat(parameters('clusterName'), 'vmRDP')]",
+      "nicName": "[concat(parameters('clusterName'), 'nicRDP')]",
+      "publicIpName": "[concat(parameters('clusterName'),'pipRDP')]",
+      "AddressType": "Static",
+      "ipAddr": "10.0.0.4", // First three IP addresses are reserver by Azure. So, the IP should be post first three IP's
+      "DNS": "[toLower(concat(parameters('clusterName'), 'RDP'))]",
+      "TypeSize": "Standard_D2"
+    }
+    /* End Variable: RDP setting */
+  },
+  "resources": [
+    // Support Log Storage account
+    {
+      "name": "[variables('supportLogStorageAccountName')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "[variables('storageApiVersion')]",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "[parameters('supportLogStorageAccountType')]"
+      },
+      "kind": "Storage",
+      "properties": {
+      },
+      "tags": {
+        "resourceType": "[variables('resourceTypeTag')]",
+        "clusterName": "[parameters('clusterName')]",
+        "Environment": "[parameters('environment')]"
+      }
+    },
+    // Network security group setting for Front end node type subnet
+    {
+      "name": "[concat('nsg', variables('subnetNTFrontEnd')['Name'])]",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2018-02-01",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "resourceType": "[variables('resourceTypeTag')]",
+        "clusterName": "[parameters('clusterName')]",
+        "Environment": "[parameters('environment')]"
+      },
+      "properties": {
+        "securityRules": [
+          {
+            "name": "allowFrontEndGeneralHttpPort",
+            "properties": {
+              "description": "Allow the inbound connection to the subnet for Front end VMSS on general HTTP port.",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "[parameters('ntFrontEndGeneralHttpPort')]",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 1000,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "allowServiceFabricClusterWebPortalPort",
+            "properties": {
+              "description": "Allow the port used by service fabric explorer to connect to the cluster.",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "[variables('svcFabCluster')['httpGatewayPort']]",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 1100,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "allowServiceFabricClientPort",
+            "properties": {
+              "description": "Allow the port used to service fabric client (including powershell).",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "[variables('svcFabCluster')['tcpGatewayPort']]",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 1200,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "allowServiceFabricInternalCommunicationPort",
+            "properties": {
+              "description": "Allow the ports that are used by service fabric to communicate with the nodes.",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "[variables('svcFabCluster')['clusterPorts']]",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 1300,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "allowServiceFabricEphemeralPort",
+            "properties": {
+              "description": "Allow the service fabric ephmeral ports within the virtual network.",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "[concat(variables('svcFabCluster')['ephemeralStartPort'], '-', variables('svcFabCluster')['ephemeralEndPort'])]",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 1400,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "allowServiceFabricSMBPort",
+            "properties": {
+              "description": "Allow SMB traffic within the virtual network used by service fabric to move packages around.",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "445",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 1500,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "allowPublicInternetToJumpboxRDP",
+            "properties": {
+              "description": "Allow RDP from public internet to the Jumpbox machine.",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "[variables('rdpMachine')['ipAddr']]",
+              "access": "Allow",
+              "priority": 1550,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "allowVirtualNetworkRDP",
+            "properties": {
+              "description": "Allow RDP within the virtual network.",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 1600,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "allowServiceFabricClusterEndpointConnectionPort",
+            "properties": {
+              "description": "Allow the service fabric cluster connection port.",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "[parameters('clusterConnectionEndPointPort')]",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 1700,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "allowServiceFabricLeaseDriverEndpointPort",
+            "properties": {
+              "description": "Allow the service fabric lease driver endpoint port. It is used by the cluster lease driver to find out if the nodes are still active.",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "[parameters('serviceFabricLeaseDriverEndPointPort')]",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 1800,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "blockAllInbound",
+            "properties": {
+              "description": "Block all inbound traffic, except the ones explicitly allowed.",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Deny",
+              "priority": 1900,
+              "direction": "Inbound"
+            }
+          }
+        ]
+      }
+    },
+    // Virtual network setting
+    {
+      "apiVersion": "[variables('vNetApiVersion')]",
+      "location": "[resourceGroup().location]",
+      "name": "[variables('virtualNetworkName')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkSecurityGroups/', concat('nsg', variables('subnetNTFrontEnd')['Name']))]"
+      ],
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('virtualNetworkAddressPrefix')]"
+          ]
+        }
+        ,
+        "subnets": [
+          {
+            "name": "[variables('subnetNTFrontEnd')['Name']]",
+            "properties": {
+              "addressPrefix": "[variables('subnetNTFrontEnd')['CIDR']]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', concat('nsg', variables('subnetNTFrontEnd')['Name']))]"
+              }
+            }
+          },
+          {
+            "name": "[variables('subnetAppGateway')['Name']]",
+            "properties": {
+              "addressPrefix": "[variables('subnetAppGateway')['CIDR']]",
+              "serviceEndpoints": [],
+              "delegations": []
+            }
+          }
+        ]
+      },
+      "tags": {
+        "resourceType": "[variables('resourceTypeTag')]",
+        "clusterName": "[parameters('clusterName')]",
+        "Environment": "[parameters('environment')]"
+      },
+      "type": "Microsoft.Network/virtualNetworks"
+    },
+    //{
+    //  "comments": "Subnet definition.",
+    //  "type": "Microsoft.Network/virtualNetworks/subnets",
+    //  "name": "[concat(variables('virtualNetworkName'), '/', variables('subnetNTFrontEnd')['Name'])]",
+    //  "apiVersion": "[variables('vNetApiVersion')]",
+    //  "properties": {
+    //    "addressPrefix": "[variables('subnetNTFrontEnd')['CIDR']]",
+    //    "networkSecurityGroup": {
+    //      "id": "[resourceId('Microsoft.Network/networkSecurityGroups', concat('nsg', variables('subnetNTFrontEnd')['Name']))]"
+    //    }
+    //  },
+    //  "dependsOn": [
+    //    "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]"
+    //  ]
+    //},
+    //{
+    //  "apiVersion": "[variables('vNetApiVersion')]",
+    //  "location": "[resourceGroup().location]",
+    //  "name": "[variables('virtualNetworkAppGatewayName')]",
+    //  "properties": {
+    //    "addressSpace": {
+    //      "addressPrefixes": [
+    //        "[variables('subnetAppGateway')['CIDR']]"
+    //      ]
+    //    }
+    //  },
+    //  "tags": {
+    //    "resourceType": "[variables('resourceTypeTag')]",
+    //    "clusterName": "[parameters('clusterName')]",
+    //    "Environment": "[parameters('environment')]"
+    //  },
+    //  "type": "Microsoft.Network/virtualNetworks"
+    //},
+    //{
+    //  "comments": "Subnet definition for app gateway.",
+    //  "type": "Microsoft.Network/virtualNetworks/subnets",
+    //  "name": "[concat(variables('virtualNetworkAppGatewayName'), '/', variables('subnetAppGateway')['Name'])]",
+    //  "apiVersion": "[variables('vNetApiVersion')]",
+    //  "properties": {
+    //    "addressPrefix": "[variables('subnetAppGateway')['CIDR']]"
+    //  },
+    //  "dependsOn": [
+    //    "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkAppGatewayName'))]"
+    //  ]
+    //},
+    // Public IP setting
+    {
+      "name": "[variables('publicIPNodeTypeFrontEnd')['Name']]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "[variables('publicIPApiVersion')]",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "resourceType": "[variables('resourceTypeTag')]",
+        "clusterName": "[parameters('clusterName')]",
+        "Environment": "[parameters('environment')]"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "dnsSettings": {
+          "domainNameLabel": "[variables('publicIPNodeTypeFrontEnd')['DNS']]"
+        }
+      }
+    },
+    // Application gateway setting
+    {
+      "comments": "Generalized from resource: '/subscriptions/78372667-21b1-4bb1-a5d0-86954f68f581/resourceGroups/cmprgstg/providers/Microsoft.Network/applicationGateways/testappgateway'.",
+      "type": "Microsoft.Network/applicationGateways",
+      "name": "[variables('appGatewayidNTFrontEndName')]",
+      "apiVersion": "[variables('appGatewayApiVersion')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "sku": {
+          "name": "[parameters('appGatewaySize')]",
+          "tier": "[parameters('appGatewayTier')]",
+          "capacity": "[parameters('appGatewayInstanceCount')]"
+        },
+        "gatewayIPConfigurations": [
+          {
+            "name": "appGatewayIpConfig",
+            "properties": {
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetAppGateway')['Name'])]"
+              }
+            },
+            "type": "Microsoft.Network/applicationGateways/gatewayIPConfigurations"
+          }
+        ],
+        "frontendIPConfigurations": [
+          {
+            "name": "appGatewayFrontendIP",
+            "properties": {
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPNodeTypeFrontEnd')['Name'])]"
+              }
+            }
+          }
+        ],
+        "frontendPorts": [
+          {
+            "name": "appGatewayFrontendPort",
+            "properties": {
+              "port": "[parameters('ntFrontEndGeneralHttpPort')]"
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "appGatewayBackendPool",
+            "properties": {
+              "BackendAddresses": []
+            }
+          }
+        ],
+        "backendHttpSettingsCollection": [
+          {
+            "name": "appGatewayBackendHttpSettings",
+            "properties": {
+              "port": "[parameters('ntFrontEndGeneralHttpPortBackend')]",
+              "Protocol": "Http",
+              "cookieBasedAffinity": "[parameters('appGatewayCookieBasedAffinity')]"
+            }
+          }
+        ],
+        "httpListeners": [
+          {
+            "name": "appGatewayHttpListener",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[variables('appGatewayNTFrontEnd')['IPConfig']]"
+              },
+              "frontendPort": {
+                "id": "[variables('appGatewayNTFrontEnd')['Ports']]"
+              },
+              "protocol": "Http",
+              "requireServerNameIndication": false
+            }
+          }
+        ],
+        "requestRoutingRules": [
+          {
+            "name": "rule1",
+            "properties": {
+              "ruleType": "Basic",
+              "httpListener": {
+                "id": "[variables('appGatewayNTFrontEnd')['HttpListener']]"
+              },
+              "backendAddressPool": {
+                "id": "[variables('appGatewayNTFrontEnd')['BackendAddressPool']]"
+              },
+              "backendHttpSettings": {
+                "id": "[variables('appGatewayNTFrontEnd')['BackendHttpSetting']]"
+              }
+            }
+          }
+        ],
+        "probes": [],
+        "enableHttp2": false
+      },
+      "tags": {
+        "resourceType": "[variables('resourceTypeTag')]",
+        "clusterName": "[parameters('clusterName')]",
+        "Environment": "[parameters('environment')]"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPNodeTypeFrontEnd')['Name'])]"
+      ]
+    },
+    // VM Scale set Definition
+    {
+      "name": "[variables('ntFrontEnd')['TypeName']]",
+      "type": "Microsoft.Compute/virtualMachineScaleSets",
+      "apiVersion": "[variables('vmssApiVersion')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
+        "[concat('Microsoft.Storage/storageAccounts/', variables('supportLogStorageAccountName'))]",
+        "[concat('Microsoft.Network/applicationGateways/', variables('appGatewayidNTFrontEndName'))]"
+      ],
+      "tags": {
+        "resourceType": "[variables('resourceTypeTag')]",
+        "clusterName": "[parameters('clusterName')]",
+        "Environment": "[parameters('environment')]"
+      },
+      "sku": {
+        "name": "[variables('ntFrontEnd')['TypeSize']]",
+        "tier": "Standard",
+        "capacity": "[variables('ntFrontEnd')['Capacity']]"
+      },
+      "properties": {
+        "upgradePolicy": {
+          // Setting the upgrade mode to automatic so change in a property of the scaleset that affects the VM's like VM size, OS version, an extension
+          // etc. These changes lead to an automatic reboot or reimage of the VM's. If this is set to manual, explicitly we need to call Update-AzureRmVmssInstance
+          // powershell command.
+          "mode": "Automatic",
+          "rollingUpgradePolicy": {
+            // The maximum percentage of total VM instances that will be upgraded simultaneously by a rolling upgrade in one batch.
+            "maxBatchInstancePercent": "[parameters('vmssUpgradeBatchSize')]",
+            // The maximum percentage of VM instances that can be unhealthy (either because of the upgrade or other reasons) before the rolling upgade aborts.
+            "maxUnhealthyInstancePercent": "[parameters('vmssUpgradeMaxUnhealthyInstancePercent')]",
+            // The maximum percentage of upgraded VM instances that can be in unhealthy state before the rolling update aborts.
+            "maxUnhealthyUpgradedInstancePercent": "[parameters('vmssUpgradeMaxUnhealthyInstancePercent')]",
+            // The wait time between completing the upgrade in one batch and starting the upgrade in the next batch. The default is 0 seconds (PT0S)
+            "pauseTimeBetweenBatches": "PT0S"
+          },
+          "automaticOSUpgradePolicy": {
+            "enableAutomaticOSUpgrade": "true",
+            "disableAutomaticRollback": "false"
+          }
+        },
+        "virtualMachineProfile": {
+          "osProfile": {
+            "computerNamePrefix": "[variables('ntFrontEnd')['TypeName']]",
+            "adminUsername": "[parameters('vmAdminUserName')]",
+            "adminPassword": "[parameters('vmAdminPassword')]",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true,
+              "timeZone": "[parameters('vmTimeZone')]"
+            },
+            "secrets": [
+              {
+                // Upload the primary key vault cert and secondary key vault cert(for secondary data center) on the VM nodes. Both the certificates
+                // should be present in both the key vaults to handle scenario where other data center key vault is down while deploying cluster.
+                // And at any point if a service needs to point to the secondary key vault once it comes up, it would be possible only if both
+                // certificates are already uploaded on the VM's.
+                "sourceVault": {
+                  "id": "[parameters('configKeyVault')]"
+                },
+                "vaultCertificates": [
+                  {
+                    "certificateStore": "[parameters('certificateStore')]",
+                    "certificateUrl": "[parameters('currentKeyVaultCertificateSecretUrl')]"
+                  },
+                  {
+                    "certificateStore": "[parameters('certificateStore')]",
+                    "certificateUrl": "[parameters('pairedKeyVaultCertificateSecretUrl')]"
+                  }
+                ]
+              }
+            ]
+          },
+          "storageProfile": {
+            "imageReference": "[variables('ntFrontEndInstanceImageReference')]",
+            "osDisk": {
+              // Caching helps to improve the read/write performance on the disk
+              "caching": "ReadOnly",
+              // Write accelerator is a capability for M-series virtual machines on premium storage with Azure managed disk exclusively. It is used to improve
+              // the I/O latency on the disk against azure premium storage.
+              "writeAcceleratorEnabled": false,
+              "createOption": "FromImage",
+              "osType": "Windows",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              }
+            }
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "[variables('ntFrontEnd')['nicName']]",
+                "properties": {
+                  "primary": true,
+                  // Accelerated networking improves network performance by enabling single root I/O virtualization (SR-IOV) to a VM.
+                  "enableAcceleratedNetworking": false,
+                  "ipConfigurations": [
+                    {
+                      "name": "[concat(variables('ntFrontEnd')['nicName'],'-',0)]",
+                      "properties": {
+                        "applicationGatewayBackendAddressPools": [
+                          {
+                            "id": "[variables('appGatewayNTFrontEnd')['BackendAddressPool']]"
+                          }
+                        ],
+                        "subnet": {
+                          "id": "[variables('subnetNTFrontEnd')['Ref']]"
+                        },
+                        "privateIPAddressVersion": "IPv4"
+                      }
+                    }
+                  ],
+                  "enableIPForwarding": false
+                }
+              }
+            ]
+          },
+          "extensionProfile": {
+            "extensions": [
+              {
+                "name": "[concat('ServiceFabricNodeVmExt',variables('ntFrontEnd')['TypeName'])]",
+                "properties": {
+                  "type": "ServiceFabricNode",
+                  "autoUpgradeMinorVersion": true,
+                  "protectedSettings": {
+                    "StorageAccountKey1": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('supportLogStorageAccountName')),'2018-07-01').keys[0].value]",
+                    "StorageAccountKey2": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('supportLogStorageAccountName')),'2018-07-01').keys[1].value]"
+                  },
+                  "publisher": "Microsoft.Azure.ServiceFabric",
+                  "settings": {
+                    "clusterEndpoint": "[reference(parameters('clusterName')).clusterEndpoint]",
+                    "nodeTypeRef": "[variables('ntFrontEnd')['TypeName']]",
+                    "dataPath": "D:\\\\SvcFab",
+                    "durabilityLevel": "[parameters('vmssDurabilityLevel')]",
+                    "enableParallelJobs": true,
+                    "nicPrefixOverride": "[variables('subnetNTFrontEnd')['CIDR']]",
+                    "certificate": {
+                      "thumbprint": "[parameters('currentKeyVaultCertificateThumbprint')]",
+                      "thumbprintSecondary": "[parameters('pairedKeyVaultCertificateThumbprint')]",
+                      "x509StoreName": "[parameters('certificateStore')]"
+                    }
+                  },
+                  "typeHandlerVersion": "1.0"
+                }
+              }
+            ]
+          }
+        },
+        // With overprovisioning turned on, the scale set spins up more VM's than we actually asked for, then deletes the extra VM's once the requested number
+        // of VM's have been provisioned. The extra VM's are not charged, however, the applications that cannot handle creation of extra instances and there
+        // deletion, then it may lead to issues.
+        "overprovision": "[variables('overProvision')]"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "resources": []
+    },
+    // Service fabric cluster definition
+    {
+      "name": "[parameters('clusterName')]",
+      "type": "Microsoft.ServiceFabric/clusters",
+      "apiVersion": "[variables('sfClusterApiVersion')]",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "resourceType": "[variables('resourceTypeTag')]",
+        "clusterName": "[parameters('clusterName')]",
+        "Environment": "[parameters('environment')]"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Storage/storageAccounts/', variables('supportLogStorageAccountName'))]"
+      ],
+      "properties": {
+        "azureActiveDirectory": {
+          // These settings are required to secure client or sf explorer access to service fabric cluster. So, a web application and a native application is used.
+          "tenantId": "[parameters('tenantId')]",
+          "clusterApplication": "[parameters('clusterApplicationId')]",
+          "clientApplication": "[parameters('clientApplicationId')]"
+        },
+        "certificate": {
+          "thumbprint": "[parameters('currentKeyVaultCertificateThumbprint')]",
+          "thumbprintSecondary": "[parameters('pairedKeyVaultCertificateThumbprint')]",
+          "x509StoreName": "[parameters('certificateStore')]"
+        },
+        "clusterCodeVersion": "[parameters('serviceFabricClusterRuntimeVersion')]",
+        "upgradeMode": "Manual",
+        "diagnosticsStorageAccountConfig": {
+          "storageAccountName": "[variables('supportLogStorageAccountName')]",
+          "protectedAccountKeyName": "StorageAccountKey1",
+          "blobEndpoint": "[concat('https://',variables('supportLogStorageAccountName'),'.blob.core.windows.net/')]",
+          "queueEndpoint": "[concat('https://',variables('supportLogStorageAccountName'),'.queue.core.windows.net/')]",
+          "tableEndpoint": "[concat('https://',variables('supportLogStorageAccountName'),'.table.core.windows.net/')]"
+        },
+        "fabricSettings": [
+          {
+            "name": "Security",
+            "parameters": [
+              {
+                "name": "ClusterProtectionLevel",
+                "value": "[parameters('serviceFabricClusterProtectionLevel')]"
+              }
+            ]
+          }
+        ],
+        "managementEndpoint": "[concat('https://',parameters('clusterName'),'.',resourceGroup().location,'.cloudapp.azure.com',':',variables('svcFabCluster')['httpGatewayPort'])]",
+        "nodeTypes": [
+          {
+            "name": "[variables('ntFrontEnd')['TypeName']]",
+            "placementProperties": {
+              "isDMZ": "true",
+              "internetFacing": "true",
+              "management": "false"
+            },
+            "clientConnectionEndpointPort": "[variables('svcFabCluster')['tcpGatewayPort']]",
+            "httpGatewayEndpointPort": "[variables('svcFabCluster')['httpGatewayPort']]",
+            "durabilityLevel": "[parameters('vmssDurabilityLevel')]",
+            "applicationPorts": {
+              "startPort": "[variables('svcFabCluster')['applicationStartPort']]",
+              "endPort": "[variables('svcFabCluster')['applicationEndPort']]"
+            },
+            "ephemeralPorts": {
+              "startPort": "[variables('svcFabCluster')['ephemeralStartPort']]",
+              "endPort": "[variables('svcFabCluster')['ephemeralEndPort']]"
+            },
+            "isPrimary": true,
+            "vmInstanceCount": "[variables('ntFrontEnd')['capacity']]"
+          }
+        ],
+        "reliabilityLevel": "[parameters('serviceFabricClusterReliabilityLevel')]",
+        "vmImage": "Windows",
+        "addonFeatures": [
+          "DnsService"
+        ]
+      }
+    },
+    // Public IP for RDP jumpbox
+    {
+      "name": "[variables('rdpMachine')['publicIpName']]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "[variables('publicIPApiVersion')]",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "resourceType": "[variables('resourceTypeTag')]",
+        "clusterName": "[parameters('clusterName')]",
+        "Environment": "[parameters('environment')]"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "[variables('rdpMachine')['AddressType']]",
+        "dnsSettings": {
+          "domainNameLabel": "[toLower(variables('rdpMachine')['DNS'])]"
+        }
+      }
+    },
+    // Network interface for RDP jump box
+    {
+      "name": "[variables('rdpMachine')['nicName']]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "[variables('nicApiVersion')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('rdpMachine')['publicIpName'])]"
+      ],
+      "tags": {
+        "resourceType": "[variables('resourceTypeTag')]",
+        "clusterName": "[parameters('clusterName')]",
+        "Environment": "[parameters('environment')]"
+      },
+      "properties": {
+        "ipConfigurations": [
+          {
+            "properties": {
+              "privateIPAddress": "[variables('rdpMachine')['ipAddr']]",
+              "privateIPAllocationMethod": "Static",
+              "subnet": {
+                "id": "[variables('subnetNTFrontEnd')['Ref']]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('rdpMachine')['publicIpName'])]"
+              }
+            },
+            "name": "ipConfig1"
+          }
+        ]
+      }
+    },
+    // Virtual machine acting as the Jump box
+    {
+      "name": "[variables('rdpMachine')['Name']]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "[variables('vmApiVersion')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Storage/storageAccounts/', variables('supportLogStorageAccountName'))]",
+        "[concat('Microsoft.Network/networkInterfaces/', variables('rdpMachine')['nicName'])]"
+      ],
+      "tags": {
+        "resourceType": "[variables('resourceTypeTag')]",
+        "clusterName": "[parameters('clusterName')]",
+        "Environment": "[parameters('environment')]"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[variables('rdpMachine')['TypeSize']]"
+        },
+        "storageProfile": {
+          "imageReference": "[variables('ntFrontEndInstanceImageReference')]",
+          "osDisk": {
+            "name": "osDisk",
+            "vhd": {
+              "uri": "[concat('http://',variables('supportLogStorageAccountName'),'.blob.core.windows.net/vhds/', variables('rdpMachine')['Name'], '-osdisk.vhd')]"
+            },
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
+          }
+        },
+        "osProfile": {
+          "computerName": "[variables('rdpMachine')['Name']]",
+          "adminUsername": "[parameters('vmAdminUserName')]",
+          "adminPassword": "[parameters('vmAdminPassword')]"
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('rdpMachine')['nicName'])]"
+            }
+          ]
+        },
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": "true",
+            "storageUri": "[concat('http://',variables('supportLogStorageAccountName'),'.blob.core.windows.net')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "clusterProperties": {
+      "value": "[reference(parameters('clusterName'))]",
+      "type": "object"
+    }
+  }
+}

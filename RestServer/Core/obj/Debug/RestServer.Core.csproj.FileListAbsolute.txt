@@ -8,7 +8,6 @@ D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Logging.p
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Utility.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.ServerContext.pdb
-D:\Misc\Business Idea\SecurityDev\RestServer\Core\obj\Debug\RestServer.Core.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\obj\Debug\RestServer.Core.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\obj\Debug\RestServer.Core.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.IoC.dll
@@ -31,3 +30,7 @@ D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Polly.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Polly.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\Polly.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\bin\Debug\RestServer.Entities.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\obj\Debug\RestServer.Core.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\obj\Debug\RestServer.Core.csproj.CoreCompileInputs.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\Core\obj\Debug\RestServer.Core.csproj.CopyComplete

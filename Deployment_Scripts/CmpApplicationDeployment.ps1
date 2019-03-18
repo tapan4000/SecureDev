@@ -5,8 +5,8 @@
 Login-AzureRmAccount
 
 $ApplicationPackagePath="D:\Misc\Business Idea\SecurityDev\RestServer\RestServer\pkg\Debug"
-$ClusterEndpoint = "cmpclsstg.eastus.cloudapp.azure.com:19000"
-$ClusterAccessCertificateThumbprint = "BABBBF72EA22CF89CC6C76AE6E0BC7A11A01D2A6"
+$ClusterEndpoint = "cmpclsstgntfrontend.eastus.cloudapp.azure.com:19000"
+$ClusterAccessCertificateThumbprint = "7D6496BFE961B2AB444F5B267FB86DA413CD4803"
 $ApplicationPackagePathInImageStore = "RestServer_V100"
 $ApplicationTypeName = "RestServerType"
 $ApplicationTypeVersion = "1.0.0"
@@ -39,6 +39,9 @@ Write-Host "`nDelpoying application and services for application type: '$Applica
 Copy-ServiceFabricApplicationPackage  -ApplicationPackagePath $ApplicationPackagePath -ImageStoreConnectionString fabric:ImageStore -ApplicationPackagePathInImageStore $ApplicationPackagePathInImageStore
 Register-ServiceFabricApplicationType -ApplicationPathInImageStore $ApplicationPackagePathInImageStore -TimeoutSec 600
 New-ServiceFabricApplication -ApplicationName $ApplicationName -ApplicationTypeName $ApplicationTypeName -ApplicationTypeVersion $ApplicationTypeVersion -TimeoutSec 600 
-New-ServiceFabricService -ApplicationName $ApplicationName -ServiceName "$ApplicationName/FrontEndService" -ServiceTypeName "FrontEndServiceType" -Stateless -PartitionSchemeSingleton -InstanceCount -1 -PlacementConstraint "(nodeType==cmppri)"
+New-ServiceFabricService -ApplicationName $ApplicationName -ServiceName "$ApplicationName/FrontEndService" -ServiceTypeName "FrontEndServiceType" -Stateless -PartitionSchemeSingleton -InstanceCount -1
 
 Write-Host "`nDeploy application and services succeeded"
+
+
+#Get-Process -Id (Get-NetTCPConnection -LocalPort 19000).OwningProcess

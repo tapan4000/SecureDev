@@ -27,5 +27,15 @@ namespace RestServer.DataAccess.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<bool> IsActiveCaptureSessionAvailableAccrossGroups(int userId)
+        {
+            return await this.locationCaptureSessionStrategy.IsActiveCaptureSessionAvailableAccrossGroups(userId).ConfigureAwait(false);
+        }
+
+        public async Task<bool> IsRecentlyInactivatedCaptureSessionAvailableAccrossGroups(int userId, int postInactivationLocationUpdateAllowedPeriodInSeconds)
+        {
+            return await this.locationCaptureSessionStrategy.IsRecentlyInactivatedCaptureSessionAvailableAccrossGroups(userId, postInactivationLocationUpdateAllowedPeriodInSeconds).ConfigureAwait(false);
+        }
     }
 }

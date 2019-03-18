@@ -142,7 +142,7 @@ function Read-PublishProfile
     $publishProfile.CopyPackageParameters = Read-XmlElementAsHashtable $publishProfileXml.PublishProfile.Item("CopyPackageParameters")
 
     if ($publishProfileXml.PublishProfile.Item("UpgradeDeployment"))
-    {
+    { 
         $publishProfile.UpgradeDeployment.Parameters = Read-XmlElementAsHashtable $publishProfileXml.PublishProfile.Item("UpgradeDeployment").Item("Parameters")
         if ($publishProfile.UpgradeDeployment["Mode"])
         {

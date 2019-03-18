@@ -1,2 +1,2 @@
 System TestVariable set to 
-ECHO is on.
+Hello 

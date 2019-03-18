@@ -1,0 +1,32 @@
+1) Generate the client AD application for accessing the cluster via powershell/visual studio. Also, generate the application for accessing the cluster via service fabric explorer using below scripts. Refer the scripts under: D:\Misc\Business Idea\SecurityDev\Deployment_Scripts\Azure-PowerShell-Snippets-master\Azure-PowerShell-Snippets-master\MicrosoftAzureServiceFabric-AADHelpers\AADTool. Make sure the cluster name is same as the name of the cluster in the target environment. It is used to prefix the Azure AD applications created by the script. It does not need to match exactly. WebApplicationReply URL is the default endpoint that Azure AD returns to your users after they finish signing in. Also, keep the web application URL accordingly.
+
+.\SetupApplications.ps1 -TenantId '914a3600-38dd-421d-9f70-7aac6ce385ad' -ClusterName 'cmpclsstg' -WebApplicationReplyUrl 'https://cmpclsstg.eastus.cloudapp.azure.com:19080/Explorer/index.html' -AddResourceAccess
+                                        
+TenantId                       914a3600-38dd-421d-9f70-7aac6ce385ad
+WebAppId                       bc6bbbd9-7376-4f35-ae47-ec778b41c305        
+NativeClientAppId              ca3796ed-5621-4900-817b-b2ec9a81d832          
+ServicePrincipalId             6f86985c-eb0b-4172-ae3e-6c41b71d3324          
+
+-----ARM template-----
+"azureActiveDirectory": {
+  "tenantId":"914a3600-38dd-421d-9f70-7aac6ce385ad",
+  "clusterApplication":"bc6bbbd9-7376-4f35-ae47-ec778b41c305",
+  "clientApplication":"ca3796ed-5621-4900-817b-b2ec9a81d832"
+},
+
+2) Add the admin user and non-admin user for the web application
+. Scripts\SetupUser.ps1 -TenantId '7b25ab7e-cd25-4f0c-be06-939424dc9cc9' -WebApplicationId '9bf7c6f3-53ce-4c63-8ab3-928c7bf4200b' -UserName 'SFAdmin' -Password 'Test4321' -IsAdmin
+
+OR simply assign the user to application as an admin or user from the portal.
+Once the users have been assigned you can connect to the server using below command.
+Connect-ServiceFabricCluster -ConnectionEndpoint <endpoint> -KeepAliveIntervalInSec 10 -AzureActiveDirectory -ServerCertThumbprint <thumbprint>
+
+Here server certificate thumbprint is the thumbprint of the certificate used for node-to-node security in service fabric and is defined in the VMSS extensions for service fabric. In our case it would be the key vault certificate itself.
+
+3) Update the Cluster ARM template with the typehandlerversion. To get the latest typehandler verion use the script
+Get-AzureRmVMExtensionImage -PublisherName Microsoft.Compute -Type VMAccessAgent
+
+4) Generate the certificates for key vault for primary and secondary data center using the script CreateCert_StoreInKeyVault.ps1. It can also be used to generate the encoded certificate if the certificate is already present.
+
+5) Populate the parameters file and test out the template using below command:
+Test-AzureRmResourceGroupDeployment -ResourceGroupName "cmpclsrgstg" -TemplateFile .\CmpClsArmTemplate.json -TemplateParameterFile .\CmpClsArmParameters.json

@@ -7,8 +7,11 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\bin\Debug\RestServer.Entities.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\bin\Debug\EntityFramework.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\bin\Debug\EntityFramework.SqlServer.xml
-D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\obj\Debug\RestServer.DataAccess.Configuration.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\obj\Debug\RestServer.DataAccess.Configuration.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\obj\Debug\RestServer.DataAccess.Configuration.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\bin\Debug\RestServer.Cache.Core.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\bin\Debug\RestServer.Cache.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\bin\Debug\RestServer.Entities.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\obj\Debug\RestServer.DataAccess.Configuration.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\obj\Debug\RestServer.DataAccess.Configuration.csproj.CoreCompileInputs.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.DataAccess.Configuration\obj\Debug\RestServer.DataAccess.Configuration.csproj.CopyComplete

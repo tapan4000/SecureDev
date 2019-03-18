@@ -1,2 +1,6 @@
 1) Waking up app automatically on receiving a notification.
 https://stackoverflow.com/questions/24313539/push-notifications-when-app-is-closed
+2) To allow powershell to connect to service fabric and publish application when publishing through visual studio, use the below script
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser
+3) When two certificates are defined in the cluster security then the primary certificate needs to have the same domain as the cluster.
+https://github.com/Azure/service-fabric-issues/issues/146

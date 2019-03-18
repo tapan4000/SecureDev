@@ -9,6 +9,7 @@ using RestServer.Entities.Enums;
 using System.Collections.Concurrent;
 using RestServer.IoC;
 using RestServer.IoC.Interfaces;
+using RestServer.Entities;
 
 namespace RestServer.Core
 {
@@ -25,7 +26,7 @@ namespace RestServer.Core
 
         public ITransientErrorRetryPolicy GetRetryPolicy(TargetSystemEnum targetSystem, RetryTypeEnum retryType, RetrySetting retrySetting)
         {
-            var cachePolicyKey = string.Concat(targetSystem, CoreConstants.UnderscoreConcatenator, retryType);
+            var cachePolicyKey = string.Concat(targetSystem, CoreConstants.UnderscoreSeparator, retryType);
             ITransientErrorRetryPolicy cachedPolicy;
             if (!cachedRetryPolicyList.TryGetValue(cachePolicyKey, out cachedPolicy))
             {

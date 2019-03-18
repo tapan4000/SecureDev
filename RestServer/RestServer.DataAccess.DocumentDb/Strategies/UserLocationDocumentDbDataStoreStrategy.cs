@@ -15,7 +15,7 @@ namespace RestServer.DataAccess.DocumentDb.Strategies
 {
     public class UserLocationDocumentDbDataStoreStrategy : DocumentDbDataStoreStrategyBase<UserLocation>, IUserLocationDataStoreStrategy
     {
-        public UserLocationDocumentDbDataStoreStrategy(IDocumentDbContext documentDbContext, string collection, IUserContext userContext, IEventLogger logger) : base(documentDbContext, collection, userContext, logger)
+        public UserLocationDocumentDbDataStoreStrategy(IDocumentDbContext documentDbContext, IUserContext userContext, IEventLogger logger) : base(documentDbContext, documentDbContext.GetCollection(DocumentDbCollectionType.User), userContext, logger)
         {
         }
 

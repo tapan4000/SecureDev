@@ -40,3 +40,21 @@ INSERT [dbo].[RestServerSetting] ([Key], [Value], [CreatedBy], [CreationDateTime
 	"RetryIntervalInSeconds": 2,
 	"TransientExceptionList": [""RestServer.Cache.CacheException""]
 }', SUSER_SNAME(), GETUTCDATE())
+
+IF NOT EXISTS (SELECT * FROM [dbo].[RestServerSetting] WHERE [Key] = 'LocationSetting')
+INSERT [dbo].[RestServerSetting] ([Key], [Value], [CreatedBy], [CreationDateTime]) 
+	VALUES ('LocationSetting', '{
+	"PostInactivationLocationUpdateAllowedPeriodInSeconds": 86400
+}', SUSER_SNAME(), GETUTCDATE())
+
+IF NOT EXISTS (SELECT * FROM [dbo].[RestServerSetting] WHERE [Key] = 'DocDbSetting')
+INSERT [dbo].[RestServerSetting] ([Key], [Value], [CreatedBy], [CreationDateTime]) 
+	VALUES ('DocDbSetting', '{
+	"MaxConnectionLimit": 50,
+	"RequestTimeoutInSeconds": 60,
+	"MediaRequestTimeOutInSeconds": 120,
+	"RetryCountOnThrottling": 9,
+	"RetryIntervalInSeconds": 30,
+	"DatabaseName": "cmpdoc",
+	"UserCollectionName": "users" 
+}', SUSER_SNAME(), GETUTCDATE())

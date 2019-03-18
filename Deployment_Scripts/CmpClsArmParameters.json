@@ -1,81 +1,113 @@
 {
-"$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-"contentVersion":"1.0.0.0",
-"parameters":{
-"clusterName":{
-"value":"cmpclsstg"
-},
-"clusterLocation":{
-"value":"eastus"
-},
-"computeLocation":{
-"value":"eastus"
-},
-"adminUserName":{
-"value":"cmpadmin"
-},
-"adminPassword":{
-"value":"P@ssword"
-},
-"nicName":{
-"value":"NIC-cmpclsstg"
-},
-"publicIPAddressName":{
-"value":"cmpclsstg-PubIP"
-},
-"dnsName":{
-"value":"cmpclsstg"
-},
-"virtualNetworkName":{
-"value":"VNet-cmpclsstg"
-},
-"lbName":{
-"value":"LB-cmpclsstg"
-},
-"lbIPName":{
-"value":"LBIP-cmpclsstg"
-},
-"applicationDiagnosticsStorageAccountName":{
-"value":"sfdgcmpclsstg4453"
-},
-"supportLogStorageAccountName":{
-"value":"sflogscmpclsstg7745"
-},
-"sourceVaultValue":{
-"value":"/subscriptions/78372667-21b1-4bb1-a5d0-86954f68f581/resourceGroups/cmprgstg/providers/Microsoft.KeyVault/vaults/cmpkvstg"
-},
-"certificateUrlValue":{
-"value":"https://cmpkvstg.vault.azure.net:443/secrets/clusteraccesscert/3ebe4bcfcde3489c9fa2ec03114f3f76"
-},
-"certificateThumbprint":{
-"value":"BABBBF72EA22CF89CC6C76AE6E0BC7A11A01D2A6"
-},
-"sfExplorerClientCertificateThumbprint":{
-"value":"4b49261fb08cbe47a080f61a810ec7d31fd091e8"
-}
-"vmImageSku":{
-"value":"2016-Datacenter-with-Containers"
-},
-"vmImageOffer":{
-"value":"WindowsServer"
-},
-"nt0ephemeralStartPort":{
-"value":49152
-},
-"nt0ephemeralEndPort":{
-"value":65534
-},
-"nt0applicationStartPort":{
-"value":20000
-},
-"nt0applicationEndPort":{
-"value":30000
-},
-"nt0fabricTcpGatewayPort":{
-"value":19000
-},
-"nt0fabricHttpGatewayPort":{
-"value":19080
-}
-}
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    /* Begin Parameters: Core */
+    "clusterName": {
+      "value": "cmpclsstg"
+    },
+    "environment": {
+      "value": "Stage"
+    },
+    "configKeyVault": {
+      "value": "/subscriptions/78372667-21b1-4bb1-a5d0-86954f68f581/resourceGroups/cmprgstg/providers/Microsoft.KeyVault/vaults/cmpkvstg"
+    },
+    "clusterConnectionEndPointPort": {
+      "value": 9025
+    },
+    "serviceFabricLeaseDriverEndPointPort": {
+      "value": 9026
+    },
+    "serviceFabricClusterRuntimeVersion": {
+      "value": "6.4.637.9590"
+    },
+    "serviceFabricClusterProtectionLevel": {
+      "value": "EncryptAndSign"
+    },
+    "serviceFabricClusterReliabilityLevel": {
+      "value": "Bronze"
+    },
+    /* End Parameters: Core */
+
+    /* Begin Parameters: Azure AD setting */
+    "tenantId": {
+      "value": "914a3600-38dd-421d-9f70-7aac6ce385ad"
+    },
+    "clusterApplicationId": {
+      "value": "bc6bbbd9-7376-4f35-ae47-ec778b41c305"
+    },
+    "clientApplicationId": {
+      "value": "ca3796ed-5621-4900-817b-b2ec9a81d832"
+    },
+    /* End Parameters: Azure AD Setting */
+
+    /* Begin Parameters: Port */
+    "sfTcpManagementPort": {
+      "value": 19000
+    },
+    "sfHttpManagementPort": {
+      "value": 19080
+    },
+    "ntFrontEndGeneralHttpPort": {
+      "value": 8085
+    },
+    "ntFrontEndGeneralHttpPortBackend": {
+      "value": 8085
+    },
+    /* End Parameters: Port */
+
+    /* Begin Parameters: VM Setting */
+    "ntFrontEndInstanceSize": {
+      "value": "Standard_D2"
+    },
+    "ntFrontEndInstanceCnt": {
+      "value": 3
+    },
+    "vmssUpgradeBatchSize": {
+      "value": 20
+    },
+    "vmssUpgradeMaxUnhealthyInstancePercent": {
+      "value": 20
+    },
+    "vmssUpgradeMaxUpgradedUnhealthyInstancePercent": {
+      "value": 20
+    },
+    "vmAdminUserName": {
+      "value": "cmpadmin"
+    },
+    "vmAdminPassword": {
+      "value": "djiq23!@#2dq"
+    },
+    "vmTimeZone": {
+      "value": "Pacific Standard Time"
+    },
+    "vmssDurabilityLevel": {
+      "value": "Bronze"
+    },
+    /* End Parameters: VM Setting */
+
+    /* Begin Parameters: Certificate */
+    "certificateStore": {
+      "value": "My"
+    },
+    "currentKeyVaultCertificateThumbprint": {
+      "value": "7D6496BFE961B2AB444F5B267FB86DA413CD4803"
+    },
+    "currentKeyVaultCertificateSecretUrl": {
+      "value": "https://cmpkvstg.vault.azure.net/secrets/CurrentKeyVaultEncodedCert/85b603f7334b4b2faef43b9a4bd69631"
+    },
+    "pairedKeyVaultCertificateThumbprint": {
+      "value": "D836D04CBDD77A133825E613B3EEBDA1B70F53D1"
+    },
+    "pairedKeyVaultCertificateSecretUrl": {
+      "value": "https://cmpkvstg.vault.azure.net/secrets/PairedKeyVaultEncodedCert/1f26d96044bb4ba39304090c98eb1737"
+    },
+    /* End Parameters: Certificate */
+
+    /* Begin Parameters: Storage account setting */
+    "supportLogStorageAccountType": {
+      "value": "Standard_LRS"
+    }
+    /* End Parameters: Storage account setting */
+  }
 }

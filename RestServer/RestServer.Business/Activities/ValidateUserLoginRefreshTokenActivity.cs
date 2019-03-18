@@ -11,6 +11,7 @@ using RestServer.Entities.DataAccess;
 using RestServer.DataAccess.Core.Interfaces;
 using RestServer.Business.Models;
 using RestServer.Core.Extensions;
+using RestServer.Business.Core.Interfaces.Activities;
 
 namespace RestServer.Business.Activities
 {
@@ -18,7 +19,7 @@ namespace RestServer.Business.Activities
     {
         private IUnitOfWorkFactory unitOfWorkFactory;
 
-        public ValidateUserLoginRefreshTokenActivity(IEventLogger logger, IUnitOfWorkFactory unitOfWorkFactory) : base(logger)
+        public ValidateUserLoginRefreshTokenActivity(IActivityFactory activityFactory, IEventLogger logger, IUnitOfWorkFactory unitOfWorkFactory) : base(activityFactory, logger)
         {
             this.unitOfWorkFactory = unitOfWorkFactory;
         }

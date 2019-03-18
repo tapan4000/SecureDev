@@ -5,8 +5,10 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\bin\Debug\Entit
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\bin\Debug\EntityFramework.SqlServer.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\bin\Debug\EntityFramework.xml
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\bin\Debug\EntityFramework.SqlServer.xml
-D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\obj\Debug\RestServer.Entities.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\obj\Debug\RestServer.Entities.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\obj\Debug\RestServer.Entities.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\bin\Debug\RestServer.Cache.Core.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\bin\Debug\RestServer.Cache.Core.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\obj\Debug\RestServer.Entities.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\obj\Debug\RestServer.Entities.csproj.CoreCompileInputs.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Entities\obj\Debug\RestServer.Entities.csproj.CopyComplete

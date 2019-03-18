@@ -55,7 +55,7 @@
     <Compile Include="Models\TextLocalSmsResponseModel.cs" />
     <Compile Include="NotificationHandler.cs" />
     <Compile Include="NotificationQueueSeeder.cs" />
-    <Compile Include="NotificationTemplateConstants.cs" />
+    <Compile Include="NotificationTemplateMergeFieldConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\EmailProvider.cs" />
     <Compile Include="Providers\SmsProvider.cs" />

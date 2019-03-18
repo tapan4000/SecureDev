@@ -70,6 +70,7 @@
     <Compile Include="DataAccess\IEntity.cs" />
     <Compile Include="DataAccess\LocalityBasedPublicGroup.cs" />
     <Compile Include="DataAccess\MembershipTier.cs" />
+    <Compile Include="DataAccess\NotificationMessageTemplate.cs" />
     <Compile Include="DataAccess\PublicGroup.cs" />
     <Compile Include="DataAccess\RestServerContext.cs" />
     <Compile Include="DataAccess\RestServerSetting.cs" />
@@ -84,11 +85,14 @@
     <Compile Include="Enums\GroupMemberStateEnum.cs" />
     <Compile Include="Enums\LocationCaptureSessionStateEnum.cs" />
     <Compile Include="Enums\LocationCaptureTypeEnum.cs" />
+    <Compile Include="Enums\LocationRequestTypeEnum.cs" />
     <Compile Include="Enums\MembershipTierEnum.cs" />
+    <Compile Include="Enums\NotificationMessageTypeEnum.cs" />
     <Compile Include="Enums\NotificationModeEnum.cs" />
     <Compile Include="Enums\RetryStrategyEnum.cs" />
     <Compile Include="Enums\RetryTypeEnum.cs" />
     <Compile Include="Enums\TargetSystemEnum.cs" />
+    <Compile Include="CoreConstants.cs" />
     <Compile Include="Interfaces\IUserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

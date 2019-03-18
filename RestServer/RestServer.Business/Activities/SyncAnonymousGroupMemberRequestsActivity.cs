@@ -13,6 +13,7 @@ using RestServer.Configuration.Models;
 using RestServer.Configuration;
 using RestServer.Business.Models;
 using RestServer.Core.Extensions;
+using RestServer.Business.Core.Interfaces.Activities;
 
 namespace RestServer.Business.Activities
 {
@@ -22,7 +23,7 @@ namespace RestServer.Business.Activities
 
         private IConfigurationHandler configurationHandler;
 
-        public SyncAnonymousGroupMemberRequestsActivity(IEventLogger logger, IUnitOfWorkFactory unitOfWorkFactory, IConfigurationHandler configurationHandler) : base(logger)
+        public SyncAnonymousGroupMemberRequestsActivity(IActivityFactory activityFactory, IEventLogger logger, IUnitOfWorkFactory unitOfWorkFactory, IConfigurationHandler configurationHandler) : base(activityFactory, logger)
         {
             // As the sync can happen repeatedly during login process, mark the failure of this activity as ignorable.
             this.CanIgnoreTrackableFailure = true;

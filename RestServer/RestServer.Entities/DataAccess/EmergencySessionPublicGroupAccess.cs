@@ -11,7 +11,7 @@ namespace RestServer.Entities.DataAccess
     using System.Data.Entity.Spatial;
 
     [Serializable]
-    [StorageType(CacheHint.DistributedCache, CacheArea.EmergencySession)]
+    [StorageType(CacheHint.DistributedCache, CacheArea.LocationSession)]
     public partial class EmergencySessionPublicGroupAccess : IEntityBase
     {
         public int EmergencySessionPublicGroupAccessId { get; set; }

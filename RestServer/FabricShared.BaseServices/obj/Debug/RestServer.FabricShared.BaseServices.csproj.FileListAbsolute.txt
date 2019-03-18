@@ -1,4 +1,3 @@
-D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\obj\Debug\RestServer.FabricShared.BaseServices.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\RestServer.FabricShared.BaseServices.dll.config
 D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\RestServer.FabricShared.BaseServices.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\RestServer.FabricShared.BaseServices.pdb
@@ -95,3 +94,11 @@ D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug
 D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Polly.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Polly.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Polly.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Microsoft.Azure.Services.AppAuthentication.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\Microsoft.Azure.Services.AppAuthentication.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\RestServer.FabricShared.Configuration.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\RestServer.Entities.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\bin\Debug\RestServer.Configuration.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\obj\Debug\RestServer.FabricShared.BaseServices.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\obj\Debug\RestServer.FabricShared.BaseServices.csproj.CoreCompileInputs.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\FabricShared.BaseServices\obj\Debug\RestServer.FabricShared.BaseServices.csproj.CopyComplete

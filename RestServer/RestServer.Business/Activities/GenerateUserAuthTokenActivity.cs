@@ -10,6 +10,7 @@ using RestServer.Logging.Interfaces;
 using RestServer.Core.Extensions;
 using RestServer.Business.Models;
 using RestServer.RestSecurity.Interfaces;
+using RestServer.Business.Core.Interfaces.Activities;
 
 namespace RestServer.Business.Activities
 {
@@ -17,7 +18,7 @@ namespace RestServer.Business.Activities
     {
         private IUserAuthTokenManager userAuthTokenManager;
 
-        public GenerateUserAuthTokenActivity(IEventLogger logger, IUserAuthTokenManager userAuthTokenManager) : base(logger)
+        public GenerateUserAuthTokenActivity(IActivityFactory activityFactory, IEventLogger logger, IUserAuthTokenManager userAuthTokenManager) : base(activityFactory, logger)
         {
             this.userAuthTokenManager = userAuthTokenManager;
         }

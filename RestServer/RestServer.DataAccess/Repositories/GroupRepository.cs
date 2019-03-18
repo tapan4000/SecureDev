@@ -13,6 +13,7 @@ using RestServer.Logging.Interfaces;
 using RestServer.DataAccess.Interfaces.Strategies;
 using RestServer.DataAccess.Interfaces.StoredProcedureAccessStrategies;
 using RestServer.Cache;
+using RestServer.DataAccess.Core.Models;
 
 namespace RestServer.DataAccess.Repositories
 {
@@ -37,6 +38,11 @@ namespace RestServer.DataAccess.Repositories
             // Clear the user's entry in REDIS cache as the User record will be updated with the flag for AnonyousGroupMemberVerified.
             this.userBasedCacheStrategyHandler.DeleteFromStoreAsync(CacheTypeToKeyPropertyMap.GetUserBasedCacheFinalKeys(userId, userIsdCode, mobileNumber));
             return this.storedProcedureAccessStrategy.SyncAnonymousGroupMemberRequests(userId, userIsdCode, mobileNumber, maxUserCountPerGroup, maxGroupCountPerUser);
+        }
+
+        public Task<IList<UserNotificationInformationRecord>> FetchNotificationDetailsForAdminsByGroup(int groupId)
+        {
+            return this.storedProcedureAccessStrategy.FetchNotificationDetailsForAdminsByGroup(groupId);
         }
     }
 }

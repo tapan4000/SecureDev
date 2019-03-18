@@ -32,6 +32,8 @@ namespace RestServer.DataAccess.Core.Interfaces
 
         ILocationCaptureSessionRepository LocationCaptureSessionRepository { get; }
 
+        INotificationMessageTemplateRepository NotificationMessageTemplateRepository { get; }
+
         Task<int> SaveAsync();
     }
 }

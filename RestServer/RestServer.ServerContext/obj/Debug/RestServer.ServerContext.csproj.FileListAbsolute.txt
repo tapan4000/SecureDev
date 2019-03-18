@@ -2,4 +2,5 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.ServerContext\bin\Debug\
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.ServerContext\bin\Debug\RestServer.ServerContext.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.ServerContext\obj\Debug\RestServer.ServerContext.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.ServerContext\obj\Debug\RestServer.ServerContext.pdb
-D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.ServerContext\obj\Debug\RestServer.ServerContext.csprojResolveAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.ServerContext\obj\Debug\RestServer.ServerContext.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.ServerContext\obj\Debug\RestServer.ServerContext.csproj.CoreCompileInputs.cache

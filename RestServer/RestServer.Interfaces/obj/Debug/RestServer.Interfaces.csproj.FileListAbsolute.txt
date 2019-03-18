@@ -2,3 +2,5 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Interfaces\bin\Debug\Res
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Interfaces\bin\Debug\RestServer.Interfaces.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Interfaces\obj\Debug\RestServer.Interfaces.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Interfaces\obj\Debug\RestServer.Interfaces.pdb
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Interfaces\obj\Debug\RestServer.Interfaces.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Interfaces\obj\Debug\RestServer.Interfaces.csproj.CoreCompileInputs.cache

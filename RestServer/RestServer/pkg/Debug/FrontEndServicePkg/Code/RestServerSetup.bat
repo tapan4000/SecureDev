@@ -12,4 +12,4 @@ echo Installation of winlogbeat service complete
 REM To delete this system variable us
 REM REG delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v TestVariable /f
 
-powershell.exe -ExecutionPolicy Bypass -Command ".\RestServerSetup.ps1"
+REM powershell.exe -ExecutionPolicy Bypass -Command ".\RestServerSetup.ps1"

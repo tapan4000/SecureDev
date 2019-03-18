@@ -11,5 +11,9 @@ namespace RestServer.DataAccess.Interfaces.Strategies
     public interface ILocationCaptureSessionStrategy : IDataStoreStrategy<LocationCaptureSession>
     {
         Task<IList<LocationCaptureSession>> GetEmergencySessions(int groupId);
+
+        Task<bool> IsActiveCaptureSessionAvailableAccrossGroups(int userId);
+
+        Task<bool> IsRecentlyInactivatedCaptureSessionAvailableAccrossGroups(int userId, int postInactivationLocationUpdateAllowedPeriodInSeconds);
     }
 }

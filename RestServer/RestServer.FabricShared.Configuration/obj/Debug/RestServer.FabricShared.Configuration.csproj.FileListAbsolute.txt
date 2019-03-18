@@ -37,7 +37,6 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configurati
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Unity.Container.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Unity.Interception.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Unity.RegistrationByConvention.pdb
-D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\obj\Debug\RestServer.FabricShared.Configuration.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\obj\Debug\RestServer.FabricShared.Configuration.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\obj\Debug\RestServer.FabricShared.Configuration.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Microsoft.Azure.KeyVault.dll
@@ -62,3 +61,10 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configurati
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Polly.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Polly.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Polly.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Microsoft.Azure.Services.AppAuthentication.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\Microsoft.Azure.Services.AppAuthentication.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.Configuration.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\bin\Debug\RestServer.Entities.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\obj\Debug\RestServer.FabricShared.Configuration.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\obj\Debug\RestServer.FabricShared.Configuration.csproj.CoreCompileInputs.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.FabricShared.Configuration\obj\Debug\RestServer.FabricShared.Configuration.csproj.CopyComplete

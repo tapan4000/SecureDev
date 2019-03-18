@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RestServer.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,6 @@ namespace RestServer.DataAccess.Core.Models
         [JsonProperty("time")]
         public DateTime Timestamp;
 
-        public LocationRequestType(Adhoc/Periodic) RequestType;
+        public LocationGenerationTypeEnum LocationGenerationType;
     }
 }

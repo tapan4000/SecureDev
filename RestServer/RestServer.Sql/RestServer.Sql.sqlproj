@@ -93,6 +93,10 @@
     <Build Include="dbo\Tables\LocationCaptureSessionState.sql" />
     <Build Include="dbo\Tables\LocationCaptureType.sql" />
     <Build Include="dbo\Tables\MembershipTier.sql" />
+    <Build Include="dbo\Tables\NotificationMessageTemplate.sql" />
+    <Build Include="dbo\Tables\NotificationMessageType.sql" />
+    <Build Include="dbo\Tables\Language.sql" />
+    <Build Include="dbo\StoredProcedure\usp_FetchNotificationDetailsForAdminsByGroup.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="RestServer.Sql.refactorlog" />
@@ -107,6 +111,9 @@
     <None Include="Scripts\SeedData\LocationCaptureSessionState.sql" />
     <None Include="Scripts\SeedData\LocationCaptureType.sql" />
     <None Include="Scripts\SeedData\MembershipTier.sql" />
+    <None Include="Scripts\SeedData\NotificationMessageType.sql" />
+    <None Include="Scripts\SeedData\NotificationMessageTemplate.sql" />
+    <None Include="Scripts\SeedData\Language.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

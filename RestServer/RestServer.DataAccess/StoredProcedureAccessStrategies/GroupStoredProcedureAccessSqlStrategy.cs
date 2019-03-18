@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using RestServer.Cache.Interfaces;
 using RestServer.Configuration.Interfaces;
 using RestServer.Core.Extensions;
+using RestServer.DataAccess.Core.Models;
+using System.Data;
 
 namespace RestServer.DataAccess.StoredProcedureAccessStrategies
 {
@@ -22,11 +24,11 @@ namespace RestServer.DataAccess.StoredProcedureAccessStrategies
         {
             var parameters = new Dictionary<string, string>
             {
-                { StoredProcedureConstants.UserIdParameterName, userId.ToString() },
-                { StoredProcedureConstants.UserMobileIsdCodeParameterName, userIsdCode },
-                { StoredProcedureConstants.UserMobileNumberParameterName, mobileNumber },
-                { StoredProcedureConstants.MaxUserCountPerGroupParameterName, maxUserCountPerGroup.ToString() },
-                { StoredProcedureConstants.MaxGroupCountPerUserParameterName, maxGroupCountPerUser.ToString() }
+                { StoredProcedureConstants.UserId, userId.ToString() },
+                { StoredProcedureConstants.UserMobileIsdCode, userIsdCode },
+                { StoredProcedureConstants.UserMobileNumber, mobileNumber },
+                { StoredProcedureConstants.MaxUserCountPerGroup, maxUserCountPerGroup.ToString() },
+                { StoredProcedureConstants.MaxGroupCountPerUser, maxGroupCountPerUser.ToString() }
             };
 
             var logResponse = await this.ExecuteProcedure<string>(StoredProcedureConstants.SyncAnonymousGroupMemberRequestsStoredProcedure, parameters);
@@ -34,6 +36,36 @@ namespace RestServer.DataAccess.StoredProcedureAccessStrategies
             {
                 this.Logger.LogInformation(logResponse);
             }
+        }
+
+        public async Task<IList<UserNotificationInformationRecord>> FetchNotificationDetailsForAdminsByGroup(int groupId)
+        {
+            var parameters = new Dictionary<string, string>
+            {
+                { StoredProcedureConstants.GroupId, groupId.ToString() }
+            };
+
+            var adminNotificationDetailsDataTable = await this.ExecuteProcedureReturningTable(StoredProcedureConstants.FetchNotificationDetailsForAdminsByGroupStoredProcedure, parameters);
+            if(adminNotificationDetailsDataTable.Rows.Count == 0)
+            {
+                return null;
+            }
+
+            var userNotificationRecords = new List<UserNotificationInformationRecord>();
+            foreach(DataRow adminNotificationDetailRow in adminNotificationDetailsDataTable.Rows)
+            {
+                userNotificationRecords.Add(new UserNotificationInformationRecord
+                {
+                    CompleteMobileNumber = adminNotificationDetailRow[StoredProcedureConstants.CompleteMobileNumber] != DBNull.Value
+                        ? Convert.ToString(adminNotificationDetailRow[StoredProcedureConstants.CompleteMobileNumber]) : null,
+                    EmailId = adminNotificationDetailRow[StoredProcedureConstants.EmailId] != DBNull.Value
+                        ? Convert.ToString(adminNotificationDetailRow[StoredProcedureConstants.EmailId]) : null,
+                    UserId = adminNotificationDetailRow[StoredProcedureConstants.UserId] != DBNull.Value
+                        ? Convert.ToInt32(adminNotificationDetailRow[StoredProcedureConstants.UserId]) : 0,
+                });
+            }
+
+            return userNotificationRecords;
         }
     }
 }

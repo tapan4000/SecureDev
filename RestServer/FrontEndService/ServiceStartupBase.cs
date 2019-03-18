@@ -23,6 +23,7 @@
     using Configuration.Models;
     using System.Data.Entity;
     using DataAccess.Core;
+    using DataAccess.DocumentDb.Interfaces;
 
     public abstract class ServiceStartupBase
     {
@@ -33,6 +34,8 @@
         private IEventLogger logger;
 
         private GlobalSetting globalSetting;
+
+        private UnityDependencyContainer dependencyContainer;
 
         public void ConfigureHttp(IAppBuilder appBuilder)
         {
@@ -47,7 +50,7 @@
             var unityContainer = IoCUnityHelper.GetConfiguredContainer();
             IoCUnityHelper.OverrideDependencies(unityContainer, null, this.explicitRegistrations);
             var unityDependencyResolver = new UnityDependencyResolver(unityContainer);
-            var dependencyContainer = new UnityDependencyContainer(unityContainer);
+            this.dependencyContainer = new UnityDependencyContainer(unityContainer);
             config.DependencyResolver = unityDependencyResolver;
             this.configurationHandler = (IConfigurationHandler)unityDependencyResolver.GetService(typeof(IConfigurationHandler));
 
@@ -59,9 +62,11 @@
             // Configure Message Handlers
             this.ConfigureMessageHandlers(config);
 
-            this.logger = dependencyContainer.Resolve<IEventLogger>();
+            this.logger = this.dependencyContainer.Resolve<IEventLogger>();
 
             AsyncHelper.RunSync(this.InitializeRedis);
+
+            AsyncHelper.RunSync(this.InitializeDocumentDb);
 
             DbConfiguration.SetConfiguration(new EntityFrameworkDbConfiguration(this.globalSetting.SqlRetryCount, this.globalSetting.SqlRetryIntervalInSeconds, this.logger));
 
@@ -171,6 +176,14 @@
             var cacheConnectionString = await this.configurationHandler.GetConfiguration(ConfigurationConstants.RedisCacheConnectionString);
             var multiplexerPoolSize = await this.configurationHandler.GetConfiguration<int>(ConfigurationConstants.RedisCacheConnectionMultiplexerPoolSize);
             RedisConnectionMultiplexer.Instance.Initialize(new[] { cacheConnectionString }, this.globalSetting.MinIocpThreadCountForMaxRedisThroughput, this.logger, multiplexerPoolSize);
+        }
+
+        private async Task InitializeDocumentDb()
+        {
+            var documentDbContext = this.dependencyContainer.Resolve<IDocumentDbContext>();
+            var documentDbSetting = await this.configurationHandler.GetConfiguration<DocumentDbSetting>(ConfigurationConstants.DocDbSetting).ConfigureAwait(false);
+            var documentDbConnectionString = await this.configurationHandler.GetConfiguration(ConfigurationConstants.DocDbConnectionString).ConfigureAwait(false);
+            await documentDbContext.InitializeAsync(documentDbSetting, documentDbConnectionString).ConfigureAwait(false);
         }
 
         private void AllowCors(IAppBuilder appBuilder)

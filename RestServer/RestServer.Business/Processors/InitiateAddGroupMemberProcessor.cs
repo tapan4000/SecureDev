@@ -69,25 +69,47 @@ namespace RestServer.Business.Processors
             {
                 var sendNotificationRequest = new SendNotificationActivityData
                 {
-                    Title = NotificationTemplateConstants.EmailConstants.GroupJoinRequestEmailSubject,
-                    Message = string.Format(NotificationTemplateConstants.EmailConstants.GroupJoinRequestEmailBody, requestData.RequestorUser.FirstName, getGroupByIdResult.Group.GroupName),
-                    RecipientIdentifier = addGroupMemberActivityResult.ExistingUser.Email,
-                    NotificationMode = NotificationModeEnum.Email,
+                    Recipients = new List<NotificationRecipient>
+                    {
+                        new NotificationRecipient
+                        {
+                            EmailId = addGroupMemberActivityResult.ExistingUser.Email,
+                            NotificationPreference = NotificationModeEnum.Email
+                        }
+                    },
+                    BodyMergeFields = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>(NotificationTemplateMergeFieldConstants.RequestorName, requestData.RequestorUser.FirstName),
+                        new KeyValuePair<string, string>(NotificationTemplateMergeFieldConstants.GroupName, getGroupByIdResult.Group.GroupName)
+                    },
+                    NotificationMessageType = NotificationMessageTypeEnum.GroupJoinRequestCreated,
                     CanNotificationFailureCauseFlowFailure = false
                 };
-                var sendEmailResult = await this.CreateAndExecuteActivity<SendNotificationActivity, SendNotificationActivityData, RestrictedBusinessResultBase>(sendNotificationRequest).ConfigureAwait(false);
+                    
+                var sendEmailResult = await this.CreateAndExecuteActivity<SendNotificationActivity, SendNotificationActivityData, SendNotificationActivityResult>(sendNotificationRequest).ConfigureAwait(false);
             }
             else
             {
                 // Send SMS to the user mobile number
                 var sendNotificationRequest = new SendNotificationActivityData
                 {
-                    Message = string.Format(NotificationTemplateConstants.SmsConstants.GroupJoinRequest, requestData.RequestorUser.FirstName, getGroupByIdResult.Group.GroupName),
-                    RecipientIdentifier = Utility.GetCompleteMobileNumber(requestData.AddedMemberIsdCode, requestData.AddedMemberMobileNumber),
-                    CanNotificationFailureCauseFlowFailure = false,
-                    NotificationMode = NotificationModeEnum.Sms
+                    Recipients = new List<NotificationRecipient>
+                    {
+                        new NotificationRecipient
+                        {
+                            CompleteMobileNumber = Utility.GetCompleteMobileNumber(requestData.AddedMemberIsdCode, requestData.AddedMemberMobileNumber),
+                            NotificationPreference = NotificationModeEnum.Sms
+                        }
+                    },
+                    BodyMergeFields = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>(NotificationTemplateMergeFieldConstants.RequestorName, requestData.RequestorUser.FirstName),
+                        new KeyValuePair<string, string>(NotificationTemplateMergeFieldConstants.GroupName, getGroupByIdResult.Group.GroupName)
+                    },
+                    NotificationMessageType = NotificationMessageTypeEnum.GroupJoinRequestCreated,
+                    CanNotificationFailureCauseFlowFailure = false
                 };
-                var sendSmsResult = await this.CreateAndExecuteActivity<SendNotificationActivity, SendNotificationActivityData, RestrictedBusinessResultBase>(sendNotificationRequest).ConfigureAwait(false);
+                var sendSmsResult = await this.CreateAndExecuteActivity<SendNotificationActivity, SendNotificationActivityData, SendNotificationActivityResult>(sendNotificationRequest).ConfigureAwait(false);
             }
 
             return initiateAddGroupMemberResult;

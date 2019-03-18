@@ -15,8 +15,8 @@ namespace RestServer.DataAccess.DocumentDb.Strategies
 {
     public class UserBlockListDocumentDbDataStoreStrategy : DocumentDbDataStoreStrategyBase<UserBlockList>, IUserBlockListDataStoreStrategy
     {
-        public UserBlockListDocumentDbDataStoreStrategy(IDocumentDbContext documentDbContext, string collection, IUserContext userContext, IEventLogger logger) 
-            : base(documentDbContext, collection, userContext, logger)
+        public UserBlockListDocumentDbDataStoreStrategy(IDocumentDbContext documentDbContext, IUserContext userContext, IEventLogger logger) 
+            : base(documentDbContext, documentDbContext.GetCollection(DocumentDbCollectionType.User), userContext, logger)
         {
         }
 

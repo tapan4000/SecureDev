@@ -25,7 +25,6 @@ D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.RegistrationByC
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\Unity.ServiceLocation.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.ServerContext.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Utility.pdb
-D:\Misc\Business Idea\SecurityDev\RestServer\IoC\obj\Debug\RestServer.IoC.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\obj\Debug\RestServer.IoC.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\obj\Debug\RestServer.IoC.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Entities.dll
@@ -34,3 +33,7 @@ D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\EntityFramework.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Entities.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Cache.Core.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\EntityFramework.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\bin\Debug\RestServer.Entities.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\obj\Debug\RestServer.IoC.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\obj\Debug\RestServer.IoC.csproj.CoreCompileInputs.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\IoC\obj\Debug\RestServer.IoC.csproj.CopyComplete

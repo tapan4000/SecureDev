@@ -15,6 +15,7 @@ using RestServer.Configuration;
 using RestServer.Business.Models;
 using RestServer.Core.Extensions;
 using RestServer.Entities.Enums;
+using RestServer.Business.Core.Interfaces.Activities;
 
 namespace RestServer.Business.Activities
 {
@@ -24,7 +25,7 @@ namespace RestServer.Business.Activities
 
         private IConfigurationHandler configurationHandler;
 
-        public AddGroupActivity(IEventLogger logger, IUnitOfWorkFactory unitOfWorkFactory, IConfigurationHandler configurationHandler) : base(logger)
+        public AddGroupActivity(IActivityFactory activityFactory, IEventLogger logger, IUnitOfWorkFactory unitOfWorkFactory, IConfigurationHandler configurationHandler) : base(activityFactory, logger)
         {
             this.unitOfWorkFactory = unitOfWorkFactory;
             this.configurationHandler = configurationHandler;

@@ -43,6 +43,8 @@ namespace RestServer.DataAccess.Core
 
         private IGenericRepository<MembershipTier> membershipTierRepository;
 
+        private INotificationMessageTemplateRepository notificationMessageTemplateRepository;
+
         private IConsolidatedCacheInvalidator cacheInvalidator;
 
         public RestServerUnitOfWork(IDependencyContainer dependencyContainer, IEventLogger logger, IUserContext userContext, IConsolidatedCacheInvalidator cacheInvalidator)
@@ -196,6 +198,19 @@ namespace RestServer.DataAccess.Core
                 }
 
                 return this.membershipTierRepository;
+            }
+        }
+
+        public INotificationMessageTemplateRepository NotificationMessageTemplateRepository
+        {
+            get
+            {
+                if(null == this.notificationMessageTemplateRepository)
+                {
+                    this.notificationMessageTemplateRepository = this.dependencyContainer.Resolve<INotificationMessageTemplateRepository>();
+                }
+
+                return this.notificationMessageTemplateRepository;
             }
         }
 

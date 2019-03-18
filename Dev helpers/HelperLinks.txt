@@ -24,3 +24,10 @@ Open developer command prompt for visual studio
 Use command: makecert -sv mykey.pvk -n "cn=RestSeverKeyVault" RestServerKeyVault.cer -b 11/15/2018 -e 11/15/2019 -r
 Create Private key pass: restkeyvault
 cer  to pfx command: pvk2pfx -pvk mykey.pvk -spc RestServerKeyVault.cer -pfx RestServerKeyVault.pfx -pi restkeyvault
+
+8) In order to debug application accessing key vault using managed identity, you need to install azure CLI version 2.0. Use below link:
+https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest
+https://azure.microsoft.com/en-in/resources/samples/app-service-msi-keyvault-dotnet/
+
+9) When there are two cluster certificates, the authentication happens with the certificate that has a later expiry date. Else modify the security settings to use secondary if newer as false.
+https://github.com/Azure/service-fabric-issues/issues/433

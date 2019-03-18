@@ -11,21 +11,24 @@ using RestServer.DataAccess.Core.Interfaces;
 using RestServer.Entities.DataAccess;
 using RestServer.Business.Models;
 using RestServer.Entities.Enums;
+using RestServer.Core.Extensions;
+using RestServer.Business.Models.Response;
+using RestServer.Business.Core.Interfaces.Activities;
 
 namespace RestServer.Business.Activities
 {
-    public class AddLocationCaptureSessionActivity : ActivityBase<AddLocationCaptureSessionActivityData, RestrictedBusinessResultBase>
+    public class AddLocationCaptureSessionActivity : ActivityBase<AddLocationCaptureSessionActivityData, AddLocationCaptureSessionResult>
     {
         private IUnitOfWorkFactory unitOfWorkFactory;
 
-        public AddLocationCaptureSessionActivity(IEventLogger logger, IUnitOfWorkFactory unitOfWorkFactory) : base(logger)
+        public AddLocationCaptureSessionActivity(IActivityFactory activityFactory, IEventLogger logger, IUnitOfWorkFactory unitOfWorkFactory) : base(activityFactory, logger)
         {
             this.unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        protected async override Task<RestrictedBusinessResultBase> ExecuteAsync(AddLocationCaptureSessionActivityData requestData)
+        protected async override Task<AddLocationCaptureSessionResult> ExecuteAsync(AddLocationCaptureSessionActivityData requestData)
         {
-            var response = new RestrictedBusinessResultBase();
+            var response = new AddLocationCaptureSessionResult();
 
             // Add the user location capture session header information in data store
             using (var unitOfWork = this.unitOfWorkFactory.RestServerUnitOfWork)
@@ -39,7 +42,7 @@ namespace RestServer.Business.Activities
                     if(null == locationProviderUser)
                     {
                         this.Result.IsSuccessful = false;
-                        this.Result.AddBusinessError(BusinessErrorCode.UserWithIdNotFound);
+                        this.Result.AddBusinessError(BusinessErrorCode.LocationProviderUserIdNotFound);
                         return response;
                     }
                 }
@@ -79,7 +82,7 @@ namespace RestServer.Business.Activities
                 }
 
                 // Fetch the membership tier of the user whose location is requested to determine if the requested duration exceeds the max allowed duration.
-                var userMemberhipTierConfiguration = await unitOfWork.MembershipTierRepository.GetById(locationProviderUser.MembershipTierId).ConfigureAwait(false);
+                var userMemberhipTierConfiguration = await unitOfWork.MembershipTierRepository.GetById((int)locationProviderUser.MembershipTierId).ConfigureAwait(false);
 
                 if((requestData.LocationCaptureTypeId == LocationCaptureTypeEnum.Emergency && requestData.LocationCapturePeriodInSeconds > userMemberhipTierConfiguration.EmergencySessionMaxDurationInSeconds) 
                     || (requestData.LocationCaptureTypeId == LocationCaptureTypeEnum.PeriodicUpdate && requestData.LocationCapturePeriodInSeconds > userMemberhipTierConfiguration.LookoutSessionMaxDurationInSeconds))
@@ -92,7 +95,7 @@ namespace RestServer.Business.Activities
                 var locationCaptureSession = new LocationCaptureSession
                 {
                     Title = requestData.Title,
-                    ExpiryDateTime = DateTime.UtcNow.AddSeconds(requestData.LocationCapturePeriodInSeconds),
+                    ExpiryDateTime = requestData.RequestDateTime.AddSeconds(requestData.LocationCapturePeriodInSeconds),
                     LocationProviderUserId = requestData.LocationProviderUserId,
                     LocationCaptureSessionStateId = (int)requestData.LocationCaptureSessionStateId,
                     LocationCaptureTypeId = (int)requestData.LocationCaptureTypeId,
@@ -103,6 +106,7 @@ namespace RestServer.Business.Activities
                 // Store the location capture session to the data store.
                 var insertedRecord = await unitOfWork.LocationCaptureSessionRepository.InsertAsync(locationCaptureSession).ConfigureAwait(false);
                 await unitOfWork.SaveAsync().ConfigureAwait(false);
+                response.ServerLocationCaptureSessionId = insertedRecord.LocationCaptureSessionId;
             }
 
             return response;
@@ -110,7 +114,42 @@ namespace RestServer.Business.Activities
 
         protected override bool ValidateRequestData(AddLocationCaptureSessionActivityData requestData)
         {
-            throw new NotImplementedException();
+            if(null == requestData.RequestingUser)
+            {
+                this.logger.LogError("Requesting user is not provided.");
+                this.Result.AddBusinessError(BusinessErrorCode.UserParameterNotProvided);
+                return false;
+            }
+
+            if (requestData.Title.IsEmpty())
+            {
+                this.logger.LogError("Location capture session title is not provided.");
+                this.Result.AddBusinessError(BusinessErrorCode.LocationCaptureSessionTitleNotProvided);
+                return false;
+            }
+
+            if (requestData.LocationProviderUserId <= 0)
+            {
+                this.logger.LogError("User id for location provider user is not provided.");
+                this.Result.AddBusinessError(BusinessErrorCode.UserIdNotProvided);
+                return false;
+            }
+
+            if (requestData.GroupId <= 0)
+            {
+                this.logger.LogError("Group id for location capture session is not provided.");
+                this.Result.AddBusinessError(BusinessErrorCode.GroupIdNotProvided);
+                return false;
+            }
+
+            if (requestData.LocationCapturePeriodInSeconds <= 0)
+            {
+                this.logger.LogError("Duration for location capture session is not provided.");
+                this.Result.AddBusinessError(BusinessErrorCode.LocationCaptureSessionDurationNotProvided);
+                return false;
+            }
+
+            return true;
         }
     }
 }

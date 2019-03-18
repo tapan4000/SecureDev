@@ -11,6 +11,7 @@
     <Parameter Name="LogLevel" Value="Verbose" />
     <Parameter Name="IsRedisCacheEnabled" Value="true" />
     <Parameter Name="RedisCacheTtlInSeconds" Value="14400" />
+    <Parameter Name="IsManagedIdentityUsedForKeyVaultAccess" Value="false"/>
   </Section>
   
 </Settings>

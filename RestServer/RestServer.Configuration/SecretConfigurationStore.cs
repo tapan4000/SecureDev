@@ -76,16 +76,23 @@ namespace RestServer.Configuration
                 this.Logger.LogError("Key Vault URL cannot be empty.");
             }
 
-            var keyVaultClientAuthId = await this.GetConfigurationFromTargetStoreByKeyAync<string>(ConfigurationConstants.KeyVaultClientAuthId).ConfigureAwait(false);
-            if (string.IsNullOrWhiteSpace(keyVaultClientAuthId))
-            {
-                this.Logger.LogError("Key Vault Client Auth Id cannot be empty.");
-            }
+            string keyVaultClientAuthId = null;
+            string keyVaultClientCertificateThumbprint = null;
 
-            var keyVaultClientCertificateThumbprint = await this.GetConfigurationFromTargetStoreByKeyAync<string>(ConfigurationConstants.KeyVaultClientCertificateThumbprint).ConfigureAwait(false);
-            if (string.IsNullOrWhiteSpace(keyVaultClientCertificateThumbprint))
+            var isManagedIdentityUsedForKeyVaultAccess = await this.GetConfigurationFromTargetStoreByKeyAync<bool>(ConfigurationConstants.IsManagedIdentityUsedForKeyVaultAccess).ConfigureAwait(false);
+            if (!isManagedIdentityUsedForKeyVaultAccess)
             {
-                this.Logger.LogError("Key Vault Client Certificate thumbprint cannot be empty.");
+                keyVaultClientAuthId = await this.GetConfigurationFromTargetStoreByKeyAync<string>(ConfigurationConstants.KeyVaultClientAuthId).ConfigureAwait(false);
+                if (string.IsNullOrWhiteSpace(keyVaultClientAuthId))
+                {
+                    this.Logger.LogError("Key Vault Client Auth Id cannot be empty.");
+                }
+
+                keyVaultClientCertificateThumbprint = await this.GetConfigurationFromTargetStoreByKeyAync<string>(ConfigurationConstants.KeyVaultClientCertificateThumbprint).ConfigureAwait(false);
+                if (string.IsNullOrWhiteSpace(keyVaultClientCertificateThumbprint))
+                {
+                    this.Logger.LogError("Key Vault Client Certificate thumbprint cannot be empty.");
+                }
             }
 
             var keyVaultCacheExpirationDurationInSeconds = await this.GetConfigurationFromTargetStoreByKeyAync<int>(ConfigurationConstants.KeyVaultCacheExpirationDurationInSeconds).ConfigureAwait(false);
@@ -97,6 +104,7 @@ namespace RestServer.Configuration
             var keyVaultConfiguration = new KeyVaultConfiguration
             {
                 VaultAddress = keyVaultUrl,
+                IsManagedIdentityUsedForKeyVaultAccess = isManagedIdentityUsedForKeyVaultAccess,
                 ClientAuthId = keyVaultClientAuthId,
                 ClientCertificateThumbrpint = keyVaultClientCertificateThumbprint,
                 CacheExpirationDurationInSeconds = keyVaultCacheExpirationDurationInSeconds

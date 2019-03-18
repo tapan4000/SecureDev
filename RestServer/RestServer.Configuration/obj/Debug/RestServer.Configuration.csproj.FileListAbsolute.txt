@@ -26,7 +26,6 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\RestServer.ServerContext.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\RestServer.Utility.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\StackExchange.Redis.xml
-D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\obj\Debug\RestServer.Configuration.csprojResolveAssemblyReference.cache
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\obj\Debug\RestServer.Configuration.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\obj\Debug\RestServer.Configuration.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\RestServer.Configuration.dll.config
@@ -64,3 +63,9 @@ D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\Polly.dll
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\Polly.pdb
 D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\Polly.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\Microsoft.Azure.Services.AppAuthentication.dll
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\Microsoft.Azure.Services.AppAuthentication.xml
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\bin\Debug\RestServer.Entities.dll.config
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\obj\Debug\RestServer.Configuration.csprojAssemblyReference.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\obj\Debug\RestServer.Configuration.csproj.CoreCompileInputs.cache
+D:\Misc\Business Idea\SecurityDev\RestServer\RestServer.Configuration\obj\Debug\RestServer.Configuration.csproj.CopyComplete

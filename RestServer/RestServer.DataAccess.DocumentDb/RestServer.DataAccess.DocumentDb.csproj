@@ -51,7 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DocumentDbCollectionType.cs" />
     <Compile Include="DocumentDbConstants.cs" />
+    <Compile Include="DocumentDbContext.cs" />
     <Compile Include="DocumentDbUnitOfWork.cs" />
     <Compile Include="DocumentException.cs" />
     <Compile Include="Interfaces\IDocumentDbContext.cs" />

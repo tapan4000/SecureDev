@@ -46,7 +46,7 @@ namespace RestServer.DataAccess.Core
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            this.AppenCommonConfiguration(modelBuilder);
+            this.AppendCommonConfiguration(modelBuilder);
             this.AppendUserRelatedConfiguration(modelBuilder);
             this.AppendGroupRelatedConfiguration(modelBuilder);
             this.AppendEmergencySessionRelatedConfiguration(modelBuilder);
@@ -79,7 +79,6 @@ namespace RestServer.DataAccess.Core
         private void AppendEmergencySessionRelatedConfiguration(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new EmergencyLocationConfiguration());
-            modelBuilder.Configurations.Add(new LocationCaptureSessionConfiguration());
             modelBuilder.Configurations.Add(new EmergencySessionExtensionConfiguration());
             modelBuilder.Configurations.Add(new EmergencySessionPublicGroupAccessConfiguration());
             modelBuilder.Configurations.Add(new EmergencySessionViewerConfiguration());
@@ -90,10 +89,12 @@ namespace RestServer.DataAccess.Core
             modelBuilder.Configurations.Add(new DeviceConfiguration());
         }
 
-        private void AppenCommonConfiguration(DbModelBuilder modelBuilder)
+        private void AppendCommonConfiguration(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new RestServerSettingConfiguration());
             modelBuilder.Configurations.Add(new ApplicationConfiguration());
+            modelBuilder.Configurations.Add(new MembershipTierConfiguration());
+            modelBuilder.Configurations.Add(new NotificationMessageTemplateConfiguration());
         }
 
         private void AppendLocationConfiguration(DbModelBuilder modelBuilder)

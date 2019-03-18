@@ -77,6 +77,10 @@ namespace RestServer.Business.Models
 
         UserIdForGroupMemberAddRequestNotProvided = 10031,
 
+        ContextUserNotProvided = 10032,
+
+        NotificationMessageTypeNotProvided = 10033,
+
         // Group management related error codes: 20001 - 30000
         MaxGroupCountPerUserReached = 20001,
 
@@ -102,6 +106,8 @@ namespace RestServer.Business.Models
 
         GroupWithIdNotFound = 20012,
 
+        GroupHasNoAdminOtherThanRequestingUser = 20013,
+
         // 30001 - 40000: Location management related error codes
         LocationCaptureSessionExceededAllowedDuration = 30001,
 
@@ -110,5 +116,17 @@ namespace RestServer.Business.Models
         LocationProviderUserNotAssociatedToTargetGroup = 30003,
 
         UserRequestingLocationNotAnAdmin = 30004,
+
+        LocationCaptureSessionTitleNotProvided = 30005,
+
+        LocationCaptureSessionDurationNotProvided = 30006,
+
+        NoActiveOrRecentlyInactivatedSessionsAvailable = 30007,
+
+        LatitudeNotProvided = 30008,
+
+        LongitudeNotProvided = 30009,
+
+        LocationProviderUserIdNotFound = 30010,
     }
 }

@@ -10,14 +10,14 @@ namespace RestServer.Business.Models.Request
 {
     public class SendNotificationActivityData : BusinessRequestData
     {
-        public string Title { get; set; }
+        public IList<NotificationRecipient> Recipients { get; set; }
 
-        public string Message { get; set; }
-
-        public string RecipientIdentifier { get; set; }
-
-        public NotificationModeEnum NotificationMode { get; set; }
+        public NotificationMessageTypeEnum NotificationMessageType { get; set; }
 
         public bool CanNotificationFailureCauseFlowFailure { get; set; }
+
+        public IList<KeyValuePair<string, string>> SubjectMergeFields { get; set; }
+
+        public IList<KeyValuePair<string, string>> BodyMergeFields { get; set; }
     }
 }
